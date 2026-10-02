@@ -3,11 +3,13 @@ set -eu
 
 DRY_RUN=0
 SOURCE=''
+HOME_OVERRIDE=''
 while [ "$#" -gt 0 ]; do
   case "$1" in
     --dry-run) DRY_RUN=1 ;;
     --source) shift; [ "$#" -gt 0 ] || { echo 'missing --source value' >&2; exit 2; }; SOURCE=$1 ;;
-    -h|--help) echo 'Usage: install.sh [--dry-run] [--source DIR|URL]'; exit 0 ;;
+    --home) shift; [ "$#" -gt 0 ] || { echo 'missing --home value' >&2; exit 2; }; HOME_OVERRIDE=$1 ;;
+    -h|--help) echo 'Usage: install.sh [--dry-run] [--source DIR|URL] [--home DIR]'; exit 0 ;;
     *) echo "unknown argument: $1" >&2; exit 2 ;;
   esac
   shift
@@ -24,16 +26,16 @@ case "$SOURCE" in
     TMP=$(mktemp -d)
     curl --fail --location --silent --show-error "$SOURCE" -o "$TMP/archive.zip"
     unzip -q "$TMP/archive.zip" -d "$TMP/extracted"
-    set -- "$TMP"/extracted/*
-    [ -d "$1" ] || { echo 'archive has no root directory' >&2; exit 1; }
-    SOURCE=$1
+  set -- "$TMP"/extracted/*
+  [ "$#" -eq 1 ] && [ -d "$1" ] || { echo 'archive must contain exactly one root directory' >&2; exit 1; }
+  SOURCE=$1
     ;;
 esac
 TEMPLATE=$SOURCE/config/agent/AGENTS.md
 [ -f "$TEMPLATE" ] || { echo "missing template: $TEMPLATE" >&2; exit 1; }
 # Validate source before touching the destination.
 [ -s "$TEMPLATE" ] || { echo 'template is empty' >&2; exit 1; }
-DEST=${HOME:?HOME is not set}/.omp/agent/AGENTS.md
+DEST=${HOME_OVERRIDE:-${HOME:?HOME is not set}}/.omp/agent/AGENTS.md
 if [ -f "$DEST" ] && cmp -s "$TEMPLATE" "$DEST"; then
   echo "unchanged: $DEST"
   exit 0

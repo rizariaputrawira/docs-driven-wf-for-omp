@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
     [switch]$DryRun,
-    [string]$Source
+    [string]$Source,
+    [string]$Home
 )
 $ErrorActionPreference = 'Stop'
 
@@ -22,7 +23,9 @@ try {
     if (-not (Test-Path -LiteralPath $template -PathType Leaf)) { throw "Missing template: $template" }
     $content = [IO.File]::ReadAllBytes($template)
     if ($content.Length -eq 0) { throw 'Template is empty.' }
-    $destination = Join-Path $env:USERPROFILE '.omp/agent/AGENTS.md'
+    $homeDirectory = if ($Home) { $Home } else { $env:USERPROFILE }
+    if (-not $homeDirectory) { throw 'Home directory is not set.' }
+    $destination = Join-Path $homeDirectory '.omp/agent/AGENTS.md'
     if ((Test-Path -LiteralPath $destination -PathType Leaf) -and
         [Convert]::ToBase64String($content) -ceq [Convert]::ToBase64String([IO.File]::ReadAllBytes($destination))) {
         Write-Output "unchanged: $destination"

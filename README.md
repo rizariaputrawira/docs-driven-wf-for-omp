@@ -5,8 +5,8 @@ Portable distribution of the OMP user-level agent guidance maintained in this re
 ## Requirements and scope
 
 - OMP 18.4.11 was the installed version used to confirm the user-level rules path `~/.omp/agent/AGENTS.md`; the installer does not depend on a particular OMP config.yml schema.
-- POSIX install: `sh`, `cp`, `cmp`, `mktemp`, and `date`; remote mode additionally requires `curl` and `unzip`.
-- Windows install: PowerShell 5.1+; remote mode uses `Invoke-WebRequest` and `Expand-Archive`.
+- POSIX commands: `sh`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp`, and `date`. Remote installation additionally requires `curl` and `unzip`. The scripts use POSIX shell builtins such as `cd`, `command`, `echo`, `exit`, `set`, `shift`, and `test` without additional utilities.
+- Windows: PowerShell 5.1+; remote mode uses `Invoke-WebRequest` and `Expand-Archive`.
 
 ## Installed file mapping
 
@@ -23,6 +23,7 @@ From a local clone on Linux/macOS:
 ```sh
 sh install.sh --dry-run
 sh install.sh
+sh install.sh --home /path/to/home
 ```
 
 Update by pulling the repository changes, then rerun `sh install.sh`. Windows PowerShell:
@@ -30,7 +31,10 @@ Update by pulling the repository changes, then rerun `sh install.sh`. Windows Po
 ```powershell
 .\install.ps1 -DryRun
 .\install.ps1
+.\install.ps1 -Home 'C:\Users\example'
 ```
+
+The home override changes only the home directory used for the managed destination. Without it, the scripts use `$HOME` or `$env:USERPROFILE`.
 
 The scripts also accept an explicit source directory or downloadable ZIP URL. Example one-line install from the default `main` branch:
 
@@ -52,6 +56,24 @@ sh install.sh --source https://github.com/rizariaputrawira/omp-config/archive/re
 .\install.ps1 -Source 'https://github.com/rizariaputrawira/omp-config/archive/refs/heads/main.zip'
 ```
 
-Append `--dry-run` or `-DryRun` to preview the destination. Dry-run never creates directories or changes files. The remote source option expects a ZIP containing exactly one top-level directory. Download, extraction, and template checks complete before the destination is touched.
+Append `--dry-run` or `-DryRun` to preview the destination. Dry-run never creates directories or changes files. Remote ZIP sources must contain exactly one top-level directory; extraction and template checks complete before the destination is touched.
+
+## Configuration doctor
+
+The doctor checks only the managed `AGENTS.md` file. It does not inspect or modify OMP settings, credentials, model/provider choices, trusted workspaces, or other user data. Check is the default and is read-only:
+
+```sh
+sh scripts/doctor.sh
+sh scripts/doctor.sh --check --home /path/to/home
+sh scripts/doctor.sh --fix --home /path/to/home
+```
+
+```powershell
+.\scripts\doctor.ps1
+.\scripts\doctor.ps1 -Check -Home 'C:\Users\example'
+.\scripts\doctor.ps1 -Fix -Home 'C:\Users\example'
+```
+
+Pass/matching exits 0, missing or drifted content exits 1, and invalid arguments or an unusable source/home exits 2. `--fix`/`-Fix` delegates to the existing installer, so a changed existing file gets the same timestamped backup and an already-matching file remains unchanged. By default the doctor checks the current `$HOME` or `%USERPROFILE%`; `--home`/`-Home` selects another existing home directory for both checking and repair.
 
 No environment variables, secrets, template substitutions, or user-specific values are required. Troubleshooting: ensure `$HOME` (POSIX) or `$env:USERPROFILE` (Windows) points to the intended account; install the listed remote utilities if using ZIP URLs; inspect the printed backup path before restoring.
