@@ -2,12 +2,20 @@ export default function lunaToolBoundary(pi) {
   pi.on("before_subagent_spawn", (event) => {
     const name = String(event.agent?.name ?? event.agent?.id ?? "").toLowerCase();
     if (name === "advisor" || name === "slow") return undefined;
-    return { model: "@task", note: "Tool-using work routes to Luna" };
+    const models = {
+      scout: "@smol",
+      routine: "@routine",
+      task: "@task",
+      reviewer: "@task",
+      "security-reviewer": "@task",
+    };
+    return { model: models[name] ?? "@task", note: "Worker model follows its assigned role" };
   });
 
   pi.on("tool_call", (event, ctx) => {
     const current = ctx.models.current();
-    if (current?.provider === "openai-codex" && current?.id === "gpt-6-luna") return undefined;
+    if (current?.provider === "openai-codex" &&
+        ["gpt-6-luna", "gpt-6-sol", "gpt-6.1-sol"].includes(current?.id)) return undefined;
 
     const main = ctx.agent?.kind === "main";
     const input = event.input;
@@ -32,7 +40,7 @@ export default function lunaToolBoundary(pi) {
 
     return {
       block: true,
-      reason: "This model cannot use workspace tools. Delegate substantive work to Luna and use its results.",
+      reason: "This model cannot use workspace tools. Delegate substantive work to Luna or Sol and use its results.",
     };
   });
 }

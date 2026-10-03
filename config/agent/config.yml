@@ -11,8 +11,8 @@ modelRoles:
   routine: openai-codex/gpt-6-luna:medium
   plan: openai-codex/gpt-6-luna:medium
   task: openai-codex/gpt-6-luna:medium
-  advisor: openai-codex/gpt-6-sol:high
-  slow: openai-codex/gpt-6-sol:high
+  advisor: openai-codex/gpt-6.1-sol:high
+  slow: openai-codex/gpt-6.1-sol:medium
   vision: openai-codex/gpt-6-luna:medium
   commit: openai-codex/gpt-6-luna:low
   tiny: openai-codex/gpt-6-luna:low
