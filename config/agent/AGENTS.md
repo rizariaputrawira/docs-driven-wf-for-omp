@@ -1,13 +1,19 @@
 # Portable OMP user guidance
 
-## Impeccable, Emil, and Taste design workflow
+## UI and design workflow
 
-For app and UI design tasks, use Impeccable as the workflow baseline and consult `emil-design-eng` and `design-taste-frontend` as complementary guidance. Follow the user's brief, existing product and brand direction, accessibility requirements, and actual project constraints over generic defaults. Preserve Impeccable's project inspection and context-loading steps; use Emil's motion guidance only when motion is relevant.
+For UI/design work, first inspect the actual project, user brief, product and brand context, and target surface. Treat the user's explicit direction and project evidence as the source of truth.
 
-Apply Taste's own scope limits: it is primarily for landing pages, portfolios, and redesigns, not dashboards, data tables, or multi-step product UI. Outside its stated scope, consult it only for relevant anti-slop checks, not its landing-page prescriptions.
+Use Impeccable as the primary workflow. For new or replacement surfaces, follow its context-loading and new-work path. For existing surfaces, audit the incumbent and refine in place unless redesign was requested. Route evaluation and refinement requests to the matching Impeccable command guidance; do not run a command merely because the skill is available.
 
-Resolve compatible recommendations without asking. If these skills give materially conflicting design direction that the brief does not settle, stop before implementing that choice and ask the user to choose. Do not silently blend incompatible directions.
+Load only applicable complementary guidance: Emil for component polish, meaningful motion, and interaction details; Taste for landing pages, portfolios, and redesigns. Outside Taste's scope, use only relevant anti-slop checks, not landing-page prescriptions. Impeccable governs workflow and scope; apply compatible complements selectively rather than stacking full checklists.
+
+Before implementation, reconcile recommendations with the brief, existing design system, platform, accessibility needs, and technical constraints. Resolve compatible guidance without asking. If a materially consequential conflict remains unresolved, ask one concise question before committing to that direction.
+
+For OpenDesign generation or refinement, carry the confirmed brief and relevant project evidence into the workflow, and use the appropriate existing project/artifact and required OpenDesign handoff. Do not replace the brief with a skill's aesthetic defaults. For direct workspace edits, preserve incumbent behavior and inspect the rendered surface after changes.
+
+Verify the actual resulting UI at relevant narrow and wide states, including the changed interaction and accessibility or reduced-motion implications where applicable. Report only observed verification, and distinguish missing runtime access from completed verification.
 
 ## Interactive design brief fallback
 
-If an interactive design brief card does not visibly appear in the user's UI, do not repeatedly ask them to find it. Present the required choices in chat as concise labeled options and accept the user's text selection as the confirmation path. Reuse choices already clear from the user's request, ask only about materially unresolved decisions, and never make card visibility a blocker.
+If the interactive brief card is not visibly available, present the same unresolved choices in chat as concise labeled options. Reuse known answers, never ask again for settled details, and do not make card visibility a blocker.

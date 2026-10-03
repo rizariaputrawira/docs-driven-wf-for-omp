@@ -1,0 +1,129 @@
+symbolPreset: unicode
+composer:
+  shape: band
+theme:
+  dark: onyx
+  light: onyx
+setupVersion: 2
+modelRoles:
+  default: openai-codex/gpt-6-luna:medium
+  smol: openai-codex/gpt-6-luna:medium
+  routine: openai-codex/gpt-6-luna:medium
+  plan: openai-codex/gpt-6-luna:medium
+  task: openai-codex/gpt-6-luna:medium
+  advisor: openai-codex/gpt-6-sol:high
+  slow: openai-codex/gpt-6-sol:high
+  vision: openai-codex/gpt-6-luna:medium
+  commit: openai-codex/gpt-6-luna:low
+  tiny: openai-codex/gpt-6-luna:low
+  memory: openai-codex/gpt-6-luna:low
+cycleOrder:
+  - smol
+  - default
+  - routine
+  - slow
+defaultThinkingLevel: medium
+skills:
+  customDirectories:
+    - ~/.agents/skills
+    - ~/.agent/skills
+    - .agents/skills
+    - .agent/skills
+statusLine:
+  preset: default
+  sessionAccent: true
+  transparent: false
+  compactThinkingLevel: true
+  showHookStatus: true
+  separator: pipe
+  contextLine: annotated
+hideThinkingBlock: false
+tier:
+  openai: none
+  subagent: none
+  advisor: none
+modelRoleStorage: global
+retry:
+  enabled: true
+  maxRetries: 1
+  modelFallback: false
+  usageAwareFallback: false
+  fallbackChains:
+    {}
+task:
+  prewalk: false
+  eager: default
+  enableEffort: false
+  maxConcurrency: 3
+  maxRecursionDepth: 1
+  maxEffort: high
+  agentModelOverrides:
+    scout: "@smol"
+    routine: "@routine"
+    task: "@task"
+    reviewer: "@task"
+    security-reviewer: "@task"
+    slow: "@slow"
+    advisor: "@advisor"
+  agentPrewalk:
+    scout: "off"
+    routine: "off"
+    task: "off"
+    reviewer: "off"
+    security-reviewer: "off"
+    slow: "off"
+    advisor: "off"
+  agentAdvisor:
+    scout: "off"
+    routine: "off"
+    task: "off"
+    reviewer: "off"
+    security-reviewer: "off"
+    slow: "off"
+    advisor: "off"
+  agentServiceTierOverrides:
+    scout: none
+    routine: none
+    task: none
+    reviewer: none
+    security-reviewer: none
+    slow: none
+    advisor: none
+  isolation:
+    enabled: false
+advisor:
+  enabled: false
+prewalk:
+  enabled: false
+dev:
+  autoqaConsent: denied
+  autoqa: false
+tools:
+  approvalMode: yolo
+  xdev: false
+  intentTracing: false
+terminal:
+  showProgress: false
+power:
+  sleepPrevention: idle
+features:
+  unexpectedStopDetection: mechanical
+tui:
+  codexResetFireworks: false
+display:
+  shimmer: classic
+  showTokenUsage: true
+magicKeywords:
+  ultrathink: false
+plan:
+  enabled: true
+  defaultOnStartup: false
+contextPromotion:
+  enabled: false
+extendedContext: false
+compaction:
+  enabled: true
+codexResets:
+  autoRedeem: "no"
+telemetry:
+  otlpExportEnabled: false

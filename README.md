@@ -1,32 +1,32 @@
 # omp-config
 
-Portable distribution of the OMP user-level agent guidance maintained in this repository. It deliberately does not distribute OMP settings, credentials, provider/model selections, trusted workspaces, histories, databases, caches, or generated state.
+Portable snapshot of OMP user-level configuration and behavior, including model-role and agent-model assignments, agent definitions, rules, extensions, commands, MCP declarations, skill sources, watchdog configuration, and the disabled plugin lock state. The maintained settings intentionally preserve `tools.approvalMode: yolo`; review this unrestricted approval choice before installing.
 
 ## Requirements and scope
 
-- OMP 18.4.11 was the installed version used to confirm the user-level rules path `~/.omp/agent/AGENTS.md`; the installer does not depend on a particular OMP config.yml schema.
-- POSIX commands: `sh`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp`, and `date`. Remote installation additionally requires `curl` and `unzip`. The scripts use POSIX shell builtins such as `cd`, `command`, `echo`, `exit`, `set`, `shift`, and `test` without additional utilities.
-- Windows: PowerShell 5.1+; remote mode uses `Invoke-WebRequest` and `Expand-Archive`.
+- POSIX: `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp`, and `date`. Remote ZIP installation additionally requires `curl` and `unzip`.
+- Windows: PowerShell 5.1+; remote ZIP installation uses `Invoke-WebRequest` and `Expand-Archive`.
+- Installation validates an existing home directory and every mapped source and destination before writing. It does not prune unrelated files or directories. Changed regular files receive collision-safe sibling backups; byte-identical files are not rewritten.
+- The portable files do not include OMP itself, model credentials, node, the OpenDesign daemon, RTK, or herdr services. `config/agent/mcp.json` expects `GITHUB_TOKEN` and `OMP_OPEN_DESIGN_CLI`; configure these per machine. The latter names an installed daemon CLI, not a bundled build. The optional RTK and herdr integrations are retained without enabling their services.
+- `config/SKILL-SOURCES.md` documents the three captured skill roots and licensing caveat. Skills are snapshots, not a guarantee of downstream redistribution rights.
 
-## Installed file mapping
+## Managed files
 
-| Repository file | Destination |
-| --- | --- |
-| `config/agent/AGENTS.md` | `$HOME/.omp/agent/AGENTS.md` (`%USERPROFILE%\.omp\agent\AGENTS.md` on Windows) |
+`config/files.tsv` is the explicit source-to-destination inventory used by both installers and doctors. It maps the regular files under `config/agent/` to `~/.omp/agent/`, `config/plugins/` to `~/.omp/plugins/`, `config/skills-agents/` to `~/.agents/skills/`, and `config/skills-agent/` to `~/.agent/skills/`. The inventory itself is source metadata and is not installed. It includes the three skill roots as separate destinations and preserves their configured discovery order and distinct copies.
 
-This file is intentionally an explicit replacement of that single managed destination. Existing OMP files and directories elsewhere remain untouched. A pre-existing destination is copied to a sibling timestamped `.bak.YYYYMMDDTHHMMSSZ` file before replacement. Identical content is left unchanged, so repeated installs are idempotent. Restore by copying the desired backup over the destination.
+Credentials, histories, databases, caches, `node_modules`, and generated state are excluded. The installer creates only directories needed for listed files; no unrelated destination data is copied, removed, or overwritten.
 
 ## Install and update
 
 From a local clone on Linux/macOS:
 
 ```sh
-sh install.sh --dry-run
+sh install.sh --dry-run --home /path/to/existing-home
 sh install.sh
-sh install.sh --home /path/to/home
+sh install.sh --home '/path/with spaces'
 ```
 
-Update by pulling the repository changes, then rerun `sh install.sh`. Windows PowerShell:
+Windows PowerShell:
 
 ```powershell
 .\install.ps1 -DryRun
@@ -34,19 +34,7 @@ Update by pulling the repository changes, then rerun `sh install.sh`. Windows Po
 .\install.ps1 -Home 'C:\Users\example'
 ```
 
-The home override changes only the home directory used for the managed destination. Without it, the scripts use `$HOME` or `$env:USERPROFILE`.
-
-The scripts also accept an explicit source directory or downloadable ZIP URL. Example one-line install from the default `main` branch:
-
-```sh
-sh -c 't=$(mktemp -d) && curl -fsSL https://github.com/rizariaputrawira/omp-config/archive/refs/heads/main.zip -o "$t/repo.zip" && unzip -q "$t/repo.zip" -d "$t" && sh "$t/omp-config-main/install.sh"; r=$?; rm -rf "$t"; exit $r'
-```
-
-```powershell
-$t = Join-Path $env:TEMP ([guid]::NewGuid().ToString()); New-Item -ItemType Directory $t | Out-Null; try { .\install.ps1 -Source 'https://github.com/rizariaputrawira/omp-config/archive/refs/heads/main.zip' } finally { Remove-Item $t -Recurse -Force }
-```
-
-For native remote-archive handling (including installer-side extraction), invoke the script with the archive URL as `--source`/`-Source`:
+The home override selects the destination root; it must already exist. POSIX defaults to `$HOME`; PowerShell defaults to `%USERPROFILE%`. The scripts also accept `--source`/`-Source` with a local source directory or ZIP URL:
 
 ```sh
 sh install.sh --source https://github.com/rizariaputrawira/omp-config/archive/refs/heads/main.zip
@@ -56,16 +44,18 @@ sh install.sh --source https://github.com/rizariaputrawira/omp-config/archive/re
 .\install.ps1 -Source 'https://github.com/rizariaputrawira/omp-config/archive/refs/heads/main.zip'
 ```
 
-Append `--dry-run` or `-DryRun` to preview the destination. Dry-run never creates directories or changes files. Remote ZIP sources must contain exactly one top-level directory; extraction and template checks complete before the destination is touched.
+Remote archives must contain exactly one top-level directory, including hidden entries. Dry-run reports intended changes but does not create destination directories, backups, or services.
+
+The OpenDesign start/stop command guidance is user-invoked and POSIX-shell-specific. Set `OMP_OPEN_DESIGN_LAUNCHER` to an executable installed launcher before running those commands; Windows installation does not provide a native PowerShell equivalent. MCP additionally uses `OMP_OPEN_DESIGN_CLI` for the installed daemon CLI and `OD_DAEMON_URL=http://127.0.0.1:7456`; installation does not start the daemon or MCP server.
 
 ## Configuration doctor
 
-The doctor checks only the managed `AGENTS.md` file. It does not inspect or modify OMP settings, credentials, model/provider choices, trusted workspaces, or other user data. Check is the default and is read-only:
+Check is read-only and compares every inventory entry:
 
 ```sh
 sh scripts/doctor.sh
-sh scripts/doctor.sh --check --home /path/to/home
-sh scripts/doctor.sh --fix --home /path/to/home
+sh scripts/doctor.sh --check --home /path/to/existing-home
+sh scripts/doctor.sh --fix --home /path/to/existing-home
 ```
 
 ```powershell
@@ -74,6 +64,4 @@ sh scripts/doctor.sh --fix --home /path/to/home
 .\scripts\doctor.ps1 -Fix -Home 'C:\Users\example'
 ```
 
-Pass/matching exits 0, missing or drifted content exits 1, and invalid arguments or an unusable source/home exits 2. `--fix`/`-Fix` delegates to the existing installer, so a changed existing file gets the same timestamped backup and an already-matching file remains unchanged. By default the doctor checks the current `$HOME` or `%USERPROFILE%`; `--home`/`-Home` selects another existing home directory for both checking and repair.
-
-No environment variables, secrets, template substitutions, or user-specific values are required. Troubleshooting: ensure `$HOME` (POSIX) or `$env:USERPROFILE` (Windows) points to the intended account; install the listed remote utilities if using ZIP URLs; inspect the printed backup path before restoring.
+The doctor exits 0 only when every mapped file matches, 1 for missing or drifted files, and 2 for invalid arguments or unusable inventory/home/read/repair errors. Fix delegates to the platform installer once, then checks every file. Use `python3 scripts/test_install.py` to run the deterministic POSIX installer/doctor integration scenarios; the runner reports explicitly when no PowerShell runtime is available.

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/can1357/oh-my-pi/main/packages/coding-agent/src/config/mcp-schema.json",
+  "mcpServers": {
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_TOKEN}"
+      }
+    },
+    "open-design": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${OMP_OPEN_DESIGN_CLI}",
+        "mcp"
+      ],
+      "env": {
+        "OD_DAEMON_URL": "http://127.0.0.1:7456"
+      }
+    }
+  }
+}

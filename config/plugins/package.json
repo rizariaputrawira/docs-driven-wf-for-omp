@@ -1,0 +1,7 @@
+{
+  "name": "omp-plugins",
+  "private": true,
+  "dependencies": {
+    "pi-9router-ext": "npm:pi-9router-ext@^0.2.4"
+  }
+}
