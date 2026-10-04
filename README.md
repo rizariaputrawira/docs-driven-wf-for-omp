@@ -72,6 +72,41 @@ The maintained suite is managed repository payload, not an OMP application patch
 
 Managed `config/agent/AGENTS.md` provides short conditional trigger-to-owner routing. Actual procedures are read on demand. Disabled/filtered/unavailable suite assets do not automatically reload or block ordinary OMP work. Requested unavailable suite-specific proof remains incomplete; native permissions and approval still govern. No new hook, router, service, task-state database, tracker, auto-commit, scanner or package install is required.
 
+### Workflow at a glance
+
+```mermaid
+flowchart TD
+  A[Goal or change] --> B{Routine bounded work?}
+  B -- Yes --> C[Use native OMP workflow]
+  B -- No --> D[Inspect project and canonical sources]
+  D --> E{Material documentation or context dependency?}
+  E -- Yes --> F[engineering-docs: build a focused context packet]
+  E -- No --> G{Unresolved consequential behavior?}
+  F --> G
+  G -- Yes --> H[brainstorming: resolve decisions and approve design]
+  G -- No --> I[Reuse existing requirements/spec; create only if needed]
+  H --> J{UI work?}
+  I --> J
+  J -- Yes --> K[Inspect incumbent; use Impeccable; OpenDesign only if required]
+  J -- No --> L[Prepare implementation plan]
+  K --> L
+  L --> M{Consequential multi-slice plan?}
+  M -- Yes --> N[plan-review: check acceptance, integration and evidence coverage]
+  M -- No --> O[Native OMP plan approval]
+  N --> O
+  O --> P[Implement the next authorized slice]
+  P --> Q[Exercise the real acceptance path]
+  Q --> R{Acceptance passes?}
+  R -- No --> S[Diagnose and correct; reapprove material scope changes]
+  S --> P
+  R -- Yes --> T{More approved slices?}
+  T -- Yes --> P
+  T -- No --> U[Update canonical docs and shipped app guide]
+  U --> V[End-to-end verified]
+```
+
+OMP owns operational state (plan approval, optional todos, task workers and same-session resume); project documents remain the authority for requirements and decisions. Delegation is optional and only for independent work. A repository plan copy is a conditional portability/team record, not a second approval authority. Use the portable handoff only when pausing or transferring harnesses; it is not the same as native session resume or `/handoff` compaction. Native Plan Mode and approval behavior were not runtime-verified in this cutover.
+
 | Canonical skill | Disposition and concrete capability | Adapted source |
 |---|---|---|
 | engineering-docs | Adopted/enhanced sole documentation owner: eight actions, source-first reuse, typed manifest, seven-heading context, trace/document audit and upgrade limits | Local staging production only; GSD context/requirements/tracer mechanisms |
