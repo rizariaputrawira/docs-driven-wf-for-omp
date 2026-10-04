@@ -76,54 +76,70 @@ Managed `config/agent/AGENTS.md` provides short conditional trigger-to-owner rou
 
 ```mermaid
 flowchart TD
-  A[Goal or change] --> B{Routine bounded work?}
-  B -- Yes --> C[Use native OMP workflow]
-  B -- No --> D[Inspect project and canonical sources]
-  D --> E{Material documentation or context dependency?}
-  E -- Yes --> F[engineering-docs: build a focused context packet]
-  E -- No --> G{Unresolved consequential behavior?}
-  F --> G
-  G -- Yes --> H[brainstorming: resolve decisions and approve design]
-  G -- No --> I[Reuse existing requirements/spec; create only if needed]
-  H --> J{UI work?}
-  I --> J
-  J -- Yes --> K[Inspect incumbent; use Impeccable; OpenDesign only if required]
-  J -- No --> L[Prepare implementation plan]
-  K --> L
-  L --> M{Consequential multi-slice plan?}
-  M -- Yes --> N[plan-review: check acceptance, integration and evidence coverage]
-  M -- No --> O[Native OMP plan approval]
-  N --> O
-  O --> P[Implement the next authorized slice]
-  P --> Q[Exercise the real acceptance path]
-  Q --> R{Acceptance passes?}
-  R -- No --> S[Diagnose and correct; reapprove material scope changes]
-  S --> P
-  R -- Yes --> T{More approved slices?}
-  T -- Yes --> P
-  T -- No --> U[Update canonical docs and shipped app guide]
-  U --> V[End-to-end verified]
+  A[Goal or change] --> B{Routine bounded task?}
+  B -- Yes --> C[Native OMP workflow; load only a triggered skill]
+  B -- No --> D[project-delivery: end-to-end workflow]
+  D --> E[Inspect project and existing canonical documents]
+  E --> F{Need focused task context?}
+  F -- Yes --> G[engineering-docs: read owners, conflicts and gaps]
+  F -- No --> H{Need a product/design spec?}
+  G --> H
+  H -- Yes --> I[brainstorming: resolve consequential choices]
+  I --> J{Existing spec or requirements owner?}
+  J -- Yes --> K[Update that canonical document]
+  J -- No --> L[Create approved spec: docs/specs/date-topic.md]
+  H -- No --> M[Reuse current approved spec and decisions]
+  K --> N{Glossary or consequential ADR needed?}
+  L --> N
+  M --> N
+  N -- Yes --> O[domain-modeling: update glossary or ADR only if warranted]
+  N -- No --> P{UI work?}
+  O --> P
+  P -- Yes --> Q[Impeccable workflow; keep approved design reference]
+  P -- No --> R[Prepare native OMP implementation plan]
+  Q --> R
+  R --> S{Consequential multi-slice plan?}
+  S -- Yes --> T[plan-review: read-only coverage check]
+  S -- No --> U[Native OMP plan approval]
+  T --> U
+  U --> V{Durable plan copy needed?}
+  V -- Yes --> W[Mirror approved plan in project docs]
+  V -- No --> X[Use approved native plan]
+  W --> Y[Implement authorized slices]
+  X --> Y
+  Y --> Z[Exercise real acceptance path]
+  Z --> AA{Acceptance passes?}
+  AA -- No --> AB[Diagnose and correct; reapprove material scope changes]
+  AB --> Y
+  AA -- Yes --> AC{More approved slices?}
+  AC -- Yes --> Y
+  AC -- No --> AD[Update canonical docs and app guide to match shipped behavior]
+  AD --> AE[End-to-end verified]
 ```
 
-OMP owns operational state (plan approval, optional todos, task workers and same-session resume); project documents remain the authority for requirements and decisions. Delegation is optional and only for independent work. A repository plan copy is a conditional portability/team record, not a second approval authority. Use the portable handoff only when pausing or transferring harnesses; it is not the same as native session resume or `/handoff` compaction. Native Plan Mode and approval behavior were not runtime-verified in this cutover.
+**Where the skills fit:** `project-delivery` owns the substantial-delivery path; `engineering-docs` supplies focused context when needed; `brainstorming` resolves consequential product choices; `domain-modeling` handles active terminology and consequential decisions; `plan-review` checks consequential multi-slice coverage before native approval. During implementation, use `tdd` only for requested test-first work, `diagnosing-bugs` for difficult/flaky/performance issues, and `code-review` for review. Use `security-intake` for external bundle adoption, `security-review` for focused security changes, and `security-audit` only for explicitly bounded audits. These do not all run on every app.
 
-| Canonical skill | Disposition and concrete capability | Adapted source |
+**Where documents fit:** reuse existing product/requirements/design owners first. Create or update an approved spec only when the app needs one; default new spec path is `docs/specs/YYYY-MM-DD-topic.md`. Glossaries and ADRs are conditional. A repository plan copy is optional for a real team/portability need, not a second approval authority. After verification, update the existing README or create `docs/app-guide.md` if none exists. Context packets and native todos are working aids, not extra product documents.
+
+OMP owns operational state (native plan approval, optional todos, task workers and same-session resume); project documents remain the authority for requirements and decisions. Delegation is optional and only for independent work. Portable handoff is for an explicit pause/transfer; it is not native session resume or `/handoff` compaction. Native Plan Mode and approval behavior were not runtime-verified in this cutover.
+
+| Canonical skill | Origin: our authorship and selected upstream influence | Concrete capability |
 |---|---|---|
-| engineering-docs | Adopted/enhanced sole documentation owner: eight actions, source-first reuse, typed manifest, seven-heading context, trace/document audit and upgrade limits | Local staging production only; GSD context/requirements/tracer mechanisms |
-| brainstorming | Enhanced approval paths, supplied-intent write-back and explicit ready-frontier stress-test | Matt Pocock, Superpowers |
-| domain-modeling | Replaced weak body with active counterexamples, settled glossary and consequential truthful ADRs | Matt Pocock |
-| tdd | Replaced weak body with meaningful observed vertical RED/GREEN and optional refactor; explicit test-first only | Matt Pocock, Superpowers |
-| code-review | Replaced weak body with separate Standards/correctness and Spec verdicts, WIP coverage and complete fix dispositions | Matt Pocock, Superpowers |
-| diagnosing-bugs | Replaced weak body with signal/minimization/falsifiable hypothesis/root correction/original-path proof | Matt Pocock, Superpowers |
-| writing-for-agents | Replaced weak body with condition-bearing pointers, single owners and authorized real baseline/candidate assessment | Matt Pocock, Superpowers |
-| project-delivery | Enhanced complete vertical delivery and independently authorized resume; incumbent-first UI evidence | Matt Pocock, Superpowers, GSD; original ownership expression |
-| plan-review | Added read-only semantic acceptance, consumer integration, dependencies and proof coverage check | GSD |
-| handoff-to-another-harness | Enhanced explicit pause/export and transfer, exact partial state and non-authoritative portable snapshot | GSD |
-| resume-from-handoff | Enhanced strictly read-only selected-snapshot summary, never continuation | GSD |
-| retro | Enhanced evidence/applicability/promotion conditions, no automatic policy/memory mutation | GSD |
-| security-intake | Added source-only bundle purpose/authority/provenance/coverage assessment, exact four verdicts | NVIDIA SkillSpector |
-| security-review | Added focused changed-boundary discovery and fresh source refutation | Anthropic |
-| security-audit | Added explicitly bounded coverage-led audit with relevant AI, availability and supply-chain companions | Cloudflare |
+| engineering-docs | Originally authored by us in staging; selected GSD documentation mechanisms informed the managed adaptation | Sole documentation owner: eight actions, source-first reuse, typed manifest, seven-heading context, trace/document audit and upgrade limits |
+| brainstorming | Our OMP-specific adaptation; selected Matt Pocock and Superpowers methods informed it | Approval paths, supplied-intent write-back and explicit ready-frontier stress-test |
+| domain-modeling | Our OMP-specific adaptation of selected Matt Pocock methods | Active counterexamples, settled glossary and consequential truthful ADRs |
+| tdd | Our OMP-specific adaptation of selected Matt Pocock and Superpowers methods | Meaningful observed vertical RED/GREEN and optional refactor; explicit test-first only |
+| code-review | Our OMP-specific adaptation of selected Matt Pocock and Superpowers methods | Separate Standards/correctness and Spec verdicts, WIP coverage and complete fix dispositions |
+| diagnosing-bugs | Our OMP-specific adaptation of selected Matt Pocock and Superpowers methods | Signal/minimization/falsifiable hypothesis/root correction/original-path proof |
+| writing-for-agents | Our OMP-specific adaptation of selected Matt Pocock and Superpowers methods | Condition-bearing pointers, single owners and authorized real baseline/candidate assessment |
+| project-delivery | Our delivery procedure and ownership/resumption rules; selected Matt Pocock, Superpowers and GSD methods informed it | Complete vertical delivery and independently authorized resume; incumbent-first UI evidence |
+| plan-review | Our OMP-specific review procedure; selected GSD methods informed it | Read-only semantic acceptance, consumer integration, dependencies and proof coverage check |
+| handoff-to-another-harness | Our portable handoff contract; selected GSD methods informed it | Explicit pause/export and transfer, exact partial state and non-authoritative portable snapshot |
+| resume-from-handoff | Our read-only loading procedure; selected GSD methods informed it | Selected-snapshot summary only, never continuation |
+| retro | Our recommendation-only procedure; selected GSD learning methods informed it | Evidence/applicability/promotion conditions; no automatic policy/memory mutation |
+| security-intake | Our OMP intake procedure; selected NVIDIA SkillSpector methods informed it | Source-only bundle purpose/authority/provenance/coverage assessment, exact four verdicts |
+| security-review | Our OMP review procedure; selected Anthropic review methods informed it | Focused changed-boundary discovery and fresh source refutation |
+| security-audit | Our bounded audit procedure; selected Cloudflare methods informed it | Coverage-led audit with relevant AI, availability and supply-chain companions |
 
 Exact immutable revisions, local path mappings, modifications and full MIT/Apache-2.0 notices are in each skill's SOURCES.md and [payload provenance](config/SKILL-SOURCES.md). Titus assets are not copied or translated because no covering grant was established. The Pi catalog shortlist (bigpowers 2.88.9, pi-security-analysis 0.17.3, pi-subagents 0.75.0, openwiki 0.7.0) is rejected for this bounded need, not certified safe/unsafe or assumed OMP-compatible. Its recorded necessity assessment is in engineering-docs/SOURCES.md.
 
