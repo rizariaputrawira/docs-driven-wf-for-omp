@@ -121,6 +121,25 @@ flowchart TD
 
 **Where documents fit:** reuse existing product/requirements/design owners first. Create or update an approved spec only when the app needs one; default new spec path is `docs/specs/YYYY-MM-DD-topic.md`. Glossaries and ADRs are conditional. A repository plan copy is optional for a real team/portability need, not a second approval authority. After verification, update the existing README or create `docs/app-guide.md` if none exists. Context packets and native todos are working aids, not extra product documents.
 
+### Documents created or updated by the skills
+
+These are conditional outputs, not a required document bundle. Skills inspect and extend existing canonical owners first; a skill run does not automatically create every item below.
+
+| Document or output | Skill owner | When and where |
+|---|---|---|
+| Product/design spec, including user stories and acceptance criteria | `project-delivery` specification; `brainstorming` for consequential unresolved choices | Update the existing product/requirements owner. If none is sufficient and no project convention exists, use `docs/specs/YYYY-MM-DD-<topic>.md`. Keep stories and testable acceptance together; do not create one file per story. |
+| Focused context packet | `engineering-docs` context branch | Task/session output listing relevant sources, conflicts, gaps and boundaries. It is a working aid, not automatically a new project document. |
+| Engineering-docs manifest | `engineering-docs` setup/maintain | Reuse an existing manifest; `docs/engineering-docs.yaml` is only the fallback when a manifest is needed and none exists. |
+| Glossary | `domain-modeling` | Update the existing glossary when terminology needs an agreed owner; `GLOSSARY.md` is a fallback, not a default deliverable. |
+| Architecture decision record (ADR) | `domain-modeling` | Record a consequential, hard-to-reverse, surprising or contested decision in the project's existing ADR location; do not create an ADR for every choice. |
+| UI/design reference | Existing UI design owner and Impeccable workflow | Preserve or update the project's existing `DESIGN.md` or approved design artifact when needed, and link it from the spec. OpenDesign is used only when generation/refinement is actually required. |
+| Implementation plan | `project-delivery`; `plan-review` for consequential multi-slice coverage | The native OMP plan is the operative plan. A repository copy is optional when team review, portability or project convention requires it; use the existing plan location or a dated `docs/plans/` path, and do not treat the copy as another approval. |
+| Verification, review or security findings | `project-delivery`, `code-review`, or the matching security skill | Use the existing plan, test/evidence, review or security-finding owner. Do not automatically create a parallel report; record only observed evidence and authorized dispositions. |
+| Portable handoff snapshot | `handoff-to-another-harness` | Only for an explicit pause/transfer: `.handoff/NNN-YYYYMMDD-handoff.md`. `resume-from-handoff` reads a selected snapshot; it does not continue the work. |
+| User/app guide | `project-delivery` final documentation | After end-to-end verification, update the existing README/user guide or create `docs/app-guide.md` if the project has no suitable guide. Describe shipped behavior and limitations. |
+
+Other skills have narrower outputs: `tdd` changes tests/code only when test-first work is requested; diagnosis, review, intake and retro do not silently generate documentation or mutate policy. Any durable write still requires the applicable authorization.
+
 OMP owns operational state (native plan approval, optional todos, task workers and same-session resume); project documents remain the authority for requirements and decisions. Delegation is optional and only for independent work. Portable handoff is for an explicit pause/transfer; it is not native session resume or `/handoff` compaction. Native Plan Mode and approval behavior were not runtime-verified in this cutover.
 
 | Canonical skill | Origin: our authorship and selected upstream influence | Concrete capability |
