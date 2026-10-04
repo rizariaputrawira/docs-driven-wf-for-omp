@@ -1,0 +1,34 @@
+# ADR format and decision status
+
+Load only when a consequential architecture/domain decision needs a durable record. Reuse the existing ADR convention/location first. Otherwise use `docs/adr/NNNN-short-slug.md`: inspect the highest valid existing sequence and choose the next unused number without overwriting. Create the directory only for a real authorized ADR.
+
+## Minimal record
+
+A title and short context/decision/reason paragraph are enough when they preserve the actual basis. Include considered options, consequences, constraints and source links when they explain non-obvious trade-offs. Avoid ceremony that obscures the decision.
+
+The record must distinguish:
+
+- what problem/constraint forced the choice;
+- the decision and its scope, or the proposal still awaiting a decision;
+- why the selected option fits, including meaningful rejected alternatives;
+- the actual decision basis/authorization locator when available;
+- non-obvious consequences and links to related requirements/ADRs.
+
+Do not fabricate a date, approval event or identity. Unknown facts remain unknown. Numbering provides stable identity, not acceptance.
+
+## Status
+
+Use these exact status values when recording status, in the existing project's representation:
+
+|Status|Meaning and required basis|
+|---|---|
+|`proposed`|A choice under consideration; no approval is implied.|
+|`accepted`|An actually settled decision with its real decision/authorization basis recorded or linked.|
+|`deprecated`|The decision is no longer recommended; explain the observed decision to retire it and current applicability.|
+|`superseded`|A real successor ADR exists; link it and explain the replacement boundary.|
+
+Keep `superseded` as the status and put the actual successor link alongside it, not a fabricated “future ADR”. Follow existing reverse links where used. If the successor is merely proposed, do not imply an accepted replacement. A supersession proposal stays proposed until the actual decision occurs.
+
+## When the record earns its place
+
+Record hard-to-reverse ownership/integration choices, surprising deviations with genuine reasons, contested alternatives, lock-in, or non-visible constraints that a future maintainer would otherwise miss. A small reversible local choice needs no ADR merely because this skill ran. If evidence is insufficient, return the proposed decision and missing basis without manufacturing acceptance or a new file.

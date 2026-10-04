@@ -1,0 +1,17 @@
+# Reusable template, not a classified project or evidence of completeness.
+# Replace provisional values after inspection; preserve existing canonical owners.
+# Field contract: references/manifest.md. Add only justified selected/omitted concepts.
+version: 1
+project:
+  types:
+    - software
+  platforms: []
+  capabilities: []
+  profile: lean
+  criticality: unknown
+  security:
+    data-sensitivity: unknown
+    exposure: unknown
+    rationale: "UNRESOLVED: inspect repository data, exposure, trust boundaries and obligations before selecting risk coverage."
+documents: {}
+# Optional traceability points to an existing project map, not a new competing owner.

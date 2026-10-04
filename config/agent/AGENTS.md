@@ -1,5 +1,29 @@
 # Portable OMP user guidance
 
+## Engineering workflow
+
+Apply this routing only when the documentation-driven suite is available, enabled and matches the current request. Explicit skill disablement/filtering wins. Missing or disabled suite assets must not stop ordinary native OMP work or trigger automatic file-load/setup. Continue native permissions, approval and relevant context checks; block only explicitly requested unavailable suite-specific proof. Renewed explicit authorization to load a known file is distinct from automatic reactivation.
+
+| Current task trigger | Procedure owner to read on demand |
+|---|---|
+| Material documentation/context dependency | `skill://engineering-docs`, context branch before dependent work. No manifest is required for safe provisional inspection; no automatic setup. |
+| Unresolved consequential behavior | `skill://brainstorming` |
+| Active domain terminology, relationships or consequential ADR work | `skill://domain-modeling` |
+| Explicit substantial/end-to-end delivery or authorized continuation | `skill://project-delivery`, with `resume` for actual continuation |
+| Consequential multi-slice plan coverage/integration check | `skill://plan-review` before native proposal/reapproval, not a second approval ritual |
+| Requested/approved test-first or red-green-refactor | `skill://tdd`. Ordinary regression coverage alone does not force TDD. |
+| Difficult, flaky or performance diagnosis | `skill://diagnosing-bugs` |
+| Ordinary patch, WIP, spec/correctness or correction review | `skill://code-review` |
+| External bundle adoption/update | `skill://security-intake` |
+| Focused security diff/base/head review | `skill://security-review` |
+| Explicit bounded deep security audit | `skill://security-audit` |
+| Explicit pause/export/transfer | `skill://handoff-to-another-harness` |
+| Read/load a handoff only | `skill://resume-from-handoff`, selected snapshot only, never continuation |
+| Guidance changes or separately authorized behavioral skill assessment | `skill://writing-for-agents` |
+| Requested retrospective | `skill://retro` |
+
+Descriptions are triggers, not loaded procedures. Use actual `read` and the installed task/tool schemas. Independent security discovery/refutation needs fresh source-inspecting read-only reviewers and effective dispatched-definition provenance, not advice-only advisor assertions or a same-named substitute. Instructions create no permissions, model binding or sandbox. For explicitly requested upgrade proof, read `skill://engineering-docs/references/omp-compatibility.md`; absent native convenience support permits a known canonical file read only for an explicitly requested enabled suite, never to defeat disablement. No dispatcher/plugin/autoload hook is added.
+
 ## UI and design workflow
 
 For UI/design work, first inspect the actual project, user brief, product and brand context, and target surface. Treat the user's explicit direction and project evidence as the source of truth.

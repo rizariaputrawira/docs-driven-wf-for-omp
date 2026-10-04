@@ -1,116 +1,39 @@
 ---
 name: brainstorming
-description: "Use before creative or behavioral work to turn an idea into an evidence-backed, user-approved design. Supports OMP's ultrathink, orchestration, repository intelligence, and browser capabilities without implementation before approval."
+description: "Use before unresolved creative or behavioral design work, or for an explicit decision stress-test."
 ---
 
-# Brainstorming Ideas Into Designs
+# Brainstorming
 
-Turn an idea into a design that the user explicitly approves before any implementation begins. Match process to uncertainty; extract evidence from the actual project rather than guessing.
+Turn uncertainty into an evidence-backed design whose scope the user can recognize and approve. An existing approved design is context, not a reason to repeat the interview. Skill text grants no tools, runtime keywords, reasoning mode or permission.
 
-## Invocation and OMP thinking
+## Establish intent and evidence
 
-Use either:
+1. Announce the provisional path: **spike**, **bounded**, or **architectural**. Bounded requires an existing affected flow that can actually be inspected. When two paths fit, choose the heavier; newly discovered complexity upgrades the path.
+2. Read the current request, relevant project guidance and existing requirement/design owners. Trace the affected flow and real callers. Discover repo/tool-provided facts rather than asking the user. Use source navigation and, for an existing UI, available read-only DOM/screenshot evidence when it resolves a real visual choice. Missing material context blocks dependent decisions, not unrelated safe inspection.
+3. Write back the intended outcome, audience/use, constraints and observable success in a short note. Distinguish supplied facts from assumptions; invite correction. Ask only for consequential missing intent. Do not re-interview facts the request already supplies.
+4. Carry that understanding into every proposed choice. Ordinary brainstorming asks one material question at a time. An explicit **stress-test** instead loads [ready-frontier rounds](references/stress-test.md); its batched questions do not become the default interview.
 
-```text
-/skill:brainstorming <idea>
-```
+## Approval boundary
 
-or an ordinary request that names this skill. For OMP's maximum automatic reasoning effort, `ultrathink` must appear as standalone lowercase prose in the **user's actual prompt**:
-
-```text
-ultrathink /skill:brainstorming explore <idea>
-```
-
-Skill content cannot activate a magic keyword retroactively. `ultrathink` improves reasoning depth; it never bypasses an approval gate.
-
-`orchestrate` and `workflowz` are likewise user-prompt keywords. Use them only when the brainstorm has substantial independent research, review, or migration slices; they are unnecessary for ordinary bounded work.
-
-<HARD-GATE>
-Until the user explicitly approves the proposed design, do NOT invoke an implementation skill, edit production files, write code, scaffold a project, make a consequential external change, or silently start implementation.
-</HARD-GATE>
-
-## Phase 1 — Establish evidence
-
-Before the first substantive question:
-
-1. State the provisional classification: **spike**, **bounded**, or **architectural**.
-2. Inspect only enough existing context to ground the next decision:
-   - Project rules and current state first.
-   - Use `glob` to map unknown structure; `read` selected files in full; `grep` for exact usage.
-   - When language-server support is available, use LSP definitions, references, and symbols for code relationships. Do not infer call sites from filenames.
-   - For existing UI, inspect the running surface with the browser's DOM/ARIA tools and a screenshot. Use native computer inspection only when it is already enabled, read-only, and clearer than browser inspection.
-3. State facts separately from assumptions and name the uncertainty that the next question resolves.
-
-Do not perform a broad audit, create a plan document, or delegate merely to appear thorough.
-
-## Phase 2 — Choose the path
-
-Announce the classification before asking the first question. If two paths fit, take the heavier path. Hidden complexity upgrades the path; nothing downgrades it.
+Before implementation, obtain actual native/user approval for the selected path and exact scope. Until then, remain in authorized read-only research and design discussion; do not write production code, scaffold, install dependencies or change external state. Documentation writes also require authority. Plan Mode returns proposed content through an allowed channel and never writes checkout files. A skill is not a second approval engine: use the current native proposal/approval mechanism where it owns the decision.
 
 ### Spike
 
-Use for a feasibility question whose output is an answer, not retained code.
-
-1. Inspect enough context to frame a safe probe.
-2. Present the question and a 2–3 sentence probe plan.
-3. Get approval.
-4. Investigate as cheaply as correctness allows.
-5. Report evidence, uncertainty, and a recommendation. Label every created artifact as throwaway.
-
-Approval to explore a spike does not approve retaining, shipping, or extending its artifacts.
+Present a feasibility question and a two- or three-sentence safe probe, including permitted effects and evidence. Wait for approval, then investigate within that boundary. Report the result, uncertainty and recommendation; label any authorized artifacts throwaway. Exploration approval does not permit retaining, shipping or expanding them.
 
 ### Bounded
 
-Use only for a well-scoped change to a flow that already exists and can be read in the repository.
-
-1. Trace the affected flow and its actual call sites.
-2. Ask one clarifying question at a time, only when its answer changes the design.
-3. Present a short in-chat design containing:
-   - outcome and explicit non-goals;
-   - changed behavior and affected boundaries/files;
-   - errors, edge cases, and compatibility implications;
-   - exact verification evidence.
-4. Stop for an explicit approval.
-5. After approval, use OMP's normal development workflow.
+Trace the existing path and answer discoverable facts first. Present a compact in-chat design: outcome/non-goals, behavior and affected boundaries, errors/compatibility, and observable verification. Stop for approval before implementation. No new spec or plan file is required solely by this classification. After approval, use ordinary OMP development; test-first applies only when requested or approved.
 
 ### Architectural
 
-Use for new projects or subsystems, cross-cutting changes, interface restructures, or work that decomposes into independent subproblems.
+Map load-bearing choices, ownership and prerequisite decisions. Offer two or three genuinely viable approaches with trade-offs and a recommendation. Present reviewable sections covering system boundary, interfaces, data/control flow, errors/security/migration where applicable, and acceptance/evidence. If oversized, agree independently deliverable subprojects without silently discarding requested acceptance.
 
-1. Map the current system, constraints, and independent subsystems. Identify load-bearing choices and their dependencies: resolve prerequisites before asking downstream questions.
-2. Ask one question at a time about purpose, constraints, success criteria, and ownership; ask only when the answer could materially change the design. Research facts discoverable from the repository or available tools instead of asking the user.
-3. If the prompt contains `orchestrate` and two or more **read-only, independent** research slices exist, delegate them in one parallel batch. Give each a precise question and a shared output contract. Verify important findings against primary repository evidence before relying on them.
-4. Offer 2–3 viable approaches with trade-offs. Lead with the recommendation and why it best fits the evidence.
-5. Present the preferred design in reviewable sections, scaled to complexity:
-   - system boundary and non-goals;
-   - components and interfaces;
-   - data/control flow and state ownership;
-   - error handling, security, migration, and rollback where applicable;
-   - testing and observable acceptance criteria.
-6. Get explicit approval of the design.
-7. Write the approved design to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`, unless the user gives another location.
-8. Self-review the document for placeholders, contradictions, ambiguity, unwanted scope, and unverifiable claims. Correct issues.
-9. Ask the user to approve the written design before planning or implementing, except when OMP Plan Mode is active: follow its read-only rules and approval mechanism rather than adding a separate design-document gate.
+Reuse the existing canonical spec/requirement owner. When no sufficient convention exists, the default new spec is `docs/specs/YYYY-MM-DD-<topic>.md` using the actual known date; preserve existing artifact locations. A conversational design approval permits only the stage presented, not unseen implementation content. Write the agreed design only when authorized, self-review contradictions, missing acceptance, ambiguity and scope, then obtain approval of the material written basis before dependent implementation. Native Plan Mode carries these stages without a duplicate written-document approval ritual.
 
-For an oversized request, decompose it into independently deliverable subprojects. Brainstorm only the first one through this process.
+When substantial delivery/planning is actually requested, load `skill://project-delivery` for the approved transition rather than upstream writing-plans or an executor. Do not load implementation procedures before their boundary is authorized.
 
-## Phase 3 — Present decisions clearly
+## Finish
 
-- Keep one open decision per message. Prefer concise multiple-choice options when they represent real trade-offs; otherwise ask an open question.
-- Distinguish verified facts, decisions, assumptions, and open questions. Ask questions only after their prerequisites are resolved; stop when no material decision remains.
-- Apply YAGNI aggressively: remove unrequested features, abstractions, integrations, and unrelated refactors.
-- Approval is scoped. A later change in requirements requires a new or revised design.
-- A simple task needs a short design, not no design.
-
-For UI or spatial decisions, use the browser only when seeing the actual interface, a screenshot, or DOM state resolves the choice better than prose. Do not use the removed Superpowers visual-companion server. Use text, a compact table, or a Mermaid diagram for non-visual trade-offs.
-
-## OMP tool discipline
-
-- Use `todo` only when the work meets OMP's threshold for persistent multi-step tracking; keep the brainstorm itself concise.
-- Use `task`/`eval` only for genuinely parallel, independent research. Never delegate the user interview, final recommendation, or approval decision.
-- Use browser/computer inspection read-only during brainstorming. Do not click, type, publish, or mutate external state without separate authorization.
-- Use normal OMP implementation tools only after approval. Do not invoke absent Superpowers skills, external spec-reviewer templates, or automatic commits.
-
-## Transition
-
-After approval, restate the approved scope, acceptance criteria, and next stage. Then proceed only with work authorized by that approval.
+Restate the selected scope, acceptance, unresolved assumptions and authorized next stage. Completion is a reported spike result or a reviewable design with the actual approval status—not merely presenting options. Changed material requirements or scope require native reapproval. No automatic commits, mandatory delegation, visual-companion service or keyword-trigger assertions are part of this procedure.
