@@ -1,16 +1,36 @@
 # omp-config
 
-The maintained settings intentionally preserve `tools.approvalMode: yolo`; review this unrestricted approval choice before installing.
+> **Safety:** This configuration deliberately sets `tools.approvalMode: yolo`, an unrestricted approval mode. Review this setting and its consequences before installing.
 
-## What this repository is
+## Overview
 
-This is a portable, inventory-managed snapshot of user-level OMP configuration. It is **not** the OMP application, a plugin marketplace installer, or a project template. Its payload configures an existing OMP installation and supplies skill guidance that an agent may read when relevant.
+`omp-config` is a portable, inventory-managed snapshot of user-level configuration and guidance for an existing OMP installation. It is not the OMP application, a plugin marketplace installer, or a project template. It does not include OMP or credentials, or start external services.
 
-The repository is organized around a few distinct responsibilities:
+## Quick start
+
+From the repository root. The source defaults to this checkout and the destination to your existing home (`$HOME` on POSIX, `%USERPROFILE%` in PowerShell). Preview first, then install.
+
+```sh
+sh install.sh --dry-run
+sh install.sh
+```
+
+On Windows PowerShell:
+
+```powershell
+.\install.ps1 -DryRun
+.\install.ps1
+```
+
+After installation, open OMP and choose a prompt under [Start with your goal](#start-with-your-goal). For another home or source archive, see [Install and update](#install-and-update).
+
+## What this configures
+
+The managed payload has distinct runtime roles:
 
 | Path | What it owns |
 |---|---|
-| `config/agent/config.yml` and `config/agent/AGENTS.md` | OMP settings and portable user-level routing/policy |
+| `config/agent/config.yml` and `config/agent/AGENTS.md` | Model/agent settings, `tools.approvalMode: yolo`, Plan Mode available but not auto-started, discovery preferences, and conditional user-level routing/policy |
 | `config/agent/agents/` | Custom agent-role definitions and their tool boundaries |
 | `config/agent/extensions/` | Runtime hooks and integrations, distinct from passive skill instructions |
 | `config/agent/skills/` | One flat OMP-native skill source tree; each skill has a public `name:` and may include references or package assets |
@@ -20,9 +40,94 @@ The repository is organized around a few distinct responsibilities:
 | `config/files.tsv` | Explicit allowlist mapping each managed source file to its home-relative destination |
 | `scripts/` and `install.*` | POSIX and PowerShell install/doctor entry points and the POSIX integration runner |
 
+## Skills, agents, extensions, and MCP
+
+Keep these concepts separate at runtime:
+
+- **Skills** are passive task guidance selected by public `name:` and read on demand. They do not grant a model, tool, or permission.
+- **Agents** are role definitions with instructions and tool boundaries. Their presence does not prove runtime discovery or dispatch.
+- **Extensions** are event hooks or integrations. They may be conditional and do not imply a process or service is running.
+- **Commands** are user-invoked guidance; the OpenDesign recipes are POSIX shell, not PowerShell commands.
+- **MCP declarations** describe connections and prerequisites. They do not install or start servers.
+- **OMP** continues to control session discovery, tool permissions, and approval behavior.
+
+## Start with your goal
+
+You do not need to run every skill. Choose the job that matches your need. These are OMP chat prompts, not terminal commands; replace examples with your project facts.
+
+- **New project:** Use `project-delivery` to prepare the documentation baseline and complete implementation plan. Keep gaps explicit; do not write app code before native approval covers the reviewed scope. **First:** readiness gaps and a plan, not scaffolding.
+- **Diagnose a bug:** Use `diagnosing-bugs` for the reported export-order failure despite passing library tests. Treat the report as ground truth; trace the real caller and propose a focused correction without editing or running commands. **First:** a source-grounded cause or remaining uncertainty.
+- **Review changes:** Use `code-review` on staged, unstaged, and untracked work plus relevant requirements. Return separate Standards/correctness and Spec verdicts with file references; do not edit, test, publish, or approve. **First:** scoped findings and coverage limits.
+- **Coordinate independent work:** Divide a feature into independent slices with shared interfaces, bounded ownership, and observable acceptance. Integrate and verify once; keep dependent work in sequence. **First:** isolated contributions or a reason to work serially.
+- **Audit an existing UI:** Use `impeccable` to assess accessibility, keyboard use, narrow screens, and loading/empty/error states. Preserve the current brand and behavior; report findings only. **First:** scoped polish recommendations.
+- **Load a handoff only:** Use `resume-from-handoff` to summarize the selected `.handoff` snapshot; do not inspect cited files, validate claims, run commands, edit, or continue. **First:** a snapshot summary or notice that none is available.
+
+For every bundled choice, see [the full skill usage guide](SKILL-USAGE.md): **53 public names**, when to use each,
+concrete prompts, expected outputs, permission/tool limits, and all **eight engineering-docs actions**.
+Choose another skill only when its goal matches your task; these examples are alternatives, not a required sequence.
+
+## Requirements and scope
+
+- POSIX: `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp`, and `date`. Remote ZIP installation additionally requires `curl` and `unzip`.
+- Windows: PowerShell 5.1+; remote ZIP installation uses `Invoke-WebRequest` and `Expand-Archive`.
+- Not bundled: OMP, model credentials, Node.js, the OpenDesign daemon, the `rtk` executable, or herdr services. Every installed file is listed in the inventory.
+- `config/agent/mcp.json` declares a GitHub HTTP MCP connection (`GITHUB_TOKEN`) and a local OpenDesign stdio connection (`OMP_OPEN_DESIGN_CLI`, `OD_DAEMON_URL=http://127.0.0.1:7456`). Configure these per machine; installation does not provide or start either server.
+- The optional RTK and herdr hooks do not start services. The RTK hook disables itself unless `rtk >=0.23.0` is on `PATH`; `herdr` requires `HERDR_ENV=1`, `HERDR_SOCKET_PATH`, and `HERDR_PANE_ID`.
+- `config/SKILL-SOURCES.md` documents the canonical skill folder, its source history, and licensing caveats. Skill snapshots do not guarantee downstream redistribution rights.
+
+## Managed files
+
+`config/files.tsv` is the explicit source-to-destination inventory shared by both installers and doctors:
+
+- `config/agent/` maps to `~/.omp/agent/`; `config/plugins/` maps to `~/.omp/plugins/`.
+- Managed skills have one source at `config/agent/skills/` and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout.
+- Current counts: **240 mappings**, including **219 skill files** and **53 entrypoints with 53 unique public names**. The TSV is source metadata and is not installed.
+
+Managed skills use OMP's native user-skill convention. Native user/project skill discovery remains available, while the [managed discovery settings](config/agent/config.yml) leave `customDirectories` empty and disable Agents user/project skill-source discovery. Retired `.agent`/`.agents` copies cannot reenter through those configured sources. Other runtime providers may exist; these settings do not prove application-wide isolation.
+
+## Install and update
+
+The default source is this checkout. Destinations default to the existing `$HOME` on POSIX and `%USERPROFILE%` in PowerShell. To select another existing home and use a local source directory or ZIP URL, pass `--home`/`-Home` and `--source`/`-Source`:
+
+```sh
+sh install.sh --home '/path/with spaces' --source https://github.com/rizariaputrawira/omp-config/archive/refs/heads/main.zip
+```
+
+```powershell
+.\install.ps1 -Home 'C:\Users\example' -Source 'https://github.com/rizariaputrawira/omp-config/archive/refs/heads/main.zip'
+```
+
+Remote ZIP archives must contain exactly one top-level directory, including hidden entries. Dry-run validates and reports intended changes without copying files or creating destination directories or backups. See [Requirements and scope](#requirements-and-scope) for platform prerequisites.
+
+The OpenDesign start/stop command guidance is user-invoked and POSIX-shell-specific. Set `OMP_OPEN_DESIGN_LAUNCHER` to an installed executable before running those commands; Windows installation does not provide a native PowerShell equivalent.
+
+## Configuration doctor
+
+Check is the default read-only mode and compares every inventory entry:
+
+```sh
+sh scripts/doctor.sh
+sh scripts/doctor.sh --check --home /path/to/existing-home
+sh scripts/doctor.sh --fix --home /path/to/existing-home
+```
+
+```powershell
+.\scripts\doctor.ps1
+.\scripts\doctor.ps1 -Check -Home 'C:\Users\example'
+.\scripts\doctor.ps1 -Fix -Home 'C:\Users\example'
+```
+
+The doctor uses these exit codes:
+
+- `0`: every mapped file matches.
+- `1`: one or more files are missing or drifted.
+- `2`: invalid arguments, inventory/home/read/compare errors, or repair failures.
+
+`--fix` delegates once to the platform installer, then checks every file. Both POSIX entrypoints use the shared [inventory validator](scripts/validate-inventory.sh).
+
 ## How deployment and use fit together
 
-The main lifecycle is source-controlled configuration → validated installation → OMP session use → optional drift check. Installation copies files only; it does not install OMP, launch agents, activate the disabled plugin, provide credentials, or start MCP/OpenDesign/RTK/herdr services.
+The lifecycle is explicit inventory → validated install → existing OMP reads settings and available skills → optional doctor check. Installation copies only managed files; it does not install OMP, launch agents, activate the disabled plugin, or provide credentials.
 
 ```mermaid
 flowchart LR
@@ -37,116 +142,22 @@ flowchart LR
   I --> H
 ```
 
-The inventory is the deployment boundary: unlisted history, staging, credentials, caches and generated state are not installed. The installer checks the complete source/destination set before writing, leaves byte-identical files untouched, backs up changed regular files, and does not prune old or unrelated destination data. The doctor compares the same inventory; `--fix` repairs through the installer, then compares again.
-
-At runtime, keep these concepts separate:
-
-- **Skills** are passive task guidance, selected by public `name:` and read on demand; a skill does not grant permission or supply a model/tool.
-- **Agents** are configured roles with their own instructions and permitted tools. Their existence does not prove a particular session dispatched them.
-- **Extensions** can respond to runtime events; they are distinct from passive skills. External extensions/services and credentials remain separate prerequisites.
-- **MCP declarations** describe external integrations; installation does not provision or start their servers.
-- **Approval and runtime permissions** remain controlled by the installed OMP environment. In particular, review the configured `yolo` approval mode before installation.
-
-For the task-oriented catalog and copyable prompts, see [Start with your goal](#start-with-your-goal) and [SKILL-USAGE.md](SKILL-USAGE.md). For deployment details, use [Install and update](#install-and-update) and [Configuration doctor](#configuration-doctor); for exact source revisions and notices, use [skill payload provenance](config/SKILL-SOURCES.md).
-
-## Start with your goal
-
-You do not need to run every skill. Pick the job below, then paste its message into OMP.
-These are **OMP chat prompts, not terminal commands**. Replace example project details with your own.
-
-Before you start:
-
-1. Read [Requirements and scope](#requirements-and-scope), including the approval-setting warning in the introduction. OMP and model credentials are not bundled.
-2. Follow [Install and update](#install-and-update), then work in your intended project with the relevant sources available.
-3. Use only skills enabled and available in your session. Say whether you want findings, a proposal, or scoped edits.
-
-A skill is guidance, not a tool or model, and naming it grants no permission to edit, install, or start services.
-Native permissions and Plan Mode still apply. Explicitly disabled skills stay disabled; missing tools or sources must be reported, not assumed.
-
-| Your goal | Copy/paste message | What to expect first |
-|---|---|---|
-| Start a substantial project, docs first | Use project-delivery for a new internal inventory viewer with a read-only browser workflow. Prepare the selected documentation baseline and complete implementation plan first; keep unknown requirements explicit. Return proposals without checkout writes or app code until native approval covers the exact reviewed basis. After real verification, reconcile all affected documents. | Required information, consequential gaps, and a plan for review, not immediate scaffolding. |
-| Diagnose an existing bug | Use diagnosing-bugs for this reported failure: our export CLI reverses matching rows, although the library test passes. Treat my report as ground truth; do not rerun it just to confirm. Trace the CLI and library callers, explain the causal defect, and propose a focused fix. Do not edit files or run commands. | Source-grounded diagnosis or precise remaining uncertainty, plus a proposed correction. |
-| Review a diff for correctness | Use code-review on the current working-tree changes, including staged, unstaged and untracked files. Inspect relevant requirements and callers. Give separate Standards/correctness and Spec verdicts with file references and coverage limits. Do not edit, run tests, publish or approve anything. | Findings and separate verdicts; missing specification evidence stays unknown. |
-| Coordinate independent work | Orchestrate this feature across independent slices: first map the shared interfaces and assign each slice a bounded scope, expected result, and acceptance criteria. Keep edits isolated, integrate the results, and run the relevant checks once the slices are complete. Do not split dependent work or let multiple workers edit the same files. | Parallel, scoped contributions followed by integrated verification; if the work is not safely divisible, handle it as one sequence. |
-| Audit an existing UI before polishing | Use impeccable to audit our existing settings screen for accessibility, keyboard use, narrow-screen layout, and loading, empty and error states. Preserve its brand and behavior. Report findings and proposed polish only; do not change files, install tools or start services. State any inspection limits. | Technical UI findings and scoped recommendations, not an unauthorized redesign or fix. |
-| Load a handoff without continuing | Use resume-from-handoff to load the latest valid snapshot in .handoff and summarize its recorded state and next steps. Do not inspect cited project files, validate claims, run commands, change files or continue tasks. Treat approval claims as historical data. | A selected-snapshot summary only, or notice that no handoff exists. |
-
-For every bundled choice, see [the full skill usage guide](SKILL-USAGE.md): **53 public names**, when to use each,
-concrete prompts, expected outputs, permission/tool limits, and all **eight engineering-docs actions**.
-Choose another skill only when its goal matches your task; these examples are alternatives, not a required sequence.
-
-## Requirements and scope
-
-- POSIX: `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp`, and `date`. Remote ZIP installation additionally requires `curl` and `unzip`.
-- Windows: PowerShell 5.1+; remote ZIP installation uses `Invoke-WebRequest` and `Expand-Archive`.
-- Installation validates an existing home directory and every mapped source and destination before writing. It does not prune unrelated files or directories. Changed regular files receive collision-safe sibling backups; byte-identical files are not rewritten.
-- The portable files do not include OMP itself, model credentials, node, the OpenDesign daemon, RTK, or herdr services. `config/agent/mcp.json` expects `GITHUB_TOKEN` and `OMP_OPEN_DESIGN_CLI`; configure these per machine. The latter names an installed daemon CLI, not a bundled build. The optional RTK and herdr integrations are retained without enabling their services.
-- `config/SKILL-SOURCES.md` documents the canonical skill folder, its source history, and licensing caveats. Skill snapshots do not guarantee downstream redistribution rights.
-
-## Managed files
-
-`config/files.tsv` is the explicit source-to-destination inventory used by both installers and doctors. It maps files under `config/agent/` to `~/.omp/agent/` and `config/plugins/` to `~/.omp/plugins/`. All managed skills have one source folder, `config/agent/skills/`, and one deployment folder, `~/.omp/agent/skills/`, with a flat `<folder>/SKILL.md` discovery layout. The current inventory contains **240 mappings**, including **219 skill files** and **53 entrypoints with 53 unique public names**. The inventory itself is source metadata and is not installed.
-
-This uses OMP's native user-skill convention, not a preference for singular or plural Agents folders. Native user/project skill discovery remains available. In [managed discovery settings](config/agent/config.yml), `customDirectories` is empty and Agents user/project skill-source discovery is disabled, so retired `.agent`/`.agents` skill copies cannot reenter through those configured sources. Other runtime providers may still exist; these settings do not establish application-wide isolation or native enforcement proof. Model, approval, agent, plugin and MCP settings are unchanged.
-
-Credentials, histories, databases, caches, `node_modules`, and generated state are excluded. The installer creates only directories needed for listed files; no unrelated destination data is copied, removed, or overwritten.
-
-## Install and update
-
-From a local clone on Linux/macOS:
-
-```sh
-sh install.sh --dry-run --home /path/to/existing-home
-sh install.sh
-sh install.sh --home '/path/with spaces'
-```
-
-Windows PowerShell:
-
-```powershell
-.\install.ps1 -DryRun
-.\install.ps1
-.\install.ps1 -Home 'C:\Users\example'
-```
-
-The home override selects the destination root; it must already exist. POSIX defaults to `$HOME`; PowerShell defaults to `%USERPROFILE%`. The scripts also accept `--source`/`-Source` with a local source directory or ZIP URL:
-
-```sh
-sh install.sh --source https://github.com/rizariaputrawira/omp-config/archive/refs/heads/main.zip
-```
-
-```powershell
-.\install.ps1 -Source 'https://github.com/rizariaputrawira/omp-config/archive/refs/heads/main.zip'
-```
-
-Remote archives must contain exactly one top-level directory, including hidden entries. Dry-run reports intended changes but does not create destination directories, backups, or services.
-
-The OpenDesign start/stop command guidance is user-invoked and POSIX-shell-specific. Set `OMP_OPEN_DESIGN_LAUNCHER` to an executable installed launcher before running those commands; Windows installation does not provide a native PowerShell equivalent. MCP additionally uses `OMP_OPEN_DESIGN_CLI` for the installed daemon CLI and `OD_DAEMON_URL=http://127.0.0.1:7456`; installation does not start the daemon or MCP server.
-
-## Configuration doctor
-
-Check is read-only and compares every inventory entry:
-
-```sh
-sh scripts/doctor.sh
-sh scripts/doctor.sh --check --home /path/to/existing-home
-sh scripts/doctor.sh --fix --home /path/to/existing-home
-```
-
-```powershell
-.\scripts\doctor.ps1
-.\scripts\doctor.ps1 -Check -Home 'C:\Users\example'
-.\scripts\doctor.ps1 -Fix -Home 'C:\Users\example'
-```
-
-The doctor exits 0 only when every mapped file matches, 1 for missing or drifted files, and 2 for invalid arguments or unusable inventory/home/read/repair errors. Fix delegates to the platform installer once, then checks every file. Both POSIX entrypoints use the shared internal [inventory validator](scripts/validate-inventory.sh), so keep `scripts/` beside `install.sh` when copying these repository tools. Use `python3 scripts/test_install.py` to run the deterministic POSIX installer/doctor integration scenarios; the runner reports explicitly when no PowerShell runtime is available. ZIP scenarios reuse the payload fixture with a standard-library HTTP handler binding. Run `bun scripts/test_model_routing.mjs` to check the production extension's worker routing and workspace-tool boundaries.
+- `config/files.tsv` defines the deployment boundary. Unlisted staging, credentials, caches, histories, and generated state are not installed.
+- Installers validate the complete source/destination set before writing, create only directories needed by listed files, leave byte-identical files untouched, back up changed files with collision-safe names, and do not prune old or unrelated destination data.
+- Doctor compares the same inventory; `--fix` delegates to the installer and checks again.
 
 ## Documentation-driven engineering suite
 
 The documentation suite comprises fifteen skills and 109 regular assets deployed to `~/.omp/agent/skills/`. See [Managed files](#managed-files) for the complete inventory totals, layout and destination details.
 
-Managed `config/agent/AGENTS.md` provides short conditional trigger-to-owner routing. Actual procedures are read on demand. Disabled/filtered/unavailable suite assets do not automatically reload or block ordinary OMP work. Requested unavailable suite-specific proof remains incomplete; native permissions and approval still govern. No new hook, router, service, task-state database, tracker, auto-commit, scanner or package install is required.
+`config/agent/AGENTS.md` routes conditionally; matching procedures are read on demand. The suite does not override OMP permissions or approval, and unavailable assets do not load themselves. See [SKILL-USAGE.md](SKILL-USAGE.md) for the public-name catalog and practical prompts.
+
+## Verification scope
+
+`python3 scripts/test_install.py` exercises the POSIX installer and doctor against isolated fixtures; it does not test the PowerShell scripts. `bun scripts/test_model_routing.mjs` exercises five named worker-routing groups in the extension, not OMP's actual model/agent dispatch. Neither command establishes authenticated model behavior, session permissions, approval provenance, or operating-system confinement.
+
+<details>
+<summary>Detailed workflow, document ownership, standards, and skill capabilities</summary>
 
 ### Workflow at a glance
 
@@ -161,7 +172,7 @@ flowchart TD
   D --> E[Product purpose, scope, constraints<br/>/project-delivery: specification; /brainstorming for consequential unknowns]
   E --> F[Requirements, stories, quality, security<br/>/engineering-docs: requirements; /security-review /security-audit only when in scope]
   F --> G[Architecture, contracts, threats, decisions<br/>/engineering-docs: architecture; /domain-modeling for terminology/ADRs]
-  G --> H[Detailed design; UI evidence if affected<br/>/engineering-docs; /Impeccable for UI]
+  G --> H[Detailed design; UI evidence if affected<br/>/engineering-docs; /impeccable for UI]
   H --> I[Verification intent and applicable release/ops/user plans<br/>/engineering-docs; relevant specialists as needed]
   I --> J[Review whole-boundary baseline and plan<br/>/project-delivery; /plan-review for consequential multi-slice work]
   J --> K{Baseline ready?}
@@ -169,7 +180,7 @@ flowchart TD
   L --> J
   K -- Yes --> M[Native approval for exact reviewed baseline and plan<br/>No skill grants approval]
   M --> N[Persist authorized docs and native plan<br/>/project-delivery; /engineering-docs]
-  N --> O[Implement and verify authorized slices<br/>Matching skill; TDD only if requested; /code-review when needed]
+  N --> O[Implement and verify authorized slices<br/>Matching skill; /tdd only if requested; /code-review when needed]
   O --> P{Material reviewed-intent change?}
   P -- Yes --> Q[Update intended owners and plan; review readiness<br/>/engineering-docs; /project-delivery]
   Q --> M
@@ -207,6 +218,9 @@ The logical baseline is required for gated delivery even when physical documents
 
 The standards below are voluntary reference points unless a project has an identified contractual, regulatory, organizational or certification obligation. They describe information and practices to consider; they do not require a fixed document set or prove conformity. Editions and applicability should be checked against the current official sources and recorded for the project. Names in the first column are common examples, not ISO-mandated titles; follow established project terminology and combine documents where appropriate.
 
+<details>
+<summary>Crosswalk of common document names, ISO references, and skill owners</summary>
+
 | Common document name(s) | Workflow document / ISO reference | What the document is for | Skill(s) used in this step | Why use the skill |
 |---|---|---|---|---|
 | Document Register / Information Index / Project Management Plan | Lifecycle and information index — [ISO/IEC/IEEE 12207:2026](https://www.iso.org/standard/90219.html); [ISO/IEC/IEEE 15289:2019](https://www.iso.org/standard/74909.html); ISO/IEC/IEEE 15288:2015 (cited only by the 15289 public crosswalk) | 12207 gives software lifecycle process guidance and information roles. 15289 helps tailor information items to purpose, audience and process. Use an index/manifest to record selected owners, sources, applicability and gaps; combine documents when that serves their readers. | `/engineering-docs` (setup); `/project-delivery` | Engineering-docs selects and indexes only needed information; project-delivery governs readiness and the end-to-end delivery boundary. |
@@ -216,6 +230,8 @@ The standards below are voluntary reference points unless a project has an ident
 | Test Strategy / Test Plan / Test Cases / Test Report | Test strategy, plan, cases and evidence — [ISO/IEC/IEEE 29119-1:2022](https://www.iso.org/standard/81291.html), [-2:2021](https://www.iso.org/standard/79428.html), [-3:2021](https://www.iso.org/standard/79429.html), [-4:2021](https://www.iso.org/standard/79430.html) | The parts cover testing concepts, processes, test documentation and techniques respectively. Select what fits the acceptance criteria and risk; plans are not execution results, and results require observed checks. | `/engineering-docs` (verification); `/tdd` only when test-first is explicitly requested; `/code-review` when review is needed | Engineering-docs maintains verification intent and trace; TDD supports an authorized test-first cycle; code-review evaluates an actual change against requirements and repository standards. |
 | Security Requirements / Threat Model / Application Security Plan / ISMS documents (only if applicable) | Application security information — selected [ISO/IEC 27034-1:2011](https://www.iso.org/standard/44378.html) with Corrigendum 1:2014, [27034-2:2015](https://www.iso.org/standard/55582.html), [27034-3:2018](https://www.iso.org/standard/55583.html); [ISO/IEC 27001:2022](https://www.iso.org/standard/27001) with [Amendment 1:2024](https://www.iso.org/standard/88435.html) when applicable | The selected 27034 parts provide application-security guidance. 27001 concerns an organization's information-security management system only when that scope is actually adopted or required; neither reference alone demonstrates product security or certification. | `/engineering-docs` (security requirements and trace); `/security-review` or `/security-audit` only when in scope | Engineering-docs records applicable security concerns, controls and evidence owners; the specialists perform bounded review or audit work when the project risk and request call for it. |
 | Software Quality Plan / Quality Management System Procedures (only if adopted) | Organization-adopted software quality-management scope — [ISO/IEC 90003:2018](https://www.iso.org/standard/74348.html) | Guidance for applying quality-management systems to software, relevant only where an organization has actually adopted that quality-management scope. It is not a project certification criterion by itself. | `/project-delivery`; `/engineering-docs` (setup) | Project-delivery coordinates the real organizational obligation with delivery readiness; engineering-docs records its source, applicability, owner and required evidence without claiming certification. |
+
+</details>
 
 **Edition caveat:** ISO/IEC/IEEE 15289:2019's public abstract maps information items to 12207:2017 and 15288:2015. Choosing 12207:2026 as lifecycle guidance does not establish an updated normative crosswalk. The cited ISO pages provide public metadata/abstracts; the normative texts were not assessed. See the [standards reference](config/agent/skills/engineering-docs/references/standards.md) for status, access limits and applicability notes.
 
@@ -244,6 +260,11 @@ OMP owns operational state: native plan approval, optional todos, workers and sa
 Exact immutable revisions, local path mappings, modifications and full MIT/Apache-2.0 notices are in each skill's SOURCES.md and [payload provenance](config/SKILL-SOURCES.md). Titus assets are not copied or translated because no covering grant was established. The Pi catalog shortlist (bigpowers 2.88.9, pi-security-analysis 0.17.3, pi-subagents 0.75.0, openwiki 0.7.0) is rejected for this bounded need, not certified safe/unsafe or assumed OMP-compatible. Its recorded necessity assessment is in engineering-docs/SOURCES.md.
 
 Removed upstream behavior includes universal TDD, forced agents/model tiers, auto-commits/worktrees/ticket publishing, tracker/Context7/state engines, provider-specific tool aliases, fixed retry/confidence gates, fail-open filtering and universal security exclusions. OpenDesign is required only for explicitly required generation/refinement, not ordinary approved incumbent UI work. Existing independently owned UI routing remains.
+
+</details>
+
+<details>
+<summary>Historical security reviews, skill migrations, and prior test results. These are records, not current verification.</summary>
 
 ### Security result and continuation boundaries
 
@@ -328,6 +349,8 @@ An upstream updater targeting `.agent/skills/` or `.agents/skills/` can recreate
 Verification of this **240-entry consolidation** is complete for the checked POSIX surface: `python3 scripts/test_install.py` passed all inventory entries, and `bun scripts/test_model_routing.mjs` passed its five named cases. Source checks covered 53 unique skill names, 219 selected skill files and 350 local/skill link targets and anchors. A real disposable-home dry-run left the home untouched; installation and doctor checks passed; all installed inventory bytes matched their sources. An identical reinstall preserved every mapped file's bytes, mode and mtime, and retained unrelated old-root user/project data.
 
 Installed OMP **18.5.0**, using that private home/project, exposed exactly the expected 53 native skill names. Passive URI reads resolved engineering-docs, the delivery baseline reference, newest Impeccable 4.5.0 and both distinct Taste names; four synthetic skills in retired singular/plural user/project roots were not discovered. These observations establish the checked native discovery/path migration, not authenticated skill execution, effective agent dispatch, Plan Mode/approval provenance or OS containment. No live-home deployment, Impeccable engine/download/service execution or Windows/PowerShell verification was performed; neither PowerShell runtime was available.
+
+</details>
 
 ## References and acknowledgements
 
