@@ -225,21 +225,21 @@ OMP owns operational state: native plan approval, optional todos, workers and sa
 
 | Canonical skill | Concrete capability |
 |---|---|
-| engineering-docs | Sole documentation owner: eight actions, source-first reuse, typed manifest, seven-heading context, trace/document audit and upgrade limits |
-| brainstorming | Approval paths, supplied-intent write-back and explicit ready-frontier stress-test |
-| domain-modeling | Active counterexamples, settled glossary and consequential truthful ADRs |
-| tdd | Meaningful observed vertical RED/GREEN and optional refactor; explicit test-first only |
-| code-review | Separate Standards/correctness and Spec verdicts, WIP coverage and complete fix dispositions |
-| diagnosing-bugs | Signal/minimization/falsifiable hypothesis/root correction/original-path proof |
-| writing-for-agents | Condition-bearing pointers, single owners and authorized real baseline/candidate assessment |
-| project-delivery | Reviewed whole-boundary baseline before code, complete vertical delivery, all affected-owner reconciliation and independently authorized resume; incumbent-first UI evidence |
-| plan-review | Read-only semantic acceptance, consumer integration, dependencies and proof coverage check |
-| handoff-to-another-harness | Explicit pause/export and transfer, exact partial state and non-authoritative portable snapshot |
-| resume-from-handoff | Selected-snapshot summary only, never continuation |
-| retro | Evidence/applicability/promotion conditions; no automatic policy/memory mutation |
-| security-intake | Source-only bundle purpose/authority/provenance/coverage assessment, exact four verdicts |
-| security-review | Focused changed-boundary discovery and fresh source refutation |
-| security-audit | Coverage-led audit with relevant AI, availability and supply-chain companions |
+| /engineering-docs | Sole documentation owner: eight actions, source-first reuse, typed manifest, seven-heading context, trace/document audit and upgrade limits |
+| /brainstorming | Approval paths, supplied-intent write-back and explicit ready-frontier stress-test |
+| /domain-modeling | Active counterexamples, settled glossary and consequential truthful ADRs |
+| /tdd | Meaningful observed vertical RED/GREEN and optional refactor; explicit test-first only |
+| /code-review | Separate Standards/correctness and Spec verdicts, WIP coverage and complete fix dispositions |
+| /diagnosing-bugs | Signal/minimization/falsifiable hypothesis/root correction/original-path proof |
+| /writing-for-agents | Condition-bearing pointers, single owners and authorized real baseline/candidate assessment |
+| /project-delivery | Reviewed whole-boundary baseline before code, complete vertical delivery, all affected-owner reconciliation and independently authorized resume; incumbent-first UI evidence |
+| /plan-review | Read-only semantic acceptance, consumer integration, dependencies and proof coverage check |
+| /handoff-to-another-harness | Explicit pause/export and transfer, exact partial state and non-authoritative portable snapshot |
+| /resume-from-handoff | Selected-snapshot summary only, never continuation |
+| /retro | Evidence/applicability/promotion conditions; no automatic policy/memory mutation |
+| /security-intake | Source-only bundle purpose/authority/provenance/coverage assessment, exact four verdicts |
+| /security-review | Focused changed-boundary discovery and fresh source refutation |
+| /security-audit | Coverage-led audit with relevant AI, availability and supply-chain companions |
 
 Exact immutable revisions, local path mappings, modifications and full MIT/Apache-2.0 notices are in each skill's SOURCES.md and [payload provenance](config/SKILL-SOURCES.md). Titus assets are not copied or translated because no covering grant was established. The Pi catalog shortlist (bigpowers 2.88.9, pi-security-analysis 0.17.3, pi-subagents 0.75.0, openwiki 0.7.0) is rejected for this bounded need, not certified safe/unsafe or assumed OMP-compatible. Its recorded necessity assessment is in engineering-docs/SOURCES.md.
 
