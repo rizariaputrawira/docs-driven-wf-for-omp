@@ -40,7 +40,7 @@ def make_fixture(directory: Path) -> Path:
     fixture = directory / "source fixture"
     (fixture / "config").mkdir(parents=True)
     shutil.copy2(INVENTORY, fixture / "config/files.tsv")
-    for source, _ in mappings():
+    for source in ("install.sh", "scripts/doctor.sh", "scripts/validate-inventory.sh", *(source for source, _ in mappings())):
         src = ROOT / source
         dst = fixture / source
         dst.parent.mkdir(parents=True, exist_ok=True)
@@ -152,6 +152,8 @@ def main() -> None:
         untouched.mkdir()
         run("sh", str(INSTALL), "--source", str(bad_source), "--home", str(untouched), expected=2)
         assert not (untouched / ".omp").exists()
+        run("sh", str(bad_source / "scripts/doctor.sh"), "--fix", "--home", str(untouched), expected=2)
+        assert not list(untouched.iterdir())
         malformed = tmp / "malformed source"
         shutil.copytree(source, malformed)
         inv = malformed / "config/files.tsv"
