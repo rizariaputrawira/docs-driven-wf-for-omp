@@ -116,7 +116,7 @@ def main() -> None:
         cmp_command.chmod(0o755)
         run("sh", str(DOCTOR), "--home", str(home), env={**os.environ, "PATH": f"{cmp_bin}{os.pathsep}{os.environ['PATH']}"}, expected=2)
         nested_agent = home / ".omp/agent/agents/task.md"
-        nested_skill = home / ".agents/skills/tdd/SKILL.md"
+        nested_skill = home / ".omp/agent/skills/tdd/SKILL.md"
         nested_agent.unlink()
         assert "missing:" in doctor(home, expected=1).stdout
         doctor(home, "--fix")
@@ -124,7 +124,7 @@ def main() -> None:
         nested_skill.write_bytes(b"drift\n")
         assert "drift:" in doctor(home, expected=1).stdout
         doctor(home, "--fix")
-        assert nested_skill.read_bytes() == (ROOT / "config/skills-agents/tdd/SKILL.md").read_bytes()
+        assert nested_skill.read_bytes() == (ROOT / "config/agent/skills/tdd/SKILL.md").read_bytes()
 
         # Changed files get a collision-safe backup preserving old content.
         target.write_bytes(b"prior user bytes\n")

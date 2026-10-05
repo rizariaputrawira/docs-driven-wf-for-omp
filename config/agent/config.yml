@@ -24,11 +24,9 @@ cycleOrder:
   - slow
 defaultThinkingLevel: medium
 skills:
-  customDirectories:
-    - ~/.agents/skills
-    - ~/.agent/skills
-    - .agents/skills
-    - .agent/skills
+  customDirectories: []
+  enableAgentsUser: false
+  enableAgentsProject: false
 statusLine:
   preset: default
   sessionAccent: true
