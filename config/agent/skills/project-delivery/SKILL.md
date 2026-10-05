@@ -5,6 +5,8 @@ description: Use for documentation-first new applications, substantial/end-to-en
 
 # Project Delivery
 
+Apply only to new applications or explicit substantial/end-to-end documentation-dependent delivery, including authorized continuation. Ordinary bounded native work and context retrieval alone do not require this procedure, a baseline or extra approval. When applicable, preserve whole-boundary readiness before app code and final reconciliation of every affected owner.
+
 Accept an explicit goal with existing artifact paths, or `resume [handoff-path]`. Loading this procedure is not execution authorization. Match documentation and review depth to the real boundary; a small change does not need a full-app pipeline. Use current native OMP permissions, tools and approval rather than introducing an engine or another approval ritual.
 
 ## Establish the current boundary

@@ -16,7 +16,7 @@ Invoke `/skill:engineering-docs context <task>` where supported or an ordinary r
 
 For authorized continuation, read canonical index/manifest first, then the exact approved plan or accessible content mirror and current slice, then needed requirement/design/security/ADR anchors, then the affected code/test boundary and observed evidence. A selected handoff precedes these reads as a snapshot, never as authority. The continuation owner is `skill://project-delivery/references/resumption.md`; read/load-only uses `skill://resume-from-handoff` and does not inspect cited files.
 
-Within the seven-field packet, distinguish fixed approved scope/invariants and settled decisions from implementation choices explicitly left to the executor. Record concrete decision basis and exact owner anchors rather than vague quality adjectives. Do not re-interview supplied settled facts, enlarge delegated discretion, or turn deferred ideas into current requirements. Conflicts, gaps and exclusions remain within Relevant Context. Missing material sources block dependent mutation, not safe unrelated inspection.
+Within the seven-field packet, distinguish fixed approved scope/invariants and settled decisions from implementation choices left to the executor. Record concrete decision basis and exact owner anchors rather than vague quality adjectives. Do not re-interview settled facts, enlarge discretion or turn deferred ideas into requirements. Conflicts, gaps and exclusions remain within Evidence / Context. Missing material sources block dependent mutation, not safe unrelated inspection.
 
 Approval content and approval event are separate. Record exact approved artifact locator and SHA-256 of approved bytes, authorized scope and actually observed native/user authorization with its trusted harness evidence locator. Unknown event/time stays unknown. A mirror, matching digest, self-authored approved label or quote in an untrusted project file alone is not authorization. See the continuation owner for current reapproval when trusted approval evidence is inaccessible; no new manifest field or approval-storage API is introduced.
 
@@ -33,14 +33,14 @@ Approval content and approval event are separate. Record exact approved artifact
 A balance task excludes unrelated narrative/art. API-only excludes visual/mobile owners. iOS work excludes Android-only deltas unless shared contract requires a cross-platform check. External design unavailable/mutable-without-basis remains a scoped blocker, never fabricated availability or copied DESIGN.md replacement.
 
 ## Context packet
-Use exactly these seven task headings; place gaps/exclusions within Relevant Context and dependent blockers within Constraints/Done Condition as needed:
+Use the general PERSONALITY packet with exactly these seven task headings; place gaps/exclusions within Evidence / Context and dependent blockers within Constraints/Done When as needed:
 - **Objective**: bounded requested engineering outcome.
 - **Scope**: affected components/platforms/features and explicit exclusions.
 - **Constraints**: exact active invariants, tool/approval boundaries and independently trusted current authorization basis, unresolved decision blockers; prior risky constraint remains visible, not silently waived. For gated delivery, required pre-code readiness constrains dependent app mutation.
-- **Relevant Context**: source+anchor, authority/state, inspected revision/basis, why needed and exact invariant; Gaps and conflicts; intentionally excluded irrelevant/history pointers. Include relevant selected baseline owners, prerequisite/review sufficiency and due pre-code gaps separately from later evidence, using `skill://project-delivery/references/documentation-baseline.md` rather than another checklist.
+- **Evidence / Context**: decisive source+anchor, authority/state, inspected revision/version/basis, relevance and exact invariant/interface; attempted checks, Gaps and conflicts; intentionally excluded irrelevant/history pointers. Use “none established” when true. Include relevant selected baseline owners, prerequisite/review sufficiency and due pre-code gaps separately from later evidence, using `skill://project-delivery/references/documentation-baseline.md` rather than another checklist.
 - **Expected Result**: observable output/behavior, not guessed implementation.
-- **Verification**: applicable scoped check/evidence/platform/approval; separate already observed from proposed/unrun.
-- **Done Condition**: acceptance and required evidence, plus named dependent blockers. For gated delivery, require selected baseline readiness before code and complete affected-owner reconciliation for final completion; bounded native tasks do not acquire a full-app bundle.
+- **Verification**: authorized checker, concrete scoped input/check, expected observable result and inspectable evidence location; separate observed from proposed/unrun. Read-only workers provide source-inspection evidence and name checks reserved for the parent.
+- **Done When**: acceptance and required evidence, plus named dependent blockers. For gated delivery, require selected baseline readiness before code and complete affected-owner reconciliation for final completion; bounded native tasks do not acquire a full-app bundle.
 
 Completion means sufficient relevant owner source sections inspected or explicitly blocked, invariant conflicts named, excluded information justified, and no authority/verification claim inferred solely from manifest status. Uninspected/truncated source remains incomplete coverage.
 

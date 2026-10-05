@@ -1,14 +1,4 @@
 export default function lunaToolBoundary(pi) {
-  pi.on("before_subagent_spawn", (event) => {
-    const name = String(event.agent?.name ?? event.agent?.id ?? "").toLowerCase();
-    if (name === "advisor" || name === "slow") return undefined;
-    const models = {
-      scout: "@smol",
-      routine: "@routine",
-    };
-    return { model: models[name] ?? "@task", note: "Worker model follows its assigned role" };
-  });
-
   pi.on("tool_call", (event, ctx) => {
     const current = ctx.models.current();
     if (current?.provider === "openai-codex" &&

@@ -24,8 +24,16 @@ Use the existing plan format, with enough detail for a fresh implementer:
 - Verification: authorized checker, real entry/consumer/input, expected success and failure result, relevant automated/manual checks, environment and unavailable evidence.
 - Done condition: complete implementation, consumer integration, documentation and criterion-specific proof; shape/existence is named separately from behavior.
 - Risks/undo cost and unresolved approval/source facts.
+- Recommended executor: `direct`, `routine`, `task` or `slow`.
+- Reason: current evidence supporting the recommendation, not file count or a category.
 
 The plan also carries a global coverage table and current review dispositions. Keep product truth in canonical sources and link it. Exact changing paths/interfaces belong here; no new tracker/state schema is needed.
+
+Executor recommendations are advisory; main owns final current-evidence routing and integration. Use `direct` for small bounded main work, `routine` for specified established-pattern work, and `task` for bounded work with settled direction/interfaces. Use `slow` only for the existing PERSONALITY material uncertainty/consequence triggers.
+
+Examples:
+- Recommended executor: `task`. Reason: the export producer/CLI interface, denial behavior and fixtures are settled; the remaining bounded implementation uses those exact contracts.
+- Recommended executor: `slow`. Reason: unresolved cross-system ownership of export permission and snapshot consistency could disclose another tenant's rows; existing evidence does not establish a safe allocation.
 
 ## Self-check and native proposal
 
@@ -33,4 +41,8 @@ Read the requirements again after drafting. For each criterion follow the actual
 
 For gated delivery, inspect selected owner substance, prerequisite sufficiency and review/gap dispositions through [before-code readiness](documentation-baseline.md#before-code-readiness). A full tracer plan cannot excuse missing required app-level architecture, detailed/error design or planned test intent. Not-yet-due runtime results remain unobserved.
 
-For consequential multi-slice plans load `skill://plan-review` and its single coverage checklist before native proposal/reapproval; meaningful independence needs a fresh read-only source-inspecting worker, not an advice-only advisor. Trivial edits skip it. Findings inform native approval, never enlarge scope. Review the exact selected baseline and complete implementation plan together; record approved bytes/locator, digest, scope and independently trusted current authorization as described in [resumption](resumption.md). Preserve a native operative plan. Add a repository content mirror only where existing convention, team or portability need warrants one, after authorization; it cannot approve work. Persist exact necessary reviewed baseline content before app implementation. No automatic commit, worktree, publication, universal TDD, Context7, forced model tier or additional gate engine.
+For consequential multi-slice plans load `skill://plan-review` and its single coverage checklist before native proposal/reapproval. Recommend a fresh `slow` with an explicitly review-only source-inspecting assignment for consequential integration review; advisor consumes supplied evidence only and reviewer retains patch focus. Trivial edits skip independent review. Findings inform native approval, never enlarge scope.
+
+Preapproval review names the exact `local://<slug>-plan.md`, canonical source anchors and existing plan-review procedure; allow inspection only, with no edits, check execution or implementation. Native Plan Mode children share the parent's local root and restrict tools, excluding LSP/MCP/injected tools. Draft plans are not automatic approved-plan handoffs. This is a runtime tool restriction, not OS isolation; outside Plan Mode review-only prose is not a hard sandbox. Native approval remains the sole approval interaction.
+
+Review the exact selected baseline and complete implementation plan together; record approved bytes/locator, digest, scope and independently trusted current authorization as described in [resumption](resumption.md). Preserve a native operative plan. Add a repository content mirror only for an existing convention, team or portability need after authorization; it cannot approve work. Persist necessary reviewed baseline content before app implementation. No automatic commit, worktree, publication, universal TDD, forced model tier or additional gate engine.

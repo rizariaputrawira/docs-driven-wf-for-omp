@@ -30,26 +30,51 @@ The managed payload has distinct runtime roles:
 
 | Path | What it owns |
 |---|---|
-| `config/agent/config.yml` and `config/agent/AGENTS.md` | Model/agent settings, `tools.approvalMode: yolo`, Plan Mode available but not auto-started, discovery preferences, and conditional user-level routing/policy |
-| `config/agent/agents/` | Custom agent-role definitions and their tool boundaries |
-| `config/agent/extensions/` | Runtime hooks and integrations, distinct from passive skill instructions |
-| `config/agent/skills/` | One flat OMP-native skill source tree; each skill has a public `name:` and may include references or package assets |
+| `config/agent/PERSONALITY.md` | Global working, escalation, delegation and evidence-acceptance policy |
+| `config/agent/AGENTS.md` | Conditional semantic routing and canonical permission distinctions |
+| `config/agent/config.yml` | Native model/agent policy, approval mode, discovery, concurrency/depth and isolation settings |
+| `config/agent/agents/` | Seven bounded role definitions, requested built-in tools and output contracts |
+| `config/agent/extensions/` | Deterministic runtime restrictions and integrations; no worker-model router |
+| `config/agent/skills/` | Passive on-demand procedures, selected by public `name:` |
+| Task-specific plans and canonical project documents | Authorized project scope, interfaces, acceptance and maintained decisions; not global routing |
 | `config/agent/commands/` | User-invoked command guidance; commands do not start services during installation |
 | `config/agent/mcp.json` | MCP declarations that refer to machine-provided credentials and executables |
 | `config/plugins/` | Plugin package/lock metadata; `pi-9router-ext` is deliberately disabled |
 | `config/files.tsv` | Explicit allowlist mapping each managed source file to its home-relative destination |
-| `scripts/` and `install.*` | POSIX and PowerShell install/doctor entry points and the POSIX integration runner |
+| `scripts/` and `install.*` | Deployment checks, static configuration contracts and executable hook contracts |
 
 ## Skills, agents, extensions, and MCP
 
 Keep these concepts separate at runtime:
 
 - **Skills** are passive task guidance selected by public `name:` and read on demand. They do not grant a model, tool, or permission.
-- **Agents** are role definitions with instructions and tool boundaries. Their presence does not prove runtime discovery or dispatch.
-- **Extensions** are event hooks or integrations. They may be conditional and do not imply a process or service is running.
+- **Agents** are bounded role definitions with instructions, requested built-in tool selection and output contracts. Their presence does not prove runtime discovery or dispatch, or universally exclude ambient tools.
+- **Extensions** are event hooks or integrations. The retained model-dependent tool hook is not a reviewer sandbox, OS containment or a worker-model router.
 - **Commands** are user-invoked guidance; the OpenDesign recipes are POSIX shell, not PowerShell commands.
 - **MCP declarations** describe connections and prerequisites. They do not install or start servers.
 - **OMP** continues to control session discovery, tool permissions, and approval behavior.
+
+See [canonical permission distinctions](config/agent/AGENTS.md#permission-and-model-ownership) for instruction, built-in admission, native Plan Mode, extension interception, model policy, OS isolation and approval. Frontmatter is meaningful requested selection, not a universal sandbox; ambient tools and mutating LSP need scope discipline outside Plan Mode. Isolation remains disabled.
+
+### Native worker-model ownership
+
+Native OMP selects invocation model, then settings override, then agent frontmatter, then live parent/default. `@default` selects the live parent, not a fixed role. Alias resolution, unknown agents, invalid explicit selectors and credential fallback remain native behavior. Authentication fallback limits unconditional identity guarantees; static selectors are not dispatch evidence. See [version-matched discovery and precedence](https://github.com/can1357/oh-my-pi/blob/v18.6.1/docs/task-agent-discovery.md) and [native resolver](https://github.com/can1357/oh-my-pi/blob/v18.6.1/packages/coding-agent/src/config/model-resolver.ts).
+
+| Agent | Native override | Configured model/thinking |
+|---|---|---|
+| scout | `@smol` | `openai-codex/gpt-6-luna:medium` |
+| routine | `@routine` | `openai-codex/gpt-6-luna:medium` |
+| task | `@task` | `openai-codex/gpt-6-luna:medium` |
+| reviewer | `@task` | `openai-codex/gpt-6-luna:medium` |
+| security-reviewer | `@task` | `openai-codex/gpt-6-luna:medium` |
+| slow | `@slow` | `openai-codex/gpt-6.1-sol:medium` |
+| advisor | `@advisor` | `openai-codex/gpt-6.1-sol:high` |
+
+### Two paths, not a universal pipeline
+
+**Ordinary native work:** direct Luna or a bounded existing worker, proportionate verification, done. No engineering-docs setup, delivery skill, baseline, manifest, extra approval or new document is required unless the actual boundary needs it.
+
+**Documentation-dependent delivery:** available/enabled matching engineering-docs supplies material authoritative context; project-delivery handles new applications and explicit substantial/end-to-end delivery with whole-boundary readiness, native approval and affected-owner reconciliation. Context retrieval alone is not full delivery. Consequential plan review can apply independently without creating a baseline.
 
 ## Start with your goal
 
@@ -177,9 +202,39 @@ The documentation suite comprises fifteen skills and 109 regular assets deployed
 
 `config/agent/AGENTS.md` routes conditionally; matching procedures are read on demand. The suite does not override OMP permissions or approval, and unavailable assets do not load themselves. See [SKILL-USAGE.md](SKILL-USAGE.md) for the public-name catalog and practical prompts.
 
+## Selective OMO architecture comparison
+
+The [OMO overview at `a8019016f47a9d814ebcc24bd921a561f065ee80`](https://github.com/code-yeongyu/oh-my-openagent/blob/a8019016f47a9d814ebcc24bd921a561f065ee80/docs/guide/overview.md) is a reference for principles, not a requirement to import prompts or machinery. OMP remains authoritative for this payload, with [v18.6.1 native agent contracts](https://github.com/can1357/oh-my-pi/blob/v18.6.1/docs/task-agent-discovery.md) and [Plan Mode child restrictions](https://github.com/can1357/oh-my-pi/blob/v18.6.1/packages/coding-agent/src/task/structured-subagent.ts).
+
+| Reference concept | Local disposition |
+|---|---|
+| Main integration ownership | Already represented: main owns scope, integration and evidence acceptance. |
+| Repository versus documentation research | Useful minimal scout enhancement, with versioned provenance; no librarian role. |
+| Skill versus execution-role distinction | Useful documentation principle, already represented by composing passive procedures with bounded workers. |
+| Independent plan review | Already represented; clarify review-only slow + plan-review and exact native local-plan access. |
+| Evidence acceptance and plan-driven decomposition | Already represented; strengthen the seven-field packet and per-slice executor rationale. |
+| Category routing, team/DAG framework, Boulder/persistent state, continuation loops and keyword routing | Unnecessary duplication for this configuration payload; no orchestration state or router added. |
+| Architect/librarian/plan-consultant/plan-reviewer, extra plugin and model-prompt families | No distinct contract justifies more public roles, integrations or model taxonomy. Preserve seven roles and dormant plugin state. |
+| Universal documentation/approval pipeline | Incompatible with ordinary lightweight native flow; documentation-dependent delivery remains conditional. |
+| Cross-harness hard read-only/security claims | Uncertain without matching native evidence; do not import containment guarantees. |
+
 ## Verification scope
 
-`python3 scripts/test_install.py` exercises the POSIX installer and doctor against isolated fixtures; it does not test the PowerShell scripts. `bun scripts/test_model_routing.mjs` exercises five named worker-routing groups in the extension, not OMP's actual model/agent dispatch. Neither command establishes authenticated model behavior, session permissions, approval provenance, or operating-system confinement.
+`python3 scripts/test_install.py` exercises the POSIX installer and doctor against isolated fixtures; it does not test PowerShell. `bun scripts/test_agent_config.mjs` parses real YAML/frontmatter and checks seven configured mappings plus deterministic negative cases; it is static configuration, not dispatch proof. `bun scripts/test_model_routing.mjs` and `node scripts/test_model_routing.mjs` invoke the real retained handler using native-shaped main/sub events and assert no slow/advisor spawn replacement. These are tool-handler contracts, not authenticated dispatch, native approval or OS containment.
+
+### Native ownership verification (OMP 18.6.1)
+
+The ownership change was exercised in disposable homes and native project fixtures, without installing to a real home:
+
+- Static configuration contract passed for seven definitions and ten in-memory negative cases. The retained hook contract passed seven named groups under both Bun and Node; a native-shaped regression rejects the old slow/advisor `@task` replacement.
+- POSIX installer/doctor integration passed all 233 mappings. Real-payload dry-run wrote no payload; install/check matched all destination bytes; an unrelated sentinel survived and identical reinstall preserved files/mtimes without unnecessary backups. Source validation found seven agents, 36 public skills, 233 regular payload assets/mappings, 163 local links and 96 live skill references with no broken target in the inspected owners.
+- Native CLI `omp/18.6.1` child `session_init`, model and thinking records showed the five ordinary roles at Luna-medium, slow at Sol-medium and advisor at Sol-high, with no invocation selectors. Exact managed agent bodies were present in the dispatched system prompts. An explicit Luna-medium selector for slow resolved to Luna-medium. These are observed dispatch outcomes, not unconditional identity guarantees.
+- Fresh ordinary direct and routine-probe sessions reported the exact sentinel without suite reads, baseline/manifest setup, mutation or extra approval. Explicit source-loaded documentation review returned the seven-field packet, identified missing denial/interface/readiness coverage and supplied a corrected draft with exact allowed/denied checks marked not run.
+- Scout repository-only, documentation-only and mixed probes used substantive source reads and pinned version/section provenance. An unreachable source remained unknown with next evidence named. In interactive native Plan Mode, slow read the exact session-local draft and explicitly supplied plan-review/checklist; its actual tool list was read/grep/glob/web_search/yield with `readOnly=true`, no LSP/MCP/injected tools. It reported blockers without mutation/check execution/approval; the draft remained unapproved.
+
+Complete native JSONL/session evidence was retained under `/tmp/omp-native-ownership-y41m1jt3/`, with parent-inspected metadata in `inspection.json`, `definition-provenance.json` and `plan-evidence-extract.json`. Deployment/source receipts are `/tmp/native-ownership-deployment-evidence.json` and `/tmp/native-ownership-source-evidence.json`. Independent read-only evidence reviews supported the bounded observations; a checker initially conflated a failed parent checklist path with the successful child read, then corrected it against exact records.
+
+Limits remain explicit: initial empty-output launch attempts and an aborted noninteractive plan attempt are not proof. A parent misspelled-source read and reviewer/scout yield retries occurred; accepted child reads/results are preserved separately. Ambient GitHub/OpenDesign MCP initialization failed and those integrations were not validated. No app service or fixture implementation was launched, no plan was approved, and no OS containment was established. PowerShell/Windows remain unverified. Source-loaded procedure smoke is neither native skill registration nor comparative improvement or complete application delivery. Historical catalog evidence below remains historical.
 
 ### Balanced catalog verification
 
