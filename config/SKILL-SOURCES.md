@@ -12,7 +12,7 @@ That historical capture contained 64 directories and 253 files, with no symlinke
 
 ## Active documentation-driven cutover
 
-The current payload contains **69 skill directories and 351 skill files** across those three roots. The selected fifteen-skill suite under `config/skills-agents/` contains **108 explicitly deployed regular assets**, including fifteen entrypoints, fifteen SOURCES files, seven preserved engineering-docs templates and 22 full license notices. `config/files.tsv` contains **372 mappings** in total. Ten canonical entrypoint destinations were retained for in-place replacement; five new capabilities were added. The non-pruning installer does not retire renamed skills, so no duplicate upstream wrappers/aliases were introduced.
+The current payload contains **69 skill directories and 352 skill files** across those three roots. The selected fifteen-skill suite under `config/skills-agents/` contains **109 explicitly deployed regular assets**, including fifteen entrypoints, fifteen SOURCES files, seven preserved engineering-docs templates and 22 full license notices. `config/files.tsv` contains **373 mappings** in total. Ten canonical entrypoint destinations were retained for in-place replacement; five new capabilities were added. The non-pruning installer does not retire renamed skills, so no duplicate upstream wrappers/aliases were introduced.
 
 Each changed/new skill's SOURCES.md maps exact upstream path/revision to local files, adopted mechanisms, modifications, removed incompatibilities and applicable full notice. These are pinned adapted/authored payloads, not claims that the unchanged legacy snapshots are newly licensed.
 

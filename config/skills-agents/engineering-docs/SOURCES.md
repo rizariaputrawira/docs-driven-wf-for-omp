@@ -6,6 +6,8 @@ The only active maintained owner is `config/skills-agents/engineering-docs/`. In
 
 The adopted entrypoint removes staging-only and preserve-incumbents restrictions. Conditional owner links replace frozen integration prescriptions. Context distinguishes fixed approved scope from delegated implementation discretion and ordered resumption reads. Requirements retain stable atomic IDs with many-to-many acceptance mapping, not execution checkboxes. Sequence uses real prerequisites and an end-to-end tracer, not a task engine. Verification links the single delivery evidence procedure. Security routes separate intake/review/audit to one candidate/disposition lifecycle. Compatibility is independently authored for passive/native/behavioral layers and safe disabled or missing capability behavior.
 
+The documentation-first update links the original project-delivery baseline owner from selection, sequence, context and audit rather than duplicating its gate. Authorized setup/create prepares necessary intended information; maintain reconciles every affected owner against sources and observed evidence. Operations/user guidance separates pre-code plans from later actual outcomes. The standards map is original public-metadata/abstract-based guidance with explicit access limits and the 15289:2019-to-12207:2017/15288:2015 edition boundary, not ISO conformity. Catalog bytes/IDs/schema, manifest v1, trace fields/relations, four profiles and all seven templates remain unchanged.
+
 ## Adapted licensed source
 
 Repository: https://github.com/open-gsd/gsd-core

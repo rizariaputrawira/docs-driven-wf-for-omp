@@ -9,7 +9,7 @@ Apply this routing only when the documentation-driven suite is available, enable
 | Material documentation/context dependency | `skill://engineering-docs`, context branch before dependent work. No manifest is required for safe provisional inspection; no automatic setup. |
 | Unresolved consequential behavior | `skill://brainstorming` |
 | Active domain terminology, relationships or consequential ADR work | `skill://domain-modeling` |
-| Explicit substantial/end-to-end delivery or authorized continuation | `skill://project-delivery`, with `resume` for actual continuation |
+| New applications, explicit substantial/end-to-end delivery or authorized continuation | `skill://project-delivery`, with `resume` for actual continuation; prepare/review the selected documentation baseline before app code and reconcile all affected owners at completion |
 | Consequential multi-slice plan coverage/integration check | `skill://plan-review` before native proposal/reapproval, not a second approval ritual |
 | Requested/approved test-first or red-green-refactor | `skill://tdd`. Ordinary regression coverage alone does not force TDD. |
 | Difficult, flaky or performance diagnosis | `skill://diagnosing-bugs` |

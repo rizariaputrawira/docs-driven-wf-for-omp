@@ -68,7 +68,7 @@ The doctor exits 0 only when every mapped file matches, 1 for missing or drifted
 
 ## Documentation-driven engineering suite
 
-The maintained suite is managed repository payload, not an OMP application patch. Normal installation deploys its 108 regular assets from `config/skills-agents/` to `.agents/skills/`; this cutover does not deploy into the actual installed home. The full inventory now has 372 mappings. Existing ten canonical destinations remain, avoiding obsolete discoverable aliases under the non-pruning installer.
+The maintained suite is managed repository payload, not an OMP application patch. Normal installation deploys its 109 regular assets from `config/skills-agents/` to `.agents/skills/`; this change does not deploy into the actual installed home. The full inventory now has 373 mappings. Existing ten canonical destinations remain, avoiding obsolete discoverable aliases under the non-pruning installer.
 
 Managed `config/agent/AGENTS.md` provides short conditional trigger-to-owner routing. Actual procedures are read on demand. Disabled/filtered/unavailable suite assets do not automatically reload or block ordinary OMP work. Requested unavailable suite-specific proof remains incomplete; native permissions and approval still govern. No new hook, router, service, task-state database, tracker, auto-commit, scanner or package install is required.
 
@@ -76,71 +76,60 @@ Managed `config/agent/AGENTS.md` provides short conditional trigger-to-owner rou
 
 ```mermaid
 flowchart TD
-  A[Goal or change] --> B{Routine bounded task?}
-  B -- Yes --> C[Native OMP workflow; load only a triggered skill]
-  B -- No --> D[project-delivery: end-to-end workflow]
-  D --> E[Inspect project and existing canonical documents]
-  E --> F{Need focused task context?}
-  F -- Yes --> G[engineering-docs: read owners, conflicts and gaps]
-  F -- No --> H{Need a product/design spec?}
-  G --> H
-  H -- Yes --> I[brainstorming: resolve consequential choices]
-  I --> J{Existing spec or requirements owner?}
-  J -- Yes --> K[Update that canonical document]
-  J -- No --> L[Create approved spec: docs/specs/date-topic.md]
-  H -- No --> M[Reuse current approved spec and decisions]
-  K --> N{Glossary or consequential ADR needed?}
-  L --> N
-  M --> N
-  N -- Yes --> O[domain-modeling: update glossary or ADR only if warranted]
-  N -- No --> P{UI work?}
-  O --> P
-  P -- Yes --> Q[Impeccable workflow; keep approved design reference]
-  P -- No --> R[Prepare native OMP implementation plan]
-  Q --> R
-  R --> S{Consequential multi-slice plan?}
-  S -- Yes --> T[plan-review: read-only coverage check]
-  S -- No --> U[Native OMP plan approval]
-  T --> U
-  U --> V{Durable plan copy needed?}
-  V -- Yes --> W[Mirror approved plan in project docs]
-  V -- No --> X[Use approved native plan]
-  W --> Y[Implement authorized slices]
-  X --> Y
-  Y --> Z[Exercise real acceptance path]
-  Z --> AA{Acceptance passes?}
-  AA -- No --> AB[Diagnose and correct; reapprove material scope changes]
-  AB --> Y
-  AA -- Yes --> AC{More approved slices?}
-  AC -- Yes --> Y
-  AC -- No --> AD[Update canonical docs and app guide to match shipped behavior]
-  AD --> AE[End-to-end verified]
+  A[Goal or change] --> B{New app or substantial delivery?}
+  B -- No --> C[Bounded native task: affected context, fix and proof]
+  C --> C1[Update only materially affected docs]
+  B -- Yes --> D[engineering-docs: classify risk, select profile, standards and owners]
+  D --> E[Product purpose, scope and sourced constraints]
+  E --> F[Requirements, stories, quality and security acceptance]
+  F --> G[Architecture, contracts, threats and decisions]
+  G --> H[Detailed design; UI evidence only where affected]
+  H --> I[Verification intent and applicable release, operations and user plans]
+  I --> J[project-delivery: review required whole-boundary baseline and complete plan]
+  J --> K{Baseline ready?}
+  K -- No --> L[Resolve document gaps and material decisions]
+  L --> J
+  K -- Yes --> M[Native approval covering exact reviewed baseline and plan]
+  M --> N[Persist necessary reviewed docs; native operative plan]
+  N --> O[Implement and exercise authorized complete slices]
+  O --> P{Material reviewed-intent change?}
+  P -- Yes --> Q[Update affected intended owners and plan; review readiness]
+  Q --> M
+  P -- No --> R[Reconcile ALL affected documents against actual sources and evidence]
+  R --> S{Final acceptance and reconciliation supported?}
+  S -- No --> T[Diagnose and correct remaining behavior, evidence or document gaps]
+  T --> P
+  S -- Yes --> U[Full delivery complete]
 ```
 
-**Where the skills fit:** `project-delivery` owns the substantial-delivery path; `engineering-docs` supplies focused context when needed; `brainstorming` resolves consequential product choices; `domain-modeling` handles active terminology and consequential decisions; `plan-review` checks consequential multi-slice coverage before native approval. During implementation, use `tdd` only for requested test-first work, `diagnosing-bugs` for difficult/flaky/performance issues, and `code-review` for review. Use `security-intake` for external bundle adoption, `security-review` for focused security changes, and `security-audit` only for explicitly bounded audits. These do not all run on every app.
+`project-delivery` owns this documentation-first gate for enabled, available new-app/substantial delivery and authorized continuation. `engineering-docs` selects/reuses canonical information and exposes due gaps. `brainstorming` resolves only consequential unknown choices; `domain-modeling` handles active terminology/ADRs; `plan-review` independently checks consequential multi-slice coverage before native approval. A disabled/unavailable suite is not auto-loaded or set up; ordinary native tasks remain possible, while explicitly requested unavailable suite-specific work stays incomplete.
 
-**Where documents fit:** reuse existing product/requirements/design owners first. Create or update an approved spec only when the app needs one; default new spec path is `docs/specs/YYYY-MM-DD-topic.md`. Glossaries and ADRs are conditional. A repository plan copy is optional for a real team/portability need, not a second approval authority. After verification, update the existing README or create `docs/app-guide.md` if none exists. Context packets and native todos are working aids, not extra product documents.
+The [single baseline procedure](config/skills-agents/project-delivery/references/documentation-baseline.md) defines readiness, changed-intent reapproval and complete affected-owner reconciliation. Before readiness, safe inspection and authorized document/design work can proceed, not app source/tests/scaffolding, dependency installation, migration or app-service startup. A feasible tracer or an `approved` string is not permission to bypass missing required app-level design/test intent. Native Plan Mode proposes substantive content without checkout writes. One native approval can cover the exact baseline and implementation plan; do not add another approval engine.
 
-### Documents created or updated by the skills
+### Documents and timing
 
-These are conditional outputs, not a required document bundle. Skills inspect and extend existing canonical owners first; a skill run does not automatically create every item below.
+The logical baseline is required for gated delivery even when physical documents are combined or reused. Lean apps can use substantive README sections; larger apps split for real owners/audiences/lifecycles. Preserve established product/requirements/API/UI owners. Only if necessary information has no owner or convention use `docs/<family>/<canonical-id>.md`. No separate file per story, automatic whole-catalog bundle or fictional result document.
 
-| Document or output | Skill owner | When and where |
+| Timing | Information and owner | Required coverage or applicability |
 |---|---|---|
-| Product/design spec, including user stories and acceptance criteria | `project-delivery` specification; `brainstorming` for consequential unresolved choices | Update the existing product/requirements owner. If none is sufficient and no project convention exists, use `docs/specs/YYYY-MM-DD-<topic>.md`. Keep stories and testable acceptance together; do not create one file per story. |
-| Focused context packet | `engineering-docs` context branch | Task/session output listing relevant sources, conflicts, gaps and boundaries. It is a working aid, not automatically a new project document. |
-| Engineering-docs manifest | `engineering-docs` setup/maintain | Reuse an existing manifest; `docs/engineering-docs.yaml` is only the fallback when a manifest is needed and none exists. |
-| Glossary | `domain-modeling` | Update the existing glossary when terminology needs an agreed owner; `GLOSSARY.md` is a fallback, not a default deliverable. |
-| Architecture decision record (ADR) | `domain-modeling` | Record a consequential, hard-to-reverse, surprising or contested decision in the project's existing ADR location; do not create an ADR for every choice. |
-| UI/design reference | Existing UI design owner and Impeccable workflow | Preserve or update the project's existing `DESIGN.md` or approved design artifact when needed, and link it from the spec. OpenDesign is used only when generation/refinement is actually required. |
-| Implementation plan | `project-delivery`; `plan-review` for consequential multi-slice coverage | The native OMP plan is the operative plan. A repository copy is optional when team review, portability or project convention requires it; use the existing plan location or a dated `docs/plans/` path, and do not treat the copy as another approval. |
-| Verification, review or security findings | `project-delivery`, `code-review`, or the matching security skill | Use the existing plan, test/evidence, review or security-finding owner. Do not automatically create a parallel report; record only observed evidence and authorized dispositions. |
-| Portable handoff snapshot | `handoff-to-another-harness` | Only for an explicit pause/transfer: `.handoff/NNN-YYYYMMDD-handoff.md`. `resume-from-handoff` reads a selected snapshot; it does not continue the work. |
-| User/app guide | `project-delivery` final documentation | After end-to-end verification, update the existing README/user guide or create `docs/app-guide.md` if the project has no suitable guide. Describe shipped behavior and limitations. |
+| Before development | Classification, profile, standards and index/manifest: `engineering-docs setup` | Record scope/risk/obligations, selected owners/anchors, relevant omissions, prerequisites, source basis and review. Reuse a sufficient valid index; otherwise authorized setup uses manifest v1 at `docs/engineering-docs.yaml`. Preserve/report invalid existing manifests rather than bypassing them. |
+| Before development | Purpose/PRD or sufficient brief: product owner, project-delivery specification | Outcomes, users/stakeholders, scope/exclusions, sourced constraints and consequential assumptions; no duplicate BRD/PRD. |
+| Before development | SRS, useful stories/use cases, acceptance, NFR and security/platform requirements: requirements owner | Testable success, denied/error/boundary behavior and justified quality targets/methods. Start security classification and requirements early. |
+| Before development | Architecture, contracts, threat/control allocation and consequential decisions: architecture/native-contract owners | Relevant boundaries/responsibilities and data/trust flows; selected views only. Glossaries/ADRs and specialist outputs are applicability-based, not mandatory files. |
+| Before development | Technical/API/UI design: detailed/native-contract and established visual owners | Data/state/error/concurrency/integration/platform invariants. Impeccable is primary where UI exists; OpenDesign generation only for an actual user/project requirement. Required unresolved UI baseline blocks this boundary's app implementation. Artifact TDD is not test-first. |
+| Before development | Test strategy/plan/cases and trace: verification owner | Independent expected values, meaningful denial/boundary routes, safe data/environment, requirement-to-design/planned-proof links. Runtime results remain not-run, without invented implementation nodes or passes. |
+| Before development | Applicable delivery/configuration/migration/rollback, operations/recovery and user preparation: release/operator/reader owners | Resolve implementation-affecting constraints and plan intended procedures/flows. No invented servers, service targets, deployment/restore/signing/store outcomes. |
+| Before development | Baseline readiness and complete native implementation plan: project-delivery, conditional plan-review | Inspect all selected required content and review/gap dispositions. Trusted current authorization must cover exact material baseline decisions and plan; persist necessary reviewed docs after authorization and before app code. Repository plan mirror only for existing convention/team/portability need. |
+| During development | Material intended changes: affected canonical owners and native plan | Update intended content, resolve conflicts and obtain required native reapproval before dependent code. Unchanged-intent corrections use existing scope. Invalidate only materially affected evidence. |
+| During development | Actual verification/review/security findings and trace: existing evidence owners | Record only exercised checks and inspected findings/dispositions; unrelated green logs do not satisfy a failed criterion. Requested test-first, diagnosis and matching reviews are conditional, not a fifteen-skill procession. |
+| Completion | Actual release/security/recovery/platform results, where required | Record observed outcomes only; missing required runtime/deployment proof stays unverified. Out-of-scope external events do not become invented requirements. |
+| Completion | All affected as-built owners and user/app guide: project-delivery with engineering-docs maintain | Reconcile product/requirements, architecture/ADRs, design/native contracts, data/security/platform, verification/trace, release/configuration/recovery/operations and reader docs. A guide update alone is insufficient. Full completion needs every required criterion satisfied and complete affected-document reconciliation. |
 
-Other skills have narrower outputs: `tdd` changes tests/code only when test-first work is requested; diagnosis, review, intake and retro do not silently generate documentation or mutate policy. Any durable write still requires the applicable authorization.
+Standards alignment is voluntary guidance unless an actual identified obligation says otherwise, not ISO conformity or certification. The [standards owner](config/skills-agents/engineering-docs/references/standards.md) maps specific lifecycle/information/requirements/architecture/quality/testing editions and legitimate-access limits. Only public metadata/abstracts were inspected, not full normative texts. Documentation-first order is our local policy, not ISO-mandated waterfall. In particular, 15289:2019's public mapping uses 12207:2017/15288:2015; using 12207:2026 does not prove an updated normative crosswalk.
 
-OMP owns operational state (native plan approval, optional todos, task workers and same-session resume); project documents remain the authority for requirements and decisions. Delegation is optional and only for independent work. Portable handoff is for an explicit pause/transfer; it is not native session resume or `/handoff` compaction. Native Plan Mode and approval behavior were not runtime-verified in this cutover.
+**Practical prompt:** “Use project-delivery for this new application. Prepare and review the selected documentation baseline first. Do not implement until native approval covers the exact reviewed baseline and complete plan. After real verification, reconcile all affected documents before claiming completion.”
+
+OMP owns operational state: native plan approval, optional todos, workers and same-session resume. Canonical docs own requirements and decisions; context packets are task/session aids, not another database. Delegation is optional and cannot replace readiness. Explicit pause/transfer may produce `.handoff/NNN-YYYYMMDD-handoff.md`; `resume-from-handoff` reads only the selected snapshot, while project-delivery resume chooses document work, remaining implementation, final reconciliation or no remaining work from actual evidence. A handoff/digest/label never approves execution. Source-loaded actions are distinct from native discovery, registration and Plan Mode/approval enforcement.
 
 | Canonical skill | Origin: our authorship and selected upstream influence | Concrete capability |
 |---|---|---|
@@ -151,7 +140,7 @@ OMP owns operational state (native plan approval, optional todos, task workers a
 | code-review | Our OMP-specific adaptation of selected Matt Pocock and Superpowers methods | Separate Standards/correctness and Spec verdicts, WIP coverage and complete fix dispositions |
 | diagnosing-bugs | Our OMP-specific adaptation of selected Matt Pocock and Superpowers methods | Signal/minimization/falsifiable hypothesis/root correction/original-path proof |
 | writing-for-agents | Our OMP-specific adaptation of selected Matt Pocock and Superpowers methods | Condition-bearing pointers, single owners and authorized real baseline/candidate assessment |
-| project-delivery | Our delivery procedure and ownership/resumption rules; selected Matt Pocock, Superpowers and GSD methods informed it | Complete vertical delivery and independently authorized resume; incumbent-first UI evidence |
+| project-delivery | Our delivery procedure, documentation-first baseline and ownership/resumption rules; selected Matt Pocock, Superpowers and GSD methods informed existing procedures | Reviewed whole-boundary baseline before code, complete vertical delivery, all affected-owner reconciliation and independently authorized resume; incumbent-first UI evidence |
 | plan-review | Our OMP-specific review procedure; selected GSD methods informed it | Read-only semantic acceptance, consumer integration, dependencies and proof coverage check |
 | handoff-to-another-harness | Our portable handoff contract; selected GSD methods informed it | Explicit pause/export and transfer, exact partial state and non-authoritative portable snapshot |
 | resume-from-handoff | Our read-only loading procedure; selected GSD methods informed it | Selected-snapshot summary only, never continuation |
@@ -210,3 +199,26 @@ The remaining verification was resumed with fresh Sol High actors, and a fresh i
 | Malformed/lifecycle-invalid terminal results | Fresh semantic action read all nine invalid cases and accounted for each exactly once. Missing phase arrays/IDs, conflicting or unassigned dispositions, missing confirmation proof, unproved authorized-local, prohibited severity and failed fragments all withheld confirmation/clean assurance, retaining assigned unresolved IDs. This is observed source-loaded semantic assessment, not production native-parser validation. |
 
 Complete published host security terminals were checked for assigned IDs, phase completeness and semantic dispositions; a task-supplied schema and same-named role still do not prove effective managed-definition provenance. Failed/intermediate yields and a schema-validation override in the fresh intake trace are retained, not promoted to native strict-enforcement proof; acceptance uses its complete final source-grounded terminal. Security runtime impact and native-definition assurance remain incomplete where facts are unavailable. Failed actors are not reconstructed from fragments, replaced with weaker models or counted as clean results. The user's requested current-session/WSL verification is complete with these notes; unrun native and Windows interfaces remain unverified, not falsely passed or current delivery blockers.
+
+### Documentation-first workflow verification
+
+This assessment is separate from the historical 372-entry cutover above. The new [baseline procedure](config/skills-agents/project-delivery/references/documentation-baseline.md) and its delivery/documentation entry points were exercised from explicit before-edit and changed source copies: fifteen skills, with 108 control assets and 109 candidate assets. Accepted fresh actions used the supplied ordinary-file maps; an optional non-suite coding supplement was explicitly mapped separately. Actual completed actor session records show `openai-codex/gpt-6.1-sol`, High thinking and no fallback. Three independent read-only evidence reviews culminated in support for the current eight-case coverage, not a guarantee of every branch or candidate-only causation.
+
+| Case | Observed result |
+|---|---|
+| Writer-enabled pre-code gate | Both control and candidate prepared substantive whole-boundary documentation, retained the unresolved equally authoritative denial-exit conflict and withheld app mutation despite an approved mirror. |
+| Documents, implementation and reconciliation | Both prepared and independently reviewed sufficient pre-code owners before exact-basis implementation assignments. Real core and CLI worked; fresh mapped-source maintenance reconciled all 14 candidate selected concepts, while the control reconciled 13. Both controls succeeded; no comparative improvement is claimed. |
+| Read-only proposal | Substantive proposed owners, readiness and implementation plan were returned without fixture writes or execution attempts. This is not native Plan Mode proof. |
+| Authority, freshness and material feedback | Copied approval/digest claims withheld implementation; an independently trusted exact-basis assignment permitted it. Cosmetic content changes did not force restart. Proposed exit-4 feedback updated affected draft intent and plan while retaining active exit-3 code/proof and requiring reapproval before dependent mutation. |
+| Actual consumer drift | The original CLI exit 4 was observed against retained exit-3 acceptance. Authorized correction and relevant core/CLI proof preceded fresh reconciliation of every affected requirement/design/case/result/guide owner; an unrelated passing log did not substitute. |
+| Resume and load-only | Fresh consumers distinguished complete/no-work, correct-code/stale-doc work and valid-core/missing-CLI work. Document-only repair preserved implementation. Load-only inspected its selected snapshot, not cited code or Next Steps. |
+| Tailoring and evidence timing | Lean CLI reused combined README owners; standard web reused established product/requirements/API/visual owners and prepared operations information. Android/iOS shared one common owner with real platform deltas and named unresolved decisions. No runtime, restore or device/store results were invented. |
+| Bounded and disabled/unavailable contexts | Existing-core order correction needed no full app bundle. Fresh disabled/unavailable countercases read only permitted routing context, preserved unrelated files and passed the specified real CLI success. Requested unavailable suite proof stayed unverified. These are routing-context observations, not native disablement enforcement. |
+
+Controller-owned Python subprocesses used private fixture working directories and minimal nonsecret environments. The candidate and corrected-drift app each passed eight independently expected inputs at both the actual imported public-core seam and real CLI: two specified successes, empty/no-match/nested-row boundaries, and nonempty/sentinel/empty denial. The control passed the same three primary cases plus four separately recorded edge inputs at both seams. Exact status, streams, row contents/order and core exception were observed; CLI-only success was not treated as public-helper proof. Fresh copied-fixture document consumers reused receipts only against byte-identical observed source, explicitly retaining the original execution directory rather than claiming a rerun.
+
+Real disposable-home dry-run/install/doctor/identical-reinstall checks and `python3 scripts/test_install.py` passed for **373 mappings**; `bun scripts/test_model_routing.mjs` passed its five named cases. Dry-run made no home changes, the deployed new reference matched source bytes and identical reinstall preserved destination bytes/modes/mtimes/backups. Native Bun YAML parsing and local-link/catalog-anchor checks preserved passive entrypoints, manifest v1, the 129-concept catalog and seven templates. Current payload remains 69 skill directories and 352 skill files. Protected metadata confined changes to the 22 authorized passive paths, preserving staging, runtime/agent/plugin settings, installers/tests, catalog/templates and Git state.
+
+Failures remain distinct records: three quota-interrupted actions, the original reconciliation's out-of-map installed supplement read, and the original unavailable countercase's extra routing-section read were not relabeled passes. Fresh independently judged reassessments supplied current coverage. Complete tool/source errors, earlier negative review verdicts and a corrected controller display-count mistake remain external evidence; actual receipt inputs/results govern acceptance.
+
+This is passive cooperative, source-loaded workflow acceptance. Native discovery/registration, effective managed-agent selection, Plan Mode/approval UI provenance, runtime disablement enforcement, OS containment, Windows/PowerShell behavior, production authentication and formal ISO conformity were not established. No live-home deployment, settings/credential change or external app service was performed.

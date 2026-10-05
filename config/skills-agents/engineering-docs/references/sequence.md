@@ -1,7 +1,7 @@
 # Information sequence and lifecycle actions
 
 ## Lifecycle phases
-Phases identify information roles, not numbered execution gates or a mandated lifecycle. Existing project-delivery/native Plan Mode remains authoritative.
+Phases identify information roles, not universal numbered execution gates or a mandated lifecycle. New-app/substantial documentation-first delivery has a reviewed pre-code baseline owned by `skill://project-delivery/references/documentation-baseline.md`; native permissions/Plan Mode remain authoritative. Its full selected boundary must be ready before app implementation.
 
 | Phase | Information role |
 |---|---|
@@ -21,12 +21,16 @@ Phases identify information roles, not numbered execution gates or a mandated li
 
 Security starts at phases 0 and 2, not phase 5. Behavior/quality/security/story/test-strategy work may proceed in parallel after stable product facts. Detailed/API/data/threat/deployment/platform design may proceed in parallel after sufficient relevant architecture boundary inputs. Iteration feeds update triggers rather than reciprocal prerequisites. Missing inputs permit explicitly provisional drafts, not approval/active constraints or verified completion.
 
+Independent drafts mean safe inspection and authorized document/design work, not permission to start app code before that boundary's complete required baseline. Review consumed prerequisites before downstream commitment. Release/user/recovery plans can be due before code; actual test/release/restore/store reports are due only after observation, regardless of numeric phase.
+
 ## Dependency rules
 Catalog dependencies are true information prerequisites, not mandatory files. `srs -> brief` means meaningful originating need/scope is required, possibly an existing README purpose or GDD section, not a command to create a brief/PRD. `technical-design -> architecture-description` means relevant structural/constraint information, not every view. Threat analysis needs classification/trust; controls need security invariants/threat assumptions; cases need acceptance; observed reports need actual case/method basis. Design planning does not wait for downstream release test success. Requirements can be approved before implementation verification.
 
 Graph direction is concept -> prerequisite. Known IDs only, no self edges or cycles. Family defaults are not a blanket waterfall: artifact edges carry purpose-specific minimum input. Informational references/downstream evidence/feedback are related links or update triggers, not prerequisites. The selected manifest `depends-on` captures actual necessary owner-entry information; creation graph does not automatically load all references into context. Equivalent existing sections/evidence can satisfy an edge without selecting another file. Report each input as sufficient/missing/provisional and parallel opportunities; do not store current-agent/current-wave/execution-state.
 
 For implementation planning, choose a real production-quality end-to-end tracer through the required producer/consumer boundary and verify its acceptance before expansion. A scaffold, disconnected layer or reduced criterion is not that tracer. Name exact consumes/produces interfaces, necessary prerequisite evidence and unresolved one-way choices; parallelize only genuinely independent work. Sequence here remains an information view, never a GSD executor or manifest task queue. For consequential multi-slice plans load the single `skill://plan-review/references/coverage-checklist.md` before native proposal/reapproval; do not duplicate its checklist or create another approval gate.
+
+For gated delivery, first prepare/review required whole-boundary information through the delivery-owned baseline, then implement its authorized tracer. A slice cannot evade required architecture/design/test intent. `status`, `next` and `sequence` distinguish due pre-code gaps from later runtime evidence.
 
 ## Eight native actions
 Use `/skill:engineering-docs <action>` arguments, not custom slash commands or a shell CLI. Plan Mode stays read-only and returns proposed writes through native approval.

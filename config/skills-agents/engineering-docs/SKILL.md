@@ -10,6 +10,7 @@ Govern necessary engineering information, not a mandatory pile of files. This in
 ## Start here
 
 1. Identify the requested action, scope, repository conventions and actual evidence. Default an unspecified action to read-only `context` for the named task; ask only when the requested outcome is materially ambiguous.
+   Context-only requests remain read-only. Explicit new-app/substantial baseline preparation instead follows the enabled, available delivery owner's [documentation-first gate](../project-delivery/references/documentation-baseline.md), selecting and preparing necessary information under current permission before app code. Do not silently turn context retrieval into setup or delivery.
 2. Preserve native Plan Mode and existing approval boundaries. `setup`, `create` and `maintain` change documents only when the task authorizes those changes; Plan Mode returns proposed changes through the native plan, not project-file writes.
 3. Discover canonical manifests/docs through instructions and indexes. Reuse an existing manifest; default a new one to `docs/engineering-docs.yaml` only after ownership analysis. Multiple authorities, invalid/unsupported YAML or inaccessible sources block dependent mutation, not safe read-only reconnaissance. See [manifest](references/manifest.md).
 4. Classify independent types, platforms, capabilities, risk and actual obligations with [profiles](references/profiles.md). Unknown remains unknown; lean never waives material security.
@@ -22,15 +23,18 @@ Use `/skill:engineering-docs <action> [argument]` or an ordinary request naming 
 
 ### setup
 Inspect/classify/reuse owners using [profiles](references/profiles.md) and [manifest](references/manifest.md). Propose required information and applicable omissions with reasons, security assessment, owners, planned sources and precise unknowns. When authorized, write/update only the manifest and necessary existing owner sections; never mass-create artifacts. Reruns preserve unrelated entries and user content. Done: evidence-supported selection or named blockers, valid canonical ownership and no fabricated approval/status.
+For gated delivery, authorized `setup` selects the whole delivery boundary and `create`/owner-extension prepares its necessary substantive pre-code information. Reuse a sufficient index as allowed by the delivery-owned baseline; do not bypass an invalid existing manifest or generate a full catalog.
 
 ### status
 Read-only selected phase/document/required/declared-status/observed-status/next-action table. Compare source existence, contents and evidence against [manifest authority](references/manifest.md#authority-and-evidence); a declared active file may actually be missing or stale. Name uninspected coverage. Done: current scoped table, evidence gaps and blockers; no writes.
+For gated delivery, expose required due pre-code gaps and later unobserved runtime/release evidence separately.
 
 ### next
 Read-only prioritized document work with rationale, sufficient information prerequisites, safe parallel opportunities and blockers. Use [sequence](references/sequence.md); material security/context hazards outrank lower-risk cosmetic work. Do not enqueue runtime waves. Done: actionable bounded next work, not an entire-catalog checklist.
+Respect the selected delivery baseline: useful authorized document work can resolve readiness; a possible tracer cannot bypass required pre-code gaps.
 
 ### sequence
-Read-only dependency-aware lifecycle view of selected information using [sequence](references/sequence.md). Prerequisites are information, not mandatory artifacts or numbered gates; security begins with classification/requirements. Label provisional drafts and approval blockers. Done: scoped acyclic view with real prerequisites and parallel opportunities.
+Read-only dependency-aware lifecycle view of selected information using [sequence](references/sequence.md). Phases are information, not universal numbered gates; selected documentation-first delivery still requires its reviewed pre-code baseline. Security begins with classification/requirements. Label provisional drafts, due pre-code gaps, later evidence and approval blockers. Done: scoped acyclic view with real prerequisites and parallel document opportunities.
 
 ### create <document>
 Resolve a known canonical ID/name/alias in the catalog, then inspect the existing owner. `requirements` resolves to `srs`; artifact alias `TDD` resolves to `technical-design`, never invokes the `tdd` testing skill. Unknown aliases produce an actionable error with relevant supported concepts, not a guessed new kind. Extend a sufficient source/anchor before creating a file. If coverage already exists or a separate owner is unjustified, explain and do not generate paper. Use the linked checklist and only a relevant [template](templates/artifact.md); native contracts/generators remain native and require substantive inputs/authorization. Record unknowns as draft/incomplete/blocked. Done: authorized necessary information at one canonical owner, manifest/trace impact reconciled, no fictitious project facts.
@@ -43,6 +47,7 @@ Follow [audit](references/audit.md) read-only: expected information → manifest
 
 ### maintain <change>
 Inspect actual changed implementation and fresh scoped verification evidence, then use [audit](references/audit.md), [manifest](references/manifest.md) and [traceability](references/traceability.md) to identify affected canonical owners/links/update triggers. Without execution evidence report proposed/unverified impact; do not activate verified behavior. When authorized update only affected information, reconcile manifest/trace and audit changed security/context scope after observed verification. Required docs do not authorize altering another skill. Done: accurate affected-owner updates with current scoped evidence, or proposed impact and exact blockers; existing project-delivery gates remain authoritative.
+Reconcile every affected selected product/requirements, architecture/ADR, detail/native-contract, data/security/platform, verification/trace, release/operations/recovery and user owner, not just user docs. Changed intended design uses authorized `create`/owner-extension and the delivery owner's material-change review/reapproval rule; never call a draft intended change a verified as-built fact.
 
 ## Conditional references and existing owners
 

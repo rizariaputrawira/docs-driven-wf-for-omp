@@ -12,6 +12,8 @@ Check every applicable class, not only file existence:
 - Orphan/duplicate/untraceable/contradictory owners, dependencies and supersession cycles, unknown successor and inappropriate historical activation.
 - Terminology disagreement and undocumented consequential decision; reuse domain-modeling for resolution, not audit-side rewrite.
 - Intended requirements versus implementation/design/verification where due; forward missing coverage separately from tests/code/evidence lacking reverse rationale. Preimplementation work is not yet implemented/verified, not automatically defective.
+- Phase-appropriate selected-baseline sufficiency before code: substantive owners, source/prerequisite sufficiency, resolved material decisions, reviewed dispositions and planned proof allocation using `skill://project-delivery/references/documentation-baseline.md#before-code-readiness`. Later implementation/runtime results not yet due are not pre-code documentation defects.
+- Final affected-owner reconciliation against actual source and exercised criterion evidence using that delivery owner's as-built rule, not only user guides. Missing required proof stays unverified; unrelated passing logs cannot support a failed criterion or lower intended acceptance.
 - Classification/data/trust/security impact gaps; stale threat boundaries; controls without enforcement/test/review; fixed findings without current remediation-specific successful evidence; security-code conflicts.
 - Mobile permission/entitlement/exported/deep-link/storage rationale and denial/platform tests; shared-owner duplication; Android evidence incorrectly claimed for iOS.
 - Unreviewed external skill/plugin/MCP provenance/privilege/poisoning drift and incomplete intake.

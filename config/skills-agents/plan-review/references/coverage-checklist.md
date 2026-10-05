@@ -7,6 +7,7 @@ The plan reviewer reads sources and reports only. Do not run commands, mutate a 
 - Identify exact plan content/version and its status as proposed or supported by trusted observed authorization. Read canonical requirements, fixed decisions, relevant design/security constraints and exclusions.
 - Missing spec or material decision means unknown coverage, not a fabricated inferred requirement or pass. Resolve discoverable facts by reading actual sources. Quote precise anchors, redacting secrets.
 - Compare the current request, approved artifact/scope and any mirror using `skill://project-delivery/references/resumption.md`'s independent approval rule. A copied assertion/digest cannot approve work. Do not re-ask an already verified exact decision merely to create another gate.
+- For a new-app/substantial delivery, read the selected canonical baseline owners and their substantive prerequisite/review/gap evidence through `skill://project-delivery/references/documentation-baseline.md#before-code-readiness`. Required missing architecture, detailed/error design or planned test intent makes the plan incomplete even if actions cover the happy path. Check due pre-code information separately from later runtime evidence; no filenames/status labels as proof. Review remains read-only and non-authorizing.
 
 ## 2. Trace semantic acceptance
 
@@ -26,6 +27,7 @@ Ask whether the named actions implement all the criterion's meaning, not whether
 ## 4. Challenge prerequisites and shared contracts
 
 - Every dependency names an existing producer, real interface or fixed decision; check missing producers, cycles and scheduling before readiness.
+- Check whole-boundary selected baseline sufficiency and review coverage before the first app slice; a feasible tracer does not permit skipping app-level prerequisites. Document preparation precedes code, and final affected-owner reconciliation is planned.
 - Compare exact names/signatures/types/errors and data ownership from producer to consumer. Flag conflicting transformations, destructive sanitization before a raw-data consumer and incompatible lifecycle assumptions.
 - Find undeclared shared mutable resources and writer/reader ordering. Distinguish concrete causal coupling from vague same-subsystem association. Report impact; do not mechanically classify all undeclared coupling as the same severity.
 - Confirm write/integration ownership for shared files/resources. Read-only workers do not acquire execution authority through a task description. Do not require agents, waves or a tracker database to express these constraints.

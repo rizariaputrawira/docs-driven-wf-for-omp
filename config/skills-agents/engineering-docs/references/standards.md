@@ -10,11 +10,12 @@ Standards guidance here is originally authored; no normative standard clauses or
 ## Lifecycle and information
 - [ISO/IEC/IEEE 12207:2026](https://www.iso.org/standard/90219.html), published Edition 2, replaces withdrawn 2017: software lifecycle processes and concurrent/iterative information roles, not a fixed document schema or process waterfall.
 - [15289:2019](https://www.iso.org/standard/74909.html), published Edition 4, confirmed 2025, replaces 2017: purpose/audience/process-fit information items. [CD revision](https://www.iso.org/standard/94699.html), Edition 5 under development, is not a published replacement.
+  Edition boundary: the public 15289:2019 abstract maps information items to 12207:2017 and 15288:2015. Selecting 12207:2026 as lifecycle guidance does not establish a normative updated crosswalk; full normative texts were not assessed.
 - [29148:2018](https://www.iso.org/standard/72089.html), published Edition 2, confirmed 2024: requirements source/scope/quality and verifiability. [DIS revision](https://www.iso.org/standard/94091.html), Edition 3 under development, remains draft. Do not impose draft provisions as current baseline.
 
 ## Architecture and quality
 - [42010:2022](https://www.iso.org/standard/74393.html), published Edition 2, replaces 2011: stakeholder/concern-driven architecture description; selected views, not mandatory diagram inventory.
-- [25010:2023](https://www.iso.org/standard/78176.html), published Edition 2, replaces 2011, and [25030:2019](https://committee.iso.org/standard/72116.html), published Edition 2, confirmed 2025, replaces 2007: product-specific quality properties and measurable quality requirements. Workloads/boundaries/thresholds need actual product evidence, not generic scorecards.
+- [25010:2023](https://www.iso.org/standard/78176.html), published Edition 2, replaces 2011, and [25030:2019](https://www.iso.org/standard/72116.html), published Edition 2, confirmed 2025, replaces 2007: product-specific quality properties and measurable quality requirements. Workloads/boundaries/thresholds need actual product evidence, not generic scorecards.
 - [ISO/IEC/IEEE 90003:2018](https://www.iso.org/standard/74348.html), published Edition 1, confirmed 2025, replaces ISO/IEC 90003:2014: relevant where actual organization-adopted quality-management scope exists; not certification criteria or a project certification claim.
 - [arc42](https://arc42.org/overview/) and [C4](https://c4model.com/) are optional structuring/view lenses. [MADR](https://github.com/adr/madr/blob/main/template/adr-template.md) informs consequential decisions through existing domain-modeling. No mandatory template, view count or new decision process.
 
@@ -45,3 +46,16 @@ Android/Google published terms and Apple copyright/terms remain authoritative; t
 
 ## Standards mapping record
 For each actual applicability claim record source/exact edition or release, rationale, information owner, actual required review/approval/evidence, implementation status and review trigger in the owning project artifact. Provision identifiers are used only from legitimately available source text. Map observed implementation/verification separately from document approval. Missing obligations/interpretation/access blocks the affected assurance claim; safe independent work continues. Catalog related-standards references alone never make a standard applicable.
+
+The before-code documentation order is local delivery policy owned by `skill://project-delivery/references/documentation-baseline.md`, not ISO-mandated waterfall or proof of conformity. Public metadata/abstracts support this guidance map, not clause-level assessment:
+
+| Guidance source | Application information |
+|---|---|
+| ISO/IEC/IEEE 12207:2026 | Lifecycle roles and preparation/use/change of information throughout delivery; no required waterfall |
+| ISO/IEC/IEEE 15289:2019 | Purpose/audience/content coverage and tailoring/combining information items, subject to the edition boundary above |
+| ISO/IEC/IEEE 29148:2018 | Sourced, consistent, testable requirements, useful stories/use cases and acceptance |
+| ISO/IEC/IEEE 42010:2022 | Stakeholder/concern-driven architecture descriptions, selected views and decision rationale; not a mandated design tool |
+| ISO/IEC 25010:2023 and 25030:2019 | App-specific quality characteristics, measurable requirements and justified target/method basis |
+| ISO/IEC/IEEE 29119-1:2022, -2:2021, -3:2021, -4:2021 | Concepts, processes, test documentation and selected techniques respectively; plans before code, results only after observation |
+
+Record actual selected edition/access, applicability rationale, information owner, required review/evidence and limits in the existing project index/product/requirements owner and existing manifest `standards` lists where used. Catalog `related-standards` are candidate references, neither exhaustive obligations nor conformity mapping. Preserve manifest v1 and traceability contracts: pre-code links allocate requirements to design and planned verification sources, without invented implementation nodes, dates or passes. Access limits alone do not block voluntary alignment; unavailable interpretation of an actual binding obligation blocks its dependent commitment.

@@ -6,7 +6,7 @@ Load when a delivery outcome must be synthesized or clarified. The consuming rol
 
 1. Read the current request, supplied decisions and existing canonical requirements/design, domain vocabulary and relevant ADRs. Inspect the affected implementation and consumer/test seam. Treat code as evidence of current behavior, not authority to overwrite approved intended behavior.
 2. Enumerate known outcome, affected actors, constraints, failure paths and exclusions. Identify only material unknowns. Repository-discoverable facts are researched; a remaining consequential choice routes to `skill://brainstorming`. Do not ask again for supplied answers.
-3. Reuse an existing sufficient owner, extending relevant anchors only. If an authorized new spec is needed and no convention exists, use `docs/specs/YYYY-MM-DD-<topic>.md`. Preserve existing locations, including historical branded ones; do not create parallel owners or silently change approved scope.
+3. Reuse an existing sufficient product/requirements owner, extending relevant anchors only. If authorized new information needs a separate owner and no convention exists, use the engineering-docs `docs/<family>/<canonical-id>.md` fallback. Preserve existing locations, including historical branded ones; do not create parallel owners or silently change approved scope.
 4. Prefer the highest existing consumer seam that can discriminate the requested behavior. Describe the input, independently derived expected result and relevant failure result; introduce a new seam only when the existing ones cannot prove acceptance, explaining the concrete gap.
 
 ## Content contract
@@ -26,3 +26,5 @@ Keep durable product decisions in their existing owners; keep exact changing fil
 ## Exit and approval
 
 The spec is ready for planning when an independent reader can identify the full requested behavior, errors, constraints and proof without guessing. Proposed content is not accepted content. Native approval governs consequential decisions and execution; a repository label, issue status or spec filename cannot supply it. Return proposed content in Plan Mode without checkout writes; when authorized to persist it, preserve current edits and trace the approved basis. Do not create tracker labels, setup commands, automatic publication or a second spec approval ceremony.
+
+Planning sufficiency is not permission to implement. New-app/substantial delivery also requires the complete selected [documentation baseline](documentation-baseline.md#before-code-readiness), including design and planned verification intent, reviewed with the implementation plan. Persist exact necessary reviewed content only after current authorization and before app code.

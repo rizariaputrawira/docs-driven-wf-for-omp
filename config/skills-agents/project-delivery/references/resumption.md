@@ -11,6 +11,8 @@ Load only for `project-delivery resume [handoff-path]` or an explicit equivalent
 5. **Affected boundary and evidence.** Read relevant current code/tests/callers and available observed check results. Reconcile every claimed done/partial item with its actual basis. Preserve user edits. Mark mismatches, invalidated evidence and unavailable facts; never rerun a known failure just to confirm it. Existing service/job state is observational context, not permission to restart, requeue or cancel anything.
 6. **Rebuild the documentation packet.** Use `skill://engineering-docs/references/context-routing.md` when available/enabled. Emit exactly `Objective`, `Scope`, `Constraints`, `Relevant Context`, `Expected Result`, `Verification`, `Done Condition`. Put conflicts, gaps, exclusions, exact approval basis, observed evidence and the current authorized slice in their appropriate sections. Link source owners, not a parallel state database.
 
+For the new-app/substantial boundary, recheck relevant [baseline readiness](documentation-baseline.md#before-code-readiness), owner substance and current authorization after this reconciliation. Do not recreate sufficient documents, replay valid work or auto-load a disabled/unavailable dependency. Missing explicitly requested baseline inputs keep that result incomplete, not ordinary native work.
+
 ## Authorization is independently verified
 
 Record, in the packet and any later exported handoff:
@@ -28,4 +30,11 @@ If the old native plan URI is unavailable, an accessible exact content mirror pl
 
 ## Choose the next action
 
-Continue only the earliest incomplete currently authorized slice whose material prerequisites are ready. Do not skip an unresolved required acceptance or overwrite partial work to make a cleaner restart. A prerequisite is ready because its real interface/decision/evidence exists, not because a handoff labels it complete. State precisely what blocks dependent work; finish safe independent inspection. When the route changes materially, use [planning](planning.md) and native reapproval before implementation. No automatic state reconstruction, agent/job restart, consumed-handoff deletion, WIP commit, provider change or session reset.
+Select the next action from reconciled facts, not an assumed new implementation slice:
+
+- Required pre-code readiness incomplete: useful authorized document/design work or proposed content in a read-only channel; name the exact remaining material decision.
+- Readiness and current authorization sufficient, implementation incomplete: the earliest incomplete authorized complete slice, preserving valid partial work and required consumers.
+- Code complete but affected design/results/trace or other selected owners stale: final document/evidence reconciliation and only necessary checks, not reimplementation.
+- All required acceptance and affected-document reconciliation supported: report no remaining delivery work.
+
+Do not skip unresolved acceptance or overwrite partial progress for a cleaner restart. Real interfaces/decisions/evidence establish prerequisites, not handoff labels. A changed material basis invalidates only relevant proof/readiness and follows [planning](planning.md) and native reapproval before dependent code. Cosmetic changes need appropriate source review, not automatic semantic drift or a full restart. State blockers and finish safe independent work. No automatic state reconstruction, job restart, handoff deletion, WIP commit, provider change or session reset.

@@ -25,4 +25,11 @@ For each criterion record its canonical anchor, implementation/consumer evidence
 
 Include explicit human/deployment needs and exclusions. A required unverified or failed criterion prevents a full-completion claim. Distinguish “present and wired, behavior unverified” from both absence and pass. Check counts and green builds cannot substitute for full criterion coverage. Never filter away a current acceptance gap because a vague later-phase name sounds related; a deferred slice criterion must have an exact plan mapping and remains open for final acceptance.
 
+Full delivery also requires [complete affected-owner reconciliation](documentation-baseline.md#as-built-reconciliation), not only a guide update or worker summary. Inspect every affected selected owner against actual sources and relevant observed evidence, preserving intended acceptance and honest limits. Distinguish:
+
+- **slice complete:** this slice's behavior, consumers, documents and proof are supported; other app criteria may remain.
+- **code complete, docs pending:** implementation evidence is sufficient but affected owners/links/states remain unreconciled.
+- **documents reconciled, runtime unverified:** source-backed documents are accurate but required runtime proof is missing.
+- **full app complete:** every required criterion is satisfied and all affected selected documents are reconciled.
+
 Report actual changes, exercised checks/results, source-only observations and unresolved limits. Documentation describes only observed shipped behavior, not proposed features. No GSD tools, status engine, probes, universal timing cap, auto-commit, requirement waiver or fresh-execution mandate on every message is adopted.

@@ -329,6 +329,7 @@ config/skills-agents/project-delivery/LICENSE.gsd	.agents/skills/project-deliver
 config/skills-agents/project-delivery/LICENSE.matt	.agents/skills/project-delivery/LICENSE.matt
 config/skills-agents/project-delivery/LICENSE.superpowers	.agents/skills/project-delivery/LICENSE.superpowers
 config/skills-agents/project-delivery/SOURCES.md	.agents/skills/project-delivery/SOURCES.md
+config/skills-agents/project-delivery/references/documentation-baseline.md	.agents/skills/project-delivery/references/documentation-baseline.md
 config/skills-agents/project-delivery/references/implementation-brief.md	.agents/skills/project-delivery/references/implementation-brief.md
 config/skills-agents/project-delivery/references/planning.md	.agents/skills/project-delivery/references/planning.md
 config/skills-agents/project-delivery/references/resumption.md	.agents/skills/project-delivery/references/resumption.md

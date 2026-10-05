@@ -36,11 +36,11 @@ A balance task excludes unrelated narrative/art. API-only excludes visual/mobile
 Use exactly these seven task headings; place gaps/exclusions within Relevant Context and dependent blockers within Constraints/Done Condition as needed:
 - **Objective**: bounded requested engineering outcome.
 - **Scope**: affected components/platforms/features and explicit exclusions.
-- **Constraints**: exact active invariants, tool/approval boundaries, unresolved decision blockers; prior risky constraint remains visible, not silently waived.
-- **Relevant Context**: source+anchor, authority/state, inspected revision/basis, why needed and concise exact engineering invariant; Gaps and conflicts; intentionally excluded irrelevant/historical pointers.
+- **Constraints**: exact active invariants, tool/approval boundaries and independently trusted current authorization basis, unresolved decision blockers; prior risky constraint remains visible, not silently waived. For gated delivery, required pre-code readiness constrains dependent app mutation.
+- **Relevant Context**: source+anchor, authority/state, inspected revision/basis, why needed and exact invariant; Gaps and conflicts; intentionally excluded irrelevant/history pointers. Include relevant selected baseline owners, prerequisite/review sufficiency and due pre-code gaps separately from later evidence, using `skill://project-delivery/references/documentation-baseline.md` rather than another checklist.
 - **Expected Result**: observable output/behavior, not guessed implementation.
 - **Verification**: applicable scoped check/evidence/platform/approval; separate already observed from proposed/unrun.
-- **Done Condition**: acceptance and required evidence, plus named dependent blockers that preclude completion claims.
+- **Done Condition**: acceptance and required evidence, plus named dependent blockers. For gated delivery, require selected baseline readiness before code and complete affected-owner reconciliation for final completion; bounded native tasks do not acquire a full-app bundle.
 
 Completion means sufficient relevant owner source sections inspected or explicitly blocked, invariant conflicts named, excluded information justified, and no authority/verification claim inferred solely from manifest status. Uninspected/truncated source remains incomplete coverage.
 
