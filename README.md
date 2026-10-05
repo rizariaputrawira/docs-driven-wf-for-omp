@@ -149,32 +149,34 @@ Managed `config/agent/AGENTS.md` provides short conditional trigger-to-owner rou
 
 ### Workflow at a glance
 
+The labels name suggested owners for each phase, not a mandatory skill procession. Use specialist skills only when enabled, available and relevant; native approval and permission checks are not skills.
+
 ```mermaid
 flowchart TD
-  A[Goal or change] --> B{New app or substantial delivery?}
-  B -- No --> C[Bounded native task: affected context, fix and proof]
-  C --> C1[Update only materially affected docs]
-  B -- Yes --> D[engineering-docs: classify risk, select profile, standards and owners]
-  D --> E[Product purpose, scope and sourced constraints]
-  E --> F[Requirements, stories, quality and security acceptance]
-  F --> G[Architecture, contracts, threats and decisions]
-  G --> H[Detailed design; UI evidence only where affected]
-  H --> I[Verification intent and applicable release, operations and user plans]
-  I --> J[project-delivery: review required whole-boundary baseline and complete plan]
+  A[Goal or change<br/>Select only relevant, available guidance] --> B{New app or substantial delivery?}
+  B -- No --> C[Bounded native task<br/>Use matching skill if helpful]
+  C --> C1[Update materially affected docs<br/>engineering-docs: maintain]
+  B -- Yes --> D[Classify risk, profile, standards, owners<br/>engineering-docs: setup; project-delivery]
+  D --> E[Product purpose, scope, constraints<br/>project-delivery: specification; brainstorming for consequential unknowns]
+  E --> F[Requirements, stories, quality, security<br/>engineering-docs: requirements; security-review/security-audit only when in scope]
+  F --> G[Architecture, contracts, threats, decisions<br/>engineering-docs: architecture; domain-modeling for terminology/ADRs]
+  G --> H[Detailed design; UI evidence if affected<br/>engineering-docs; Impeccable for UI]
+  H --> I[Verification intent and applicable release/ops/user plans<br/>engineering-docs; relevant specialists as needed]
+  I --> J[Review whole-boundary baseline and plan<br/>project-delivery; plan-review for consequential multi-slice work]
   J --> K{Baseline ready?}
-  K -- No --> L[Resolve document gaps and material decisions]
+  K -- No --> L[Resolve gaps and material decisions<br/>engineering-docs: create/extend; brainstorming/domain-modeling when needed]
   L --> J
-  K -- Yes --> M[Native approval covering exact reviewed baseline and plan]
-  M --> N[Persist necessary reviewed docs; native operative plan]
-  N --> O[Implement and exercise authorized complete slices]
+  K -- Yes --> M[Native approval for exact reviewed baseline and plan<br/>No skill grants approval]
+  M --> N[Persist authorized docs and native plan<br/>project-delivery; engineering-docs]
+  N --> O[Implement and verify authorized slices<br/>Matching skill; TDD only if requested; code-review when needed]
   O --> P{Material reviewed-intent change?}
-  P -- Yes --> Q[Update affected intended owners and plan; review readiness]
+  P -- Yes --> Q[Update intended owners and plan; review readiness<br/>engineering-docs; project-delivery]
   Q --> M
-  P -- No --> R[Reconcile ALL affected documents against actual sources and evidence]
+  P -- No --> R[Reconcile affected docs with sources and evidence<br/>project-delivery; engineering-docs: maintain]
   R --> S{Final acceptance and reconciliation supported?}
-  S -- No --> T[Diagnose and correct remaining behavior, evidence or document gaps]
+  S -- No --> T[Diagnose and correct remaining gaps<br/>diagnosing-bugs for difficult causes; otherwise matching skill]
   T --> P
-  S -- Yes --> U[Full delivery complete]
+  S -- Yes --> U[Full delivery complete<br/>Evidence and permissions, not a skill label]
 ```
 
 `project-delivery` owns this documentation-first gate for enabled, available new-app/substantial delivery and authorized continuation. `engineering-docs` selects/reuses canonical information and exposes due gaps. `brainstorming` resolves only consequential unknown choices; `domain-modeling` handles active terminology/ADRs; `plan-review` independently checks consequential multi-slice coverage before native approval. A disabled/unavailable suite is not auto-loaded or set up; ordinary native tasks remain possible, while explicitly requested unavailable suite-specific work stays incomplete.
