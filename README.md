@@ -64,7 +64,7 @@ sh scripts/doctor.sh --fix --home /path/to/existing-home
 .\scripts\doctor.ps1 -Fix -Home 'C:\Users\example'
 ```
 
-The doctor exits 0 only when every mapped file matches, 1 for missing or drifted files, and 2 for invalid arguments or unusable inventory/home/read/repair errors. Fix delegates to the platform installer once, then checks every file. Use `python3 scripts/test_install.py` to run the deterministic POSIX installer/doctor integration scenarios; the runner reports explicitly when no PowerShell runtime is available. Run `bun scripts/test_model_routing.mjs` to check the production extension's worker routing and workspace-tool boundaries.
+The doctor exits 0 only when every mapped file matches, 1 for missing or drifted files, and 2 for invalid arguments or unusable inventory/home/read/repair errors. Fix delegates to the platform installer once, then checks every file. Use `python3 scripts/test_install.py` to run the deterministic POSIX installer/doctor integration scenarios; the runner reports explicitly when no PowerShell runtime is available. ZIP scenarios reuse the payload fixture with a standard-library HTTP handler binding. Run `bun scripts/test_model_routing.mjs` to check the production extension's worker routing and workspace-tool boundaries.
 
 ## Documentation-driven engineering suite
 

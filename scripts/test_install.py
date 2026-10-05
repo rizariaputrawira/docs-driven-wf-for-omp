@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+from functools import partial
 import http.server
 import os
 from pathlib import Path
@@ -20,14 +21,14 @@ INVENTORY = ROOT / "config" / "files.tsv"
 
 
 def run(*args: str, env: dict[str, str] | None = None, expected: int = 0) -> subprocess.CompletedProcess[str]:
-    result = subprocess.run(args, cwd=ROOT, env=env, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result = subprocess.run(args, cwd=ROOT, env=env, text=True, capture_output=True)
     assert result.returncode == expected, (args, result.returncode, result.stdout[-1200:], result.stderr[-1200:])
     return result
 
 
-def mappings(inventory: Path = INVENTORY) -> list[tuple[str, str]]:
+def mappings() -> list[tuple[str, str]]:
     rows = []
-    for line in inventory.read_text(encoding="utf-8").splitlines():
+    for line in INVENTORY.read_text(encoding="utf-8").splitlines():
         fields = line.split("\t")
         assert len(fields) == 2 and all(fields)
         rows.append((fields[0], fields[1]))
@@ -182,17 +183,11 @@ def main() -> None:
         run("sh", str(INSTALL), "--source", "--dry-run", "--home", str(home), expected=2)
 
         # Exercise ZIP acceptance and exact-one-root rejection through a local HTTP server.
-        zip_root = tmp / "zip-source"
-        shutil.copytree(source, zip_root)
         archives = tmp / "archives"
         archives.mkdir()
         valid = archives / "valid.zip"
-        archive(zip_root, valid)
-        class Handler(QuietHandler):
-            directory = str(archives)
-            def __init__(self, *args: object, **kwargs: object) -> None:
-                super().__init__(*args, directory=self.directory, **kwargs)
-        server = socketserver.TCPServer(("127.0.0.1", 0), Handler)
+        archive(source, valid)
+        server = socketserver.TCPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(archives)))
         thread = threading.Thread(target=server.serve_forever, daemon=True)
         thread.start()
         try:
@@ -202,7 +197,7 @@ def main() -> None:
             run("sh", str(INSTALL), "--source", url, "--home", str(zip_home))
             assert_install(zip_home, rows)
             for name, kwargs in (("two.zip", {"roots": ("one", "two")}), ("hidden.zip", {"hidden_root": True}), ("file.zip", {"root_file": True})):
-                archive(zip_root, archives / name, **kwargs)
+                archive(source, archives / name, **kwargs)
                 reject_home = tmp / f"reject-{name}"
                 reject_home.mkdir()
                 run("sh", str(INSTALL), "--source", f"http://127.0.0.1:{server.server_address[1]}/{name}", "--home", str(reject_home), expected=2)

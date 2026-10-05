@@ -6,18 +6,13 @@ The exact record/phase/semantic contract is owned by [engineering-docs security]
 
 Main consolidates stable rule IDs and gives each current candidate basis to a distinct fresh read-only refuter who did not discover or author it. Supply the candidate, relevant architecture/coverage context, selected companion rules and original evidence, but not another refuter's conclusion as authority. The refuter rereads decisive current source, verifies locations and input/interface shape, reconstructs strongest authentication/authorization/normalization/lifecycle/framework controls and every prerequisite, then attempts disproof.
 
-- Complete independently reconstructed source impact proof may yield `confirmed` with `evidence_method: source`; it establishes the source-visible boundary violation, not a runtime exploit or a deployed reachability claim.
-- A specific decisive missing deployment, model, provider, identity or runtime fact yields `needs-validation`, naming the fact and safe next evidence. It has no severity.
-- Preventing controls, impossible prerequisites or lack of the claimed meaningful impact yield `rejected`, retaining exact disproof and no severity.
-- No valid independent terminal result leaves the candidate undisposed and the assessment incomplete; do not repair malformed fragments into a decision.
+Before assigning a disposition or accepting a terminal result, read and apply [Discovery and fresh refutation](skill://engineering-docs/references/security.md#discovery-and-fresh-refutation) and [Parent phase and terminal acceptance](skill://engineering-docs/references/security.md#parent-phase-and-terminal-acceptance).
 
 Check current source, not only original excerpts. Changed material trace, impact, severity or evidence method requires another fresh challenge before accepting the strengthened basis. A new root cause returns to discovery. Carry previous records only as prior evidence subject to current checking.
 
 ## Runtime evidence is a separate authorized branch
 
-Reviewers never execute. Only a separately authorized executor, with actual OS containment demonstrated, may perform a named minimum dummy-data check. Require no external/shared network, isolated loopback only if necessary, an empty allowlisted environment, no host credentials/home/sockets, read-only target/tools, confined disposable writes and explicit CPU/memory/process/file-size/disk/time bounds. No dependency install or live traffic. Stop at the minimum boundary effect; do not produce persistence, expand impact, stress availability, publish, or spend paid quota.
-
-Trusted observed executor evidence must bind authorization, current source, exact safe input/check, controls and real result. Target-produced files remain untrusted; a result dependent on an artifact needs demonstrably safe bounded capture and provenance, not a blind copy of scratch. If authorization, containment, capture or decisive output is unavailable, retain the exact gap. A source-only reconstruction cannot be labeled `authorized-local`; supplied author logs are not independently observed executor proof.
+Reviewers never execute. Before any separately authorized runtime evidence, read and apply [Separate authorization for runtime evidence](skill://engineering-docs/references/security.md#separate-authorization-for-runtime-evidence); unavailable prerequisites leave that proof incomplete.
 
 ## Derive the report, never strengthen it
 

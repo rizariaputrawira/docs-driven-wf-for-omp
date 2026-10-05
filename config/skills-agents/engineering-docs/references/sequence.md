@@ -35,16 +35,7 @@ For gated delivery, first prepare/review required whole-boundary information thr
 ## Eight native actions
 Use `/skill:engineering-docs <action>` arguments, not custom slash commands or a shell CLI. Plan Mode stays read-only and returns proposed writes through native approval.
 
-| Action | Procedure | Observable completion |
-|---|---|---|
-| setup | Inspect instructions/owners; classify evidence; select applicable information and omissions; propose/update canonical manifest only when authorized; preserve unrelated entries/content on rerun | Minimal typed manifest or proposed Plan Mode changes, each selection/omission reason and exact unresolved facts; no mass document creation |
-| status | Read manifest and actual selected sources/evidence; separate declared status from observed state | Read-only phase/document/required/declared/observed/action table and coverage gaps |
-| next | Inspect selected missing/stale/blocked knowledge, security risk and sufficient prerequisites | Read-only prioritized document work with rationale, blockers and independent/parallel work, not runtime waves |
-| sequence | Resolve selected information dependencies and phase roles | Read-only selected lifecycle/prerequisite view, not full catalog or waterfall |
-| create <document> | Resolve exact ID/name/alias, information need, owner and supplied facts; extend existing section before new file; unknown alias errors with relevant supported concepts | Authorized content at canonical source, substantive acceptance/update basis; incomplete/draft/blocked unknowns explicit, no guessed facts |
-| context <task> | Follow [context-routing](context-routing.md#resolution-procedure) and exact packet fields | Read-only bounded authoritative packet with loaded invariants/gaps/conflicts/exclusions |
-| audit [scope] | Follow [audit](audit.md#audit-procedure), expected->manifest->source->code/test/evidence | Read-only source-grounded prioritized findings with inspected/unavailable coverage and independent security disposition |
-| maintain <change> | Inspect actual change/verification evidence, resolve affected owners/classification/manifest/trace; update only affected sources when authorized | Updated affected canonical facts/links plus scoped audit; absent execution evidence yields proposed unverified impact, never activation/verified claim |
+For each action's procedure, permission boundary and observable completion, read [Native arguments](../SKILL.md#native-arguments); this reference owns information order and prerequisites, not a second action contract.
 
 ## Create and maintain boundaries
 A requested name without unmet information need is not a creation trigger: explain the existing canonical coverage and leave it intact. Unknown aliases never imply custom concepts; custom concept needs explicit purpose/owner after actual need is established. Required external composition unavailable blocks dependent design content, not unrelated authorized documentation. If facts cannot finish an existing draft, name exact missing inputs and preserve draft/incomplete/blocked state; do not mark it complete.

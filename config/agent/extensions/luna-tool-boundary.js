@@ -5,9 +5,6 @@ export default function lunaToolBoundary(pi) {
     const models = {
       scout: "@smol",
       routine: "@routine",
-      task: "@task",
-      reviewer: "@task",
-      "security-reviewer": "@task",
     };
     return { model: models[name] ?? "@task", note: "Worker model follows its assigned role" };
   });
