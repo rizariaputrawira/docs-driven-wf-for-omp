@@ -1,6 +1,6 @@
 # omp-config
 
-Portable snapshot of OMP user-level configuration and behavior, including model-role and agent-model assignments, agent definitions, rules, extensions, commands, MCP declarations, skill sources, watchdog configuration, and the disabled plugin lock state. The maintained settings intentionally preserve `tools.approvalMode: yolo`; review this unrestricted approval choice before installing.
+The maintained settings intentionally preserve `tools.approvalMode: yolo`; review this unrestricted approval choice before installing.
 
 ## What this repository is
 
@@ -144,7 +144,7 @@ The doctor exits 0 only when every mapped file matches, 1 for missing or drifted
 
 ## Documentation-driven engineering suite
 
-The maintained suite is managed repository payload, not an OMP application patch. Normal installation deploys its **109 regular assets** from `config/agent/skills/` to `~/.omp/agent/skills/`. These fifteen skills share the same canonical folder as all other managed skills. The full inventory has **240 mappings**, with **219 skill files** and **53 skill directories/entrypoints/public names**. This consolidation does not install into the actual home or create compatibility aliases or symlinks.
+The documentation suite comprises fifteen skills and 109 regular assets deployed to `~/.omp/agent/skills/`. See [Managed files](#managed-files) for the complete inventory totals, layout and destination details.
 
 Managed `config/agent/AGENTS.md` provides short conditional trigger-to-owner routing. Actual procedures are read on demand. Disabled/filtered/unavailable suite assets do not automatically reload or block ordinary OMP work. Requested unavailable suite-specific proof remains incomplete; native permissions and approval still govern. No new hook, router, service, task-state database, tracker, auto-commit, scanner or package install is required.
 
@@ -202,7 +202,6 @@ The logical baseline is required for gated delivery even when physical documents
 | During development | Actual verification/review/security findings and trace: existing evidence owners | Record only exercised checks and inspected findings/dispositions; unrelated green logs do not satisfy a failed criterion. Requested test-first, diagnosis and matching reviews are conditional, not a fifteen-skill procession. |
 | Completion | Actual release/security/recovery/platform results, where required | Record observed outcomes only; missing required runtime/deployment proof stays unverified. Out-of-scope external events do not become invented requirements. |
 | Completion | All affected as-built owners and user/app guide: project-delivery with engineering-docs maintain | Reconcile product/requirements, architecture/ADRs, design/native contracts, data/security/platform, verification/trace, release/configuration/recovery/operations and reader docs. A guide update alone is insufficient. Full completion needs every required criterion satisfied and complete affected-document reconciliation. |
-
 
 ### ISO standards mapped to the workflow
 
