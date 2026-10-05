@@ -2,6 +2,53 @@
 
 Portable snapshot of OMP user-level configuration and behavior, including model-role and agent-model assignments, agent definitions, rules, extensions, commands, MCP declarations, skill sources, watchdog configuration, and the disabled plugin lock state. The maintained settings intentionally preserve `tools.approvalMode: yolo`; review this unrestricted approval choice before installing.
 
+## What this repository is
+
+This is a portable, inventory-managed snapshot of user-level OMP configuration. It is **not** the OMP application, a plugin marketplace installer, or a project template. Its payload configures an existing OMP installation and supplies skill guidance that an agent may read when relevant.
+
+The repository is organized around a few distinct responsibilities:
+
+| Path | What it owns |
+|---|---|
+| `config/agent/config.yml` and `config/agent/AGENTS.md` | OMP settings and portable user-level routing/policy |
+| `config/agent/agents/` | Custom agent-role definitions and their tool boundaries |
+| `config/agent/extensions/` | Runtime hooks and integrations, distinct from passive skill instructions |
+| `config/agent/skills/` | One flat OMP-native skill source tree; each skill has a public `name:` and may include references or package assets |
+| `config/agent/commands/` | User-invoked command guidance; commands do not start services during installation |
+| `config/agent/mcp.json` | MCP declarations that refer to machine-provided credentials and executables |
+| `config/plugins/` | Plugin package/lock metadata; `pi-9router-ext` is deliberately disabled |
+| `config/files.tsv` | Explicit allowlist mapping each managed source file to its home-relative destination |
+| `scripts/` and `install.*` | POSIX and PowerShell install/doctor entry points and the POSIX integration runner |
+
+## How deployment and use fit together
+
+The main lifecycle is source-controlled configuration → validated installation → OMP session use → optional drift check. Installation copies files only; it does not install OMP, launch agents, activate the disabled plugin, provide credentials, or start MCP/OpenDesign/RTK/herdr services.
+
+```mermaid
+flowchart LR
+  A[Repository payload] --> B[Explicit config/files.tsv]
+  B --> C[Dry run or install]
+  C --> D[Validate sources and destinations]
+  D --> E[Copy changed files to selected home]
+  E --> F[Existing OMP reads settings and available skills]
+  F --> G[User requests matching guidance or tools]
+  E --> H[Doctor check]
+  H -->|drift| I[Doctor fix delegates to installer]
+  I --> H
+```
+
+The inventory is the deployment boundary: unlisted history, staging, credentials, caches and generated state are not installed. The installer checks the complete source/destination set before writing, leaves byte-identical files untouched, backs up changed regular files, and does not prune old or unrelated destination data. The doctor compares the same inventory; `--fix` repairs through the installer, then compares again.
+
+At runtime, keep these concepts separate:
+
+- **Skills** are passive task guidance, selected by public `name:` and read on demand; a skill does not grant permission or supply a model/tool.
+- **Agents** are configured roles with their own instructions and permitted tools. Their existence does not prove a particular session dispatched them.
+- **Extensions** can respond to runtime events; they are distinct from passive skills. External extensions/services and credentials remain separate prerequisites.
+- **MCP declarations** describe external integrations; installation does not provision or start their servers.
+- **Approval and runtime permissions** remain controlled by the installed OMP environment. In particular, review the configured `yolo` approval mode before installation.
+
+For the task-oriented catalog and copyable prompts, see [Start with your goal](#start-with-your-goal) and [SKILL-USAGE.md](SKILL-USAGE.md). For deployment details, use [Install and update](#install-and-update) and [Configuration doctor](#configuration-doctor); for exact source revisions and notices, use [skill payload provenance](config/SKILL-SOURCES.md).
+
 ## Start with your goal
 
 You do not need to run every skill. Pick the job below, then paste its message into OMP.
@@ -270,3 +317,5 @@ Installed OMP **18.5.0**, using that private home/project, exposed exactly the e
 The bundled skill snapshots include adaptations or reference material from projects whose maintainers made their work available. Thank you to the teams behind [Matt Pocock's skills](https://github.com/mattpocock/skills), [Superpowers](https://github.com/obra/superpowers), [GSD](https://github.com/open-gsd/gsd-core), [NVIDIA SkillSpector](https://github.com/NVIDIA/SkillSpector), [Anthropic Security Review](https://github.com/anthropics/claude-code-security-review), and [Cloudflare Security Audit](https://github.com/cloudflare/security-audit-skill).
 
 See [skill payload provenance](config/SKILL-SOURCES.md) for exact revisions, adaptations, and license notices, and the [skill usage guide](SKILL-USAGE.md) for practical selection and examples. Attribution is not an endorsement or a blanket statement of redistribution rights; consult the provenance notes and included notices.
+
+For the upstream project's broader workflow, supported-harness installation/update instructions, and skill-library overview, see the [Superpowers README](https://github.com/obra/superpowers#readme). This repository is an OMP-specific portable configuration snapshot: it contains selected, locally adapted Superpowers material with provenance in [skill payload sources](config/SKILL-SOURCES.md); it is not the upstream Superpowers plugin, and upstream installation commands do not install this repository.
