@@ -1,7 +1,9 @@
 ---
 name: brandkit
-description: Premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations. Trained for minimalist, cinematic, editorial, dark-tech, luxury, cultural, security, gaming, developer-tool, and consumer-app brand systems. Optimized for intentional logo concepting, refined composition, sparse typography, strong symbolic meaning, premium mockups, art-directed imagery, and flexible grid layouts.
+description: Create image-led brand-board and logo-world concepts from the supplied brief and assets. The brief controls deliverables, panel count, layout, palette and brand direction. Generation requires an available permitted image tool. Output is a visual concept, not production code, vector artwork, trademark clearance or proof of actual product features.
 ---
+
+The brief, native authority and actual supplied facts/assets override every illustrative recipe, numerical dial, default pack, palette, font, framing choice and imperative below. Use optional examples only for a matching request; they never authorize invented evidence, extra outputs, generation, dependencies or code. Generated concept imagery is not an actual product screenshot or proof of real people, customers or metrics.
 
 # BRANDKIT IMAGE GENERATION SKILL
 
@@ -23,7 +25,7 @@ Do not generate generic logos.
 Do not generate random mockups.  
 Do not generate messy AI moodboards.
 
-Create a complete brand world in one image.
+When image generation is requested and a permitted tool is available, create only the requested brand-world image deliverables.
 
 ---
 
@@ -70,25 +72,11 @@ Every generated board must answer:
 
 ---
 
-# DEFAULT OUTPUT
+# OUTPUT SHAPE
 
-Unless the user specifies otherwise:
+The requested brief controls whether an image is wanted, its count, aspect ratio, layout, panel contents and visual direction. Do not infer a fixed board or panel count. If the brief leaves a material choice open, choose a compact composition that serves the stated brand goal; ask only when the missing input prevents a grounded result. The layouts below are optional examples, not defaults or required panels.
 
-- Generate one brand-kit overview image
-- Default layout: `3 × 3`
-- Default aspect ratio: `4:3` or `16:10`
-- Use a clean presentation grid
-- Use consistent gutters
-- Use minimal text
-- Make every panel feel connected
-
-Allowed layouts:
-- `3 × 3` full identity system
-- `2 × 3` cinematic brand deck overview
-- `2 × 2` compact concept board
-- `1 × 3` horizontal brand strip
-- `4 × 2` wide contact-sheet layout
-- custom layout when requested
+If image generation was requested, use an available permitted image-generation tool. If none is available, say the image deliverable is incomplete and name that missing prerequisite; do not replace the requested image with prose or claim completion. You may provide a clearly labeled text-only concept/proposal only when useful, without presenting it as the requested image.
 
 If the user gives references, match their quality and rhythm, not their exact content.
 
@@ -96,21 +84,9 @@ If the user gives references, match their quality and rhythm, not their exact co
 
 # BRAND STRATEGY FIRST
 
-Before generating, infer the brand strategy.
+# BRAND STRATEGY AND EVIDENCE
 
-Think through:
-
-- category
-- audience
-- product function
-- emotional promise
-- cultural position
-- trust level
-- visual world
-- symbolic metaphor
-- what the brand should avoid
-
-The visual system must be based on meaning.
+Use the user's brief and supplied references/assets as authority for the brand. Base factual product, audience, history or market claims only on supplied/inspected evidence. Do not invent proof, customers, metrics, certifications, product screens or brand attributes. Where information is absent, keep the concept abstract or label the assumption as a proposal rather than fact. The category-to-symbol examples below are optional ideation prompts, not factual inferences or mandatory choices.
 
 Examples:
 
@@ -747,7 +723,7 @@ Brand strategy:
 - logo idea: [how the mark combines symbol + name + category meaning]
 
 Layout:
-[3×3 / 2×3 / custom] grid on a dark or light presentation canvas with strong gutters, clean alignment, and refined negative space.
+[Requested grid or custom composition] on a brief-appropriate presentation canvas. Include only panels supported by the supplied brief and assets; omit unknown factual claims.
 
 Panels:
 - logo cover

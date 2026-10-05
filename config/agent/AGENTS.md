@@ -4,6 +4,8 @@
 
 Apply this routing only when the documentation-driven suite is available, enabled and matches the current request. Explicit skill disablement/filtering wins. Missing or disabled suite assets must not stop ordinary native OMP work or trigger automatic file-load/setup. Continue native permissions, approval and relevant context checks; block only explicitly requested unavailable suite-specific proof. Renewed explicit authorization to load a known file is distinct from automatic reactivation.
 
+Everyday starting owners are `project-delivery` for substantial delivery, `engineering-docs` for material context dependencies, `diagnosing-bugs` for difficult causes, `code-review` for requested review, `impeccable` for UI, `ponytail` for coding simplicity, and `writing-for-agents` for guidance work. Other retained specialists are available on their specific trigger, not mandatory phases. Occasional is a usage classification, not a discovery root or disablement setting.
+
 | Current task trigger | Procedure owner to read on demand |
 |---|---|
 | Material documentation/context dependency | `skill://engineering-docs`, context branch before dependent work. No manifest is required for safe provisional inspection; no automatic setup. |

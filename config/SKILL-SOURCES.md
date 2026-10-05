@@ -2,7 +2,7 @@
 
 ## Canonical OMP-native payload
 
-All managed skills have one source folder, `config/agent/skills/`, and one deployment folder, `~/.omp/agent/skills/`, using the flat `<folder>/SKILL.md` layout. This follows OMP's native user-skill convention, not an arbitrary singular/plural folder preference. The current payload contains **53 skill directories, 53 entrypoints/unique public names and 219 skill files**. `config/files.tsv` contains **240 explicit mappings** in total. The selected fifteen-skill suite retains **109 explicitly deployed regular assets**, including fifteen entrypoints, fifteen SOURCES files, seven preserved engineering-docs templates and 22 full license notices.
+All managed skills have one source folder, `config/agent/skills/`, and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout. The balanced payload contains **36 skill directories/entrypoints and unique public names, 212 skill files and 233 explicit mappings**. The fifteen-skill engineering suite remains **109 regular assets**, including fifteen entrypoints, fifteen SOURCES files, seven engineering-docs templates and 22 full license notices. No discovery provider/profile or installer pruning was added.
 
 Native user/project skill discovery remains available. Managed `customDirectories` is empty and Agents user/project skill-source discovery is disabled, so retired `.agent`/`.agents` copies cannot reenter through those configured sources. External runtime/providers may still exist. These source settings do not prove native resolution, application-wide isolation or OS enforcement. Model, approval, agent, plugin and MCP settings remain unchanged.
 
@@ -16,11 +16,11 @@ The original portable snapshot captured three local roots without merging distin
 
 That historical capture contained 64 directories and 253 files, with no symlinked skill entries/files and no separate LICENSE/COPYING notices. Unchanged snapshots retain their attribution and licensing caveat: local presence or a license link does not establish redistribution rights.
 
-The first consolidation removed nine byte-identical complete singular/plural trees and retired singular Impeccable 4.2.2 in favor of plural 4.3.1. No singular-root-only inventoried files were found. The final consolidation removes the plural root and six remaining native/plural same-name duplicate complete packages. All 53 genuinely distinct public names remain, with one entrypoint per name and no obsolete compatibility aliases or symlinks.
+The earlier root consolidation removed nine byte-identical singular/plural trees, retired singular Impeccable 4.2.2 in favor of plural 4.3.1, then removed the plural root and six native/plural same-name duplicate packages. Its historical result retained 53 public names; the balanced semantic consolidation below supersedes that catalog, without aliases or symlinks.
 
 The newest versioned Impeccable package is retained complete: **4.5.0 with engine 0.1.11**. Older **4.3.1 and 4.2.2** packages are retired. The older **0.1.5 Linux binary is not copied** into the newest package. Duplicate `design-taste-frontend` copies were byte-identical. Other unversioned differing copies have no defensible release-recency claim; their differences are only bare-invocation startup greetings or a course link, and the native variants are retained.
 
-The native folder formerly named `taste-skill` declared `design-taste-frontend`; it moves to `config/agent/skills/design-taste-frontend/` before the separately named plural `taste-skill` package takes `config/agent/skills/taste-skill/`. Both public names remain distinct. Other existing native alias-folder names are preserved, including `output-skill` declaring `full-output-enforcement`.
+Historical path selection: the native `taste-skill` folder declaring `design-taste-frontend` moved to the matching canonical folder; the separately named plural `taste-skill` temporarily retained a distinct public name. The latter is now retired. Surviving alias-folder paths such as `output-skill` declaring `full-output-enforcement` remain unchanged.
 
 The newest Impeccable launcher's first-run download may require permitted network access, a writable cache, curl/wget and SHA-256 tooling; an available compatible binary avoids it. Failure/refusal uses the source-defined direct-context fallback through permitted tools, with limits reported. No engine or service was invoked for this consolidation.
 
@@ -41,10 +41,46 @@ Titus `3b752711dabebdc5f3762555d23fd75fc1c9eb92` has no established covering gra
 
 `config/agent/skills/engineering-docs/` is the sole active documentation owner. Its initial 25 production files come only from staging SKILL/references/templates. Staging bodies, frozen tests/reports and old smoke/ALL51 receipts remain historical, not acceptance of this replacement suite. The 129-concept registry, manifest/trace semantics and seven template contracts are preserved.
 
+## Balanced consolidation and licensing boundary
+
+The map below records exact old package/public-name ownership. New animate build/opportunities/vocabulary/principles, Taste references and Emil component-craft are independently authored guidance. Common technical glossary terms and underlying capabilities are retained, not the legacy expressive prose. No new grant is inferred from local presence, source URLs or attribution.
+
+Omitted copied material: legacy motion construction/finder prose, full glossary definitions, review standards/audit/plan templates, Taste/style/scroll recipes and nonexistent blocks instructions, and Emil philosophy/quotes/component-motion recipes. These are replaced by original procedures/definitions/examples, not copied or translated into new references. Exact v1 procedures, greetings, fabricated RNG/assets/telemetry, compulsory style/motion and the gain scoreboard are deliberately removed. Existing unchanged snapshots, including retained motion recipes and the complete Impeccable package, retain their previously recorded licensing caveats; this consolidation is **not a blanket legal clearance** of legacy redistribution. No upstream package refresh/adoption occurred.
+
+Motion inspiration remains informational attribution to [Emil Kowalski](https://emilkowal.ski/), including the previously referenced [restraint article](https://emilkowal.ski/ui/you-dont-need-animations); it is not a license grant. The exact legacy folder origins for optional design directions are preserved in the map. Existing image/platform/Sonner/Expo notices and all engineering SOURCES/LICENSE assets remain preserved.
+
+Ponytail snapshots identify [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) and declare MIT. The complete upstream notice is now deployed as `ponytail/LICENSE.ponytail`, including Copyright (c) 2026 DietrichGebert. License-only evidence was read on 2026-10-05 at immutable revision `dbdfc8de29fb91609ed2df2ae378782a956d8e86`: [LICENSE](https://raw.githubusercontent.com/DietrichGebert/ponytail/dbdfc8de29fb91609ed2df2ae378782a956d8e86/LICENSE). This pin identifies inspected license evidence, **not** the revision of the older unversioned local skill bodies. Local adaptations consolidate review/audit/debt/help, correct scope reduction and authority/persistence/intelligence/check rules; no upstream plugin/benchmark is adopted.
+
+Existing-file changes to Impeccable, images/brand, Stitch, break-ui and prototype are local authority/brief corrections; no legacy content is moved into new assets. Stitch DESIGN.md is an independently authored, explicitly labeled example, not canonical project truth. Shared motion guidance is lazy-loaded from animate rather than stacked automatically.
+
+## Retired entrypoints: migration map
+
+These 17 folders/public names are historical migration identifiers, not invocations or links to retained aliases. Installation is non-pruning: old native folders remain discoverable in existing homes until a separately authorized retirement moves them outside **all skill discovery roots**. Inspect and preserve customized contents first; do not blanket-delete directories. This task does not mutate a live home or claim 36-name discovery there.
+
+| Retired folder under `.omp/agent/skills/` | Former public name | Surviving action/reference or removal |
+|---|---|---|
+| `emil-animate` | `emil-animate` | animate `build`: `skill://animate/references/build.md` |
+| `emil-find-animation-opportunities` | `emil-find-animation-opportunities` | animate `opportunities`: `skill://animate/references/opportunities.md` |
+| `emil-review-animations` | `emil-review-animations` | explicit review-animations: `skill://review-animations` |
+| `find-animation-opportunities` | `find-animation-opportunities` | animate `opportunities`: `skill://animate/references/opportunities.md` |
+| `animation-vocabulary` | `animation-vocabulary` | animate `vocabulary`: `skill://animate/references/vocabulary.md` |
+| `taste-skill` | `taste-skill` | design-taste-frontend: `skill://design-taste-frontend` |
+| `taste-skill-v1` | `design-taste-frontend-v1` | Exact v1 procedure removed; current selective `skill://design-taste-frontend`, not v1 compatibility |
+| `gpt-tasteskill` | `gpt-taste` | Taste optional scroll: `skill://design-taste-frontend/references/scroll-storytelling.md` |
+| `redesign-skill` | `redesign-existing-projects` | Impeccable workflow plus `skill://design-taste-frontend/references/redesign.md` |
+| `brutalist-skill` | `industrial-brutalist-ui` | Taste opt-in industrial-print/tactical-crt: `skill://design-taste-frontend/references/style-directions.md` |
+| `minimalist-skill` | `minimalist-ui` | Taste opt-in minimalist-editorial: `skill://design-taste-frontend/references/style-directions.md#minimalist-editorial` |
+| `soft-skill` | `high-end-visual-design` | Taste opt-in high-end-editorial: `skill://design-taste-frontend/references/style-directions.md#high-end-editorial` |
+| `ponytail-review` | `ponytail-review` | ponytail `review`: `skill://ponytail/references/complexity-review.md` |
+| `ponytail-audit` | `ponytail-audit` | ponytail `audit`: `skill://ponytail/references/complexity-review.md` |
+| `ponytail-debt` | `ponytail-debt` | ponytail `debt`: `skill://ponytail/references/debt-ledger.md` |
+| `ponytail-help` | `ponytail-help` | ponytail `help`: inline `skill://ponytail` table |
+| `ponytail-gain` | `ponytail-gain` | Removed uncited static scoreboard; no replacement or measured-saving claim |
+
 ## Updates, deployment and evidence limits
 
 An upstream updater targeting `.agent/skills/` or `.agents/skills/` can recreate retired roots. Choose the native destination and update a complete package plus its explicit `config/files.tsv` inventory, not piecemeal entrypoints/references or mixed-version launcher/binary files. The installer remains non-pruning and preserves pre-existing destination data: old installed directories are not automatically deleted. No live-home migration was performed. Inspect retained data before any separately authorized cleanup; do not treat consolidation as permission for blanket destructive deletion.
 
 Tests, reports, recovery receipts, credentials, histories, generated state and assessment fixtures are excluded from deployment. OMP/model credentials and optional external integrations remain machine-local prerequisites; installation does not enable services. The earlier documentation-driven cutover changed passive skill payload, conditional AGENTS routing and the existing security-reviewer output/procedure. This consolidation additionally aligns skill-source discovery with the native folder; it does not alter model/approval policy or unrelated runtime configuration.
 
-Root README records the actually exercised historical compatibility/workflow acceptance results and the current one-native-folder verification, with their limits. The former 372/373-entry results and later 304-mapping two-root counts remain historical. Current POSIX integration passed 240 entries; private-home install/doctor/reinstall and OMP 18.5.0 passive native discovery checks passed, with 53 expected public names and retired-root sentinels excluded. Authenticated workflows, agent dispatch, approval/OS enforcement, engine/service execution and Windows/PowerShell behavior were not established. No live-home deployment occurred.
+Historical root-consolidation evidence: POSIX integration passed 240 entries and a private-home install/doctor/reinstall plus OMP 18.5.0 passive discovery observed 53 names. Earlier 372/373-entry and 304-mapping results also remain history. They do not establish acceptance of the balanced catalog. Current verification and limits are recorded in README. No live-home deployment, engine/service execution or Windows verification is inferred from these records.

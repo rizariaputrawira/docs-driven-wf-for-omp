@@ -1,25 +1,15 @@
 ---
 name: imagegen-frontend-web
-description: Elite frontend image-direction skill for generating premium, conversion-aware website design references. CRITICAL OUTPUT RULE — generate ONE separate horizontal image FOR EVERY section. A landing page with 8 sections produces 8 images. Never compress multiple sections into one image. Enforces composition variety (not always left-text / right-image), background-image freedom, varied CTAs, varied hero scales (giant / mid / mini minimalist), narrative concept spine, second-read moments, and a single consistent palette across all images. Optimized for landing pages, marketing sites, and product comps that developers or coding models can accurately recreate.
+description: Generate website-section reference images when requested, using the brief to determine sections, image count, composition and brand direction. When multiple sections are requested, provide one separate image per requested section if the permitted tool supports it. Image generation is tool-dependent; this skill produces reference images, not frontend code.
 ---
 
-# HARD OUTPUT RULE — READ FIRST
+The brief, native authority and actual supplied facts/assets override every illustrative recipe, numerical dial, default pack, palette, font, framing choice and imperative below. Use optional examples only for a matching request; they never authorize invented evidence, extra outputs, generation, dependencies or code. Generated concept imagery is not an actual product screenshot or proof of real people, customers or metrics.
 
-**Generate one separate horizontal image PER section. Always. No exceptions.**
+# OUTPUT AND TOOL BOUNDARY
 
-- 1 section requested -> 1 image
-- 4 sections requested -> 4 images
-- 8 sections requested -> 8 images
-- 12 sections requested -> 12 images
-- "landing page" with no count -> default to 6 sections -> 6 images
-- "full website template" -> default to 8 sections -> 8 images
+Follow the brief for requested sections and image counts; do not infer a site pack or add sections. For each requested section, provide one separate image when the image tool permits. Do not merge requested sections into one image. A separate image per section is an output organization rule, not permission or a claim that generation succeeded.
 
-Each image is one section, generated as its own image call. Never combine multiple sections into one frame. Never return a single tall image that contains the whole page.
-
-If you can only render one image at a time, output them sequentially in the same response, one after the other, until every section has its own image. Announce each one ("Section 1 of 8: Hero", "Section 2 of 8: Trust bar", etc.).
-
-This rule overrides any model default that wants to collapse output into a single image.
-
+Generate only with an available permitted image-generation tool. If requested images cannot be generated, state which deliverable is missing and the exact unavailable tool prerequisite. Do not substitute prose for requested images or report the image set complete. A text proposal may accompany the status when useful, but is not an image.
 ---
 
 # HERO COMPOSITION BIAS — READ FIRST
@@ -75,42 +65,9 @@ Default to website design comps.
 
 ---
 
-## 1. ACTIVE BASELINE CONFIGURATION
+## DIRECTION
 
-- DESIGN_VARIANCE: 8
-  `(1 = rigid / symmetrical, 10 = artsy / asymmetric)`
-- VISUAL_DENSITY: 4
-  `(1 = airy / gallery-like, 10 = packed / intense)`
-- ART_DIRECTION: 8
-  `(1 = safe commercial, 10 = bold creative statement)`
-- IMPLEMENTATION_CLARITY: 9
-  `(1 = loose moodboard, 10 = very codeable UI reference)`
-- IMAGE_USAGE_PRIORITY: 9
-  `(1 = mostly typographic, 10 = strongly image-led)`
-- SPACING_GENEROSITY: 8
-  `(1 = compact / tight, 10 = very spacious / breathable)`
-- LAYOUT_VARIATION: 8
-  `(1 = same anchor repeats, 10 = bold composition variety across sections)`
-- CONVERSION_DISCIPLINE: 8
-  `(1 = pure art moodboard, 10 = clear funnel + premium design balance)`
-
-AI Instruction:
-Use these as global defaults unless the user clearly asks for something else.
-Do not ask the user to edit this file.
-Adapt these values dynamically from the prompt.
-
-Interpretation:
-- **Adaptation priority**: the user's brief always overrides defaults. Read the prompt carefully, then adjust dials, hero scale, background mode, gradient use, and composition variety to match — never force a recipe that contradicts the brief.
-- If the user says "clean", reduce density and increase clarity.
-- If the user says "crazy creative", increase variance and art direction.
-- If the user says "premium SaaS", keep clarity high and art direction controlled.
-- If the user says "editorial", allow stronger type and more asymmetry.
-- Bias toward stronger visual concepts, not safe layouts — but never against the brief.
-- Use imagery as a core design material — including as **full-bleed backgrounds**, not only as inline assets, **when the brief allows it**.
-- Vary composition: do not default to "text left, image right". Move text to bottom-left, center, top-right, etc. across sections.
-- Keep sections breathable. Do not over-pack the page.
-- Prefer slightly more whitespace between sections than default.
-- Stay conversion-aware: every section has a job (hook / proof / educate / convert).
+The user's brief, supplied brand guidance and actual available assets control style, palette, image use, composition, density, section content and implementation emphasis. The later examples and direction lists are optional prompts only; none is a required dial, count, element or visual treatment. Do not invent factual copy, statistics, testimonials, customer logos, product evidence or assets. Mark hypothetical concept material clearly, or omit it. Prefer only visual choices that serve the brief and legibility.
 
 ### Brief-to-direction mapping
 Read the brief. Then bias the picks like this:
@@ -394,57 +351,11 @@ instead.
 
 ---
 
-## 5. IMAGE COUNT & PAGE SLICING
+## SECTION IMAGES AND CONTINUITY
 
-### THIS IS THE PRIMARY OUTPUT RULE
-Generate **one separate horizontal image PER section**. Always.
+For each section explicitly requested as an image, generate one separate image when the available permitted tool supports it. Use the requested layout/orientation where given; otherwise choose a useful format for that section. Do not impose a minimum or maximum section count, default section pack, or extra detail image. Do not collapse multiple requested section images into a single frame. If a requested section image is unavailable, identify it as missing rather than counting a proposal as delivery.
 
-- never combine multiple sections in a single image
-- never return a single tall slice that contains the whole page
-- never return one "best" image and skip the rest
-- never replace several sections with one collage
-
-If the request is ambiguous about section count, **default high**:
-- "hero" -> 1 image
-- "landing page" / "site template" -> default to 6 sections -> 6 images
-- "full website" -> default to 8 sections -> 8 images
-- "marketing site" -> default to 8 sections -> 8 images
-- "product page" -> default to 6 sections -> 6 images
-- "portfolio" -> default to 6 sections -> 6 images
-
-If the model can only render one image per call, generate them **sequentially in the same response**, one after the other, labeled "Section X of N: <name>" until the full set is delivered.
-
-### Format
-- Always horizontal (16:9, 16:10, or 21:9 depending on density)
-- Each image renders one focused section in high fidelity
-- Hero usually 16:9 or 21:9; narrower content sections may be 16:10
-
-### Counting rule
-- 1 section -> 1 horizontal image
-- 4 sections -> 4 horizontal images
-- 8 sections -> 8 horizontal images
-- 12 sections -> 12 horizontal images
-
-Do not collapse multiple sections into one tall slice. Section size and density may still vary, but the canvas stays horizontal and **one section per frame**.
-
-### Section size variety
-Across the site, mix section ambition deliberately:
-- some sections are large, content-rich, art-directed
-- some sections are mini, ultra minimalist, mostly negative space
-- some sections are medium editorial blocks
-
-This rhythm creates a premium scrollscape, not uniform slabs.
-
-### Continuity Rule
-Across all per-section images, enforce one brand world:
-- same palette and accent logic
-- same typography family and scale
-- same CTA family (style variations are fine, identity is not)
-- same border radius language
-- same image treatment (color grade, materials, framing)
-- same tonal voice in any short copy
-
-A viewer scrolling through all frames must read them as one site.
+Across images for the same project, preserve only the brand and system details established by the brief or supplied references. Variation in composition, palette, image treatment, CTA or section content is not required; follow the requested design.
 
 ---
 
@@ -786,39 +697,9 @@ Avoid:
 
 ---
 
-## 15. DEFAULT SITE PACKS
+## OPTIONAL SECTION EXAMPLES
 
-### 4-section pack
-1. Hero
-2. Features
-3. Social proof / testimonial
-4. CTA
-
-### 8-section pack
-1. Hero
-2. Trust bar
-3. Features
-4. Product showcase
-5. Benefits / use cases
-6. Testimonials
-7. Pricing
-8. CTA
-
-### 12-section pack
-1. Hero
-2. Trust bar
-3. Feature grid
-4. Product preview
-5. Problem / solution
-6. Benefits
-7. Workflow
-8. Metrics / proof / integration
-9. Testimonials
-10. Pricing
-11. FAQ
-12. CTA + footer
-
----
+The section sequences elsewhere in this skill are examples for ideation only. They are not default site packs and do not authorize adding trust bars, testimonials, pricing, metrics, CTAs or any other section absent from the brief. Use actual evidence for factual claims; omit unsupported proof content or label genuinely hypothetical concept material clearly.
 
 ## 16. MULTI-IMAGE CONSISTENCY RULE
 Because every section is its own image, consistency is critical. Across all per-section frames enforce:
@@ -862,7 +743,7 @@ Before finalizing, verify internally:
 17. Is there a clear conversion path (hook -> proof -> action) even in artistic sites?
 18. Is the palette consistent across all per-section images?
 19. Is each image horizontal and one-section-only?
-20. Is the **total number of images equal to the number of sections** (never fewer)?
+20. Does each requested section have its separate delivered image, with unavailable outputs explicitly incomplete?
 21. Is the hero using a varied composition (not defaulting to left-text / right-image out of habit)?
 
 If not, refine internally before output. If the count is wrong, regenerate the missing sections. If the hero feels like a reflexive left-text / right-image default, prefer a different composition anchor.
@@ -911,26 +792,9 @@ For minimalist briefs: this rule is suspended. Restraint is the design.
 
 ---
 
-## 19. RESPONSE BEHAVIOR
-When the user asks for a frontend design:
-1. infer site type and primary conversion goal
-2. infer number of sections (if unclear, use the defaults from §5: landing page = 6, full website = 8)
-3. **commit out loud** to the section count and announce it ("Generating N horizontal images, one per section")
-4. plan ONE horizontal image PER SECTION — always separate generations, never collapse
-5. choose Hero Scale for the whole site (giant / mid / mini)
-5. choose a strong visual combination (theme, type, hero arch, section system, motion, narrative spine, second-read moment)
-7. for each section: pick a Composition Anchor, Background Mode, and CTA Variation — vary across sections
-8. choose 4 signature components used appropriately across sections
-9. enforce hero minimalism + section size variety (some giant, some mini)
-10. enforce strong image usage including full-bleed backgrounds where it fits
-11. lock one consistent palette across all images
-12. apply §18 EXTRA CREATIVITY & IMPLEMENTATION EDGE
-13. keep spacing generous, even, and clean
-14. remove AI slop (including marquee / fake KPI clichés unless requested)
-15. run §17 CLARITY CHECK
-16. **generate every per-section horizontal image, labeled "Section X of N: <name>"**, until the full set is delivered. Do not stop early. Do not summarize. Do not return only one image.
+## RESPONSE BEHAVIOR
 
-Do not ask unnecessary follow-up questions if a strong interpretation is possible.
+Use the requested section list and visual direction. Generate the requested images only when an available permitted tool can do so; report unavailable requested images as incomplete with the missing prerequisite. Do not add sections, announce an invented count, force a composition/style recipe, or claim images were generated when they were not. Keep image generation distinct from implementation unless separately requested and authorized.
 
 ---
 

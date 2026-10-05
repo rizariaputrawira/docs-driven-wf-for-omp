@@ -1,73 +1,27 @@
-# Plan Template
+# Motion specification template
 
-Every plan written by `improve-animations` follows this structure. The executor may be a less capable model with zero context and zero taste — the plan must contain everything, exactly. No references to "the audit above" or "the easing we discussed."
+Independently authored template for proposed content, not a file-creation or execution instruction. Use native permitted planning channels, or an explicitly authorized exact destination outside Plan Mode. Make each selected specification self-contained.
 
-```markdown
-# NNN — <Short imperative title>
+## Problem and evidence
 
-- **Status**: TODO
-- **Commit**: <output of `git rev-parse --short HEAD` when this plan was written>
-- **Severity**: HIGH | MEDIUM | LOW
-- **Category**: <audit category>
-- **Estimated scope**: <n files, rough size>
-
-## Problem
-
-What is wrong, where, and why it matters to how the product feels. Cite every
-location as `path/to/file.tsx:123` and include the current code verbatim:
-
-​```css
-/* src/components/dropdown.css:14 — current */
-.dropdown { transition: all 400ms ease-in; }
-​```
+State the actual surface, source revision if known, cited locations, current code and consumer consequence. Label unobserved feel/performance rather than claiming proof.
 
 ## Target
 
-The exact end state. Every value spelled out — curves, durations, spring
-configs, media queries. Never "use a nicer easing":
+Specify exact resulting states, properties, inspected project tokens, durations/curves or spring configuration, interruption and reduced/no-motion behavior. Include necessary target code; no vague instruction to make motion nicer. If a value is unresolved, settle it through permitted evidence or explicitly identify the decision before implementation.
 
-​```css
-/* target */
-.dropdown {
-  transition: transform 200ms var(--ease-out), opacity 200ms var(--ease-out);
-  transform-origin: var(--transform-origin);
-}
-​```
+## Existing conventions
 
-## Repo conventions to follow
+Give the stack/dependency versions that matter and an actual exemplar for token placement, component behavior and file organization. No assumed new dependencies.
 
-How this codebase already does it, with one exemplar the executor should
-imitate (token names, file placement, prop patterns):
+## Ordered changes
 
-- Easing tokens live in `src/styles/tokens.css`; add new curves there, e.g. `--ease-out: cubic-bezier(0.23, 1, 0.32, 1);`
-- <exemplar file:line that already does this correctly>
+List each authorized-scope change by file and resulting behavior. Include shared-token/caller implications when relevant. Do not refer to unavailable prior chat or "the audit above".
 
-## Steps
+## Boundaries and drift
 
-1. <One concrete edit per step: file, what changes, resulting code.>
-2. …
+State excluded surfaces, semantics and dependencies. Identify the required current authorization separately from the proposal. Material source drift requires reassessment, not improvised expansion. No compulsory worktrees, planner indexes, model tiers or dispatch.
 
-## Boundaries
+## Verification and done conditions
 
-- Do NOT touch <files/components out of scope>.
-- Do NOT change markup/structure — motion properties only (unless a step says otherwise).
-- Do NOT add new dependencies.
-- If a step doesn't match the code you find (drift since the commit stamp), STOP and report instead of improvising.
-
-## Verification
-
-- **Mechanical**: <exact commands — typecheck, lint, build — with expected outcome>.
-- **Feel check**: run the UI, trigger <interaction>, and confirm:
-  - <observable check, e.g. "the dropdown scales from its trigger, not from center">
-  - <e.g. "spamming the toggle never restarts the animation from zero">
-  - In DevTools, set playback to 10% (Animations panel) and confirm <detail>.
-  - Toggle `prefers-reduced-motion` (Rendering panel) and confirm movement is dropped but opacity feedback remains.
-- **Done when**: <machine- or eye-checkable completion criteria>.
-```
-
-## Notes for the plan author
-
-- One plan per finding. If two findings share every file and the same fix pattern (e.g. the same easing token swap across components), they may merge into one plan.
-- Pull every value from [AUDIT.md](AUDIT.md) — never approximate from memory.
-- The feel check is not optional. Motion can be mechanically correct and still feel wrong; give the executor (or the human reviewing the executor's diff) concrete things to watch for in slow motion.
-- After writing plans, create or update `plans/README.md` with: a table of plans (number, title, severity, status), the recommended execution order, and any dependencies between plans.
+Give applicable existing check commands and expected consumer results, plus actual runtime interaction: narrow/wide sizes, repeated activation/reversal, origin, focus/keyboard, pointer/touch and reduced-motion behavior. Specify representative load checks for rendering exceptions and real-device checks for gesture feel. Slow playback can expose coordination defects. List observable acceptance conditions and unavailable proof layers. Proposal content is not a claim that these checks ran.

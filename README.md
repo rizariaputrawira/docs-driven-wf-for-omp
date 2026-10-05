@@ -62,7 +62,7 @@ You do not need to run every skill. Choose the job that matches your need. These
 - **Audit an existing UI:** Use `impeccable` to assess accessibility, keyboard use, narrow screens, and loading/empty/error states. Preserve the current brand and behavior; report findings only. **First:** scoped polish recommendations.
 - **Load a handoff only:** Use `resume-from-handoff` to summarize the selected `.handoff` snapshot; do not inspect cited files, validate claims, run commands, edit, or continue. **First:** a snapshot summary or notice that none is available.
 
-For every bundled choice, see [the full skill usage guide](SKILL-USAGE.md): **53 public names**, when to use each,
+For every bundled choice, see [the full skill usage guide](SKILL-USAGE.md): **36 public names**, when to use each,
 concrete prompts, expected outputs, permission/tool limits, and all **eight engineering-docs actions**.
 Choose another skill only when its goal matches your task; these examples are alternatives, not a required sequence.
 
@@ -81,7 +81,7 @@ Choose another skill only when its goal matches your task; these examples are al
 
 - `config/agent/` maps to `~/.omp/agent/`; `config/plugins/` maps to `~/.omp/plugins/`.
 - Managed skills have one source at `config/agent/skills/` and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout.
-- Current counts: **240 mappings**, including **219 skill files** and **53 entrypoints with 53 unique public names**. The TSV is source metadata and is not installed.
+- Current counts: **233 mappings**, including **212 skill files** and **36 entrypoints with 36 unique public names**. The TSV is source metadata and is not installed. Existing homes retain obsolete native skills until separately authorized retirement; fresh-install catalog counts are not migration claims.
 
 Managed skills use OMP's native user-skill convention. Native user/project skill discovery remains available, while the [managed discovery settings](config/agent/config.yml) leave `customDirectories` empty and disable Agents user/project skill-source discovery. Retired `.agent`/`.agents` copies cannot reenter through those configured sources. Other runtime providers may exist; these settings do not prove application-wide isolation.
 
@@ -98,6 +98,31 @@ sh install.sh --home '/path/with spaces' --source https://github.com/rizariaputr
 ```
 
 Remote ZIP archives must contain exactly one top-level directory, including hidden entries. Dry-run validates and reports intended changes without copying files or creating destination directories or backups. See [Requirements and scope](#requirements-and-scope) for platform prerequisites.
+
+### Existing-home skill retirement
+
+These 17 folders/public names are historical migration identifiers, not invocations or links to retained aliases. Installation is non-pruning: old native folders remain discoverable in existing homes until a separately authorized retirement moves them outside **all skill discovery roots**. Inspect and preserve customized contents first; do not blanket-delete directories. This task does not mutate a live home or claim 36-name discovery there.
+
+| Retired folder under `.omp/agent/skills/` | Former public name | Surviving action/reference or removal |
+|---|---|---|
+| `emil-animate` | `emil-animate` | animate `build`: `skill://animate/references/build.md` |
+| `emil-find-animation-opportunities` | `emil-find-animation-opportunities` | animate `opportunities`: `skill://animate/references/opportunities.md` |
+| `emil-review-animations` | `emil-review-animations` | explicit review-animations: `skill://review-animations` |
+| `find-animation-opportunities` | `find-animation-opportunities` | animate `opportunities`: `skill://animate/references/opportunities.md` |
+| `animation-vocabulary` | `animation-vocabulary` | animate `vocabulary`: `skill://animate/references/vocabulary.md` |
+| `taste-skill` | `taste-skill` | design-taste-frontend: `skill://design-taste-frontend` |
+| `taste-skill-v1` | `design-taste-frontend-v1` | Exact v1 procedure removed; current selective `skill://design-taste-frontend`, not v1 compatibility |
+| `gpt-tasteskill` | `gpt-taste` | Taste optional scroll: `skill://design-taste-frontend/references/scroll-storytelling.md` |
+| `redesign-skill` | `redesign-existing-projects` | Impeccable workflow plus `skill://design-taste-frontend/references/redesign.md` |
+| `brutalist-skill` | `industrial-brutalist-ui` | Taste opt-in industrial-print/tactical-crt: `skill://design-taste-frontend/references/style-directions.md` |
+| `minimalist-skill` | `minimalist-ui` | Taste opt-in minimalist-editorial: `skill://design-taste-frontend/references/style-directions.md#minimalist-editorial` |
+| `soft-skill` | `high-end-visual-design` | Taste opt-in high-end-editorial: `skill://design-taste-frontend/references/style-directions.md#high-end-editorial` |
+| `ponytail-review` | `ponytail-review` | ponytail `review`: `skill://ponytail/references/complexity-review.md` |
+| `ponytail-audit` | `ponytail-audit` | ponytail `audit`: `skill://ponytail/references/complexity-review.md` |
+| `ponytail-debt` | `ponytail-debt` | ponytail `debt`: `skill://ponytail/references/debt-ledger.md` |
+| `ponytail-help` | `ponytail-help` | ponytail `help`: inline `skill://ponytail` table |
+| `ponytail-gain` | `ponytail-gain` | Removed uncited static scoreboard; no replacement or measured-saving claim |
+
 
 The OpenDesign start/stop command guidance is user-invoked and POSIX-shell-specific. Set `OMP_OPEN_DESIGN_LAUNCHER` to an installed executable before running those commands; Windows installation does not provide a native PowerShell equivalent.
 
@@ -155,6 +180,26 @@ The documentation suite comprises fifteen skills and 109 regular assets deployed
 ## Verification scope
 
 `python3 scripts/test_install.py` exercises the POSIX installer and doctor against isolated fixtures; it does not test the PowerShell scripts. `bun scripts/test_model_routing.mjs` exercises five named worker-routing groups in the extension, not OMP's actual model/agent dispatch. Neither command establishes authenticated model behavior, session permissions, approval provenance, or operating-system confinement.
+
+### Balanced catalog verification
+
+The 53-to-36 semantic simplification was checked against the explicit **233-mapping / 212-skill-file** payload:
+
+- `python3 scripts/test_install.py` passed once for all 233 entries, exercising the production POSIX install/check/fix paths in disposable fixtures. `bun scripts/test_model_routing.mjs` passed its five named cases once.
+- Native Bun YAML parsed exactly 36 public entrypoints and the three explicit-only declarations. Source checks covered complete asset inventory, local/skill links and headings, all 129 catalog concepts with 200 reference/template targets, and the seven engineering templates. The complete fifteen-skill engineering/security/handoff payload and full notices remained byte-identical. Impeccable's bundled assets and engine pin remained byte-identical outside its scoped entrypoint correction.
+- A real disposable existing home passed dry-run with no payload writes, install, doctor check and exact inventory byte comparison. Installed OMP **18.5.0** reported exactly the 36 expected names through its passive unknown-name resolver diagnostic; the unsupported bare `skill://` read was not treated as discovery proof. Native reads resolved animate and the new vocabulary, Taste style and Ponytail debt references. Passive reads also retained the three explicit-only metadata declarations, not proof of enforcement.
+- A second disposable home retained an obsolete native entrypoint and an unrelated file. Identical reinstall preserved all mapped bytes, modes and mtimes and created no needless backups. This demonstrates non-pruning, not completed migration of an existing user home.
+
+Eight paired scenarios used sixteen fresh source-loaded consumers with equivalent isolated fixtures and recorded source maps, traces and complete terminal results. A fresh independent evidence judge assessed vocabulary, opportunities, motion review, motion audit, complexity/debt, Taste, images and harness proposals against fixed expectations. Candidate routing and report-only permission boundaries were supported within those scenarios; this is not candidate-only causation or general comparative improvement. No consumer trace recorded writes, command execution, launchers or services.
+
+**Behavioral acceptance is partial, not a blanket pass.** Both initial image consumers correctly reported the unavailable generator and permitted supplied-image analysis, but described the reference geometry inaccurately. After adding guidance requiring verified geometry or explicit uncertainty, a fresh candidate-only reassessment still incorrectly described equal-height blocks as unequal. The independent judge therefore rejected image factual accuracy; prose policy did not establish fidelity, and no further source correction was justified by this evidence alone. Measurement or abstention is still required for such claims. Initial failures were retained, not replaced with a success claim.
+
+Harness evidence also has limits: the baseline read an identical common-parent brief outside its assigned fixture; the candidate recovered from a failed relative-path read and consulted irrelevant in-fixture UI files, explicitly excluding them from its card conclusions. Neither rendered a member card or implemented a picker. Source-only Taste spacing proposals likewise are not observed visual results.
+
+License handling is recorded in [provenance](config/SKILL-SOURCES.md#balanced-consolidation-and-licensing-boundary): existing notices are preserved, Ponytail includes its full upstream MIT notice, and new references with unclear legacy grants use independently authored guidance rather than transplanted prose. Existing legacy licensing caveats remain, so this is not blanket legal clearance.
+
+No live home, model/agent/extension/MCP/plugin settings, installer or doctor was changed. No Impeccable/OpenDesign/Stitch engine, generator or external app service was launched. PowerShell/Windows execution remains unverified because neither runtime was available. Passive discovery and source-loaded consumer observations do not establish actual model dispatch identity, native Plan Mode/approval enforcement, OS containment, generated output quality or physical-device feel.
+
 
 <details>
 <summary>Detailed workflow, document ownership, standards, and skill capabilities</summary>
@@ -338,13 +383,17 @@ This is passive cooperative, source-loaded workflow acceptance. Native discovery
 
 ### One native skill folder and upstream updates
 
-All managed skills now live under `config/agent/skills/<folder>/SKILL.md` and deploy to `~/.omp/agent/skills/<folder>/SKILL.md`, OMP's native user-skill location. There is one entrypoint per public name, with no obsolete compatibility aliases or symlinks. Genuinely different public names remain separate, even when their bodies overlap. `design-taste-frontend` and `taste-skill` now have separate matching folders; other existing native alias-folder names remain, such as `output-skill` declaring `full-output-enforcement`.
+All managed skills live under `config/agent/skills/<folder>/SKILL.md` and deploy to `~/.omp/agent/skills/<folder>/SKILL.md`. The balanced catalog retains 36 public names and retires 17 without aliases or a discoverable archive. Impeccable is primary UI workflow; Emil/Taste are selective complements. Animate owns build/opportunities/vocabulary; Ponytail owns coding levels and one-shot review/audit/debt/help. Occasional specialists remain in the same native root. No models, agents, extensions, MCP, plugins, discovery settings, installers or doctors were changed in this simplification.
 
 Historically, nine byte-identical complete singular/plural trees were removed, and plural Impeccable 4.3.1 replaced singular 4.2.2. The final consolidation eliminates six remaining native/plural same-name duplicate packages. The newest versioned Impeccable package, **4.5.0 with engine 0.1.11**, is retained complete; **4.3.1 and 4.2.2** are retired. The older **0.1.5 Linux binary is not copied** into the newest package. `design-taste-frontend` was byte-identical across its duplicate copies. For the other unversioned differing copies, no defensible release-recency claim is available: their differences are only bare-invocation startup greetings or a course link, and the native variants are retained.
 
 The newest Impeccable launcher uses its matching standalone engine. A first-run download may require permitted network access, a writable cache, curl/wget and SHA-256 tooling; an available compatible binary avoids that download. If launch/download is unavailable or refused, follow the source-defined direct-context fallback through permitted tools and report the limit. No engine or service was invoked for this consolidation.
 
 An upstream updater targeting `.agent/skills/` or `.agents/skills/` can recreate a retired root. Choose the native destination before updating, keep each complete package's entrypoint, references and launcher/engine pin together, and update the explicit `config/files.tsv` inventory rather than copying piecemeal files. The installer remains non-pruning: pre-existing destination directories are not automatically deleted, including old installed skill copies. No live-home migration was performed. Inspect any retained data and the actual updater destination; this is not an instruction to delete legacy directories wholesale.
+
+#### Historical one-folder verification
+
+The following 240-mapping/53-name results describe the earlier root consolidation, not acceptance of the 36-name simplification:
 
 Verification of this **240-entry consolidation** is complete for the checked POSIX surface: `python3 scripts/test_install.py` passed all inventory entries, and `bun scripts/test_model_routing.mjs` passed its five named cases. Source checks covered 53 unique skill names, 219 selected skill files and 350 local/skill link targets and anchors. A real disposable-home dry-run left the home untouched; installation and doctor checks passed; all installed inventory bytes matched their sources. An identical reinstall preserved every mapped file's bytes, mode and mtime, and retained unrelated old-root user/project data.
 

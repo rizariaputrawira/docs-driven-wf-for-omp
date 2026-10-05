@@ -1,8 +1,8 @@
 # The Picker
 
-The picker's appearance is **not a design decision** — it is this spec. Copy the markup, CSS, and wiring below verbatim; the only values that change per run are the variant names and count. It stays identical across every project so it always reads as harness chrome, never as part of the design being judged. Do not restyle it with the project's tokens, fonts, or colors.
+This file specifies picker behavior and offers one optional visual example. It is not a universal appearance mandate. Preserve the actual project's design tokens, typography, contrast, and interaction conventions when implementing a picker. Keep it distinguishable from the work being compared without obscuring that work.
 
-It is a floating dark pill, bottom-center. Dark glass works on top of any page — light or dark — which is why it is not theme-aware.
+The sample below uses a floating dark pill with blur; both are optional. Choose placement and presentation from the real page context. On narrow screens, ensure the picker does not cover important content or controls; reposition it, place it in normal flow, or use another project-appropriate treatment.
 
 ## Markup
 
@@ -23,6 +23,7 @@ In a framework, keep the class names and structure; only the rendering syntax ch
 
 ## Styles
 
+Optional dark-glass example only. Replace colors, typography, sizing, shadow, blur, and placement with incumbent tokens and a context-appropriate accessible presentation. Blur and shadow are not required.
 ```css
 .proto-picker {
   position: fixed;
@@ -123,23 +124,23 @@ In a framework, keep the class names and structure; only the rendering syntax ch
 
 ## Rules
 
-- **Verbatim.** These values are the spec. No project fonts, no brand colors, no theme switching, no extra shadows or borders.
-- **The highlight slides; the variant swap stays instant.** The active pill animates between buttons (250ms, strong ease-out) as spatial feedback on the picker itself — but the variant being previewed still switches with no transition. The `width` transition is a deliberate exception to the transform/opacity rule: the element is 28px tall, absolutely positioned, and has no layout dependents, so the paint cost is negligible.
-- **One allowed modification:** if a variant occupies the bottom-center of the screen (a toast stack, a bottom sheet, a dock), set `data-position="top"` so the picker never covers the work. Nothing else about it may move or change.
-- **Replay is conditional.** Render the replay button and its divider only when at least one variant has an entrance or state animation worth re-triggering; a static comparison gets a shorter pill.
+- Treat the markup and CSS above as illustrative. Implement equivalent project-appropriate semantics and styling rather than copying fixed colors, blur, font, shadow, z-index, or placement verbatim.
+- Preserve the behavior contract below: switching is immediate; selection is represented accessibly; any selected transition is limited to picker feedback and respects reduced-motion preferences.
+- Place the picker where it remains reachable and does not obscure important content, controls, or the component under review. Reassess placement at narrow widths; use normal-flow placement or another layout if a floating control would occlude the work.
+- Render replay only when an implemented variant has motion worth replaying; otherwise omit it.
 
 ## Behavior contract
 
-The contract is fixed regardless of how the harness renders:
+Keep this behavior when the picker uses the corresponding controls and URL-state feature:
 
-- Number keys `1–N` and `←`/`→` switch variants; `R` replays. Ignore key events when focus is in an input, textarea, select, or contenteditable, or when a modifier is held.
-- Clicking an item switches to it; exactly one item carries `data-active` and `aria-current="true"` at all times, and the highlight slides to it.
-- Selection persists across reload via a URL param (`?v=2`), falling back to variant 1. The highlight takes its initial position without animating (`data-ready` is added after first paint).
-- Switching re-mounts the variant (so entrance animations re-run); the replay key re-mounts without switching.
+- Number keys `1–N` and `←`/`→` switch variants; `R` replays when replay exists. Ignore key events from editable controls and when a modifier is held.
+- Click/tap selects a variant; exactly one item has current/selected semantics, with visible keyboard focus and state synchronized to the selected content.
+- When selection persists in the URL, load the selected variant on reload and update the URL on selection. Initialize visual selection without an unintended transition.
+- Switching or replaying may remount a variant only if that is required by its actual implementation; preserve the selected state and do not claim behavior that is not implemented.
 
 ## Reference wiring
 
-Verbatim for the standalone-HTML branch; in a framework, keep the same behavior but express it idiomatically (state instead of `innerHTML`, a keyed re-mount instead of `requestAnimationFrame`, refs + a layout effect for the highlight measurement).
+The standalone wiring below is an example, not a required copy-paste implementation. In a framework, use idiomatic state and semantics. Review keyboard handling, focus, accessible selected state, and URL synchronization in the implemented picker.
 
 ```js
 // `variants` is an array of render functions, one per variant, in picker order.

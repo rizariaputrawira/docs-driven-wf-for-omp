@@ -2,7 +2,7 @@
 
 Ready-to-build implementations for the cases that come up most. Start from the recipe, then adapt — don't rebuild from scratch.
 
-Curves are the `--ease-out`, `--ease-in-out`, and `--ease-drawer` tokens defined in SKILL.md.
+Reuse inspected compatible project tokens. [Shared principles](references/principles.md) supply fallback curves/ranges. These legacy examples are not universal mandates: ordinary UI usually stays under 300ms; longer drawer/toast examples need a task-specific reason and actual verification. Reduced-motion may use no motion; immediate state/focus and non-motion feedback remain required. Prefer transform/opacity, with verified accordion-height and clipping exceptions. Existing source attribution/licensing caveats remain in the repository provenance record.
 
 ---
 
@@ -312,7 +312,7 @@ Without blur the eye reads two distinct objects swapping. Blur blends them into 
 
 ## Programmatic, without a library
 
-When the motion needs JS control but not a dependency, WAAPI gives you CSS-grade performance:
+WAAPI provides programmatic control without adding a library; rendering costs depend on the animated properties and browser.
 
 ```js
 element.animate(
@@ -321,4 +321,4 @@ element.animate(
 );
 ```
 
-Hardware-accelerated, interruptible, no bundle cost.
+Verify interruption and representative rendering load. WAAPI and clipping do not guarantee hardware acceleration or off-thread execution.

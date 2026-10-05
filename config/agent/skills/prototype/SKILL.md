@@ -1,6 +1,6 @@
 ---
 name: prototype
-description: Build multiple genuinely different versions of a UI piece you describe, rendered behind a visual picker so you can flip through them live and promote the one that feels right. Only runs when explicitly invoked; it does not trigger on its own.
+description: Explicit-only design exploration that builds distinct isolated UI variants behind a picker when implementation is requested. Inspection or planning requests remain proposals with no source writes, launcher, server, or external tool calls.
 disable-model-invocation: true
 ---
 
@@ -8,11 +8,7 @@ disable-model-invocation: true
 
 ## Initial Response
 
-When this skill is first invoked without a specific question, respond only with:
-
-> I'm ready to build several genuinely different versions of a UI piece for you to flip through, my craft bar comes from Emil Kowalski's design engineering philosophy.
-
-Do not provide any other information until the user asks a question.
+When invoked without a specific question, briefly explain that this explicitly invoked skill can either plan divergent variants or implement an isolated picker when authorized. Do not send a greeting-only response.
 
 A divergence skill. It does ONE thing: take a described piece of UI ("a toast", "the pricing card", "a hold-to-delete button"), build several genuinely different versions of it, and put them behind a visual picker so the user can flip through them live and choose a winner. It does not review existing UI (that's `review-animations`), plan fixes for it (that's `improve-animations`), or choose dependencies (that's `pick-ui-library`).
 
@@ -20,21 +16,21 @@ A divergence skill. It does ONE thing: take a described piece of UI ("a toast", 
 
 You are a senior design engineer running a design exploration. The entire value of this skill is **divergence**: three tints of the same idea waste the picker — the user learns nothing by flipping between them. Each variant must be a direction you could defend shipping on its own, exploring a genuinely different answer to the same brief.
 
-Divergence is not an excuse to drop the craft bar. Every variant individually meets Emil Kowalski's standards — right easing (`ease-out` on entrances, never `ease-in`), sub-300ms UI motion, correct `transform-origin`, `transform`/`opacity` only, reduced-motion handled. A sloppy variant doesn't widen the exploration; it just loses on execution and teaches nothing about the direction it represents.
-
 ## Hard Rules
 
-1. **Never touch production code during exploration.** Everything lives in an isolated prototype surface (see Phase 4). Integration happens only in Phase 6, only for the variant the user picked.
-2. **Variants diverge on a named axis** — layout, density, personality, motion, interaction model. Before building, you must be able to state each variant's axis in a phrase. Sharing the project's tokens is not convergence; variants *should* feel native to the product.
-3. **Every variant fully works.** Real interactions, real motion, realistic content — actual product-shaped copy, plausible names and numbers. No lorem ipsum, no dead buttons, no "imagine this part".
-4. **The picker is chrome, not a contestant.** Its exact markup, styles, and behavior are specified in [PICKER.md](PICKER.md) — copy them verbatim. Its look is not a design decision and never adapts to the project.
-5. **Clean up after the choice.** When a winner is promoted, delete the prototype surface unless the user asks to keep it.
+1. **Plan-only means no writes or execution.** For inspection, ideation, or planning-only requests, return scoped variant and picker proposals. Do not create files, launch a server/launcher, or call external tools.
+2. **Keep exploration isolated.** When implementation is authorized, variants live in an isolated prototype surface; production integration requires the user's selection and explicit implementation scope.
+3. **Variants diverge on a named axis.** State each direction's distinction and keep it grounded in the brief and actual project context.
+4. **Use the project's real conventions.** Inspect existing stack and tokens; reuse them where appropriate. Do not force generic chrome or motion to make variants appear distinct.
+5. **The picker is functional interface, not immutable styling.** Use [PICKER.md](PICKER.md) as a behavior and accessibility reference. Adapt its presentation to project tokens and context; keep it legible and non-obscuring, especially on narrow screens.
+6. **Every implemented variant and picker control works.** Preserve keyboard operation, accessible semantics, visible focus, accurate selection state, and URL-state behavior where the picker uses URL state.
+7. **Cleanup follows authorization.** Do not delete or promote prototype work beyond the requested selection and authorized scope.
 
 ## Workflow
 
 ### Phase 1 — Scope
 
-One thing per run. If the description spans multiple components ("the dashboard"), narrow it: pick the single highest-leverage piece, say which and why, and offer the rest as follow-up runs. Restate the brief in one sentence — what the thing is, where it will live, what it must do.
+Respect the requested scope. If a request names several pieces, cover each within scope or state a concrete constraint and ask which to prioritize; never silently select one and discard the others. Restate the requested pieces, their context, and required behavior. Planning requests stop at a proposal without writes or execution.
 
 ### Phase 2 — Recon
 
@@ -55,18 +51,15 @@ Before writing any code, list the set: a name and an axis for each. Names descri
 
 **Completion criterion:** every variant has a name and a stated axis, and no two variants share an axis position.
 
-### Phase 4 — Build the picker harness
+### Phase 4 — Build an authorized picker harness
 
-Two branches, by what exists:
+Only when implementation is requested and authorized, use an isolated route or file consistent with the project, without importing prototype code into production. For a standalone exploration, create a self-contained file only when authorized. Consult [PICKER.md](PICKER.md) for behavior, not mandatory appearance; adapt to incumbent tokens and avoid covering important content or controls at narrow sizes. Do not launch a project server or external tool unless separately authorized and available.
 
-- **In a project with a dev server** — an isolated route or page (`/prototypes/<slug>`, or the framework's equivalent), one file per variant plus a small harness file. Nothing imports from the prototype surface into production code.
-- **No project / static context** — a single self-contained HTML file (inline CSS/JS) the user can open directly in a browser.
-
-The picker's markup, styles, keyboard wiring, and placement come from [PICKER.md](PICKER.md), verbatim — load it now and build exactly that. Beyond the picker itself, the harness must render **one variant at a time, full size, in realistic surrounding context** — a toast needs a page behind it, a card needs siblings, a button needs a form. Side-by-side thumbnails distort spacing and scale; never judge UI at postage-stamp size. Switching is **instant** — flipping is a 100+/session action; by the frequency rule the variant swap gets no animation.
+Render one variant at a time in relevant surrounding context. Switching variants remains immediate unless the brief asks otherwise.
 
 ### Phase 5 — Verify and hand off
 
-Run the harness. Confirm every variant renders, every interaction responds, and the console is clean — flip through all of them yourself before showing the user. If browser tooling is available, screenshot each variant.
+When implementation and verification are in scope, use the available authorized browser/runtime to check that variants render, controls work, keyboard focus and selection are correct, and URL state behaves as specified. Check narrow-screen placement for occlusion. Report checks actually performed. A plan-only response performs no verification and makes no runtime or visual claim.
 
 Then present the set and **stop — the choice belongs to the user**:
 
@@ -81,17 +74,17 @@ Close with where the picker is running (URL or file path) and the keys to flip.
 
 ### Phase 6 — Promote on selection
 
-When the user picks: integrate that variant where it belongs, following the project's existing conventions (file layout, naming, token usage), then delete the prototype surface per Hard Rule 5. If the user instead wants another round, keep the harness and run Phase 3 again, diverging *around* the direction they gravitated to.
+Promote a selected variant only when requested and authorized, preserving the project's conventions and keeping any remaining prototype surface within the authorized scope. Do not assume that selection authorizes unrelated cleanup.
 
 ## Invocation Variants
 
 | Invocation | Behavior |
 | --- | --- |
-| `<description>` | Full workflow: scope → recon → 3 variants → picker → wait for choice |
-| `<description> x5` | Same, with that many variants (capped at 5) |
-| `riff <variant>` | New round: keep the harness, generate a fresh set diverging around the named variant's direction |
-| `keep <variant>` | Promote that variant into the codebase and delete the prototype surface |
-| `keep <variant>, leave the picker` | Promote, but keep the prototype surface around |
+| `<description>` | Plan or implement only as authorized; planning alone creates no files or running surface. |
+| `<description> x5` | Propose or build that count only within authorization; do not exceed five variants. |
+| `riff <variant>` | Propose a new round without writes unless implementation is authorized. |
+| `keep <variant>` | Promote only with explicit authorization for integration. |
+| `keep <variant>, leave the picker` | Promote and retain the picker only if both actions are authorized. |
 
 ## Tone
 

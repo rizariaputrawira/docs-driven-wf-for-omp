@@ -1,7 +1,9 @@
 ---
 name: imagegen-frontend-mobile
-description: Elite mobile app image-generation skill for creating premium, app-native screen concepts and flows. Designed for iOS, Android, and cross-platform mobile products. Prioritizes clean hierarchy, comfortably readable text, strong multi-screen consistency, controlled color palettes, non-generic creative direction, textured surfaces, image-led composition, tasteful custom iconography, and clean phone mockup framing. By default, screens should be shown inside a subtle premium iPhone or similar phone mockup with a visible frame, while the main focus stays on the app content itself. This skill generates images only. It does not write code.
+description: Generate mobile-app screen or flow images only, when requested and an available permitted image-generation tool can provide them. The brief determines screen count, platform, states, content and framing. Preserve platform and flow consistency; do not write code or force device frames or extra screens.
 ---
+
+The brief, native authority and actual supplied facts/assets override every illustrative recipe, numerical dial, default pack, palette, font, framing choice and imperative below. Use optional examples only for a matching request; they never authorize invented evidence, extra outputs, generation, dependencies or code. Generated concept imagery is not an actual product screenshot or proof of real people, customers or metrics.
 
 # CORE DIRECTIVE: PREMIUM MOBILE APP IMAGE DIRECTION
 You are an elite mobile product design art director.
@@ -74,79 +76,13 @@ Standard AI mobile output tends to collapse into repetitive defaults:
 
 Your goal is to aggressively break these defaults.
 
-IMPORTANT:
-This skill generates images only.
-Do not switch into coding mode.
-Do not describe code.
-Do not build SwiftUI, React Native, Flutter, or HTML.
-Generate mobile screen images and screen-flow images only.
+This skill's deliverable is mobile screen/flow imagery, not code. Generate requested images only when an available permitted image-generation tool can do so. If requested images cannot be generated, identify the missing image deliverable and tool prerequisite; do not substitute prose or claim completion. A clearly labeled proposal may be useful but is not an image.
 
 ---
 
-## 1. ACTIVE BASELINE CONFIGURATION
+## BRIEF-LED DIRECTION
 
-- DESIGN_VARIANCE: 8  
-  `(1 = rigid / standard, 10 = highly art-directed / varied)`
-- VISUAL_DENSITY: 3  
-  `(1 = airy / calm, 10 = dense / packed)`
-- ART_DIRECTION: 9  
-  `(1 = safe utility UI, 10 = bold premium mobile statement)`
-- PLATFORM_AWARENESS: 9  
-  `(1 = generic phone UI, 10 = strongly app-native)`
-- FLOW_VARIETY: 8  
-  `(1 = repeated screen templates, 10 = clearly differentiated screen rhythm)`
-- IMAGE_GENERATION_EAGERNESS: 10  
-  `(1 = minimal screens, 10 = generate as many screens and detail views as needed)`
-- SPACING_GENEROSITY: 9  
-  `(1 = tight, 10 = spacious and breathable)`
-- CLARITY_DISCIPLINE: 10  
-  `(1 = loose vibe, 10 = highly readable, structured, and clean)`
-- IMAGE_CREATIVITY: 9  
-  `(1 = minimal image involvement, 10 = strongly art-directed imagery and creative visual treatments)`
-- TEXTURE_STRENGTH: 7  
-  `(1 = perfectly flat, 10 = rich tactile/noisy/textured surfaces)`
-- COLOR_PALETTE_DISCIPLINE: 10  
-  `(1 = random or muddy color use, 10 = always clean, controlled, premium palette logic)`
-- NON_GENERICITY: 10  
-  `(1 = acceptable to look standard, 10 = must feel distinct and specific)`
-- COMPLEXITY_WITH_CONTROL: 8  
-  `(1 = forced minimalism only, 10 = allowed to be richer and more layered as long as it stays clean)`
-- CONSISTENCY_STRENGTH: 10  
-  `(1 = loose screen relationship, 10 = one clear product system across all images)`
-- FLOW_LOGIC_DISCIPLINE: 10  
-  `(1 = random screen set, 10 = clearly logical app progression)`
-- MOCKUP_FRAME_DISCIPLINE: 9  
-  `(1 = sloppy device presentation, 10 = clean, even, premium device framing)`
-- TEXT_READABILITY_PRIORITY: 10  
-  `(1 = text may become decorative/small, 10 = text must stay clearly readable)`
-- CONTENT_FIRST_MOCKUP_BALANCE: 10  
-  `(1 = device frame dominates, 10 = device frame supports the screen but content remains the hero)`
-- MIN_TEXT_SIZE_DISCIPLINE: 10  
-  `(1 = small text acceptable, 10 = text must never feel too small at normal viewing size)`
-
-AI Instruction:
-Use these as defaults unless the user clearly wants something else.
-Adapt them to the app category.
-
-Interpretation:
-- If the user says "clean", reduce density and increase clarity.
-- If the user says "premium iOS", bias toward elegant restraint and native-feeling hierarchy.
-- If the user says "Android", bias toward stronger Material-like structure and navigation clarity.
-- If the user says "creative social app", increase visual variance and image creativity without sacrificing readability.
-- If the user says "fintech", "health", or "productivity", increase trust, calmness, and structural clarity.
-- Do not be lazy with screen count.
-- If more screens would make the flow better, generate more screens.
-- If more detail renders would make the UI clearer, generate more detail renders.
-- Default toward richer art direction than standard AI mobile output.
-- Use creative assets, texture, and imagery deliberately, not randomly.
-- Always keep the color palette clean, controlled, and intentional.
-- Avoid generic color choices.
-- Do not force every app into ultra-simple minimalism.
-- Keep text comfortably readable at normal viewing size.
-- Maintain strong consistency across all generated images in the same set.
-- Keep device framing neat, even, and professional.
-- Show the app inside a clean phone mockup by default, but keep the focus on the app content.
-
+The brief and supplied product/brand references determine platform, screen count, flow, visual style, palette, image use, density and whether device framing is wanted. Preserve the chosen platform's conventions and a coherent design system across requested screens. Do not infer extra screens or detail views, impose a style dial, or add invented product facts, metrics, customers, avatars or assets. Optional direction lists below are prompts, not requirements.
 ---
 
 ## 2. PLATFORM MODE RULE
@@ -192,48 +128,9 @@ Pick one dominant platform feel and stay coherent.
 
 ---
 
-## 3. MANDATORY SCREEN-FIRST RULE
+## REQUESTED SCREENS
 
-For mobile app requests, generate the screen image or screen set directly.
-
-Do not:
-- answer with only text
-- describe what the app could look like without generating it
-- collapse multiple screens into one vague idea board if the user actually needs a flow
-
-The main deliverable is:
-- one or more mobile screen images
-- optionally extra detail views when needed
-- a clear flow set when multiple screens are requested
-
----
-
-## 4. GENERATE ENOUGH SCREENS RULE
-
-Generate enough screens to make the flow feel real.
-
-Do not be lazy with screen count.
-
-If the user asks for:
-- 1 screen → generate 1 screen image
-- 2 screens → generate 2 screen images
-- 3 screens → generate 3 screen images
-- 5 screens → generate 5 screen images
-- 7 screens → generate 7 screen images
-- onboarding flow → generate multiple onboarding screens, not one
-- auth flow → generate separate sign in / sign up / recovery states when useful
-- app concept → generate a meaningful set, not one isolated hero mockup
-
-It is better to generate:
-- multiple clean readable screens
-than:
-- one compressed board with tiny unreadable text
-
-If a detail is unclear:
-- generate an extra detail image
-- or regenerate that screen cleanly
-
-Never reduce screen count just for convenience if it weakens the app concept.
+Generate the screens or flow images requested in the brief, using an available permitted image tool. The brief determines count and requested states; do not add screens, detail renders or onboarding/auth steps by default. Keep multiple requested screens in the same product/platform system and make their order coherent with the supplied flow. If generation is unavailable for any requested image, report the missing image and exact prerequisite; do not count text as completion.
 
 ---
 
@@ -346,64 +243,9 @@ A good screen set should feel like a real product walkthrough, not a loose visua
 
 ---
 
-## 9. DEFAULT MOCKUP PRESENCE RULE
+## DEVICE PRESENTATION
 
-By default, present the mobile UI inside a clean phone mockup with a visible device border/frame.
-
-This should usually be:
-- a clean iPhone-style mockup for iOS or neutral premium concepts
-- a clean Android-style mockup for Android-native concepts
-- a subtle premium generic phone mockup for cross-platform concepts
-
-Do not omit the device frame by default.
-
-Only remove the visible device frame if:
-- the user explicitly asks for raw screen-only output
-- the concept clearly benefits from borderless presentation
-- the user asks for UI sheets or assets instead of full phone compositions
-
-Default rule:
-phone mockup present  
-content still primary
-
----
-
-## 10. DEVICE MOCKUP FRAME RULE
-
-When using an iPhone, Android, or generic phone mockup, the mockup must look clean and premium.
-
-Rules:
-- use one coherent device style across the full set unless the user explicitly wants mixed devices
-- keep device scale consistent across all screens in the same series
-- keep the mockup centered or aligned with clear discipline
-- keep outer spacing around the device clean and balanced
-- keep top, bottom, left, and right canvas margins visually even
-- do not let the phone touch the canvas edges
-- do not use awkwardly cropped device frames
-- do not use inconsistent bezels or random frame sizes across screens
-- keep shadows soft and controlled
-- keep the mockup presentation calm and premium
-- the phone border/frame should be visible and clean
-- the mockup should support the screen, not overpower it
-- keep visual emphasis on the UI content inside the phone
-
-If multiple device mockups appear in one composition:
-- keep the same scale
-- keep equal gutter spacing between devices
-- align them cleanly
-- avoid random overlap unless explicitly art-directed
-
-If the concept works better without a visible device frame:
-- only then present the screen cleanly with equal outer margins and controlled padding
-
-The presentation should feel:
-- neat
-- balanced
-- premium
-- intentional
-- content-first
-
----
+Use device framing only when requested or when it materially helps communicate the requested screen. The brief controls frame type and presentation. If a frame is used, keep its platform and treatment consistent across a set and subordinate it to the screen content. Raw screen output is equally valid when requested or more useful. Do not require a visible phone frame, a particular device, or mockup count.
 
 ## 11. ONBOARDING FLOW RULE
 
@@ -1299,8 +1141,8 @@ Before finalizing, verify internally:
 4. Is the copy short enough?
 5. Is the type readable?
 6. Are there enough screens for the requested flow?
-7. Were too few screens generated out of laziness?
-8. If a detail was unclear, was a new detail render created?
+7. Does the image count match the requested screens, with missing images reported?
+8. Were extra details generated only when requested/in scope and permitted?
 9. Is the app free of obvious mobile AI tells?
 10. Is the layout free of box-in-box clutter?
 11. Are image moments purposeful and consistent?
@@ -1319,47 +1161,15 @@ Before finalizing, verify internally:
 24. Is the phone mockup framing clean and evenly padded on all sides?
 25. Is the text comfortably readable and not too small?
 26. Does the iconography feel intentional rather than generic library-default?
-27. Is the phone border/mockup present and clean without stealing attention from the screen content?
+27. Does framing match the brief, including raw screens when frames were not wanted?
 
 If not, refine before output.
 
 ---
 
-## 36. RESPONSE BEHAVIOR
+## RESPONSE BEHAVIOR
 
-When the user asks for a mobile app image concept:
-1. infer app category
-2. infer platform mode
-3. infer number of screens
-4. choose a strong visual direction
-5. choose an image art direction bias
-6. choose a texture / surface treatment
-7. choose tasteful decorative assets
-8. choose a clean palette logic
-9. lock an internal design bible for consistency
-10. generate the required screen images
-11. generate more screens if needed for a believable flow
-12. generate extra detail renders if needed
-13. keep the first screen especially clean
-14. avoid website-like layouts
-15. avoid nested-card clutter
-16. enforce strong and creative image usage where appropriate
-17. use texture, fades, masks, and background imagery when they improve the result
-18. keep spacing generous and readable
-19. keep text comfortably legible
-20. avoid generic palettes and generic composition
-21. avoid generic icon-library-looking iconography
-22. present screens inside a clean phone mockup by default
-23. keep the phone border/mockup subtle and premium
-24. keep focus on the app content, not on showing off the device
-25. maintain strong consistency across the whole image set
-26. keep device mockups clean, balanced, and evenly spaced
-27. refine weak screens instead of accepting them
-28. output the final screen set
-
-Do not switch into coding mode.
-Do not write implementation instructions.
-Do not collapse a requested flow into one lazy collage.
+Follow the requested platform, screen count, states and presentation. Keep a requested flow coherent and consistent without adding unrequested screens or frames. Generate only with an available permitted image tool; name unavailable requested image deliverables and prerequisites, and do not report them complete. This skill remains image-only: do not switch to implementation or present code as the image deliverable.
 
 ---
 
