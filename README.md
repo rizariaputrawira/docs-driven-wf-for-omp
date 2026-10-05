@@ -15,7 +15,7 @@ sh install.sh --dry-run
 sh install.sh
 ```
 
-On Windows PowerShell:
+On Windows PowerShell (beta):
 
 ```powershell
 .\install.ps1 -DryRun
@@ -69,7 +69,7 @@ Choose another skill only when its goal matches your task; these examples are al
 ## Requirements and scope
 
 - POSIX: `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp`, and `date`. Remote ZIP installation additionally requires `curl` and `unzip`.
-- Windows: PowerShell 5.1+; remote ZIP installation uses `Invoke-WebRequest` and `Expand-Archive`.
+- Windows (beta): PowerShell 5.1+; remote ZIP installation uses `Invoke-WebRequest` and `Expand-Archive`.
 - Not bundled: OMP, model credentials, Node.js, the OpenDesign daemon, the `rtk` executable, or herdr services. Every installed file is listed in the inventory.
 - `config/agent/mcp.json` declares a GitHub HTTP MCP connection (`GITHUB_TOKEN`) and a local OpenDesign stdio connection (`OMP_OPEN_DESIGN_CLI`, `OD_DAEMON_URL=http://127.0.0.1:7456`). Configure these per machine; installation does not provide or start either server.
 - The optional RTK and herdr hooks do not start services. The RTK hook disables itself unless `rtk >=0.23.0` is on `PATH`; `herdr` requires `HERDR_ENV=1`, `HERDR_SOCKET_PATH`, and `HERDR_PANE_ID`.
@@ -278,7 +278,7 @@ The earlier public `omp --version` and `omp --help` observations identified inst
 
 Payload/deployment, native discovery/task/custom-agent selection, and real tool-enabled behavior are independent checks. Current source parsing is not native dispatch proof; published moving documentation is not installed-version acceptance. Before the one-folder consolidation, public `omp read skill://<name>` resolved all fifteen then-deployed entrypoints in a disposable HOME/state, and an audit companion reference resolved there too. This historical result does not verify discovery after the current path/settings change. These are passive URI reads, not authenticated task/agent selection. Corrected fresh CLI generation with closed stdin exited 1 because no provider API key was available; the earlier piped-stdin attempt timed out. That startup also attempted the existing GitHub/OpenDesign MCP connections, which failed; it did not verify those services. Active credentials were not read or copied. At the user's request, the separate CLI-authentication item is closed using the already exercised authenticated current-session host actions and their actual model/tool/result evidence. This is an accepted verification path, not a passing fresh CLI generation result. Effective managed security-definition selection, native Plan Mode, malformed/overridden selection and disabled/unavailable native task cases remain unverified compatibility notes, not claimed passes or current blockers.
 
-The user's deployment platform is WSL. Historical POSIX installer/doctor verification for the earlier cutover is complete, not final verification of this one-folder consolidation; Windows/PowerShell verification was closed as out of scope for that WSL-only acceptance. Neither PowerShell runtime was available, and no Windows execution is claimed. Verify the PowerShell entrypoints on an actual supported platform only if Windows deployment is later requested.
+The user's deployment platform is WSL. Historical POSIX installer/doctor verification for the earlier cutover is complete, not final verification of this one-folder consolidation; Windows/PowerShell (beta) verification was closed as out of scope for that WSL-only acceptance. Neither PowerShell runtime was available, and no Windows execution is claimed. Verify the PowerShell entrypoints on an actual supported platform only if Windows deployment is later requested.
 
 The old staging 13-smoke/ALL51/frozen test epoch is historical and does not accept this fifteen-skill suite. Recovery copies and assessment fixtures are external session evidence, never installed payload. Runtime settings, PERSONALITY.md, the boundary hook, installers/doctors and unrelated snapshots remain outside this cutover.
 
@@ -286,9 +286,9 @@ The old staging 13-smoke/ALL51/frozen test epoch is historical and does not acce
 
 The production POSIX integration runner passed all 372 inventory entries; the unchanged model-routing runner passed its five named cases. Real disposable-home dry-run/install/doctor/repeat-install checks exercised source byte equality, zero dry-run mutation and repeat-install mtime/backup preservation. Metadata checks parsed all fifteen entrypoints using native Bun YAML, checked explicit asset/link coverage and full pinned notices, and checked all 129 frozen concept reference/template targets and heading anchors. One adopted security heading was corrected to retain its original frozen catalog target; the registry and seven templates were not changed.
 
-The following are actual source-loaded private normal-host actions, not native registration, security-role selection or OS-containment proof. Completed implementation and assessment workers' runtime records show `openai-codex/gpt-6.1-sol`, High thinking and no fallback. Parent-owned process evidence is separate from workers' source observations.
+The following are actual source-loaded private normal-host actions, not native registration, security-role selection or OS-containment proof. Completed implementation and assessment workers' runtime records recorded their assigned runtime settings and no fallback. Parent-owned process evidence is separate from workers' source observations.
 
-The remaining verification was resumed with fresh Sol High actors, and a fresh independent reader judged all eighteen predefined smoke purposes supported with the stated bounds. This was bounded assessment-session acceptance, not a guarantee of every skill branch, exclusively candidate-caused behavior or unknown future-runtime compatibility. Matching runtime bootstrap guidance was also loaded in some actions: ponytail for coding, installed retro before the explicit copied retrospective procedure, and code-review for the independent evidence judge. Actual candidate procedures/references were separately read; these context qualifications are retained rather than claiming complete context isolation.
+The remaining verification was resumed with fresh actors, and a fresh independent reader judged all eighteen predefined smoke purposes supported with the stated bounds. This was bounded assessment-session acceptance, not a guarantee of every skill branch, exclusively candidate-caused behavior or unknown future-runtime compatibility. Matching runtime bootstrap guidance was also loaded in some actions: ponytail for coding, installed retro before the explicit copied retrospective procedure, and code-review for the independent evidence judge. Actual candidate procedures/references were separately read; these context qualifications are retained rather than claiming complete context isolation.
 
 | Required behavior | Observed outcome and limits |
 |---|---|
@@ -315,7 +315,7 @@ Complete published host security terminals were checked for assigned IDs, phase 
 
 ### Historical documentation-first workflow verification
 
-This assessment is separate from the historical 372-entry cutover above. The new [baseline procedure](config/agent/skills/project-delivery/references/documentation-baseline.md) and its delivery/documentation entry points were exercised from explicit before-edit and changed source copies: fifteen skills, with 108 control assets and 109 candidate assets. Accepted fresh actions used the supplied ordinary-file maps; an optional non-suite coding supplement was explicitly mapped separately. Actual completed actor session records show `openai-codex/gpt-6.1-sol`, High thinking and no fallback. Three independent read-only evidence reviews culminated in support for the current eight-case coverage, not a guarantee of every branch or candidate-only causation.
+This assessment is separate from the historical 372-entry cutover above. The new [baseline procedure](config/agent/skills/project-delivery/references/documentation-baseline.md) and its delivery/documentation entry points were exercised from explicit before-edit and changed source copies: fifteen skills, with 108 control assets and 109 candidate assets. Accepted fresh actions used the supplied ordinary-file maps; an optional non-suite coding supplement was explicitly mapped separately. Actor records show high-effort runs without fallback. Three independent read-only evidence reviews culminated in support for the current eight-case coverage, not a guarantee of every branch or candidate-only causation.
 
 | Case | Observed result |
 |---|---|
