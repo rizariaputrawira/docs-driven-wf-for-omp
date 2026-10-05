@@ -155,26 +155,26 @@ The labels name suggested owners for each phase, not a mandatory skill processio
 flowchart TD
   A[Goal or change<br/>Select only relevant, available guidance] --> B{New app or substantial delivery?}
   B -- No --> C[Bounded native task<br/>Use matching skill if helpful]
-  C --> C1[Update materially affected docs<br/>engineering-docs: maintain]
-  B -- Yes --> D[Classify risk, profile, standards, owners<br/>engineering-docs: setup; project-delivery]
-  D --> E[Product purpose, scope, constraints<br/>project-delivery: specification; brainstorming for consequential unknowns]
-  E --> F[Requirements, stories, quality, security<br/>engineering-docs: requirements; security-review/security-audit only when in scope]
-  F --> G[Architecture, contracts, threats, decisions<br/>engineering-docs: architecture; domain-modeling for terminology/ADRs]
-  G --> H[Detailed design; UI evidence if affected<br/>engineering-docs; Impeccable for UI]
-  H --> I[Verification intent and applicable release/ops/user plans<br/>engineering-docs; relevant specialists as needed]
-  I --> J[Review whole-boundary baseline and plan<br/>project-delivery; plan-review for consequential multi-slice work]
+  C --> C1[Update materially affected docs<br/>/engineering-docs: maintain]
+  B -- Yes --> D[Classify risk, profile, standards, owners<br/>/engineering-docs: setup; /project-delivery]
+  D --> E[Product purpose, scope, constraints<br/>/project-delivery: specification; /brainstorming for consequential unknowns]
+  E --> F[Requirements, stories, quality, security<br/>/engineering-docs: requirements; /security-review /security-audit only when in scope]
+  F --> G[Architecture, contracts, threats, decisions<br/>/engineering-docs: architecture; /domain-modeling for terminology/ADRs]
+  G --> H[Detailed design; UI evidence if affected<br/>/engineering-docs; /Impeccable for UI]
+  H --> I[Verification intent and applicable release/ops/user plans<br/>/engineering-docs; relevant specialists as needed]
+  I --> J[Review whole-boundary baseline and plan<br/>/project-delivery; /plan-review for consequential multi-slice work]
   J --> K{Baseline ready?}
-  K -- No --> L[Resolve gaps and material decisions<br/>engineering-docs: create/extend; brainstorming/domain-modeling when needed]
+  K -- No --> L[Resolve gaps and material decisions<br/>/engineering-docs: create/extend; /brainstorming /domain-modeling when needed]
   L --> J
   K -- Yes --> M[Native approval for exact reviewed baseline and plan<br/>No skill grants approval]
-  M --> N[Persist authorized docs and native plan<br/>project-delivery; engineering-docs]
-  N --> O[Implement and verify authorized slices<br/>Matching skill; TDD only if requested; code-review when needed]
+  M --> N[Persist authorized docs and native plan<br/>/project-delivery; /engineering-docs]
+  N --> O[Implement and verify authorized slices<br/>Matching skill; TDD only if requested; /code-review when needed]
   O --> P{Material reviewed-intent change?}
-  P -- Yes --> Q[Update intended owners and plan; review readiness<br/>engineering-docs; project-delivery]
+  P -- Yes --> Q[Update intended owners and plan; review readiness<br/>/engineering-docs; /project-delivery]
   Q --> M
-  P -- No --> R[Reconcile affected docs with sources and evidence<br/>project-delivery; engineering-docs: maintain]
+  P -- No --> R[Reconcile affected docs with sources and evidence<br/>/project-delivery; /engineering-docs: maintain]
   R --> S{Final acceptance and reconciliation supported?}
-  S -- No --> T[Diagnose and correct remaining gaps<br/>diagnosing-bugs for difficult causes; otherwise matching skill]
+  S -- No --> T[Diagnose and correct remaining gaps<br/>/diagnosing-bugs for difficult causes; otherwise matching skill]
   T --> P
   S -- Yes --> U[Full delivery complete<br/>Evidence and permissions, not a skill label]
 ```
