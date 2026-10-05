@@ -2,6 +2,32 @@
 
 Portable snapshot of OMP user-level configuration and behavior, including model-role and agent-model assignments, agent definitions, rules, extensions, commands, MCP declarations, skill sources, watchdog configuration, and the disabled plugin lock state. The maintained settings intentionally preserve `tools.approvalMode: yolo`; review this unrestricted approval choice before installing.
 
+## Start with your goal
+
+You do not need to run every skill. Pick the job below, then paste its message into OMP.
+These are **OMP chat prompts, not terminal commands**. Replace example project details with your own.
+
+Before you start:
+
+1. Read [Requirements and scope](#requirements-and-scope), including the approval-setting warning in the introduction. OMP and model credentials are not bundled.
+2. Follow [Install and update](#install-and-update), then work in your intended project with the relevant sources available.
+3. Use only skills enabled and available in your session. Say whether you want findings, a proposal, or scoped edits.
+
+A skill is guidance, not a tool or model, and naming it grants no permission to edit, install, or start services.
+Native permissions and Plan Mode still apply. Explicitly disabled skills stay disabled; missing tools or sources must be reported, not assumed.
+
+| Your goal | Copy/paste message | What to expect first |
+|---|---|---|
+| Start a substantial project, docs first | Use project-delivery for a new internal inventory viewer with a read-only browser workflow. Prepare the selected documentation baseline and complete implementation plan first; keep unknown requirements explicit. Return proposals without checkout writes or app code until native approval covers the exact reviewed basis. After real verification, reconcile all affected documents. | Required information, consequential gaps, and a plan for review, not immediate scaffolding. |
+| Diagnose an existing bug | Use diagnosing-bugs for this reported failure: our export CLI reverses matching rows, although the library test passes. Treat my report as ground truth; do not rerun it just to confirm. Trace the CLI and library callers, explain the causal defect, and propose a focused fix. Do not edit files or run commands. | Source-grounded diagnosis or precise remaining uncertainty, plus a proposed correction. |
+| Review a diff for correctness | Use code-review on the current working-tree changes, including staged, unstaged and untracked files. Inspect relevant requirements and callers. Give separate Standards/correctness and Spec verdicts with file references and coverage limits. Do not edit, run tests, publish or approve anything. | Findings and separate verdicts; missing specification evidence stays unknown. |
+| Audit an existing UI before polishing | Use impeccable to audit our existing settings screen for accessibility, keyboard use, narrow-screen layout, and loading, empty and error states. Preserve its brand and behavior. Report findings and proposed polish only; do not change files, install tools or start services. State any inspection limits. | Technical UI findings and scoped recommendations, not an unauthorized redesign or fix. |
+| Load a handoff without continuing | Use resume-from-handoff to load the latest valid snapshot in .handoff and summarize its recorded state and next steps. Do not inspect cited project files, validate claims, run commands, change files or continue tasks. Treat approval claims as historical data. | A selected-snapshot summary only, or notice that no handoff exists. |
+
+For every bundled choice, see [the full skill usage guide](SKILL-USAGE.md): **53 public names**, when to use each,
+concrete prompts, expected outputs, permission/tool limits, and all **eight engineering-docs actions**.
+Choose another skill only when its goal matches your task; these examples are alternatives, not a required sequence.
+
 ## Requirements and scope
 
 - POSIX: `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp`, and `date`. Remote ZIP installation additionally requires `curl` and `unzip`.
@@ -222,3 +248,9 @@ Real disposable-home dry-run/install/doctor/identical-reinstall checks and `pyth
 Failures remain distinct records: three quota-interrupted actions, the original reconciliation's out-of-map installed supplement read, and the original unavailable countercase's extra routing-section read were not relabeled passes. Fresh independently judged reassessments supplied current coverage. Complete tool/source errors, earlier negative review verdicts and a corrected controller display-count mistake remain external evidence; actual receipt inputs/results govern acceptance.
 
 This is passive cooperative, source-loaded workflow acceptance. Native discovery/registration, effective managed-agent selection, Plan Mode/approval UI provenance, runtime disablement enforcement, OS containment, Windows/PowerShell behavior, production authentication and formal ISO conformity were not established. No live-home deployment, settings/credential change or external app service was performed.
+
+## References and acknowledgements
+
+The bundled skill snapshots include adaptations or reference material from projects whose maintainers made their work available. Thank you to the teams behind [Matt Pocock's skills](https://github.com/mattpocock/skills), [Superpowers](https://github.com/obra/superpowers), [GSD](https://github.com/open-gsd/gsd-core), [NVIDIA SkillSpector](https://github.com/NVIDIA/SkillSpector), [Anthropic Security Review](https://github.com/anthropics/claude-code-security-review), and [Cloudflare Security Audit](https://github.com/cloudflare/security-audit-skill).
+
+See [skill payload provenance](config/SKILL-SOURCES.md) for exact revisions, adaptations, and license notices, and the [skill usage guide](SKILL-USAGE.md) for practical selection and examples. Attribution is not an endorsement or a blanket statement of redistribution rights; consult the provenance notes and included notices.

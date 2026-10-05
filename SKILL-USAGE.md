@@ -1,0 +1,230 @@
+# Choose and use a skill in OMP
+
+Start with the outcome, not a procession of skills. You do not need to read the whole catalog.
+
+| Your goal | Start here |
+|---|---|
+| New app or substantial delivery | [Delivery and decisions](#delivery-and-decisions): project-delivery |
+| Find, prepare, audit or reconcile documents | [Engineering documents](#engineering-documents): engineering-docs |
+| Fix, review or work test-first | [Implementation and review](#implementation-and-review) |
+| Improve an existing interface | [UI workflow](#ui-workflow): impeccable first |
+| Name, plan, review or build motion | [Motion](#motion) |
+| Choose a visual direction or generate concepts | [Style specialists](#style-specialists), [Images and design documents](#images-and-design-documents) |
+| Inspect a bundle or security boundary | [Source-only security](#source-only-security) |
+| Pause, load a snapshot or continue | [Handoff and continuation](#handoff-and-continuation) |
+| Simplify code, collect shortcuts or request full output | [Coding and output tools](#coding-and-output-tools) |
+
+## One practical prompt template
+
+Paste an ordinary **message inside OMP**, not a terminal command:
+
+> Use [public skill name] for [specific task]. Inspect [project/files/diff/supplied material]. Preserve [behavior, platform, brand and constraints]. I want [read-only findings / proposed content / authorized edits to named owners]. Expected result: [report, implementation, images or complete files]. Evidence available: [diagnostic, requirements, observed results or none]. Do not [out-of-scope edits, installs, services or configuration changes].
+
+Examples are illustrative and adaptable, not observed facts about this repository. Include a task: several Emil and Swift entrypoints answer a bare name with a readiness greeting.
+
+## Availability, names and permissions
+
+A **skill** is guidance, not an executable, installer, model or tool. An **agent** is a role with instructions and permitted tools. Discovery, model selection and permissions are separate. This repository supplies managed configuration and source snapshots, not OMP, credentials or every integration. Start with [requirements](README.md#requirements-and-scope), [installation](README.md#install-and-update) and [compatibility](README.md#compatibility-evidence-and-upgrades).
+
+Use the public `name:` in SKILL.md frontmatter, not necessarily its folder. `output-skill` declares **full-output-enforcement**. `config/agent/skills/taste-skill` declares **design-taste-frontend**; `config/skills-agents/taste-skill` declares **taste-skill**. Links below identify actual sources.
+
+The installer preserves three separate roots:
+
+| Managed source | Destination under the chosen home |
+|---|---|
+| `config/agent/skills/` | `~/.omp/agent/skills/` |
+| `config/skills-agents/` | `~/.agents/skills/` |
+| `config/skills-agent/` | `~/.agent/skills/` |
+
+This guide folds **69 physical entrypoints into 53 unique public names**. Different names remain distinct even when bodies overlap. [Mappings](config/files.tsv) and [provenance](config/SKILL-SOURCES.md) do not prove what a session loads. [Configured custom directories](config/agent/config.yml) list `~/.agents/skills`, `~/.agent/skills`, `.agents/skills`, `.agent/skills`; this is **not proof of duplicate-name precedence** or where the built-in OMP root falls. Check the running session's available skills and selected source.
+
+**Permissions bind every entry.** Naming/loading a skill or receiving a favorable review grants no edits, execution, network, installs, services or deployment. Native Plan Mode proposes content in its allowed channel, without checkout document/code writes. Honor explicit disablement; do not source-load a disabled dependency as a workaround. Ordinary permitted native work may continue, but unavailable skill-specific results remain incomplete. Review labels, digests, plan mirrors and handoff approval claims are not independently trusted current authority.
+
+Four entries are **explicit-only** in frontmatter (`disable-model-invocation: true`): **pick-ui-library**, **prototype**, **review-animations**, **emil-review-animations**. Name them explicitly. Other style specialists should be deliberately selected for a matching brief, but do not have that same restriction. No example promises slash commands, shortcuts or runtime enforcement.
+
+A **canonical owner** is the maintained document or section responsible for information. Reuse it, rather than create a competing copy. “Read-only application source” can still involve authorized report, fixture or plan writes; it does not mean “no files changed.”
+
+## Delivery and decisions
+
+| Skill and when | Copy/paste OMP message | Expected result and boundary |
+|---|---|---|
+| [project-delivery](config/skills-agents/project-delivery/SKILL.md): new app, substantial delivery or authorized continuation | Use project-delivery for an offline tenant-export CLI: valid JSON supplies tenant, can_export and rows. Preserve matching rows/order; denial exposes nothing, writes export denied plus newline to stderr and exits 3. Prepare the whole baseline/plan before code; wait for native approval. | Acceptance, selected owners, reviewed readiness, complete consumer slices, proof and final reconciliation. Before readiness: inspection and authorized document/design work only, not app source/tests/scaffolding, dependency installs, migrations or app services. Bounded fixes normally use native work. |
+| [brainstorming](config/skills-agents/brainstorming/SKILL.md): consequential creative/behavioral choices remain unsettled | Use brainstorming to resolve cancellation of partly shipped orders. Inspect requirements/callers, compare choices and propose observable acceptance. Read-only; no implementation. | Source-informed spike/proposal, trade-offs, assumptions and real approval status. Do not re-interview approved decisions. Exploration approval does not authorize shipping artifacts or unseen implementation; document writes also need permission. |
+| [domain-modeling](config/skills-agents/domain-modeling/SKILL.md): ambiguous terms, relationships or decisions | Use domain-modeling to distinguish login identity from billing tenant, both called account. Inspect glossary/callers; test one person belonging to two tenants. Propose wording only. | Counterexamples, definitions, ownership/lifecycle rules and justified ADR proposals. An ADR records a consequential architecture decision. No code or architecture authorization; trivial naming needs no ADR, and a numbered proposal is not accepted. |
+| [plan-review](config/skills-agents/plan-review/SKILL.md): consequential multi-slice coverage review | Use plan-review on the export plan/acceptance owner. Check library/CLI integration, denial, row preservation/order, whole-boundary readiness and planned proof. No edits, checks or approval. | Criterion → deliverable → integration → proof coverage, covered/partial/uncovered/unknown states and blockers/warnings/info. Read-only, non-authorizing; trivial edits bypass it. Happy-path tasks cannot compensate for missing required architecture/error/test intent. Integrate findings before native approval. |
+
+### Documentation-first, not a document forest
+
+New-app/substantial delivery needs sufficient **logical information for the whole authorized boundary before code**, not just the first tracer. Reuse owners; a lean CLI can keep substantive README sections instead of separate PRD/SRS/ADR/runbook files.
+
+Prepare dependency-aware coverage: classification/profile and actual obligations; purpose/scope; behavior, acceptance, quality/security; architecture/contracts/threats; detailed and applicable UI design; verification intent; applicable release/operations/recovery/reader plans; then readiness and the implementation plan. Security starts early. Plans do not imply passed tests, deployed targets, successful restores or store acceptance. Standards alignment is not certification or an ISO-mandated waterfall.
+
+The [baseline procedure](config/skills-agents/project-delivery/references/documentation-baseline.md) owns the policy. Native approval must cover the exact material baseline/plan; persist necessary reviewed docs under authorization before implementation. Material intended changes to requirements, architecture/interfaces, security/platform rules or scope require affected owner/readiness and plan updates plus required native reapproval **before dependent code**. Corrections preserving reviewed intent can use current scope.
+
+Finish only after **every required acceptance criterion is supported and every affected document owner reconciles** with source and relevant observed evidence. A guide update alone is insufficient. “Code complete, docs pending” and “docs reconciled, runtime unverified” are not full completion. A bounded native correction updates affected docs only, without the full-app gate.
+
+## Engineering documents
+
+[**engineering-docs**](config/skills-agents/engineering-docs/SKILL.md) finds, selects, creates, audits and maintains necessary information. An unspecified action defaults to **read-only context**, not setup:
+
+> Use engineering-docs for the tenant-export row-order correction. Inspect acceptance, implementation and tests; return constraints and gaps. Do not set up documentation or change files.
+
+The eight native actions below are skill arguments, not invented commands. Example facts: an offline Linux CLI filters public synthetic JSON by tenant, preserves rows/order, denies disallowed export, has no persistence/service, and README owns purpose/acceptance/usage.
+
+| Action and when | Copy/paste OMP message | Outcome and permission |
+|---|---|---|
+| **setup**: select information/owners | Use engineering-docs setup for this offline Linux CLI with public synthetic input and no persistence/service. Reuse README owners; update necessary index/manifest and sections only. | Classification/profile, selection/omissions, owners, sources and gaps. **Authorized document writes**; no mass bundle. Reuse sufficient indexes; preserve/report invalid manifests instead of bypassing them. |
+| **status**: inspect readiness | Use engineering-docs status for the CLI. Compare index/README, show declared versus observed states, required gaps and next action. Do not write. | Scoped phase/document/required/status/next-action table. **Read-only**; due pre-code gaps separate from later unobserved evidence. Active labels do not prove coverage. |
+| **next**: prioritize document work | Use engineering-docs next for the CLI. Rank grounded gaps, prerequisites, blockers and independent drafts. Do not change files. | Bounded recommendations, not a task queue. **Read-only**; material hazards outrank cosmetics. Feasible code cannot bypass required readiness gaps. |
+| **sequence**: understand dependencies | Use engineering-docs sequence for the CLI. Show dependency order, independent drafts, due pre-code gaps and later evidence. Do not write. | Tailored prerequisite/lifecycle view. **Read-only**; sufficient information matters, not separate files or universal numbered gates. Security starts early; results remain unobserved. |
+| **create**: fill missing information | Use engineering-docs create requirements for the CLI. Extend README with filtering, full-row preservation, order and denial; update necessary trace/index links only. Leave unknown denial details explicit. | Substantive right-owner coverage or existing sufficiency. **Authorized document writes**. Requirements resolves to srs, not mandatory SRS files. Unknown aliases get actionable errors. Artifact TDD means technical design, not test-first. |
+| **context**: one task's constraints | Use engineering-docs context for the row-order fix. Inspect acceptance/code/tests; return authoritative anchors and gaps. No manifest setup or edits. | Seven headings: Objective, Scope, Constraints, Relevant Context, Expected Result, Verification, Done Condition. **Read-only**; absent manifest allows provisional context, not setup. Filename priority cannot settle conflicts. |
+| **audit**: compare docs/source/evidence | Use engineering-docs audit for export behavior/design/verification owners. Report drift, gaps and uncertainty against source/evidence. No repairs or execution. | Prioritized documentation findings and state/trace/coverage limits. **Read-only**, not security-audit. Changed digests request review, not automatic semantic-drift findings. |
+| **maintain**: reconcile after change | Use engineering-docs maintain for the order fix. Inspect code and supplied original-path/regression results. Update all affected owners/links only; retain unrelated content and unverified states. | Accurate affected-owner content/evidence states. **Authorized document writes**. Missing execution stays proposed/unverified. Changed intent uses create/owner extension and required reapproval, not false as-built claims. |
+
+Details: [sequence](config/skills-agents/engineering-docs/references/sequence.md), [ownership/manifest](config/skills-agents/engineering-docs/references/manifest.md), [context](config/skills-agents/engineering-docs/references/context-routing.md), [audit](config/skills-agents/engineering-docs/references/audit.md).
+
+## Implementation and review
+
+| Skill and when | Copy/paste OMP message | Expected result and boundary |
+|---|---|---|
+| [tdd](config/skills-agents/tdd/SKILL.md): explicitly selected test-first/red-green-refactor | Use tdd for the approved order fix. Preserve complete rows/order; you may edit relevant tests/code and run scoped checks. Report meaningful RED then observed GREEN, one behavior at a time. | Independent expected values, vertical behavior cycles, minimal fix and optional preserving refactor. Writes **and execution** need authorization; import/setup failure is not RED. Regression requests do not select tdd. Do not discard useful work to manufacture test-first history. |
+| [code-review](config/skills-agents/code-review/SKILL.md): correctness, repo standards, spec fidelity | Use code-review on export WIP, including staged/unstaged/untracked changes. README owns acceptance. Trace CLI/library callers, denial/order. Return separate correctness/Standards and Spec verdicts; no edits, tests, publishing or approval. | Exact comparison scope, pass/issues/unknown verdicts, grounded findings and coverage limits. Read-only by default; absent material spec leaves Spec unknown. Correction review dispositions every prior finding and checks new breakage. Security/complexity have separate scopes. |
+| [diagnosing-bugs](config/skills-agents/diagnosing-bugs/SKILL.md): difficult, flaky, causal or performance investigation | Use diagnosing-bugs: CLI denial leaks rows although the helper test passes. Treat my report as ground truth, not a confirmation replay. Trace/correct the cause; add regressions and run authorized original-path remediation checks. | Discriminating hypotheses/evidence, cause or uncertainty, root correction and consumer/regression proof. Source-only diagnosis is possible; probes/edits require authority. Plausibility is not verified fix. Investigation alone needs no tests/docs; permanent fixes need original-path evidence, not just green helpers. |
+| [writing-for-agents](config/skills-agents/writing-for-agents/SKILL.md): skills and agent-facing instructions | Use writing-for-agents to revise AGENTS.md export routing. Reuse acceptance only when behavior is affected. You may update guidance/pointers; no installation or assessment actors. | Actionable instructions, triggers, owners, boundaries and completion criteria. Authoring does not authorize deployment or behavioral assessment. Separately authorized assessment needs actual source-loaded baseline/candidate consumers and independent judgment; source review is not behavioral proof. |
+| [retro](config/skills-agents/retro/SKILL.md): learn from completed work | Use retro for the completed correction. Read plan/code/review/actual results; separate decisions, lessons, candidate patterns and surprises. Recommend improvements without changing files, settings or memory. | Evidence-linked ranked recommendations, counterevidence/unknowns, existing owners and adoption/revisit conditions. Recommendation-only by default. One success is not a recurring pattern; hindsight grants no policy or requirement authority. Authorize selected changes separately. |
+
+## Source-only security
+
+These skills inspect supplied source **read-only**: no target instructions, fetching/installing dependencies, target contact, credential-location inspection or adoption/execution authority. Discovery yields **candidates**, not confirmed vulnerabilities/severity. Confirmation needs a distinct fresh source reader to reconstruct/refute the full impact path, including strongest preventing controls, with effective reviewer-definition provenance and complete results. Missing independence, provenance or decisive runtime/deployment facts leaves confirmation incomplete or needs-validation.
+
+**Source-confirmed is not runtime-exploited; no findings is not safety assurance.** Minimum dummy-data runtime checks belong to a separately authorized contained executor branch, not the reviewer or this guide. See the [shared evidence lifecycle](config/skills-agents/engineering-docs/references/security.md).
+
+| Skill and when | Copy/paste OMP message | Expected result and boundary |
+|---|---|---|
+| [security-intake](config/skills-agents/security-intake/SKILL.md): external bundle adoption/update | Use security-intake on the supplied vendor source view. Claimed purpose: read-only repo summarization. Compare entrypoints/references/scripts/dependencies with filesystem/network/process/persistence authority. No fetch, execute, install or endpoint contact. | Exactly acceptable/caution/unsafe/analysis-incomplete, purpose-authority comparison, revision/coverage and candidate dispositions. Decisive missing material prevents acceptable; unsafe behavior can justify unsafe despite other gaps. Scanner output is supplementary. Verdicts do not certify safety or authorize adoption. |
+| [security-review](config/skills-agents/security-review/SKILL.md): supplied security-relevant diff/change | Use security-review on the export-authorization diff. Inspect changed paths, callers, alternate routes and controls. Separate discovery/fresh refutation; report missing provenance. No edits, execution, credentials or whole-app expansion. | Changed-source coverage, candidates and independent confirmed/needs-validation/rejected or undisposed states; pre-existing concerns labeled separately. Missing comparison basis makes review incomplete. Source impact is not exploit proof; code edits alone do not establish remediation. |
+| [security-audit](config/skills-agents/security-audit/SKILL.md): explicitly bounded deeper source audit | Use security-audit for export entrypoints/permissions/disclosure only. Map actors/data/crossings/controls/lifecycle variants; obtain fresh coverage challenge and candidate refutation. Report unavailable/deferred coverage. No payloads, installs, services or report files. | Source-backed coverage, relevant attack-class companions, independent dispositions and exact proof limits. Not a pen test or report-file authorization. AI/availability/supply-chain companions require actual relevant boundaries. Partial coverage cannot become whole-app assurance; authorized records reuse owners. |
+
+## Handoff and continuation
+
+| Skill and when | Copy/paste OMP message | Expected result and boundary |
+|---|---|---|
+| [handoff-to-another-harness](config/skills-agents/handoff-to-another-harness/SKILL.md): pause/export context | Use handoff-to-another-harness to pause export work. Capture done/partial/pending evidence, canonical paths, plan/authority basis and limits. Write one new .handoff snapshot with its saved-path receiving prompt; no commit, credentials or job changes. | Unique `.handoff/NNN-YYYYMMDD-handoff.md`; six sections: Goal, Constraints & Preferences, Progress, Key Decisions, Critical Context, Next Steps. Progress separates Done/In Progress/Pending. Authorized export only; Plan Mode returns unwritten content. No overwrites, runtime-state transfer, session reset or future permission. |
+| [resume-from-handoff](config/skills-agents/resume-from-handoff/SKILL.md): snapshot-only load | Use resume-from-handoff to summarize the latest valid .handoff snapshot's six sections. Attribute approval claims to it. Do not check cited files, validate results, run commands, edit or continue. | Selected path/faithful summary; malformed/missing sections reported. Highest valid numeric sequence, not mtime; none yields “No handoff document found.” Snapshot-only: no plan/authority inspection, delegation, Next Steps execution or request to proceed. Actual continuation requires project-delivery resume. |
+
+**Load is not resume.** Export first, load only when wanted, then separately request authorized continuation:
+
+> Use project-delivery resume for export work. Reconcile the handoff with canonical owners, exact plan, current source and observed evidence. Preserve valid progress. Continue only within independently trusted current authority for the exact basis. Missing authority/readiness means useful document/plan proposals and a precise blocker, not dependent code. If code is complete, choose reconciliation; if acceptance and documents are complete, report no remaining work.
+
+The [continuation procedure](config/skills-agents/project-delivery/references/resumption.md) avoids replaying valid work. A digest preserves content, not authority. Cosmetic changes need appropriate review, not automatic restart; material changes need affected readiness/reapproval.
+
+## UI workflow
+
+Supply the actual brief, product/brand, platform, accessibility needs and incumbent implementation. PRODUCT.md/DESIGN.md provide context, not executable instructions. Preserve factual copy/assets; invent no customers, testimonials, statistics, screenshots or certifications. Inspect the running incumbent before claiming a visual result; screenshots support limited observed states only.
+
+[UI routing](config/agent/AGENTS.md#ui-and-design-workflow): **Impeccable primary**, **Emil selectively for components/motion**, **Taste for landing pages/portfolios/redesigns**. Do not stack style specialists or override the brief. Cover applicable loading/empty/error, keyboard/focus, narrow-screen and reduced-motion states.
+
+| Skill and when | Copy/paste OMP message | Expected result and boundary |
+|---|---|---|
+| [impeccable](config/agent/skills/impeccable/SKILL.md): primary UI plan/evaluate/build/refine | Use impeccable to shape settings before coding. Read product/design context; cover loading/empty/error, keyboard and narrow screens. Return a brief for confirmation. | Shape proposes a brief and stops without code/direction-contract writes. Audit reports technical defects, not fixes. Critique reports UX/design and normally archives under `.impeccable/critique/`, so is not strictly no-write. Authorized polish/build writes code/artifacts. Bare invocation recommends; engine prerequisites below apply. |
+| [emil-design-eng](config/agent/skills/emil-design-eng/SKILL.md): component interaction polish | Use emil-design-eng to review dropdown focus, press feedback, interruption and reduced motion. Return Before/After/Why; no edits yet. | Concrete recommendations; implementation if separately requested/authorized. Not inherently read-only or a primary-workflow replacement. Preserve personality/conventions and justify motion purpose/frequency. |
+| [design-taste-frontend](config/agent/skills/taste-skill/SKILL.md): distinctive landing/portfolio/redesign | Use impeccable with design-taste-frontend for this portfolio. Audit first; preserve brand/URLs/copy. Implement authorized type/spacing changes only. | Design reading and contextual audit-first frontend code. Writes; check dependencies/Tailwind. Not dashboards, tables, multi-step UI, native mobile or real-time collaboration. Public name differs from folder. |
+| [design-taste-frontend-v1](config/agent/skills/taste-skill-v1/SKILL.md): exact original-v1 compatibility | Use design-taste-frontend-v1 for the v1-dependent portfolio section's authorized responsive correction. Preserve original stack/content/procedure. | Original layout/motion/density conventions. Writes; compatibility-only, current Taste otherwise default. Check dependencies/Tailwind; stronger legacy motion cannot override accessibility. |
+| [taste-skill](config/skills-agents/taste-skill/SKILL.md): separately named current Taste entrypoint | Use taste-skill with impeccable for the landing page. Inspect brand/page; refine hierarchy/spacing while preserving navigation/legal copy. | Current Taste reading and audit-first implementation. Writes; same landing/portfolio/redesign limits. Pick this or design-taste-frontend, not both; overlapping bodies do not prove aliases/runtime selection. |
+
+### Impeccable setup and copy differences
+
+The [OMP-root](config/agent/skills/impeccable/SKILL.md), [agents-root](config/skills-agents/impeccable/SKILL.md) and [agent-root](config/skills-agent/impeccable/SKILL.md) copies have different source versions/engine pins. The newest OMP-root Commands table adds generate; older tables do not. Follow the loaded copy.
+
+Its procedure runs the context launcher once per session from the actual skill directory, with the project as working directory, then reads the playbook and product/design/surface/native context. Craft-floor guidance loads before UI edits, not planning alone. Missing DESIGN.md does not erase incumbent identity; narrow refinement need not demand a new PRODUCT.md.
+
+The [newest launcher](config/agent/skills/impeccable/scripts/impeccable) uses a standalone binary, not Node/retired npm CLI. Download fallback needs permitted network, writable cache, curl/wget and SHA-256 tooling; an available compatible binary avoids it. Disclose failure/refusal, read existing context directly through permitted tools, and do not invent facts or workaround downloads. Web live/generate/browser iteration needs real web/browser capability and a running surface; native work uses native references. Assets do not supply hooks/services/access.
+
+## Style specialists
+
+These are deliberate directions, not explicit-only frontmatter entries or automatic upgrades. Surface conflicts instead of blending incompatible aesthetics.
+
+| Skill and when | Copy/paste OMP message | Expected result and boundary |
+|---|---|---|
+| [redesign-existing-projects](config/agent/skills/redesign-skill/SKILL.md): targeted upgrade without replacement | Use redesign-existing-projects to audit/implement authorized marketing-page type/spacing upgrades. Keep framework, brand, facts and behavior; no rewrite. | Scan/diagnosis and focused code using existing styling. Writes, not audit-only; inspect dependencies/Tailwind. Effects/placeholders are not mandatory or factual evidence. Impeccable distinguishes refinement/replacement. |
+| [high-end-visual-design](config/agent/skills/soft-skill/SKILL.md): layered, spacious, motion-rich web direction | Use high-end-visual-design for the authorized campaign redesign with real assets/licensed fonts. Preserve contrast; flag brief conflicts first. | Prescribed layout/type/choreographed frontend treatment. Writes; strong style, not neutral polish. Actual premium-font availability/licensing required; not a default for minimalist/functional UI. |
+| [gpt-taste](config/agent/skills/gpt-tasteskill/SKILL.md): AIDA marketing with GSAP scroll motion | Use gpt-taste for the approved motion-led campaign with real copy/assets. Inspect React/Tailwind/GSAP; label simulated layout selection as design, not execution. | Design-plan block and composition/pin/scrub/stack code. Writes; needs applicable GSAP/@gsap/react/ScrollTrigger. AIDA: Attention, Interest, Desire, Action. Mock randomization is not a run; motion still needs accessible purpose. |
+| [minimalist-ui](config/agent/skills/minimalist-skill/SKILL.md): warm monochrome editorial direction | Use minimalist-ui for the authorized editorial update. Preserve content, use available fonts, avoid gradients/heavy shadows, implement responsive type/spacing. | Restrained warm-neutral code. Writes, not generic cleanup. Headline bans gradients but later suggests ambient ones: honor the explicit brief, not both. Fonts/imagery are not automatically available. |
+| [industrial-brutalist-ui](config/agent/skills/brutalist-skill/SKILL.md): blueprint/industrial-print or telemetry direction | Use industrial-brutalist-ui for the approved light Swiss industrial-print portfolio. Use real content and accessible controls. | Grid/macro-micro type styling. Writes; choose one archetype/substrate, not mixed print/CRT. Textures/framing must preserve legibility; invent no operational data. Not a universal default. |
+
+## Components and platform tools
+
+| Skill and when | Copy/paste OMP message | Expected result and boundary |
+|---|---|---|
+| [apple-design](config/agent/skills/apple-design/SKILL.md): web direct manipulation/springs/materials | Use apple-design to review web-sheet pointer tracking, release velocity and interruption. Recommend reduced motion; no edits. | Concrete gesture/motion guidance; writes when requested/authorized. Web translation, not SwiftUI or official Apple material package. Translucency needs purpose; source cannot prove gesture feel. |
+| [pick-ui-library](config/agent/skills/pick-ui-library/SKILL.md): one explicit library recommendation | Use pick-ui-library for long React-list virtualization. Inspect package.json; recommend one library without installing/replacing anything. | Curated task match/dependency mismatch. **Explicit-only**; recommendation scope. Wiring/install/replacement requires authorization. A fade does not warrant a motion dependency. |
+| [prototype](config/agent/skills/prototype/SKILL.md): compare working alternatives explicitly | Use prototype for three isolated invitation-card variants using our tokens/content. Show picker/tradeoffs; stop for my choice, no production integration. | Distinct functional variants/live picker. **Explicit-only, isolated code writes**, one piece per run. Needs runnable surface or standalone HTML branch. Promote chosen variant under authority; remove prototype unless retention requested. |
+| [break-ui](config/agent/skills/break-ui/SKILL.md): worst-case data/state stress | Use break-ui on the member list. Read its contract; create development-only normal/worst-case fixtures/toggle, render failures and propose fixes. Stop before fixes. | Harness/fixture writes and observed breaks/remedies. **Not read-only**. Inject at real data boundary, not distorted CSS/markup. No production toggle or fabricated claims. Fix on request; keep fixtures unless told otherwise. |
+| [mobile-native](config/agent/skills/mobile-native/SKILL.md): phone web/PWA touch/viewport/notch issues | Use mobile-native to fix PWA input zoom and browser chrome hiding actions. Preserve user zoom; explain CSS/meta changes and remaining physical-phone checks. | Minimal browser/PWA fixes. Writes; not React Native, Expo, Swift or motion design. Never mask symptoms with disabled zoom/global text selection. Verified feel requires hardware, not desktop emulation. |
+| [ask-sonner](config/agent/skills/ask-sonner/SKILL.md): React Sonner setup/style/toast defects | Use ask-sonner to fix duplicate save-success toasts. Inspect Toaster mounts/callers; preserve save behavior/theme. | Sonner-specific diagnosis/wiring when authorized. Needs actual React/Sonner/API context, not general notification architecture. One Toaster mount, client calls; guidance does not install it. |
+
+## Images and design documents
+
+Image instructions supply no generator, credentials, subscription or spending permission. Brandkit, imagegen entries and image-to-code's visual route need **available, permitted image generation**. Missing capability is a prerequisite gap, not permission to present prose as images. Concepts are not apps; screenshots cannot prove keyboard/error/authorization behavior.
+
+| Skill and when | Copy/paste OMP message | Expected result and boundary |
+|---|---|---|
+| [brandkit](config/agent/skills/brandkit/SKILL.md): image-led identity overview | Use brandkit for one concept board from supplied name/audience/approved assets. Explore a product-action logo; label concepts, not certifications/screenshots. | Coordinated image, commonly 3-by-3 logo/type/palette/applications. Needs generator/brand inputs. Not app code, editable vector delivery, trademark clearance or deployed evidence. |
+| [imagegen-frontend-web](config/agent/skills/imagegen-frontend-web/SKILL.md): website section references | Use imagegen-frontend-web for exactly three separate horizontal references: introduction, real-work showcase, contact. Supplied assets/copy, one brand world; images only. | Coherent labeled references, **one generation per section**, no whole-page collage. Not code. Specify count; default trust/testimonial packs do not authorize invented proof. |
+| [imagegen-frontend-mobile](config/agent/skills/imagegen-frontend-mobile/SKILL.md): mobile screen/flow concepts | Use imagegen-frontend-mobile for three iOS notes concepts: list, editor, save-error recovery. Supplied copy, consistent phone frames; images only. | Platform-aware flow images, frames by default. No code/implementation instructions. Needs platform/flow context; regenerate unclear screens, not old-board crops. No platform-behavior proof. |
+| [image-to-code](config/agent/skills/image-to-code-skill/SKILL.md): image-first website build | Use image-to-code for the authorized two-section portfolio. Generate fresh introduction/gallery references, analyze type/spacing/assets/interactions, then implement actual content. | References, extracted decisions and matching frontend files. Generation **plus code writes**; not mere screenshot transcription. Without generation the visual route is incomplete. Codex favors fresh sections/details, not collage crops; technical fixes have separate direct-code allowance. |
+| [stitch-design-taste](config/agent/skills/stitch-skill/SKILL.md): DESIGN.md for Google Stitch | Use stitch-design-taste to propose DESIGN.md from approved brand/screens: color roles/hex, available type, responsive layout and accessibility. No writing or Stitch calls yet. | Semantic design-system document, authorized document writes, not app code. Source names Stitch access; MCP optional. Local proposals can avoid calls, generated screens need real access. Perpetual-loop rules can conflict with task UI; do not silently adopt them. |
+
+## Motion
+
+Choose the stage first, not the library. Unprefixed/Emil-prefixed counterparts are alternative public entrypoints, not two passes to stack. Preserve tokens, interruption, frequency and reduced motion; **no animation** can be correct.
+
+| Skill and when | Copy/paste OMP message | Expected result and boundary |
+|---|---|---|
+| [animation-vocabulary](config/agent/skills/animation-vocabulary/SKILL.md): name an effect | Use animation-vocabulary: what is a popover growing from its trigger called? Give closest glossary term/definition and one alternative; no code. | Glossary answer, not audit/build/design selection. State approximation or missing term rather than inventing vocabulary. |
+| [find-animation-opportunities](config/agent/skills/find-animation-opportunities/SKILL.md): worthwhile static seams | Use find-animation-opportunities on checkout confirmation without edits. Propose worthwhile seams with source references, values/reduced motion and rejected candidates. | Short prioritized proposals/rejections/verdict. Read-only source; not existing-motion fixes. Frequency/purpose/speed/function checks filter suggestions; nothing may merit motion. |
+| [emil-find-animation-opportunities](config/skills-agents/emil-find-animation-opportunities/SKILL.md): Emil-prefixed static-seam proposals | Use emil-find-animation-opportunities on upload completion. Give precise worthwhile proposals, reduced-motion alternatives/rejections; no source edits. | Same restrained proposal role, separately named. No implementation/existing-motion diagnosis; not a second finder pass. |
+| [improve-animations](config/agent/skills/improve-animations/SKILL.md): existing-motion roadmap/fix specifications | Use improve-animations to audit existing motion without app edits. Rank findings; stop for selection. Then write selected detailed plans in the authorized location only. | Audit then selected plans/index, normally plans/ or animation-plans/. **Read-only app source, plan writes**; no automatic installs/builds/formats/fixes. Explicit authorized executor variant implements in isolated worktree/reviews diff, requiring actual delegation/worktree capability; never run silently. |
+| [review-animations](config/agent/skills/review-animations/SKILL.md): one existing motion diff | Use review-animations on the popover diff. Cite easing/duration/origin/interruption/reduced-motion/hover lines; return findings/verdict without edits. | Before/After/Why and tiered Block/Approve. **Explicit-only, review-only**; not codebase roadmap, general code review, implementation, native approval or device-feel proof. |
+| [emil-review-animations](config/skills-agents/emil-review-animations/SKILL.md): Emil-prefixed focused review | Use emil-review-animations on toast changes without edits. Cite standards; separate performance, feel/accessibility and give verdict. | Before/After/Why and tiered verdict using its own standards. **Explicit-only, review-only**; not extra validation after its counterpart or non-motion code review. |
+| [animate](config/agent/skills/animate/SKILL.md): known web motion construction | Use animate for occasional popover enter/exit. Reuse tokens, anchor to trigger, handle reversal/reduced motion; no library for a fade. | Authorized web code, purpose/frequency/ingredients and feel-check needs; matching recipes apply. Not proposal hunt, roadmap, diff review or native implementation. Frequent/keyboard actions may merit no motion. |
+| [emil-animate](config/skills-agents/emil-animate/SKILL.md): Emil-prefixed web construction | Use emil-animate for subtle pointer-button feedback using existing tokens/reduced motion. Preserve its action. | Authorized web implementation with its own recipes, same purpose/frequency framework. Alternative to animate, not another stage. Not finder, roadmap, review or Expo work. |
+| [animate-expo](config/agent/skills/animate-expo/SKILL.md): Expo/React Native motion/gestures/haptics | Use animate-expo to fix swipe dismissal. Inspect SDK/Reanimated/Gesture Handler; keep continuous motion on UI runtime, carry release velocity and support reduced motion. | Authorized native JS/TS with thread/tool/device choices. Needs actual Worklets/Reanimated and applicable gesture/router/haptic setup; check recipe version/root constraints. Not Swift/web CSS. Feel requires release build on slowest supported physical device, not Expo Go/simulator. |
+
+## Coding and output tools
+
+| Skill and when | Copy/paste OMP message | Expected result and boundary |
+|---|---|---|
+| [ponytail](config/agent/skills/ponytail/SKILL.md): simplest correct coding | Use ponytail full to propose simplifying one duplicated helper. Trace callers, prefer existing/standard-library/native features; show patch/minimal regression check, no edits. | Minimal complete solution, concise omissions/revisit conditions. Simplicity cannot remove acceptance/safety/accessibility; edits/checks need authority. Session instruction persistence: full default, lite names alternatives, ultra favors deletion. Change level in ordinary language; “stop ponytail”/“normal mode” disables. No runtime flag-file guarantee. |
+| [ponytail-audit](config/agent/skills/ponytail-audit/SKILL.md): whole-repo complexity | Use ponytail-audit to rank supported deletions/simplifications with paths and standard-library/native replacements. Report only, no fixes. | Delete/stdlib/native/yagni/shrink findings and possible reductions, or “Lean already. Ship.” Read-only one-shot, **complexity only**, not correctness/security/performance. Possible cuts are not realized savings; separately authorize fixes. |
+| [ponytail-review](config/agent/skills/ponytail-review/SKILL.md): diff complexity | Use ponytail-review on the working-tree diff. Report reinvented standard-library behavior/dependencies/abstractions with lines/replacements. No edits; not correctness/security review. | Focused findings and supported possible line reduction, or clean complexity result. Read-only, not persistent coding mode; needs real diff. Minimal assertions/smokes are not bloat. Clean is not a general quality verdict. |
+| [ponytail-debt](config/agent/skills/ponytail-debt/SKILL.md): marked shortcuts | Use ponytail-debt to collect ponytail: comments, excluding dependencies/build output. Group locations/ceilings/triggers and no-trigger flags. Chat ledger only; no writes. | Marker ledger/counts, not all technical debt. Read-only one-shot by default; no markers is not no debt. Saving needs destination/authority, not upgrade/policy permission. Missing ceilings/triggers remain missing. |
+| [ponytail-gain](config/agent/skills/ponytail-gain/SKILL.md): source benchmark display | Use ponytail-gain to show its benchmark-median scoreboard, not measured project savings. No files/mode changes. | Source lines/cost/speed medians across five tasks/three models, not a new run. Explicit one-shot display, no persistence. Raw data/methodology absent from entrypoint; no independent validation or invented local speedup. |
+| [ponytail-help](config/agent/skills/ponytail-help/SKILL.md): options reference | Use ponytail-help to explain lite/full/ultra and review/audit/debt/gain. Reference only; no activation or edits. | Compact options/deactivation card. Explicit one-shot display, no mode/flag/persistence change. Source invocation strings do not establish OMP shortcut support. |
+| [write-swift](config/agent/skills/write-swift/SKILL.md): Swift implementation/review/migration | Use write-swift to review the concurrency diagnostic against sources/toolchain/targets. Propose compatible root correction; no unchecked Sendable suppression or code/build-setting edits yet. | Isolation/ownership/task/value-type guidance or authorized implementation. Needs Swift project/compiler-language/target context; compilation/profiling needs real tools. Source baseline is not installed availability. Not mobile-web/PWA or Expo motion, nor substitute UI/platform testing. Include a specific task. |
+| [full-output-enforcement](config/agent/skills/output-skill/SKILL.md): exhaustive scoped output | Use full-output-enforcement for the agreed patch. Read current files; return every complete final file in chat without skeletons/omissions/placeholders. No writes or extra scope. | Full requested deliverables; interruption uses clean section/file/function break and completed-count/next-section marker. Paused is incomplete. Missing inputs stay blockers, not fake code. Cannot override scope, permissions, Plan Mode/readiness or authorize tools/tests. Full code is not verified code. |
+
+## Short choose-this-not-that workflows
+
+### New app versus bounded bug
+
+**New app:** project-delivery → resolve only unsettled decisions → select/reuse owners with enabled engineering-docs → review whole-boundary readiness/plan → native approval → real consumer implementation/checks → all-owner reconciliation. Plan-review assists consequential multi-slice review, not approval. Select tdd only for requested test-first.
+
+**Bounded bug:** no automatic full-app setup. Example:
+
+> The export CLI reverses matching rows; README already requires input order. Fix the bounded defect, preserve unrelated changes, add regression coverage and run the scoped original CLI-path check. Update affected docs only. Use diagnosing-bugs if needed; do not create a full baseline or assume test-first.
+
+Treat the report as ground truth. Discriminate causes instead of confirmation-only replay; green helper tests cannot replace original-consumer proof.
+
+### Review the scope you mean
+
+Code-review: correctness/spec. Plan-review: planned coverage. Ponytail-review/audit: complexity. Security-review: changed boundary; security-audit: explicitly bounded depth. Engineering-docs audit: document drift. Explicit motion review: one animation diff. None automatically fixes or approves; missing evidence is unknown, not clean.
+
+### Refine an incumbent, do not accidentally replace it
+
+Use impeccable audit for technical issues or critique for UX; critique normally archives, so request proposed chat-only content if writes are forbidden. Authorize polish preserving identity/copy/routes/behavior. Add Emil only for component details, mobile-native for browser/PWA defects. Break-ui writes fixtures then proposes fixes; prototype explicitly writes isolated alternatives and waits. Taste complements landing/portfolio/redesign, not dense settings UI. A new visual world needs a real redesign decision, not concealed polish.
+
+### Match motion stage and platform
+
+Vocabulary names; finders propose static seams; improve-animations audits/plans existing motion; explicit reviewers judge diffs. Animate/emil-animate build web motion, animate-expo handles native JS/TS, write-swift handles Swift. Do not confuse mobile-native browser fixes with native-app animation. Device feel, generated images and runtime outcomes require observation, not inference from source.
