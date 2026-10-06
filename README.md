@@ -95,6 +95,8 @@ Fresh unforced main and native plan roles request `openai-codex/gpt-6.1-sol:medi
 
 Use scout for bounded discovery, routine/task for clear implementation, and the existing review agents for source review. Select slow only for evidence-backed difficult reasoning or consequential uncertainty, not file count or missing access. Advisor remains optional evidence-only Sol-high advice, not automatic investigation or pairing. Max concurrency is three, recursion depth one, and one writer owns a shared checkout unless isolation is established. Native approval, Plan Mode, security role contracts and the unchanged exact-identity tool hook retain their boundaries.
 
+`task.showResolvedModelBadge: true` enables OMP's native task UI badge showing the actual resolved model ID for subagent execution, rather than only the configured role. This is model-resolution observability only, not proof of cost, token usage, quality, OS isolation or authorization.
+
 The cost goal is to reserve Sol context for reasoning/orchestration/integration while Luna collects and executes mechanical context. Delegation can increase total tokens; total usage, identity-specific usage, latency, quality and verification confidence are distinct. No token or dollar savings are implied without measurements.
 
 | Agent | Native override | Configured model/thinking |

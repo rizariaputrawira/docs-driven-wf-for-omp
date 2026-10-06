@@ -49,6 +49,7 @@ retry:
   fallbackChains:
     {}
 task:
+  showResolvedModelBadge: true
   prewalk: false
   eager: default
   enableEffort: false

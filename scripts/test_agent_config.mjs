@@ -26,6 +26,7 @@ function validate(config, definitions) {
   assert.equal(config.defaultThinkingLevel, "medium", `${configPath}: default thinking level`);
   assert.equal(config.task?.maxConcurrency, 3, `${configPath}: max concurrency`);
   assert.equal(config.task?.maxRecursionDepth, 1, `${configPath}: max recursion depth`);
+  assert.equal(config.task?.showResolvedModelBadge, true, `${configPath}: resolved model badge`);
   const names = new Set();
   for (const [path, text] of definitions) {
     const data = frontmatter(text, path);
