@@ -448,21 +448,9 @@ See [skill payload provenance](config/SKILL-SOURCES.md) for exact revisions, ada
 
 For the upstream project's broader workflow, supported-harness installation/update instructions, and skill-library overview, see the [Superpowers README](https://github.com/obra/superpowers#readme). This repository is an OMP-specific portable configuration snapshot: it contains selected, locally adapted Superpowers material with provenance in [skill payload sources](config/SKILL-SOURCES.md); it is not the upstream Superpowers plugin, and upstream installation commands do not install this repository.
 
-### OMO architecture comparison
+### Further reading
 
-The [OMO architecture overview at commit `a8019016f47a9d814ebcc24bd921a561f065ee80`](https://github.com/code-yeongyu/oh-my-openagent/blob/a8019016f47a9d814ebcc24bd921a561f065ee80/docs/guide/overview.md) was consulted as a comparative reference. The table is an attributed summary of local design decisions against themes in that guide; this audit found no OMO prompt, code, or package asset in the managed payload. A request for the repository-root `LICENSE` at that commit returned HTTP 404, so this audit did not establish an OMO license grant or assess other possible licensing terms. OMP remains authoritative for this payload; see its [v18.6.1 native agent contracts](https://github.com/can1357/oh-my-pi/blob/v18.6.1/docs/task-agent-discovery.md) and [Plan Mode child restrictions](https://github.com/can1357/oh-my-pi/blob/v18.6.1/packages/coding-agent/src/task/structured-subagent.ts).
-
-| Reference concept | Local disposition |
-|---|---|
-| Main integration ownership | Already represented: main owns scope, integration and evidence acceptance. |
-| Repository versus documentation research | Useful minimal scout enhancement, with versioned provenance; no librarian role. |
-| Skill versus execution-role distinction | Useful documentation principle, already represented by composing passive procedures with bounded workers. |
-| Independent plan review | Already represented: review-only slow plus plan-review and exact native local-plan access. |
-| Evidence acceptance and plan-driven decomposition | Already represented: the seven-field packet and per-slice executor rationale. |
-| Category routing, team/DAG framework, Boulder/persistent state, continuation loops and keyword routing | Unnecessary duplication for this configuration payload; no orchestration state or router added. |
-| Architect/librarian/plan-consultant/plan-reviewer, extra plugin and model-prompt families | No distinct contract justifies more public roles, integrations or model taxonomy. Preserve seven roles and dormant plugin state. |
-| Universal documentation/approval pipeline | Incompatible with ordinary lightweight native flow; documentation-dependent delivery remains conditional. |
-| Cross-harness hard read-only/security claims | Uncertain without matching native evidence; do not import containment guarantees. |
+For runtime behavior, see OMP's [v18.6.1 agent discovery](https://github.com/can1357/oh-my-pi/blob/v18.6.1/docs/task-agent-discovery.md) and [Plan Mode child restrictions](https://github.com/can1357/oh-my-pi/blob/v18.6.1/packages/coding-agent/src/task/structured-subagent.ts). The [OMO architecture overview at commit `a8019016f47a9d814ebcc24bd921a561f065ee80`](https://github.com/code-yeongyu/oh-my-openagent/blob/a8019016f47a9d814ebcc24bd921a561f065ee80/docs/guide/overview.md) was consulted as background; this README documents this repository's capabilities and does not compare products or include OMO assets.
 
 ### Third-party source and license notes
 
