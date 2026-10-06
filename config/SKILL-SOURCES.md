@@ -56,7 +56,7 @@ Ponytail snapshots identify [DietrichGebert/ponytail](https://github.com/Dietric
 
 Existing-file changes to Impeccable, images/brand, Stitch, break-ui and prototype are local authority/brief corrections; no legacy content is moved into new assets. A later complexity-only correction removes break-ui's duplicated Rule 6 while retaining the existing general trust rule and all other procedures. Stitch DESIGN.md is an independently authored, explicitly labeled example, not canonical project truth. Shared motion guidance is lazy-loaded from animate rather than stacked automatically.
 
-The later complexity-only cleanup consolidates repeated image/detail guidance and optional direction quotas in the image-to-code, web/mobile image and brandkit snapshots. Impeccable's existing `scripts/live-browser.js` has a marked local modification sharing count-button click behavior between replace/insert rows. No upstream refresh, new asset, dependency, license claim or integration change is implied; the recorded package pin and full notices remain intact.
+The later complexity-only cleanup consolidates repeated image/detail guidance and optional direction quotas in the image-to-code, web/mobile image and brandkit snapshots. Impeccable's existing `scripts/live-browser.js` has marked local modifications sharing count-button click behavior between replace/insert rows and removing six unreferenced private helpers plus two unused locals. No upstream refresh, new asset, dependency, license claim or integration change is implied; the recorded package pin and full notices remain intact.
 
 The local Impeccable routing modification additionally links the independently authored [OpenDesign reference](agent/skills/impeccable/reference/open-design.md), with a conditional pointer in managed AGENTS.md. It defines explicit external-artifact availability, project selection, handoff, run inspection and proposal boundaries without adding a public skill, role or routing engine. Immutable official OpenDesign interface/source links and inspected-version distinctions are evidence only; no upstream executable or prose payload is redistributed. Existing Impeccable attribution, Apache-2.0 notice and package pin remain unchanged.
 
@@ -65,7 +65,7 @@ The `commit-message` skill is original, locally authored guidance based on the t
 
 ## Retired entrypoints: migration map
 
-See the canonical [existing-home skill retirement map](../README.md#existing-home-skill-retirement) for all 17 historical identifiers, surviving owners and non-pruning cleanup boundaries.
+See the canonical [existing-home skill retirement map](../docs/migration.md#existing-home-retired-entrypoints) for all 17 historical identifiers, surviving owners and non-pruning cleanup boundaries.
 
 ## Updates, deployment and evidence limits
 
@@ -73,4 +73,4 @@ An upstream updater targeting `.agent/skills/` or `.agents/skills/` can recreate
 
 Tests, reports, recovery receipts, credentials, histories, generated state and assessment fixtures are excluded from deployment. OMP/model credentials and optional external integrations remain machine-local prerequisites; installation does not enable services. The earlier documentation-driven cutover changed passive skill payload, conditional AGENTS routing and the existing security-reviewer output/procedure. This consolidation additionally aligns skill-source discovery with the native folder; it does not alter model/approval policy or unrelated runtime configuration.
 
-Historical root-consolidation evidence: POSIX integration passed 240 entries and a private-home install/doctor/reinstall plus OMP 18.5.0 passive discovery observed 53 names. Earlier 372/373-entry and 304-mapping results also remain history. They do not establish acceptance of the balanced catalog. Current verification and limits are recorded in README. No live-home deployment, engine/service execution or Windows verification is inferred from these records.
+Historical root-consolidation evidence: POSIX integration passed 240 entries and a private-home install/doctor/reinstall plus OMP 18.5.0 passive discovery observed 53 names. Earlier 372/373-entry and 304-mapping results also remain history. They do not establish acceptance of the balanced catalog. Current verification and limits are recorded in [verification records](../docs/verification.md). No live-home deployment, engine/service execution or Windows verification is inferred from these records.

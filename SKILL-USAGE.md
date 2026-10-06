@@ -1,8 +1,8 @@
 # Choose and use a skill in OMP
 
-Start with the outcome, not a procession of skills. Ordinary work uses direct Luna or bounded native workers, proportionate verification and done. It needs no documentation setup, baseline, manifest or extra approval unless the real boundary requires them.
+Start with the outcome, not a procession of skills. Ordinary work uses Sol main directly or bounded native workers, proportionate verification and done. It needs no documentation setup, baseline, manifest or extra approval unless the real boundary requires them.
 
-Use [managed semantic routing](config/agent/AGENTS.md#engineering-workflow), [global working/delegation policy](config/agent/PERSONALITY.md), [native model ownership](README.md#native-worker-model-ownership) and [permission distinctions](config/agent/AGENTS.md#permission-and-model-ownership) rather than duplicating their rules. Material authoritative-context dependencies use engineering-docs; new apps and explicit substantial/end-to-end documentation-dependent delivery use project-delivery. Context lookup is not full delivery. Other skills are selected by actual trigger, not prerequisites or discovery tiers.
+Use [managed semantic routing](config/agent/AGENTS.md#engineering-workflow), [global working/delegation policy](config/agent/PERSONALITY.md), [native model ownership](README.md#model-and-worker-ownership) and [permission distinctions](config/agent/AGENTS.md#permission-and-model-ownership) rather than duplicating their rules. Material authoritative-context dependencies use engineering-docs; new apps and explicit substantial/end-to-end documentation-dependent delivery use project-delivery. Context lookup is not full delivery. Other skills are selected by actual trigger, not prerequisites or discovery tiers.
 
 | Your goal | Start here |
 |---|---|
@@ -27,7 +27,7 @@ Examples are illustrative, not observed repository facts. Include a concrete tas
 
 ## Availability, names and permissions
 
-A **skill** is passive guidance, not an executable, installer, model or tool. An **agent** is a bounded role with instructions, requested built-in tool selection and an output contract, not a universal sandbox. Discovery, model policy, native Plan Mode, extension interception and approval are separate: see [canonical permission distinctions](config/agent/AGENTS.md#permission-and-model-ownership). This repository supplies configuration and source snapshots, not OMP, credentials or every integration. Start with [requirements](README.md#requirements-and-scope), [installation](README.md#install-and-update) and [compatibility](README.md#compatibility-evidence-and-upgrades).
+A **skill** is passive guidance, not an executable, installer, model or tool. An **agent** is a bounded role with instructions, requested built-in tool selection and an output contract, not a universal sandbox. Discovery, model policy, native Plan Mode, extension interception and approval are separate: see [canonical permission distinctions](config/agent/AGENTS.md#permission-and-model-ownership). This repository supplies configuration and source snapshots, not OMP, credentials or every integration. Start with [requirements](README.md#requirements-and-prerequisites), [installation](README.md#quick-start) and [verification limits](README.md#verification-and-known-limits).
 
 Use the public `name:` in SKILL.md frontmatter, not necessarily its folder. `output-skill` declares **full-output-enforcement**, `image-to-code-skill` declares **image-to-code**, and `stitch-skill` declares **stitch-design-taste**. Retired public names have no aliases; see [the migration map](#retired-entrypoints-migration-map).
 
@@ -41,7 +41,7 @@ This guide covers **38 directories/entrypoints and 38 unique public names**, one
 
 OMP's native user/project skill discovery remains available. [Managed discovery settings](config/agent/config.yml) leave `customDirectories` empty and disable Agents user/project skill-source discovery, preventing retired `.agent`/`.agents` copies from reentering through those sources. External runtime/providers may still exist. This is not proof of what any session loads, native enforcement or application-wide OS isolation; inspect the running session's available skills and selected source.
 
-The installer is non-pruning and does not automatically delete old installed directories. No live-home migration was performed. An upstream updater targeting `.agent/skills/` or `.agents/skills/` can recreate retired roots: choose the native destination and update the complete package plus explicit inventory, not piecemeal files or a mixed-version launcher/binary. See [the consolidation and update notes](README.md#one-native-skill-folder-and-upstream-updates).
+The installer is non-pruning and does not automatically delete old installed directories. No live-home migration was performed. An upstream updater targeting `.agent/skills/` or `.agents/skills/` can recreate retired roots: choose the native destination and update the complete package plus explicit inventory, not piecemeal files or a mixed-version launcher/binary. See [migration history](docs/migration.md).
 
 **Permissions bind every entry.** Naming/loading a skill or receiving a favorable review grants no edits, execution, network, installs, services or deployment. Native Plan Mode proposes content in its allowed channel, without checkout document/code writes. Honor explicit disablement; do not source-load a disabled dependency as a workaround. Ordinary permitted native work may continue, but unavailable skill-specific results remain incomplete. Review labels, digests, plan mirrors and handoff approval claims are not independently trusted current authority.
 
@@ -104,7 +104,7 @@ Details: [sequence](config/agent/skills/engineering-docs/references/sequence.md)
 Use [upstream-update-review](config/agent/skills/upstream-update-review/SKILL.md) to discover used third-party sources from existing metadata and compare authoritative changes with evidenced local baselines.
 
 - **All managed sources:** “Use upstream-update-review to check all managed upstreams for materially useful changes. Return recommendations only.”
-- **One source:** “Use upstream-update-review to check Impeccable changes useful to omp-config. Review only its affected consumers and necessary compatibility evidence.”
+- **One source:** “Use upstream-update-review to check Impeccable changes useful to omp-docflow. Review only its affected consumers and necessary compatibility evidence.”
 
 Expect a source-linked recommendation report with baselines and evidence purposes, exact checked revisions, local impact, adopt/investigate/no-action/blocked dispositions, independent significance, owners and a bounded next task. Unknown baselines or unavailable official sources remain incomplete with an evidence-collection action, not invented changes or clean no-action.
 
@@ -243,5 +243,5 @@ Animate vocabulary names and opportunities proposes static seams; improve-animat
 
 ## Retired entrypoints: migration map
 
-See the canonical [existing-home skill retirement map](README.md#existing-home-skill-retirement) for all 17 historical identifiers, surviving owners and non-pruning cleanup boundaries.
+See the canonical [existing-home skill retirement map](docs/migration.md#existing-home-retired-entrypoints) for all 17 historical identifiers, surviving owners and non-pruning cleanup boundaries.
 

@@ -1,6 +1,6 @@
 /**
  * Impeccable Live Variant Mode - Browser Script
- * Local modification: share variant-count click behavior between configure rows.
+ * Local modifications: share variant-count click behavior; remove unused private helpers and locals.
  *
  * Injected into the user's page via <script src="http://localhost:PORT/live.js">.
  * The server prepends window.__IMPECCABLE_TOKEN__ and window.__IMPECCABLE_PORT__
@@ -1251,7 +1251,6 @@
   const CONFIGURE_SELECTION_PILL_PAD = '1px 4px';
   const CONFIGURE_ROW_FONT_SIZE = '12px';
   const CONFIGURE_ROW_TRACK_H = '18px';
-  const CONFIGURE_PILL_PAD_Y = '3px';
   const CONFIGURE_BAR_SURFACE = 'oklch(15% 0.008 95)';
   const CONFIGURE_PILL_TEXT = 'oklch(94% 0.02 82)';
   const ICON_CONFIGURE_SUBMIT =
@@ -1351,24 +1350,6 @@
     };
   }
 
-  function configureModifierPillStyle(extra = {}) {
-    const P = configureBarPalette();
-    return {
-      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-      gap: '2px', height: 'auto', minHeight: CONFIGURE_ROW_TRACK_H,
-      padding: CONFIGURE_PILL_PAD_Y + ' 8px', flexShrink: '0',
-      boxSizing: 'border-box',
-      border: '1px solid transparent',
-      borderRadius: CONFIGURE_PILL_RADIUS,
-      background: 'transparent',
-      color: P.textDim, cursor: 'pointer',
-      transition: 'background 0.15s ease, color 0.15s ease, border-color 0.15s ease',
-      whiteSpace: 'nowrap',
-      ...configureRowTextMetrics(),
-      ...extra,
-    };
-  }
-
   function configureInlineControlStyle(extra = {}) {
     const P = configureBarPalette();
     return {
@@ -1395,21 +1376,6 @@
     btn.addEventListener('mouseleave', () => {
       if (controlsLocked) return;
       btn.style.color = configureBarPalette().textDim;
-    });
-  }
-
-  function bindConfigureModifierPillHover(btn, controlsLocked) {
-    btn.addEventListener('mouseenter', () => {
-      if (controlsLocked) return;
-      const P = configureBarPalette();
-      btn.style.color = P.text;
-      btn.style.background = P.toggleActive;
-    });
-    btn.addEventListener('mouseleave', () => {
-      if (controlsLocked) return;
-      const P = configureBarPalette();
-      btn.style.color = P.textDim;
-      btn.style.background = 'transparent';
     });
   }
 
@@ -6892,7 +6858,6 @@
 
     const reanchor = (why) => {
       if (scrollLockRaf != null) { cancelAnimationFrame(scrollLockRaf); scrollLockRaf = null; }
-      const prevTarget = scrollLockTargetY;
       scrollLockTargetY = window.scrollY;
       scrollLockAnchorTop = resolveScrollLockAnchorTop();
       writeScrollY(scrollLockTargetY);
@@ -9392,28 +9357,6 @@ void main() {
     setLiveState('PICKING');
   }
 
-  function commitAcceptedVariantToDom(sessionId, variantId) {
-    const wrapper = findVariantsWrapper(sessionId);
-    if (!wrapper) return false;
-    const accepted = wrapper.querySelector('[data-impeccable-variant="' + variantId + '"]');
-    if (!accepted || !accepted.firstElementChild) return false;
-    const parent = wrapper.parentElement;
-    if (!parent) return false;
-
-    const style = wrapper.querySelector('style[data-impeccable-css]');
-    if (style && !document.querySelector('style[data-impeccable-accepted-css="' + sessionId + '"]')) {
-      const promotedStyle = style.cloneNode(true);
-      promotedStyle.setAttribute('data-impeccable-accepted-css', sessionId);
-      parent.insertBefore(promotedStyle, wrapper);
-    }
-
-    const committed = accepted.cloneNode(true);
-    committed.removeAttribute('hidden');
-    committed.style.display = 'contents';
-    parent.replaceChild(committed, wrapper);
-    return true;
-  }
-
   function handleDiscard() {
     if (pendingApplyInFlight) { showManualApplyBusyToast(); return; }
     if (!currentSessionId) return;
@@ -10209,14 +10152,6 @@ void main() {
     try {
       localStorage.setItem(INTERACTION_PREFS_KEY, JSON.stringify({ pickActive, insertActive }));
     } catch { /* ignore */ }
-  }
-
-  function loadPickPref() {
-    return loadInteractionPrefs().pickActive;
-  }
-
-  function savePickPref() {
-    saveInteractionPrefs();
   }
 
   let pickActive = loadInteractionPrefs().pickActive;
@@ -13415,10 +13350,6 @@ void main() {
     // Italic (only single *…*, skip if inside bold already handled)
     s = s.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
     return s;
-  }
-
-  function highlightBold(text) {
-    return inlineMd(text);
   }
 
   function escapeHtml(s) {

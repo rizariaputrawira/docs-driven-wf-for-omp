@@ -1,202 +1,124 @@
-# Document Driven AI Workflow Config (for OMP)
+# omp-docflow
+
+Document-aware OMP configuration with Sol-led orchestration, bounded workers,
+security workflows, and optional documentation-driven delivery.
 
 > **Safety:** This configuration deliberately sets `tools.approvalMode: yolo`, an unrestricted approval mode. Review this setting and its consequences before installing.
 
-## Overview
-
-Document Driven AI Workflow Config (for OMP) is a portable, inventory-managed snapshot of user-level configuration and guidance for an existing OMP installation. It is not the OMP application, a plugin marketplace installer, or a project template. It does not include OMP or credentials, or start external services.
-
-## Third-party prerequisites
-
-This repository deploys configuration only; it does not install third-party software or provide credentials. Feature-specific and optional prerequisites are needed only for their corresponding features, although the GitHub and OpenDesign MCP declarations are present by default and may attempt to connect.
-
-### Required for basic use
-
-1. **Install OMP separately.** Follow the [official OMP installation choices](https://github.com/can1357/oh-my-pi#install). This repository does not install OMP or declare a minimum supported OMP version. Bun or Node requirements depend on the upstream installation route you choose.
-2. **Authenticate the configured provider.** Run `omp login openai-codex` or use `/login openai-codex` inside OMP. See the [OMP provider documentation](https://github.com/can1357/oh-my-pi/blob/main/docs/providers.md) for its OAuth/token flow, including `OPENAI_CODEX_OAUTH_TOKEN`. A generic OpenAI API key does not automatically authenticate the separate `openai-codex` provider.
-3. **Check model access.** The [configured selections](config/agent/config.yml) use `gpt-6.1-sol` and `gpt-6-luna`. Successful use depends on your account/provider exposing those identifiers; their availability is not established here. If unavailable, choose supported models in your own settings.
-4. **Check installer utilities separately.** See [Requirements and scope](#requirements-and-scope) for POSIX, remote ZIP, and PowerShell prerequisites and the unresolved Windows installer caveat.
-
-### Feature-specific integrations
-
-| Third party | Needed for | What to provide | Setup / source |
-|---|---|---|---|
-| GitHub MCP server | GitHub tools; feature-specific, declared by default | Network access to `https://api.githubcopilot.com/mcp/` and a valid `GITHUB_TOKEN` exported in the environment inherited by OMP. This declaration uses a bearer token/PAT, not host-managed OAuth. Grant only permissions needed by intended operations; individual tools may require corresponding account/feature access. No local GitHub server or Docker installation is needed for this hosted HTTP declaration. | [Official GitHub MCP setup](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp-in-your-ide/set-up-the-github-mcp-server); [declaration](config/agent/mcp.json) |
-| OpenDesign and Node.js | Explicit OpenDesign/external-artifact workflows, not ordinary UI guidance; declared by default | `node` on PATH, a built OpenDesign installation and dependencies, `OMP_OPEN_DESIGN_CLI` as an absolute WSL/Linux JavaScript CLI entrypoint (source layout `<checkout>/apps/daemon/bin/od.mjs`), and a reachable daemon at `http://127.0.0.1:7456`. Generation additionally needs that deployment's runtime/credentials. Explicit POSIX lifecycle recipes also require `curl` and a separate absolute executable `OMP_OPEN_DESIGN_LAUNCHER`, not the JS entrypoint. Installation starts neither daemon nor generation. | [OpenDesign setup](https://github.com/nexu-io/open-design); [precise contract](config/agent/skills/impeccable/reference/open-design.md#prerequisites-and-source-scope); [paths and lifecycle](#opendesign-paths-and-lifecycle) |
-| RTK (Rust Token Killer) | Optional shell-output optimization | The correct `rtk-ai/rtk` executable on PATH, not Rust Type Kit. Recommend **0.24.0+** for this rewrite integration: upstream documents `rtk rewrite` from that version. The existing hook's minimum check is **0.23.0**, distinct from this recommendation. A missing/too-old executable disables the hook; `RTK_DISABLED=1` bypasses it. | [Official RTK installation](https://github.com/rtk-ai/rtk/blob/master/INSTALL.md); [hook](config/agent/extensions/rtk.ts) |
-| herdr | Optional pane/session-state reporting | Run OMP in a Herdr-managed pane supplying `HERDR_ENV=1`, `HERDR_SOCKET_PATH`, and `HERDR_PANE_ID`; these are pane inputs, not credentials to invent. Outside that environment the hook is inactive. No minimum Herdr version is established for this bundled hook. | [Herdr integration contract](https://herdr.dev/docs/add-herdr-support/); [hook](config/agent/extensions/herdr-omp-agent-state.ts) |
-
-Missing MCP inputs can make a declared integration unavailable or produce connection/authentication errors. Optional use does not guarantee silent startup without those inputs.
-
-### Optional skill capabilities
-
-- **Impeccable engine:** the bundled launcher targets engine **0.1.11**; a compatible preinstalled binary avoids download. First download needs permitted network, a writable cache, `curl` or `wget`, and `shasum` or `sha256sum` for checksum verification. It uses a standalone binary, not Node/npm. The [existing setup guide](SKILL-USAGE.md#impeccable-setup-and-engine-prerequisites) describes the direct-context fallback.
-- **Impeccable live/browser workflows:** available browser capability, a running web surface/dev server or static HTML, and the localhost helper are needed only for that workflow. See [live setup](config/agent/skills/impeccable/reference/live.md).
-- **Google Stitch:** authorized [Google Stitch](https://labs.google/stitch) access and tool availability are needed only when making Stitch calls. Programmatic MCP access is optional and is not declared in the shipped `mcp.json`. See the [bundled Stitch guidance](config/agent/skills/stitch-skill/SKILL.md).
-- **Image generation:** an available permitted image-generation tool is required only for requested image output; this configuration selects no provider or credential variable. Supplied-image analysis does not require generation. See [Images and design documents](SKILL-USAGE.md#images-and-design-documents).
-
-Libraries mentioned in skill coding recipes are target-project dependencies, not baseline OMP workstation requirements. Bundled upstream skill sources need no separate installation; see [provenance and licensing caveats](config/SKILL-SOURCES.md).
+This repository is a portable, inventory-managed snapshot of user-level configuration and guidance for an existing OMP installation. It is not OMP, an installer for OMP, a plugin marketplace installer, or a project template. It contains no OMP application or credentials and starts no external services.
 
 ## Quick start
 
-From the repository root, after checking [Third-party prerequisites](#third-party-prerequisites). The source defaults to this checkout and the destination to your existing home (`$HOME` on POSIX, `%USERPROFILE%` in PowerShell). Preview first, then install.
+Install OMP separately, authenticate the configured provider, and confirm your account can use the configured model IDs. This repository does not declare a minimum OMP version; installation-route prerequisites depend on your choice. See [requirements and prerequisites](#requirements-and-prerequisites).
+
+From the repository root, preview first:
 
 ```sh
 sh install.sh --dry-run
 sh install.sh
 ```
 
-On Windows PowerShell (beta):
+Windows PowerShell (beta; a known inventory-validation failure currently blocks
+full installation—see [requirements](#requirements-and-prerequisites)):
 
 ```powershell
 .\install.ps1 -DryRun
 .\install.ps1
 ```
 
-After installation, open OMP and choose a prompt under [Start with your goal](#start-with-your-goal). For another home or source archive, see [Install and update](#install-and-update).
+The source defaults to this checkout; destination defaults to your existing home (`$HOME` or `%USERPROFILE%`). Installation validates the complete inventory before writes, copies only listed files, leaves identical files untouched, backs up changed files with collision-safe names, and does not prune old or unrelated destination data. Dry-run does not copy files or create destination directories/backups.
+
+### Install and update
+
+To update, refresh your checkout from `main`, then repeat the preview and install
+commands above. The same managed-file and backup rules apply.
+
+To use another existing home and a local source directory or ZIP URL:
+
+```sh
+sh install.sh --home '/path/with spaces' --source https://github.com/rizariaputrawira/omp-docflow/archive/refs/heads/main.zip
+```
+
+```powershell
+.\install.ps1 -Home 'C:\Users\example' -Source 'https://github.com/rizariaputrawira/omp-docflow/archive/refs/heads/main.zip'
+```
+
+Remote ZIP archives must contain exactly one top-level directory, including hidden entries. See [Configuration doctor](#configuration-doctor) to check deployed files.
 
 ## What this configures
 
-The managed payload has distinct runtime roles:
+`config/files.tsv` is the explicit source-to-home-relative-destination allowlist used by both installers and doctors. It lists the files deployed under your OMP home and is not itself installed.
 
-| Path | What it owns |
+| Path | Role |
 |---|---|
 | `config/agent/PERSONALITY.md` | Global working, escalation, delegation and evidence-acceptance policy |
 | `config/agent/AGENTS.md` | Conditional semantic routing and canonical permission distinctions |
 | `config/agent/config.yml` | Native model/agent policy, approval mode, discovery, concurrency/depth and isolation settings |
 | `config/agent/agents/` | Seven bounded role definitions, requested built-in tools and output contracts |
 | `config/agent/extensions/` | Deterministic runtime restrictions and integrations; no worker-model router |
-| `config/agent/skills/` | Passive on-demand procedures, selected by public `name:` |
-| Task-specific plans and canonical project documents | Authorized project scope, interfaces, acceptance and maintained decisions; not global routing |
-| `config/agent/commands/` | User-invoked command guidance; commands do not start services during installation |
+| `config/agent/skills/` | Passive on-demand procedures selected by public `name:` |
+| `config/agent/commands/` | User-invoked command guidance; installation starts no services |
 | `config/agent/mcp.json` | MCP declarations that refer to machine-provided credentials and executables |
 | `config/plugins/` | Plugin package/lock metadata; no bundled plugins |
-| `config/files.tsv` | Explicit allowlist mapping each managed source file to its home-relative destination |
-| `scripts/` and `install.*` | Deployment checks, static configuration contracts and executable hook contracts |
+| `scripts/`, `install.*` | Deployment checks, static configuration contracts and executable hook contracts |
 
-## Skills, agents, extensions, and MCP
+`config/agent/` maps to `~/.omp/agent/`; `config/plugins/` maps to `~/.omp/plugins/`. Managed skills use one source folder and deploy in native flat `<folder>/SKILL.md` layout. Existing homes retain obsolete native skills until separately authorized retirement; fresh installs do not imply a completed migration.
 
-Keep these concepts separate at runtime:
+## Architecture and safe use
 
-- **Skills** are passive task guidance selected by public `name:` and read on demand. They do not grant a model, tool, or permission.
-- **Agents** are bounded role definitions with instructions, requested built-in tool selection and output contracts. Their presence does not prove runtime discovery or dispatch, or universally exclude ambient tools.
-- **Extensions** are event hooks or integrations. The retained model-dependent tool hook is not a reviewer sandbox, OS containment or a worker-model router.
-- **Commands** are user-invoked guidance; the OpenDesign recipes are POSIX shell, not PowerShell commands.
+Keep the runtime concepts distinct:
+
+- **Skills** are passive guidance selected by public `name:` and read on demand. They do not grant a model, tool or permission.
+- **Agents** are bounded role definitions with instructions, requested built-in tool selection and output contracts. Their presence does not prove runtime discovery/dispatch or universally exclude ambient tools.
+- **Extensions** are event hooks/integrations. The retained model-dependent tool hook is not a reviewer sandbox, OS containment or worker-model router.
+- **Commands** are user-invoked guidance; OpenDesign lifecycle recipes are POSIX shell, not PowerShell commands.
 - **MCP declarations** describe connections and prerequisites. They do not install or start servers.
-- **OMP** continues to control session discovery, tool permissions, and approval behavior.
+- **OMP** controls session discovery, tool permissions, approval and native Plan Mode.
 
-See [canonical permission distinctions](config/agent/AGENTS.md#permission-and-model-ownership) for instruction, built-in admission, native Plan Mode, extension interception, model policy, OS isolation and approval. Frontmatter is meaningful requested selection, not a universal sandbox; ambient tools and mutating LSP need scope discipline outside Plan Mode. Isolation remains disabled.
+See [canonical permission distinctions](config/agent/AGENTS.md#permission-and-model-ownership) and [global working policy](config/agent/PERSONALITY.md). Task isolation is disabled; instructions, frontmatter and hooks do not establish OS containment. Native Plan Mode, extension interception, approval, model selection and tool admission are distinct.
 
-### Native worker-model ownership
+### Model and worker ownership
 
-Native OMP selects invocation model, then settings override, then agent frontmatter, then live parent/default. `@default` selects the live parent, not a fixed role. Alias resolution, unknown agents, invalid explicit selectors and credential fallback remain native behavior. Authentication fallback limits unconditional identity guarantees; static selectors are not dispatch evidence. See [version-matched discovery and precedence](https://github.com/can1357/oh-my-pi/blob/v18.6.1/docs/task-agent-discovery.md) and [native resolver](https://github.com/can1357/oh-my-pi/blob/v18.6.1/packages/coding-agent/src/config/model-resolver.ts).
+The configured fresh main and native plan roles use `openai-codex/gpt-6.1-sol:medium` with medium default thinking. Sol owns orchestration, consequential decisions, integration and final acceptance. Substantial bounded execution normally uses Luna-medium (`openai-codex/gpt-6-luna:medium`). These are configured requests, not unconditional authenticated identity guarantees: explicit CLI selection, native precedence/resolution and credential fallback remain relevant.
 
-Fresh unforced main and native plan roles request `openai-codex/gpt-6.1-sol:medium`, with medium default thinking. Sol owns orchestration, consequential decisions, integration and final acceptance; substantial bounded execution normally goes to Luna-medium. Explicit CLI selections remain authoritative, and resuming a session restores its recorded model/thinking before the configured fresh-session default. An invocation selecting `@default` under a Sol parent therefore requests Sol, not Luna.
+Use scout for bounded discovery, routine/task for clear implementation, and the existing review agents for source review. Select slow only for evidence-backed difficult reasoning or consequential uncertainty: it uses Sol-medium. Advisor is optional evidence-only Sol-high advice, not automatic investigation or pairing. Maximum concurrency is three, recursion depth one, and one writer owns a shared checkout unless isolation is established. `task.showResolvedModelBadge: true` displays the resolved model ID for subagent execution; it is not proof of cost, token usage, quality, isolation or authorization. Delegation may increase total tokens; no savings are implied without measurements.
 
-Use scout for bounded discovery, routine/task for clear implementation, and the existing review agents for source review. Select slow only for evidence-backed difficult reasoning or consequential uncertainty, not file count or missing access. Advisor remains optional evidence-only Sol-high advice, not automatic investigation or pairing. Max concurrency is three, recursion depth one, and one writer owns a shared checkout unless isolation is established. Native approval, Plan Mode, security role contracts and the unchanged exact-identity tool hook retain their boundaries.
+### Two workflows, not a universal pipeline
 
-`task.showResolvedModelBadge: true` enables OMP's native task UI badge showing the actual resolved model ID for subagent execution, rather than only the configured role. This is model-resolution observability only, not proof of cost, token usage, quality, OS isolation or authorization.
+**Ordinary native work:** Sol main handles trivial work directly or uses bounded workers, then performs proportionate verification. No engineering-docs setup, delivery baseline, manifest, extra approval or new document is needed unless the actual task boundary requires it.
 
-The cost goal is to reserve Sol context for reasoning/orchestration/integration while Luna collects and executes mechanical context. Delegation can increase total tokens; total usage, identity-specific usage, latency, quality and verification confidence are distinct. No token or dollar savings are implied without measurements.
+**Documentation-dependent delivery:** when enabled and available, matching engineering-docs supplies material authoritative context. Project-delivery owns new applications and explicit substantial/end-to-end documentation-dependent delivery, including whole-boundary readiness, native approval and affected-owner reconciliation. Context lookup alone is not full delivery; consequential multi-slice plan review can apply independently.
 
-| Agent | Native override | Configured model/thinking |
-|---|---|---|
-| Fresh main | `modelRoles.default` | `openai-codex/gpt-6.1-sol:medium` |
-| Native plan | `modelRoles.plan` | `openai-codex/gpt-6.1-sol:medium` |
-| scout | `@smol` | `openai-codex/gpt-6-luna:medium` |
-| routine | `@routine` | `openai-codex/gpt-6-luna:medium` |
-| task | `@task` | `openai-codex/gpt-6-luna:medium` |
-| reviewer | `@task` | `openai-codex/gpt-6-luna:medium` |
-| security-reviewer | `@task` | `openai-codex/gpt-6-luna:medium` |
-| slow | `@slow` | `openai-codex/gpt-6.1-sol:medium` |
-| advisor | `@advisor` | `openai-codex/gpt-6.1-sol:high` |
+For practical guidance, prompt examples, capabilities and boundaries, see the [skill usage guide](SKILL-USAGE.md). For new or substantial delivery, consult the [canonical delivery baseline procedure](config/agent/skills/project-delivery/references/documentation-baseline.md); [engineering-docs context](config/agent/skills/engineering-docs/references/context-routing.md) and [standards reference](config/agent/skills/engineering-docs/references/standards.md) define their respective procedures. These are alternatives selected for the actual task, not a required sequence.
 
-### Two paths, not a universal pipeline
+Example OMP requests:
 
-**Ordinary native work:** Sol main handles trivial work directly or uses bounded existing workers, with Luna-medium the normal substantial executor, then proportionate verification and done. No engineering-docs setup, delivery skill, baseline, manifest, extra approval or new document is required unless the actual boundary needs it.
+- “Use diagnosing-bugs to trace this reported export failure; inspect the actual caller and relevant evidence, then explain the cause or remaining uncertainty.”
+- “Use code-review on my current changes; include untracked files and requirements, and report correctness and specification findings without editing.”
+- “Use impeccable to review this settings page for keyboard access and narrow screens; preserve its current behavior and brand.”
 
-**Documentation-dependent delivery:** available/enabled matching engineering-docs supplies material authoritative context; project-delivery handles new applications and explicit substantial/end-to-end delivery with whole-boundary readiness, native approval and affected-owner reconciliation. Context retrieval alone is not full delivery. Consequential plan review can apply independently without creating a baseline.
+## Requirements and prerequisites
 
-## Start with your goal
+- Install OMP separately using its [official installation choices](https://github.com/can1357/oh-my-pi#install). Authenticate with `omp login openai-codex` or `/login openai-codex` inside OMP. A generic OpenAI API key does not automatically authenticate the separate provider. See [OMP provider documentation](https://github.com/can1357/oh-my-pi/blob/main/docs/providers.md).
+- Configured model identifiers are `gpt-6.1-sol` and `gpt-6-luna`; account/provider availability is not established here. Select supported models in your own settings if needed.
+- POSIX installation requires `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp` and `date`. Remote ZIP additionally requires `curl` and `unzip`.
+- Windows installer is beta and requires PowerShell 5.1+; remote ZIP uses `Invoke-WebRequest` and `Expand-Archive`. A disposable Windows PowerShell 5.1 run rejected a valid inventory, so successful full installation is not established; details and preserved evidence are in [verification records](docs/verification.md).
+- Third-party software and credentials are not bundled. Installation starts no services. Every installed file is inventoried.
 
-You do not need to run every skill. Choose the job that matches your need. These are OMP chat prompts, not terminal commands; replace examples with your project facts.
+### Optional integrations and capabilities
 
-- **New project:** Use `project-delivery` to prepare the documentation baseline and complete implementation plan. Keep gaps explicit; do not write app code before native approval covers the reviewed scope. **First:** readiness gaps and a plan, not scaffolding.
-- **Diagnose a bug:** Use `diagnosing-bugs` for the reported export-order failure despite passing library tests. Treat the report as ground truth; trace the real caller and propose a focused correction without editing or running commands. **First:** a source-grounded cause or remaining uncertainty.
-- **Review changes:** Use `code-review` on staged, unstaged, and untracked work plus relevant requirements. Return separate Standards/correctness and Spec verdicts with file references; do not edit, test, publish, or approve. **First:** scoped findings and coverage limits.
-- **Review upstream usefulness:** Use `upstream-update-review` to check all managed sources or a named upstream for materially useful changes. **First:** read-only recommendations and evidence gaps, not upgrades. See [Upstream changes](SKILL-USAGE.md#upstream-changes).
-- **Coordinate independent work:** Divide a feature into independent slices with shared interfaces, bounded ownership, and observable acceptance. Integrate and verify once; keep dependent work in sequence. **First:** isolated contributions or a reason to work serially.
-- **Audit an existing UI:** Use `impeccable` to assess accessibility, keyboard use, narrow screens, and loading/empty/error states. Preserve the current brand and behavior; report findings only. **First:** scoped polish recommendations.
-- **Load a handoff only:** Use `resume-from-handoff` to summarize the selected `.handoff` snapshot; do not inspect cited files, validate claims, run commands, edit, or continue. **First:** a snapshot summary or notice that none is available.
+GitHub MCP and OpenDesign declarations are present by default and may attempt to connect. Missing inputs may cause unavailability or connection/authentication errors; optional does not guarantee silent startup.
 
-For every bundled choice, see [the full skill usage guide](SKILL-USAGE.md): **38 public names**, when to use each,
-concrete prompts, expected outputs, permission/tool limits, and all **eight engineering-docs actions**.
-Choose another skill only when its goal matches your task; these examples are alternatives, not a required sequence.
+| Integration | Prerequisites and scope |
+|---|---|
+| GitHub MCP | Network to `https://api.githubcopilot.com/mcp/` and a valid `GITHUB_TOKEN` inherited by OMP. This is bearer token/PAT, not host-managed OAuth; grant only needed permissions. No local server or Docker required. See [official setup](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp-in-your-ide/set-up-the-github-mcp-server) and [declaration](config/agent/mcp.json). |
+| OpenDesign | Explicit external-artifact workflows only. Requires Node, built OpenDesign installation/dependencies, absolute WSL/Linux JS entrypoint in `OMP_OPEN_DESIGN_CLI` (source layout `<checkout>/apps/daemon/bin/od.mjs`), and reachable daemon at `http://127.0.0.1:7456`. Explicit POSIX lifecycle recipes also need `curl` and separate absolute executable `OMP_OPEN_DESIGN_LAUNCHER`. Installation starts neither daemon nor generation. See [setup](https://github.com/nexu-io/open-design) and [contract](config/agent/skills/impeccable/reference/open-design.md). |
+| RTK | Optional shell-output optimization; requires `rtk-ai/rtk` executable on PATH (not Rust Type Kit). Recommend 0.24.0+ for `rtk rewrite`; hook minimum is 0.23.0. Missing/old executable disables hook; `RTK_DISABLED=1` bypasses it. See [installation](https://github.com/rtk-ai/rtk/blob/master/INSTALL.md). |
+| herdr | Optional pane/session reporting; hook is active only in a Herdr-managed pane providing `HERDR_ENV=1`, `HERDR_SOCKET_PATH` and `HERDR_PANE_ID`. No minimum version is established. |
+| Impeccable engine | Bundled launcher targets engine 0.1.11. First download may need permitted network, writable cache, `curl`/`wget` and `shasum`/`sha256sum`; compatible preinstalled binary avoids download. See [skill usage setup](SKILL-USAGE.md#impeccable-setup-and-engine-prerequisites). |
+| Browser, Stitch, image tools | Live Impeccable workflows need browser capability and a running surface. Google Stitch access/tool availability and permitted image-generation tools are needed only when requested. No generator, credential or provider is configured here. |
 
-## Requirements and scope
-
-- POSIX: `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp`, and `date`. Remote ZIP installation additionally requires `curl` and `unzip`.
-- Windows (beta): PowerShell 5.1+; remote ZIP installation uses `Invoke-WebRequest` and `Expand-Archive`. A disposable Windows PowerShell 5.1 smoke on 2026-10-06 rejected the valid inventory with `Inventory must include AGENTS.md and config.yml.` The required-entry lookup uses forward-slash keys after destination paths have been converted to backslashes. This pre-existing correctness issue remains unresolved; no successful Windows installation is claimed.
-- Windows byte comparisons use .NET's `StructuralComparisons.StructuralEqualityComparer`. Both script parsers, help entry points and six byte-equality cases per script were smoke-checked on PowerShell 5.1; this does not establish a successful full Windows installation.
-- External software and credentials are not bundled; see [Third-party prerequisites](#third-party-prerequisites). Installation starts no services. Every installed file is listed in the inventory.
-- `config/SKILL-SOURCES.md` documents the canonical skill folder, its source history, and licensing caveats. Skill snapshots do not guarantee downstream redistribution rights.
-
-## Managed files
-
-`config/files.tsv` is the explicit source-to-destination inventory shared by both installers and doctors:
-
-- `config/agent/` maps to `~/.omp/agent/`; `config/plugins/` maps to `~/.omp/plugins/`.
-- Managed skills have one source at `config/agent/skills/` and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout.
-- Current counts: **238 mappings**, including **217 skill files** and **38 entrypoints with 38 unique public names**. The TSV is source metadata and is not installed. Existing homes retain obsolete native skills until separately authorized retirement; fresh-install catalog counts are not migration claims.
-
-Managed skills use OMP's native user-skill convention. Native user/project skill discovery remains available, while the [managed discovery settings](config/agent/config.yml) leave `customDirectories` empty and disable Agents user/project skill-source discovery. Retired `.agent`/`.agents` copies cannot reenter through those configured sources. Other runtime providers may exist; these settings do not prove application-wide isolation.
-
-## Install and update
-
-The default source is this checkout. Destinations default to the existing `$HOME` on POSIX and `%USERPROFILE%` in PowerShell. To select another existing home and use a local source directory or ZIP URL, pass `--home`/`-Home` and `--source`/`-Source`:
-
-```sh
-sh install.sh --home '/path/with spaces' --source https://github.com/rizariaputrawira/omp-config/archive/refs/heads/main.zip
-```
-
-```powershell
-.\install.ps1 -Home 'C:\Users\example' -Source 'https://github.com/rizariaputrawira/omp-config/archive/refs/heads/main.zip'
-```
-
-Remote ZIP archives must contain exactly one top-level directory, including hidden entries. Dry-run validates and reports intended changes without copying files or creating destination directories or backups. See [Requirements and scope](#requirements-and-scope) for platform prerequisites.
-
-### Existing-home skill retirement
-
-These 17 folders/public names are historical migration identifiers, not invocations or links to retained aliases. Installation is non-pruning: old native folders remain discoverable in existing homes until a separately authorized retirement moves them outside **all skill discovery roots**. Inspect and preserve customized contents first; do not blanket-delete directories. This task does not mutate a live home or claim 36-name discovery there.
-
-| Retired folder under `.omp/agent/skills/` | Former public name | Surviving action/reference or removal |
-|---|---|---|
-| `emil-animate` | `emil-animate` | animate `build`: `skill://animate/references/build.md` |
-| `emil-find-animation-opportunities` | `emil-find-animation-opportunities` | animate `opportunities`: `skill://animate/references/opportunities.md` |
-| `emil-review-animations` | `emil-review-animations` | explicit review-animations: `skill://review-animations` |
-| `find-animation-opportunities` | `find-animation-opportunities` | animate `opportunities`: `skill://animate/references/opportunities.md` |
-| `animation-vocabulary` | `animation-vocabulary` | animate `vocabulary`: `skill://animate/references/vocabulary.md` |
-| `taste-skill` | `taste-skill` | design-taste-frontend: `skill://design-taste-frontend` |
-| `taste-skill-v1` | `design-taste-frontend-v1` | Exact v1 procedure removed; current selective `skill://design-taste-frontend`, not v1 compatibility |
-| `gpt-tasteskill` | `gpt-taste` | Taste optional scroll: `skill://design-taste-frontend/references/scroll-storytelling.md` |
-| `redesign-skill` | `redesign-existing-projects` | Impeccable workflow plus `skill://design-taste-frontend/references/redesign.md` |
-| `brutalist-skill` | `industrial-brutalist-ui` | Taste opt-in industrial-print/tactical-crt: `skill://design-taste-frontend/references/style-directions.md` |
-| `minimalist-skill` | `minimalist-ui` | Taste opt-in minimalist-editorial: `skill://design-taste-frontend/references/style-directions.md#minimalist-editorial` |
-| `soft-skill` | `high-end-visual-design` | Taste opt-in high-end-editorial: `skill://design-taste-frontend/references/style-directions.md#high-end-editorial` |
-| `ponytail-review` | `ponytail-review` | ponytail `review`: `skill://ponytail/references/complexity-review.md` |
-| `ponytail-audit` | `ponytail-audit` | ponytail `audit`: `skill://ponytail/references/complexity-review.md` |
-| `ponytail-debt` | `ponytail-debt` | ponytail `debt`: `skill://ponytail/references/debt-ledger.md` |
-| `ponytail-help` | `ponytail-help` | ponytail `help`: inline `skill://ponytail` table |
-| `ponytail-gain` | `ponytail-gain` | Removed uncited static scoreboard; no replacement or measured-saving claim |
-
-
-### OpenDesign paths and lifecycle
-
-The OpenDesign start/stop guidance is explicitly user-invoked and POSIX-shell-specific; Windows installation provides no native PowerShell equivalent. The [canonical OpenDesign contract](config/agent/skills/impeccable/reference/open-design.md) is entered only for explicit OpenDesign or external generated/refined artifact requirements. Impeccable owns ordinary UI work.
-
-Set `OMP_OPEN_DESIGN_CLI` to an absolute WSL/Linux **JavaScript CLI entrypoint** used by Node. For a source installation this is `<checkout>/apps/daemon/bin/od.mjs`, with the matching built distribution and dependencies present. Set `OMP_OPEN_DESIGN_LAUNCHER` separately to an absolute trusted **executable wrapper** for explicit lifecycle commands, not a JavaScript file or ambiguous PATH `od`. A shell wrapper cannot be passed to Node as its JavaScript entrypoint, so these names intentionally describe different forms.
-
-The MCP declaration explicitly sets `OD_DAEMON_URL=http://127.0.0.1:7456`; a shell export does not override it. Bundled lifecycle recipes also use fixed loopback port 7456. A custom deployment must explicitly align MCP, lifecycle and start arguments rather than assume these recipes support arbitrary URLs. Use the same WSL Node, modules, credentials and daemon; `/usr/bin/od` and Windows `od.exe` can be unrelated executables. Installation provides or starts no services, projects or runs.
+Libraries mentioned in skill coding recipes are target-project dependencies, not baseline workstation requirements. Bundled upstream snapshots need no separate install; see [provenance and licensing](config/SKILL-SOURCES.md).
 
 ## Configuration doctor
 
@@ -214,324 +136,28 @@ sh scripts/doctor.sh --fix --home /path/to/existing-home
 .\scripts\doctor.ps1 -Fix -Home 'C:\Users\example'
 ```
 
-The doctor uses these exit codes:
+Exit codes: `0` every mapped file matches; `1` one or more files are missing/drifted; `2` invalid arguments, inventory/home/read/compare errors or repair failures. `--fix` delegates once to the platform installer, then checks every file. POSIX installer and doctor share `scripts/validate-inventory.sh` as the inventory validation owner.
 
-- `0`: every mapped file matches.
-- `1`: one or more files are missing or drifted.
-- `2`: invalid arguments, inventory/home/read/compare errors, or repair failures.
+## Existing-home migration
 
-`--fix` delegates once to the platform installer, then checks every file. Both POSIX entrypoints use the shared [inventory validator](scripts/validate-inventory.sh) as the single owner of inventory-file checks; callers do not repeat its regular-file, readability or symlink checks. The validator still completes all source and destination validation before any installation writes.
+Installation is non-pruning. Old native folders remain discoverable in existing homes until a separately authorized retirement moves them outside **all skill discovery roots**. Inspect and preserve customized contents first; do not blanket-delete directories. Managed discovery settings leave `customDirectories` empty and disable Agents user/project skill-source discovery, but other runtime providers may exist; this is not application-wide isolation.
 
-## How deployment and use fit together
+The [migration map and history](docs/migration.md) records all 17 retired identifiers, surviving owners, root consolidation and historical verification. No live-home migration was performed. Updaters targeting `.agent/skills/` or `.agents/skills/` can recreate retired roots; choose the native destination and update complete packages plus `config/files.tsv`, not piecemeal files.
 
-The lifecycle is explicit inventory → validated install → existing OMP reads settings and available skills → optional doctor check. Installation copies only managed files; it does not install OMP, launch agents, install plugins, or provide credentials.
+## Verification and known limits
 
-- `config/files.tsv` defines the deployment boundary. Unlisted staging, credentials, caches, histories, and generated state are not installed.
-- Installers validate the complete source/destination set before writing, create only directories needed by listed files, leave byte-identical files untouched, back up changed files with collision-safe names, and do not prune old or unrelated destination data.
-- Doctor compares the same inventory; `--fix` delegates to the installer and checks again.
+The repository includes static configuration, installer/doctor, routing-hook,
+and disposable-home verification. Scope, receipts, historical evidence, and
+known limitations are preserved in [verification records](docs/verification.md).
+Historical results are not fresh authenticated-dispatch or Windows-installation
+proof.
 
-## Documentation-driven engineering suite
+## Sources, licenses, and further reading
 
-The documentation suite comprises fifteen skills and 109 regular assets deployed to `~/.omp/agent/skills/`. See [Managed files](#managed-files) for the complete inventory totals, layout and destination details.
+Acknowledgements: this configuration adapts or references work from [Matt Pocock's skills](https://github.com/mattpocock/skills), [Superpowers](https://github.com/obra/superpowers), [GSD](https://github.com/open-gsd/gsd-core), [NVIDIA SkillSpector](https://github.com/NVIDIA/SkillSpector), [Anthropic Security Review](https://github.com/anthropics/claude-code-security-review), [Cloudflare Security Audit](https://github.com/cloudflare/security-audit-skill), Impeccable and Ponytail. Exact sources, revisions, adaptations, attribution and notice mappings are documented in [skill payload provenance](config/SKILL-SOURCES.md) and each adapted skill's `SOURCES.md`.
 
-`config/agent/AGENTS.md` routes conditionally; matching procedures are read on demand. The suite does not override OMP permissions or approval, and unavailable assets do not load themselves. See [SKILL-USAGE.md](SKILL-USAGE.md) for the public-name catalog and practical prompts.
+Full MIT and Apache-2.0 notices remain with the applicable bundled skill payloads; Apache-2.0 records include attribution and modification notices. See each relevant `LICENSE*` file and source ledger for the actual association. Attribution is not endorsement or a blanket statement of redistribution rights. The [Superpowers README](https://github.com/obra/superpowers#readme) describes its upstream project; this repository contains selected locally adapted material, is not its plugin, and upstream install instructions do not install this configuration.
 
-## Verification scope
+No project-wide `LICENSE` was present in the inspected root listing. Historical snapshot roots had no separate LICENSE/COPYING files; unchanged snapshots and some retained third-party assets have unresolved licensing caveats. Titus material was not copied or translated because no covering grant was established. Local presence, attribution, a source URL, or a notice belonging to a different adaptation does not establish redistribution rights. Resolve exact upstream terms or exclude/rewrite material before relying on permission to redistribute it. This repository-content review is not legal advice or compliance certification.
 
-`python3 scripts/test_install.py` exercises the POSIX installer and doctor against isolated fixtures; it does not test PowerShell. `bun scripts/test_agent_config.mjs` parses real YAML/frontmatter and checks seven configured mappings plus deterministic negative cases; it is static configuration, not dispatch proof. `bun scripts/test_model_routing.mjs` and `node scripts/test_model_routing.mjs` invoke the real retained handler using native-shaped main/sub events and assert no slow/advisor spawn replacement. These are tool-handler contracts, not authenticated dispatch, native approval or OS containment. The complexity-only removal of the installer's directory alias and break-ui's duplicate Rule 6 was exercised with a disposable default-source POSIX install from an unrelated working directory, complete payload byte comparison, doctor check/fix, skill backup/repair and repeat-install mtime preservation.
-
-### Upstream review verification
-
-- Private stdlib/Bun checks found **236 unique mappings / 215 fully mapped skill files / 37 unique public names**, exactly one upstream-update-review entrypoint, and 532 resolved live links/pointers. External/template references were classified separately; historical migration identifiers are not live invocations.
-- `python3 scripts/test_install.py` passed the production POSIX installer/doctor scenarios for 236 entries. `bun scripts/test_agent_config.mjs` passed seven-role configuration and ten negative cases; `node scripts/test_model_routing.mjs` passed seven hook-contract groups. PowerShell remains unverified.
-- Two fresh source-loaded scout consumers, observed as Luna-medium without fallback, assessed nine paired private scenarios per arm. A fresh independent reader accepted all nine candidate expectations from full native tool/result traces; all 117 fixture file hashes remained unchanged. The control also handled the upstream fixtures correctly, so no comparative improvement is claimed. Actors were fresh per arm, not per case; fixture upstream documents were simulated, not live evidence.
-- The live read-only Impeccable smoke confirmed the recorded 4.5.0 tag/commit remains the latest published skill release and inspected unreleased head changes at `a40571a45f51625ddc5cd3399bbbe82796eed992`. An accepted-screenshot clarification was marked investigate, not adopted; byte-capped comparison coverage and unexercised engine compatibility remain limits. Managed payload hashes were unchanged.
-- A separate production install in a disposable home matched every deployed byte. With extensions and MCP disabled in that probe copy, OMP **18.6.1**'s passive resolver listed exactly the 37 expected names and resolved the new installed body. An isolated no-tools authenticated print attempt timed out after 30 seconds without usable output. Authenticated standalone consumer execution is therefore unverified; source-loaded task observations and passive discovery remain separate evidence.
-
-No live-home deployment, scheduling, auto-updates, daemons/databases, new agents/extensions/MCP, source registry or automatic escalation was added. No visible UI changed. Anti-slop **PASS** for authored guidance: no invented product claims, decorative filler or adoption-authority shortcut.
-
-### Minimal OpenDesign contract verification
-
-Fresh scoped checks for this guidance change:
-
-- Python standard-library parsing confirmed the unchanged Node MCP argv and fixed daemon URL, exactly one new reference mapping, resolved local OpenDesign links, and **235 mappings / 214 skill files**. MCP declaration and both lifecycle recipes remained byte-identical. Extracted recipes passed `sh -n`; that is syntax proof, not lifecycle execution.
-- `python3 scripts/test_install.py` passed real POSIX install/check/fix integration for **235 inventory entries** in disposable homes. A separate disposable install supplied the OMP consumer attempt. Neither PowerShell runtime was available; no Windows result is inferred.
-- Read-only HTTP health and daemon status reported `ok:true`, version **0.23.1**, loopback `127.0.0.1:7456`, and `shuttingDown:false`. This is not running-byte identity with the source checkout.
-- A disposable Python stdlib JSON-RPC client launched the existing built JavaScript entrypoint with Node, initialized the real stdio bridge, inspected `tools/list`, and received a successful read-only `list_projects` response. Project contents were withheld. Actual project/run/artifact/file schemas included `start_run.requestId`, explicit project fields, artifact include/byte caps and file offset/limit. The MCP server identified itself as `open-design` version **0.2.0**, distinct from the daemon version. With `OD_DAEMON_URL=http://127.0.0.1:1`, the same read-only call returned `isError:true`, `fetch failed`; no startup action was invoked. Only smoke bridge processes were closed.
-- A fresh OMP 18.6.1 consumer attempt used the disposable installed guidance with tools/extensions disabled and proposal-only cases. It timed out without usable consumer output; no provider credential environment was present. This is **not runtime routing or authenticated consumer proof**. Source review covers ordinary refinement, explicit exploration, existing documentation context, exact missing prerequisites, missing/ambiguous project selection, and rejection of unsupported pricing/metrics with an explicit proposal boundary.
-
-Anti-slop contract **PASS** for the authored guidance: no invented product content and no artifact-to-implementation authorization shortcut. No visible UI changed, so rendered verification is not applicable. No real-home deployment, project creation, generation, billing, package installation, shared-daemon start/stop, installed OMP MCP startup, native approval enforcement or generated visual-quality check was exercised. Historical receipts below remain historical.
-
-### Complexity-only cleanup verification
-
-The whole tracked tree was scanned for duplicate payloads, repeated prose and implementation declarations; legal notices, optional integrations and supported fallback assets were retained. Four image/brand skills now use compact optional reference/detail guidance and direction lists without repeated selection quotas. Impeccable's replace/insert count buttons share their existing click behavior in the count-control builder, without an injectable callback or new wrapper.
-
-`node --check` passed for the changed browser script; the config contract (16 negatives), Node hook contract (seven groups) and POSIX installer/doctor integration (236 mappings) passed. Actual count rows matched the pre-edit source in Chromium at 1280px and 390px, enabled and locked, including pointer/keyboard cycling, wraparound, hover tooltip and focus. The fixture used real helper/row code with service initialization suppressed, not the complete live engine. Five candidate source-loaded image-guidance briefs preserved supplied-image analysis and unavailable-tool/count/platform/brand boundaries; a proposed baseline arm loaded live skills instead of assigned copies and is excluded from comparative proof. No image generation or Windows verification occurred. Anti-slop PASS for the scoped changes.
-
-Local receipts: `/tmp/omp-ponytail-audit-nnxeth15/` (tree/complexity scans, frozen briefs, baseline sources and browser outcomes); source-loaded candidate trace: `history://AfterGuidanceSmoke`.
-
-### Sol-led migration verification (OMP 18.6.1)
-
-The migration baseline was tracked main `aaa6190f7fc18f1e74b80dbe70352598cdfa0ef4`, also observed at remote main before editing. Its config, PERSONALITY and AGENTS were preserved before mutation. Only the default/plan selectors, bounded policy, ordinary-work opening, this README and semantic config contract changed; managed worker definitions and the boundary hook were not remapped.
-
-- `bun scripts/test_agent_config.mjs` passed the seven worker contracts plus Sol-medium main/plan, medium default thinking, concurrency three and recursion depth one, including all **16 negative cases**.
-- The unchanged `scripts/test_model_routing.mjs` passed **seven named groups** under both Bun and Node. This proves the handler contract, not OS containment or authenticated dispatch.
-- `python3 scripts/test_install.py` passed the production POSIX integration scenarios for **236 inventory entries**. A separate actual-payload install and doctor check both exited zero in a disposable home. Neither PowerShell runtime was available.
-- An isolated installed-payload OMP 18.6.1 RPC launch exited one before `ready`, with `No models available. Use /login or set an API key environment variable.` An ordinary interactive PTY launch showed `no-model` and the same warning, then its own deadline terminated it. Neither attempt proves resolved Sol identity or successful generation.
-
-The seven-worker identity/provenance probe, invocation/CLI/resume compatibility checks, native Plan Mode startup/override/child checks and all five paired architecture cases remain blocked by unavailable models/authorized authentication in isolation. No live profile, credential copy, login, model replacement or external service was used to bypass that prerequisite. Usage, context peaks, quality comparison and dollar savings are unavailable, not zero. Approval and tool-boundary settings were preserved; their new runtime exercise is unverified.
-
-Receipts are under `/tmp/omp-sol-led-h9rafar_/`: `baseline/`, `install.log`, `doctor.log`, `target-startup/rpc.jsonl`, `target-startup/stderr.log`, `target-startup/result.json`, `verification.json` and `benchmark.json`. These are local ephemeral artifacts, not shipped dependencies. Historical successful dispatch receipts below do not establish this migration's fresh-main behavior.
-
-### Native ownership verification (OMP 18.6.1)
-
-The following historical ownership receipts predate the Sol-main migration. They exercised native worker ownership in disposable homes and project fixtures, not the new fresh-main default, without installing to a real home:
-
-- Static configuration contract passed for seven definitions and ten in-memory negative cases. The retained hook contract passed seven named groups under both Bun and Node; a native-shaped regression rejects the old slow/advisor `@task` replacement.
-- POSIX installer/doctor integration passed all 233 mappings. Real-payload dry-run wrote no payload; install/check matched all destination bytes; an unrelated sentinel survived and identical reinstall preserved files/mtimes without unnecessary backups. Source validation found seven agents, 36 public skills, 233 regular payload assets/mappings, 163 local links and 96 live skill references with no broken target in the inspected owners.
-- Native CLI `omp/18.6.1` child `session_init`, model and thinking records showed the five ordinary roles at Luna-medium, slow at Sol-medium and advisor at Sol-high, with no invocation selectors. Exact managed agent bodies were present in the dispatched system prompts. An explicit Luna-medium selector for slow resolved to Luna-medium. These are observed dispatch outcomes, not unconditional identity guarantees.
-- Fresh ordinary direct and routine-probe sessions reported the exact sentinel without suite reads, baseline/manifest setup, mutation or extra approval. Explicit source-loaded documentation review returned the seven-field packet, identified missing denial/interface/readiness coverage and supplied a corrected draft with exact allowed/denied checks marked not run.
-- Scout repository-only, documentation-only and mixed probes used substantive source reads and pinned version/section provenance. An unreachable source remained unknown with next evidence named. In interactive native Plan Mode, slow read the exact session-local draft and explicitly supplied plan-review/checklist; its actual tool list was read/grep/glob/web_search/yield with `readOnly=true`, no LSP/MCP/injected tools. It reported blockers without mutation/check execution/approval; the draft remained unapproved.
-
-Complete native JSONL/session evidence was retained under `/tmp/omp-native-ownership-y41m1jt3/`, with parent-inspected metadata in `inspection.json`, `definition-provenance.json` and `plan-evidence-extract.json`. Deployment/source receipts are `/tmp/native-ownership-deployment-evidence.json` and `/tmp/native-ownership-source-evidence.json`. Independent read-only evidence reviews supported the bounded observations; a checker initially conflated a failed parent checklist path with the successful child read, then corrected it against exact records.
-
-Limits remain explicit: initial empty-output launch attempts and an aborted noninteractive plan attempt are not proof. A parent misspelled-source read and reviewer/scout yield retries occurred; accepted child reads/results are preserved separately. Ambient GitHub/OpenDesign MCP initialization failed and those integrations were not validated. No app service or fixture implementation was launched, no plan was approved, and no OS containment was established. PowerShell/Windows remain unverified. Source-loaded procedure smoke is neither native skill registration nor comparative improvement or complete application delivery. Historical catalog evidence below remains historical.
-
-### Balanced catalog verification
-
-The 53-to-36 semantic simplification was checked against the explicit **233-mapping / 212-skill-file** payload:
-
-- `python3 scripts/test_install.py` passed once for all 233 entries, exercising the production POSIX install/check/fix paths in disposable fixtures. `bun scripts/test_model_routing.mjs` passed its five named cases once.
-- Native Bun YAML parsed exactly 36 public entrypoints and the three explicit-only declarations. Source checks covered complete asset inventory, local/skill links and headings, all 129 catalog concepts with 200 reference/template targets, and the seven engineering templates. The complete fifteen-skill engineering/security/handoff payload and full notices remained byte-identical. Impeccable's bundled assets and engine pin remained byte-identical outside its scoped entrypoint correction.
-- A real disposable existing home passed dry-run with no payload writes, install, doctor check and exact inventory byte comparison. Installed OMP **18.5.0** reported exactly the 36 expected names through its passive unknown-name resolver diagnostic; the unsupported bare `skill://` read was not treated as discovery proof. Native reads resolved animate and the new vocabulary, Taste style and Ponytail debt references. Passive reads also retained the three explicit-only metadata declarations, not proof of enforcement.
-- A second disposable home retained an obsolete native entrypoint and an unrelated file. Identical reinstall preserved all mapped bytes, modes and mtimes and created no needless backups. This demonstrates non-pruning, not completed migration of an existing user home.
-
-Eight paired scenarios used sixteen fresh source-loaded consumers with equivalent isolated fixtures and recorded source maps, traces and complete terminal results. A fresh independent evidence judge assessed vocabulary, opportunities, motion review, motion audit, complexity/debt, Taste, images and harness proposals against fixed expectations. Candidate routing and report-only permission boundaries were supported within those scenarios; this is not candidate-only causation or general comparative improvement. No consumer trace recorded writes, command execution, launchers or services.
-
-**Behavioral acceptance is partial, not a blanket pass.** Both initial image consumers correctly reported the unavailable generator and permitted supplied-image analysis, but described the reference geometry inaccurately. After adding guidance requiring verified geometry or explicit uncertainty, a fresh candidate-only reassessment still incorrectly described equal-height blocks as unequal. The independent judge therefore rejected image factual accuracy; prose policy did not establish fidelity, and no further source correction was justified by this evidence alone. Measurement or abstention is still required for such claims. Initial failures were retained, not replaced with a success claim.
-
-Harness evidence also has limits: the baseline read an identical common-parent brief outside its assigned fixture; the candidate recovered from a failed relative-path read and consulted irrelevant in-fixture UI files, explicitly excluding them from its card conclusions. Neither rendered a member card or implemented a picker. Source-only Taste spacing proposals likewise are not observed visual results.
-
-License handling is recorded in [provenance](config/SKILL-SOURCES.md#balanced-consolidation-and-licensing-boundary): existing notices are preserved, Ponytail includes its full upstream MIT notice, and new references with unclear legacy grants use independently authored guidance rather than transplanted prose. Existing legacy licensing caveats remain, so this is not blanket legal clearance.
-
-No live home, model/agent/extension/MCP/plugin settings, installer or doctor was changed. No Impeccable/OpenDesign/Stitch engine, generator or external app service was launched. PowerShell/Windows execution remains unverified because neither runtime was available. Passive discovery and source-loaded consumer observations do not establish actual model dispatch identity, native Plan Mode/approval enforcement, OS containment, generated output quality or physical-device feel.
-
-
-<details>
-<summary>Detailed workflow, document ownership, standards, and skill capabilities</summary>
-
-### Workflow at a glance
-
-The labels name suggested owners for each phase, not a mandatory skill procession. Use specialist skills only when enabled, available and relevant; native approval and permission checks are not skills.
-
-```mermaid
-flowchart TD
-  A[Goal or change<br/>Select only relevant, available guidance] --> B{New app or substantial delivery?}
-  B -- No --> C[Bounded native task<br/>Use matching skill if helpful]
-  C --> C1[Update materially affected docs<br/>/engineering-docs: maintain]
-  B -- Yes --> D[Classify risk, profile, standards, owners<br/>/engineering-docs: setup; /project-delivery]
-  D --> E[Product purpose, scope, constraints<br/>/project-delivery: specification; /brainstorming for consequential unknowns]
-  E --> F[Requirements, stories, quality, security<br/>/engineering-docs: requirements; /security-review /security-audit only when in scope]
-  F --> G[Architecture, contracts, threats, decisions<br/>/engineering-docs: architecture; /domain-modeling for terminology/ADRs]
-  G --> H[Detailed design; UI evidence if affected<br/>/engineering-docs; /impeccable for UI]
-  H --> I[Verification intent and applicable release/ops/user plans<br/>/engineering-docs; relevant specialists as needed]
-  I --> J[Review whole-boundary baseline and plan<br/>/project-delivery; /plan-review for consequential multi-slice work]
-  J --> K{Baseline ready?}
-  K -- No --> L[Resolve gaps and material decisions<br/>/engineering-docs: create/extend; /brainstorming /domain-modeling when needed]
-  L --> J
-  K -- Yes --> M[Native approval for exact reviewed baseline and plan<br/>No skill grants approval]
-  M --> N[Persist authorized docs and native plan<br/>/project-delivery; /engineering-docs]
-  N --> O[Implement and verify authorized slices<br/>Matching skill; /tdd only if requested; /code-review when needed]
-  O --> P{Material reviewed-intent change?}
-  P -- Yes --> Q[Update intended owners and plan; review readiness<br/>/engineering-docs; /project-delivery]
-  Q --> M
-  P -- No --> R[Reconcile affected docs with sources and evidence<br/>/project-delivery; /engineering-docs: maintain]
-  R --> S{Final acceptance and reconciliation supported?}
-  S -- No --> T[Diagnose and correct remaining gaps<br/>/diagnosing-bugs for difficult causes; otherwise matching skill]
-  T --> P
-  S -- Yes --> U[Full delivery complete<br/>Evidence and permissions, not a skill label]
-```
-
-`project-delivery` owns this documentation-first gate for enabled, available new-app/substantial delivery and authorized continuation. `engineering-docs` selects/reuses canonical information and exposes due gaps. `brainstorming` resolves only consequential unknown choices; `domain-modeling` handles active terminology/ADRs; `plan-review` independently checks consequential multi-slice coverage before native approval. A disabled/unavailable suite is not auto-loaded or set up; ordinary native tasks remain possible, while explicitly requested unavailable suite-specific work stays incomplete.
-
-The [single baseline procedure](config/agent/skills/project-delivery/references/documentation-baseline.md) defines readiness, changed-intent reapproval and complete affected-owner reconciliation. Before readiness, safe inspection and authorized document/design work can proceed, not app source/tests/scaffolding, dependency installation, migration or app-service startup. A feasible tracer or an `approved` string is not permission to bypass missing required app-level design/test intent. Native Plan Mode proposes substantive content without checkout writes. One native approval can cover the exact baseline and implementation plan; do not add another approval engine.
-
-### Documents and timing
-
-The logical baseline is required for gated delivery even when physical documents are combined or reused. Lean apps can use substantive README sections; larger apps split for real owners/audiences/lifecycles. Preserve established product/requirements/API/UI owners. Only if necessary information has no owner or convention use `docs/<family>/<canonical-id>.md`. No separate file per story, automatic whole-catalog bundle or fictional result document.
-
-| Timing | Information and owner | Required coverage or applicability |
-|---|---|---|
-| Before development | Classification, profile, standards and index/manifest: `engineering-docs setup` | Record scope/risk/obligations, selected owners/anchors, relevant omissions, prerequisites, source basis and review. Reuse a sufficient valid index; otherwise authorized setup uses manifest v1 at `docs/engineering-docs.yaml`. Preserve/report invalid existing manifests rather than bypassing them. |
-| Before development | Purpose/PRD or sufficient brief: product owner, project-delivery specification | Outcomes, users/stakeholders, scope/exclusions, sourced constraints and consequential assumptions; no duplicate BRD/PRD. |
-| Before development | SRS, useful stories/use cases, acceptance, NFR and security/platform requirements: requirements owner | Testable success, denied/error/boundary behavior and justified quality targets/methods. Start security classification and requirements early. |
-| Before development | Architecture, contracts, threat/control allocation and consequential decisions: architecture/native-contract owners | Relevant boundaries/responsibilities and data/trust flows; selected views only. Glossaries/ADRs and specialist outputs are applicability-based, not mandatory files. |
-| Before development | Technical/API/UI design: detailed/native-contract and established visual owners | Data/state/error/concurrency/integration/platform invariants. Impeccable is primary where UI exists; OpenDesign generation only for an actual user/project requirement. Required unresolved UI baseline blocks this boundary's app implementation. Artifact TDD is not test-first. |
-| Before development | Test strategy/plan/cases and trace: verification owner | Independent expected values, meaningful denial/boundary routes, safe data/environment, requirement-to-design/planned-proof links. Runtime results remain not-run, without invented implementation nodes or passes. |
-| Before development | Applicable delivery/configuration/migration/rollback, operations/recovery and user preparation: release/operator/reader owners | Resolve implementation-affecting constraints and plan intended procedures/flows. No invented servers, service targets, deployment/restore/signing/store outcomes. |
-| Before development | Baseline readiness and complete native implementation plan: project-delivery, conditional plan-review | Inspect all selected required content and review/gap dispositions. Trusted current authorization must cover exact material baseline decisions and plan; persist necessary reviewed docs after authorization and before app code. Repository plan mirror only for existing convention/team/portability need. |
-| During development | Material intended changes: affected canonical owners and native plan | Update intended content, resolve conflicts and obtain required native reapproval before dependent code. Unchanged-intent corrections use existing scope. Invalidate only materially affected evidence. |
-| During development | Actual verification/review/security findings and trace: existing evidence owners | Record only exercised checks and inspected findings/dispositions; unrelated green logs do not satisfy a failed criterion. Requested test-first, diagnosis and matching reviews are conditional, not a fifteen-skill procession. |
-| Completion | Actual release/security/recovery/platform results, where required | Record observed outcomes only; missing required runtime/deployment proof stays unverified. Out-of-scope external events do not become invented requirements. |
-| Completion | All affected as-built owners and user/app guide: project-delivery with engineering-docs maintain | Reconcile product/requirements, architecture/ADRs, design/native contracts, data/security/platform, verification/trace, release/configuration/recovery/operations and reader docs. A guide update alone is insufficient. Full completion needs every required criterion satisfied and complete affected-document reconciliation. |
-
-### ISO standards mapped to the workflow
-
-The standards below are voluntary reference points unless a project has an identified contractual, regulatory, organizational or certification obligation. They describe information and practices to consider; they do not require a fixed document set or prove conformity. Editions and applicability should be checked against the current official sources and recorded for the project. Names in the first column are common examples, not ISO-mandated titles; follow established project terminology and combine documents where appropriate.
-
-<details>
-<summary>Crosswalk of common document names, ISO references, and skill owners</summary>
-
-| Common document name(s) | Workflow document / ISO reference | What the document is for | Skill(s) used in this step | Why use the skill |
-|---|---|---|---|---|
-| Document Register / Information Index / Project Management Plan | Lifecycle and information index — [ISO/IEC/IEEE 12207:2026](https://www.iso.org/standard/90219.html); [ISO/IEC/IEEE 15289:2019](https://www.iso.org/standard/74909.html); ISO/IEC/IEEE 15288:2015 (cited only by the 15289 public crosswalk) | 12207 gives software lifecycle process guidance and information roles. 15289 helps tailor information items to purpose, audience and process. Use an index/manifest to record selected owners, sources, applicability and gaps; combine documents when that serves their readers. | `/engineering-docs` (setup); `/project-delivery` | Engineering-docs selects and indexes only needed information; project-delivery governs readiness and the end-to-end delivery boundary. |
-| PRD / BRD / FSD / SRS / User Stories / Use Cases / Acceptance Criteria | Product purpose, scope and requirements — [ISO/IEC/IEEE 29148:2018](https://www.iso.org/standard/72089.html) | Capture sourced needs, scope, constraints, useful use cases, acceptance criteria and verifiable requirements, including relevant error, denial and boundary behavior. | `/project-delivery` (specification); `/engineering-docs` (requirements); `/brainstorming` when consequential choices are unresolved | Project-delivery structures the product intent; engineering-docs maintains the requirements information; brainstorming explores consequential unknowns rather than inventing settled intent. |
-| SAD / ADD / TSD / System Architecture Document / Interface Specifications / ADRs | Architecture description and decisions — [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74393.html) | Describe architecture from stakeholder concerns using only relevant views, interfaces, boundaries and decision rationale; it does not prescribe a mandatory diagram set. | `/engineering-docs` (architecture); `/domain-modeling` when terms or consequential decisions are unclear | Engineering-docs reuses or maintains architecture information; domain-modeling resolves ambiguous concepts and supports justified glossary/ADR decisions. |
-| NFR Specification / Quality Requirements Specification / Quality Plan | Quality requirements — [ISO/IEC 25010:2023](https://www.iso.org/standard/78176.html); [ISO/IEC 25030:2019](https://www.iso.org/standard/72116.html) | Select product-relevant quality characteristics and turn them into measurable requirements with justified targets and assessment methods. | `/engineering-docs` (requirements); `/project-delivery` | Engineering-docs records applicable quality needs and their evidence; project-delivery ensures relevant requirements and proof are included in the reviewed baseline. |
-| Test Strategy / Test Plan / Test Cases / Test Report | Test strategy, plan, cases and evidence — [ISO/IEC/IEEE 29119-1:2022](https://www.iso.org/standard/81291.html), [-2:2021](https://www.iso.org/standard/79428.html), [-3:2021](https://www.iso.org/standard/79429.html), [-4:2021](https://www.iso.org/standard/79430.html) | The parts cover testing concepts, processes, test documentation and techniques respectively. Select what fits the acceptance criteria and risk; plans are not execution results, and results require observed checks. | `/engineering-docs` (verification); `/tdd` only when test-first is explicitly requested; `/code-review` when review is needed | Engineering-docs maintains verification intent and trace; TDD supports an authorized test-first cycle; code-review evaluates an actual change against requirements and repository standards. |
-| Security Requirements / Threat Model / Application Security Plan / ISMS documents (only if applicable) | Application security information — selected [ISO/IEC 27034-1:2011](https://www.iso.org/standard/44378.html) with Corrigendum 1:2014, [27034-2:2015](https://www.iso.org/standard/55582.html), [27034-3:2018](https://www.iso.org/standard/55583.html); [ISO/IEC 27001:2022](https://www.iso.org/standard/27001) with [Amendment 1:2024](https://www.iso.org/standard/88435.html) when applicable | The selected 27034 parts provide application-security guidance. 27001 concerns an organization's information-security management system only when that scope is actually adopted or required; neither reference alone demonstrates product security or certification. | `/engineering-docs` (security requirements and trace); `/security-review` or `/security-audit` only when in scope | Engineering-docs records applicable security concerns, controls and evidence owners; the specialists perform bounded review or audit work when the project risk and request call for it. |
-| Software Quality Plan / Quality Management System Procedures (only if adopted) | Organization-adopted software quality-management scope — [ISO/IEC 90003:2018](https://www.iso.org/standard/74348.html) | Guidance for applying quality-management systems to software, relevant only where an organization has actually adopted that quality-management scope. It is not a project certification criterion by itself. | `/project-delivery`; `/engineering-docs` (setup) | Project-delivery coordinates the real organizational obligation with delivery readiness; engineering-docs records its source, applicability, owner and required evidence without claiming certification. |
-
-</details>
-
-**Edition caveat:** ISO/IEC/IEEE 15289:2019's public abstract maps information items to 12207:2017 and 15288:2015. Choosing 12207:2026 as lifecycle guidance does not establish an updated normative crosswalk. The cited ISO pages provide public metadata/abstracts; the normative texts were not assessed. See the [standards reference](config/agent/skills/engineering-docs/references/standards.md) for status, access limits and applicability notes.
-
-**Practical prompt:** “Use project-delivery for this new application. Prepare and review the selected documentation baseline first. Do not implement until native approval covers the exact reviewed baseline and complete plan. After real verification, reconcile all affected documents before claiming completion.”
-
-OMP owns operational state: native plan approval, optional todos, workers and same-session resume. Canonical docs own requirements and decisions; context packets are task/session aids, not another database. Delegation is optional and cannot replace readiness. Explicit pause/transfer may produce `.handoff/NNN-YYYYMMDD-handoff.md`; `resume-from-handoff` reads only the selected snapshot, while project-delivery resume chooses document work, remaining implementation, final reconciliation or no remaining work from actual evidence. A handoff/digest/label never approves execution. Source-loaded actions are distinct from native discovery, registration and Plan Mode/approval enforcement.
-
-| Canonical skill | Concrete capability |
-|---|---|
-| /engineering-docs | Sole documentation owner: eight actions, source-first reuse, typed manifest, seven-heading context, trace/document audit and upgrade limits |
-| /brainstorming | Approval paths, supplied-intent write-back and explicit ready-frontier stress-test |
-| /domain-modeling | Active counterexamples, settled glossary and consequential truthful ADRs |
-| /tdd | Meaningful observed vertical RED/GREEN and optional refactor; explicit test-first only |
-| /code-review | Separate Standards/correctness and Spec verdicts, WIP coverage and complete fix dispositions |
-| /diagnosing-bugs | Signal/minimization/falsifiable hypothesis/root correction/original-path proof |
-| /writing-for-agents | Condition-bearing pointers, single owners and authorized real baseline/candidate assessment |
-| /project-delivery | Reviewed whole-boundary baseline before code, complete vertical delivery, all affected-owner reconciliation and independently authorized resume; incumbent-first UI evidence |
-| /plan-review | Read-only semantic acceptance, consumer integration, dependencies and proof coverage check |
-| /handoff-to-another-harness | Explicit pause/export and transfer, exact partial state and non-authoritative portable snapshot |
-| /resume-from-handoff | Selected-snapshot summary only, never continuation |
-| /retro | Evidence/applicability/promotion conditions; no automatic policy/memory mutation |
-| /security-intake | Source-only bundle purpose/authority/provenance/coverage assessment, exact four verdicts |
-| /security-review | Focused changed-boundary discovery and fresh source refutation |
-| /security-audit | Coverage-led audit with relevant AI, availability and supply-chain companions |
-
-Exact immutable revisions, local path mappings, modifications and full MIT/Apache-2.0 notices are in each skill's SOURCES.md and [payload provenance](config/SKILL-SOURCES.md). Titus assets are not copied or translated because no covering grant was established. The Pi catalog shortlist (bigpowers 2.88.9, pi-security-analysis 0.17.3, pi-subagents 0.75.0, openwiki 0.7.0) is rejected for this bounded need, not certified safe/unsafe or assumed OMP-compatible. Its recorded necessity assessment is in engineering-docs/SOURCES.md.
-
-Removed upstream behavior includes universal TDD, forced agents/model tiers, auto-commits/worktrees/ticket publishing, tracker/Context7/state engines, provider-specific tool aliases, fixed retry/confidence gates, fail-open filtering and universal security exclusions. OpenDesign is required only for explicitly required generation/refinement, not ordinary approved incumbent UI work. Existing independently owned UI routing remains.
-
-</details>
-
-<details>
-<summary>Historical security reviews, skill migrations, and prior test results. These are records, not current verification.</summary>
-
-### Security result and continuation boundaries
-
-The security-reviewer retains its exact read-only tool list, `spawns: []` and `model: "@task"`. Its single native-style contract now requires coverage_summary, reviewed_paths and deferred, with candidates/decisions replacing findings/confidence. Discovery never assigns confirmation/severity; fresh refutation accounts for every assigned current root cause. Missing terminal arrays, IDs, independent proof, conditional confirmation fields or effective dispatched-definition provenance leaves the assessment incomplete. A role name, model identity or task-supplied schema alone is not managed-definition provenance. Read-only procedure/tool names are not OS isolation.
-
-Handoff loading reads only its selected snapshot. Actual continuation belongs to project-delivery resume, reconciling canonical sources and exact approved bytes/scope with independently available trusted authorization. A mirror/hash/handoff label alone never authorizes execution. Export under read-only/Plan Mode returns unwritten proposed content.
-
-### Compatibility evidence and upgrades
-
-The earlier public `omp --version` and `omp --help` observations identified installed **18.5.0**. Help exposes `--config`, explicit file input and `--no-skills`. The user-invoked `omp --no-skills` disables skill discovery/loading, not AGENTS guidance, custom agents, tools or approval/model state. Conditional routing honors disablement and does not file-load around it. Recheck installed help before using that flag after an upgrade.
-
-Payload/deployment, native discovery/task/custom-agent selection, and real tool-enabled behavior are independent checks. Current source parsing is not native dispatch proof; published moving documentation is not installed-version acceptance. Before the one-folder consolidation, public `omp read skill://<name>` resolved all fifteen then-deployed entrypoints in a disposable HOME/state, and an audit companion reference resolved there too. This historical result does not verify discovery after the current path/settings change. These are passive URI reads, not authenticated task/agent selection. Corrected fresh CLI generation with closed stdin exited 1 because no provider API key was available; the earlier piped-stdin attempt timed out. That startup also attempted the existing GitHub/OpenDesign MCP connections, which failed; it did not verify those services. Active credentials were not read or copied. At the user's request, the separate CLI-authentication item is closed using the already exercised authenticated current-session host actions and their actual model/tool/result evidence. This is an accepted verification path, not a passing fresh CLI generation result. Effective managed security-definition selection, native Plan Mode, malformed/overridden selection and disabled/unavailable native task cases remain unverified compatibility notes, not claimed passes or current blockers.
-
-The user's deployment platform is WSL. Historical POSIX installer/doctor verification for the earlier cutover is complete, not final verification of this one-folder consolidation; Windows/PowerShell (beta) verification was closed as out of scope for that WSL-only acceptance. Neither PowerShell runtime was available, and no Windows execution is claimed. Verify the PowerShell entrypoints on an actual supported platform only if Windows deployment is later requested.
-
-The old staging 13-smoke/ALL51/frozen test epoch is historical and does not accept this fifteen-skill suite. Recovery copies and assessment fixtures are external session evidence, never installed payload. Runtime settings, PERSONALITY.md, the boundary hook, installers/doctors and unrelated snapshots remain outside this cutover.
-
-### Historical fifteen-skill cutover verification results
-
-The production POSIX integration runner passed all 372 inventory entries; the unchanged model-routing runner passed its five named cases. Real disposable-home dry-run/install/doctor/repeat-install checks exercised source byte equality, zero dry-run mutation and repeat-install mtime/backup preservation. Metadata checks parsed all fifteen entrypoints using native Bun YAML, checked explicit asset/link coverage and full pinned notices, and checked all 129 frozen concept reference/template targets and heading anchors. One adopted security heading was corrected to retain its original frozen catalog target; the registry and seven templates were not changed.
-
-The following are actual source-loaded private normal-host actions, not native registration, security-role selection or OS-containment proof. Completed implementation and assessment workers' runtime records recorded their assigned runtime settings and no fallback. Parent-owned process evidence is separate from workers' source observations.
-
-The remaining verification was resumed with fresh actors, and a fresh independent reader judged all eighteen predefined smoke purposes supported with the stated bounds. This was bounded assessment-session acceptance, not a guarantee of every skill branch, exclusively candidate-caused behavior or unknown future-runtime compatibility. Matching runtime bootstrap guidance was also loaded in some actions: ponytail for coding, installed retro before the explicit copied retrospective procedure, and code-review for the independent evidence judge. Actual candidate procedures/references were separately read; these context qualifications are retained rather than claiming complete context isolation.
-
-| Required behavior | Observed outcome and limits |
-|---|---|
-| CLI documentation setup and fresh rerun | Existing README and unrelated manifest owner preserved; typed manifest checked; fresh rerun made no changes. |
-| Conflicting web authorization context and documentation audit | Both read-only actions retained competing owners, obsolete boundary, missing threat/operations evidence and unsupported remediation. Context supplied all seven headings; no severity invented. |
-| Incomplete multi-slice plan | Read-only review identified omitted guest denial and missing CLI/API consumer integration with exact anchors. |
-| Brainstorming stress-test | Inspected repository policy before asking the remaining ready refund choice; no implementation or documentation writes. |
-| Active domain modeling | Used expiry/payment/cardinality counterexamples and settled glossary proposal; consequential ADR remained proposed, not falsely accepted. |
-| Explicit TDD and ordinary-regression control | Observed two meaningful assertion failures before one combined correction/GREEN, then both passed; the test source was unchanged. Actual CLI success/denial paths passed. Separate ordinary request authored five passing regression cases without invoking TDD. Literal one-test-at-a-time RED/GREEN sequencing was not exercised and is not claimed. |
-| WIP and fix review | Read actual WIP source, retained unknown Spec axis; fresh fix review addressed the original tenant issue and found newly introduced ordering breakage, read-only. |
-| Reported CLI failure diagnosis | Treated report as ground truth; working-library discriminator isolated consumer bypass. Corrected only consumer, exercised exact permitted/denied CLI and passed three consumer regressions; no confirmation-only replay. |
-| Normal two-slice delivery | Read all six delivery references, mapped acceptance to producer/consumer proof and independently dispositioned supplied feedback. Waited for actual library proof before consumer implementation; actual CLI paths then passed. Incomplete worker report was not accepted as evidence. |
-| Guidance baseline/candidate assessment | Separate actual authors and fresh consumers preserved the existing owner and followed conditional pointers. Both controls succeeded; no invented baseline failure or improvement. Parent checked writes, source preservation and actual CLI behavior. A fresh independent reader inspected actual source/tool/result evidence and supported the bounded comparison; no comparative improvement or negative-trigger comparison is inferred. |
-| Pause/export and read-only export control | New numeric snapshot preserved the previous one, contained the exact six headings and honest partial state; receiving prompt reconciled current authority. Separate control returned unwritten content with no writes. Native Plan Mode remains unverified. |
-| Load-only handoff | Read only entrypoint, directory and selected snapshot; did not inspect cited sources or execute its “already approved” instructions. |
-| Supported versus unsupported continuation authority | Current exact-scope parent assignment supported ordered reconstruction and CLI-only continuation; producer/snapshot preserved and actual CLI paths passed. A fresh unsupported-assertion action returned all seven headings, treated mirror/hash/handoff as content rather than permission, withheld continuation and left the fixture unchanged. The earlier quota-failed job remains historical failure, not merged proof. |
-| Retrospective | Fresh action read the copied procedure/reference and real completed-slice process/test receipts, produced evidence/applicability/revisit conditions and rejected the unsupported universal wiki lesson; no policy/memory mutation. Matching installed-retro bootstrap was also read, so the actor's exclusive-copied-source wording is qualified externally; no recurrence or candidate-only attribution is claimed. |
-| External bundle intake | Actual read-only discovery inventoried inert text/manifest and reported unsafe purpose/authority mismatch with missing binary/extension coverage. The earlier quota failure and a resumed refuter's nonmatching installed-code-review read remain recorded failures. A distinct fresh recheck loaded copied intake first, independently inventoried/read current sources and returned the same assigned root as needs-validation without severity; fixture unchanged and no target execution/install/network/credential/write/delegation attempt. Unsafe adoption posture is not a confirmed runtime exploit. |
-| Focused tenant-gate review/refutation | Actual read-only discovery and distinct fresh refuter independently read imported gate; seeded gate-removal allegation rejected on complete scoped source disproof, no severity. Runtime/native-definition assurance remains unverified. |
-| Explicit partial security audit | Discovery plus distinct fresh refutation/coverage challenge considered AI, availability and supply-chain boundaries. Local authorization omission retained as needs-validation because caller/deployment/model facts are missing; no severity or whole-app assurance. |
-| Malformed/lifecycle-invalid terminal results | Fresh semantic action read all nine invalid cases and accounted for each exactly once. Missing phase arrays/IDs, conflicting or unassigned dispositions, missing confirmation proof, unproved authorized-local, prohibited severity and failed fragments all withheld confirmation/clean assurance, retaining assigned unresolved IDs. This is observed source-loaded semantic assessment, not production native-parser validation. |
-
-Complete published host security terminals were checked for assigned IDs, phase completeness and semantic dispositions; a task-supplied schema and same-named role still do not prove effective managed-definition provenance. Failed/intermediate yields and a schema-validation override in the fresh intake trace are retained, not promoted to native strict-enforcement proof; acceptance uses its complete final source-grounded terminal. Security runtime impact and native-definition assurance remain incomplete where facts are unavailable. Failed actors are not reconstructed from fragments, replaced with weaker models or counted as clean results. The user's requested current-session/WSL verification for that earlier cutover was complete with these notes; unrun native and Windows interfaces remained unverified, not falsely passed or blockers for that accepted scope. These historical results do not accept the current one-folder consolidation.
-
-### Historical documentation-first workflow verification
-
-This assessment is separate from the historical 372-entry cutover above. The new [baseline procedure](config/agent/skills/project-delivery/references/documentation-baseline.md) and its delivery/documentation entry points were exercised from explicit before-edit and changed source copies: fifteen skills, with 108 control assets and 109 candidate assets. Accepted fresh actions used the supplied ordinary-file maps; an optional non-suite coding supplement was explicitly mapped separately. Actor records show high-effort runs without fallback. Three independent read-only evidence reviews culminated in support for the current eight-case coverage, not a guarantee of every branch or candidate-only causation.
-
-| Case | Observed result |
-|---|---|
-| Writer-enabled pre-code gate | Both control and candidate prepared substantive whole-boundary documentation, retained the unresolved equally authoritative denial-exit conflict and withheld app mutation despite an approved mirror. |
-| Documents, implementation and reconciliation | Both prepared and independently reviewed sufficient pre-code owners before exact-basis implementation assignments. Real core and CLI worked; fresh mapped-source maintenance reconciled all 14 candidate selected concepts, while the control reconciled 13. Both controls succeeded; no comparative improvement is claimed. |
-| Read-only proposal | Substantive proposed owners, readiness and implementation plan were returned without fixture writes or execution attempts. This is not native Plan Mode proof. |
-| Authority, freshness and material feedback | Copied approval/digest claims withheld implementation; an independently trusted exact-basis assignment permitted it. Cosmetic content changes did not force restart. Proposed exit-4 feedback updated affected draft intent and plan while retaining active exit-3 code/proof and requiring reapproval before dependent mutation. |
-| Actual consumer drift | The original CLI exit 4 was observed against retained exit-3 acceptance. Authorized correction and relevant core/CLI proof preceded fresh reconciliation of every affected requirement/design/case/result/guide owner; an unrelated passing log did not substitute. |
-| Resume and load-only | Fresh consumers distinguished complete/no-work, correct-code/stale-doc work and valid-core/missing-CLI work. Document-only repair preserved implementation. Load-only inspected its selected snapshot, not cited code or Next Steps. |
-| Tailoring and evidence timing | Lean CLI reused combined README owners; standard web reused established product/requirements/API/visual owners and prepared operations information. Android/iOS shared one common owner with real platform deltas and named unresolved decisions. No runtime, restore or device/store results were invented. |
-| Bounded and disabled/unavailable contexts | Existing-core order correction needed no full app bundle. Fresh disabled/unavailable countercases read only permitted routing context, preserved unrelated files and passed the specified real CLI success. Requested unavailable suite proof stayed unverified. These are routing-context observations, not native disablement enforcement. |
-
-Controller-owned Python subprocesses used private fixture working directories and minimal nonsecret environments. The candidate and corrected-drift app each passed eight independently expected inputs at both the actual imported public-core seam and real CLI: two specified successes, empty/no-match/nested-row boundaries, and nonempty/sentinel/empty denial. The control passed the same three primary cases plus four separately recorded edge inputs at both seams. Exact status, streams, row contents/order and core exception were observed; CLI-only success was not treated as public-helper proof. Fresh copied-fixture document consumers reused receipts only against byte-identical observed source, explicitly retaining the original execution directory rather than claiming a rerun.
-
-The earlier cutover verification passed all 373 inventory entries before source-root consolidation. It also exercised disposable-home dry-run/install/doctor/repeat-install behavior, native Bun YAML parsing and local-link/catalog-anchor checks. The later two-root transition had 304 mappings, 59 skill directories and 283 skill files. Those counts and results are historical, not passing results for the current 240-entry inventory. The fifteen-skill managed suite remains 109 assets.
-
-Failures remain distinct records: three quota-interrupted actions, the original reconciliation's out-of-map installed supplement read, and the original unavailable countercase's extra routing-section read were not relabeled passes. Fresh independently judged reassessments supplied current coverage. Complete tool/source errors, earlier negative review verdicts and a corrected controller display-count mistake remain external evidence; actual receipt inputs/results govern acceptance.
-
-This is passive cooperative, source-loaded workflow acceptance. Native discovery/registration, effective managed-agent selection, Plan Mode/approval UI provenance, runtime disablement enforcement, OS containment, Windows/PowerShell behavior, production authentication and formal ISO conformity were not established. No live-home deployment, settings/credential change or external app service was performed.
-
-### One native skill folder and upstream updates
-
-All managed skills live under `config/agent/skills/<folder>/SKILL.md` and deploy to `~/.omp/agent/skills/<folder>/SKILL.md`. The balanced catalog retains 36 public names and retires 17 without aliases or a discoverable archive. Impeccable is primary UI workflow; Emil/Taste are selective complements. Animate owns build/opportunities/vocabulary; Ponytail owns coding levels and one-shot review/audit/debt/help. Occasional specialists remain in the same native root. No models, agents, extensions, MCP, plugins, discovery settings, installers or doctors were changed in this simplification.
-
-Historically, nine byte-identical complete singular/plural trees were removed, and plural Impeccable 4.3.1 replaced singular 4.2.2. The final consolidation eliminates six remaining native/plural same-name duplicate packages. The newest versioned Impeccable package, **4.5.0 with engine 0.1.11**, is retained complete; **4.3.1 and 4.2.2** are retired. The older **0.1.5 Linux binary is not copied** into the newest package. `design-taste-frontend` was byte-identical across its duplicate copies. For the other unversioned differing copies, no defensible release-recency claim is available: their differences are only bare-invocation startup greetings or a course link, and the native variants are retained.
-
-The newest Impeccable launcher uses its matching standalone engine. A first-run download may require permitted network access, a writable cache, curl/wget and SHA-256 tooling; an available compatible binary avoids that download. If launch/download is unavailable or refused, follow the source-defined direct-context fallback through permitted tools and report the limit. No engine or service was invoked for this consolidation.
-
-An upstream updater targeting `.agent/skills/` or `.agents/skills/` can recreate a retired root. Choose the native destination before updating, keep each complete package's entrypoint, references and launcher/engine pin together, and update the explicit `config/files.tsv` inventory rather than copying piecemeal files. The installer remains non-pruning: pre-existing destination directories are not automatically deleted, including old installed skill copies. No live-home migration was performed. Inspect any retained data and the actual updater destination; this is not an instruction to delete legacy directories wholesale.
-
-#### Historical one-folder verification
-
-The following 240-mapping/53-name results describe the earlier root consolidation, not acceptance of the 36-name simplification:
-
-Verification of this **240-entry consolidation** is complete for the checked POSIX surface: `python3 scripts/test_install.py` passed all inventory entries, and `bun scripts/test_model_routing.mjs` passed its five named cases. Source checks covered 53 unique skill names, 219 selected skill files and 350 local/skill link targets and anchors. A real disposable-home dry-run left the home untouched; installation and doctor checks passed; all installed inventory bytes matched their sources. An identical reinstall preserved every mapped file's bytes, mode and mtime, and retained unrelated old-root user/project data.
-
-Installed OMP **18.5.0**, using that private home/project, exposed exactly the expected 53 native skill names. Passive URI reads resolved engineering-docs, the delivery baseline reference, newest Impeccable 4.5.0 and both distinct Taste names; four synthetic skills in retired singular/plural user/project roots were not discovered. These observations establish the checked native discovery/path migration, not authenticated skill execution, effective agent dispatch, Plan Mode/approval provenance or OS containment. No live-home deployment, Impeccable engine/download/service execution or Windows/PowerShell verification was performed; neither PowerShell runtime was available.
-
-</details>
-
-## References and acknowledgements
-
-Acknowledgements: this configuration adapts or references work from [Matt Pocock's skills](https://github.com/mattpocock/skills), [Superpowers](https://github.com/obra/superpowers), [GSD](https://github.com/open-gsd/gsd-core), [NVIDIA SkillSpector](https://github.com/NVIDIA/SkillSpector), [Anthropic Security Review](https://github.com/anthropics/claude-code-security-review), and [Cloudflare Security Audit](https://github.com/cloudflare/security-audit-skill). The exact source, revision, adaptation and notice mappings are recorded in [skill payload provenance](config/SKILL-SOURCES.md) and each adapted skill's `SOURCES.md`.
-
-See [skill payload provenance](config/SKILL-SOURCES.md) for exact revisions, adaptations, and license notices, and the [skill usage guide](SKILL-USAGE.md) for practical selection and examples. Attribution is not an endorsement or a blanket statement of redistribution rights; consult the provenance notes and included notices.
-
-For the upstream project's broader workflow, supported-harness installation/update instructions, and skill-library overview, see the [Superpowers README](https://github.com/obra/superpowers#readme). This repository is an OMP-specific portable configuration snapshot: it contains selected, locally adapted Superpowers material with provenance in [skill payload sources](config/SKILL-SOURCES.md); it is not the upstream Superpowers plugin, and upstream installation commands do not install this repository.
-
-### Further reading
-
-For runtime behavior, see OMP's [v18.6.1 agent discovery](https://github.com/can1357/oh-my-pi/blob/v18.6.1/docs/task-agent-discovery.md) and [Plan Mode child restrictions](https://github.com/can1357/oh-my-pi/blob/v18.6.1/packages/coding-agent/src/task/structured-subagent.ts). The [OMO architecture overview at commit `a8019016f47a9d814ebcc24bd921a561f065ee80`](https://github.com/code-yeongyu/oh-my-openagent/blob/a8019016f47a9d814ebcc24bd921a561f065ee80/docs/guide/overview.md) was consulted as background; this README documents this repository's capabilities and does not compare products or include OMO assets.
-
-### Third-party source and license notes
-
-The current provenance records map 15 adapted-skill source ledgers to 24 bundled license-notice files. They identify pinned MIT sources (Matt Pocock, Superpowers, GSD, Anthropic and Cloudflare), Apache-2.0 NVIDIA SkillSpector and Impeccable adaptations, and a MIT Ponytail snapshot. The ledgers associate adaptations with the relevant full notices and document source paths and modifications; Apache-2.0 records include attribution and modification notices. Consult [skill payload provenance](config/SKILL-SOURCES.md) and each skill's `SOURCES.md`/notice for the per-file mapping.
-
-This is a repository-content review, not legal advice or a compliance certification. No project-wide `LICENSE` was present in the inspected root listing. The original snapshot history records that legacy skill roots had no separate LICENSE/COPYING files; unresolved licensing caveats remain for unchanged historical snapshots. Local presence, attribution, a source URL, or a notice belonging to a different adaptation does not establish redistribution rights. Rights for those unresolved materials and any independent third-party assets within retained packages were not verified here; resolve exact upstream terms or exclude/rewrite the material before relying on permission to redistribute it.
-
+For practical skill selection see [SKILL-USAGE.md](SKILL-USAGE.md). For runtime details consult OMP's [v18.6.1 agent discovery](https://github.com/can1357/oh-my-pi/blob/v18.6.1/docs/task-agent-discovery.md) and [Plan Mode child restrictions](https://github.com/can1357/oh-my-pi/blob/v18.6.1/packages/coding-agent/src/task/structured-subagent.ts).
