@@ -1,11 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 function Fail([string]$Message) { [Console]::Error.WriteLine($Message); exit 2 }
-function EqualBytes([byte[]]$A, [byte[]]$B) {
-    if ($A.Length -ne $B.Length) { return $false }
-    for ($i = 0; $i -lt $A.Length; $i++) { if ($A[$i] -ne $B[$i]) { return $false } }
-    return $true
-}
+function EqualBytes([byte[]]$A, [byte[]]$B) { return [System.Collections.StructuralComparisons]::StructuralEqualityComparer.Equals($A, $B) }
 function Is-Reparse([string]$Path) {
     if (-not (Test-Path -LiteralPath $Path)) { return $false }
     return ((Get-Item -LiteralPath $Path -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0

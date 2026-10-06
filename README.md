@@ -137,6 +137,7 @@ Choose another skill only when its goal matches your task; these examples are al
 
 - POSIX: `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp`, and `date`. Remote ZIP installation additionally requires `curl` and `unzip`.
 - Windows (beta): PowerShell 5.1+; remote ZIP installation uses `Invoke-WebRequest` and `Expand-Archive`. A disposable Windows PowerShell 5.1 smoke on 2026-10-06 rejected the valid inventory with `Inventory must include AGENTS.md and config.yml.` The required-entry lookup uses forward-slash keys after destination paths have been converted to backslashes. This pre-existing correctness issue remains unresolved; no successful Windows installation is claimed.
+- Windows byte comparisons use .NET's `StructuralComparisons.StructuralEqualityComparer`. Both script parsers, help entry points and six byte-equality cases per script were smoke-checked on PowerShell 5.1; this does not establish a successful full Windows installation.
 - External software and credentials are not bundled; see [Third-party prerequisites](#third-party-prerequisites). Installation starts no services. Every installed file is listed in the inventory.
 - `config/SKILL-SOURCES.md` documents the canonical skill folder, its source history, and licensing caveats. Skill snapshots do not guarantee downstream redistribution rights.
 
