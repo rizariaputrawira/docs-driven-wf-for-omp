@@ -6,9 +6,40 @@
 
 `omp-config` is a portable, inventory-managed snapshot of user-level configuration and guidance for an existing OMP installation. It is not the OMP application, a plugin marketplace installer, or a project template. It does not include OMP or credentials, or start external services.
 
+## Third-party prerequisites
+
+This repository deploys configuration only; it does not install third-party software or provide credentials. Feature-specific and optional prerequisites are needed only for their corresponding features, although the GitHub and OpenDesign MCP declarations are present by default and may attempt to connect.
+
+### Required for basic use
+
+1. **Install OMP separately.** Follow the [official OMP installation choices](https://github.com/can1357/oh-my-pi#install). This repository does not install OMP or declare a minimum supported OMP version. Bun or Node requirements depend on the upstream installation route you choose.
+2. **Authenticate the configured provider.** Run `omp login openai-codex` or use `/login openai-codex` inside OMP. See the [OMP provider documentation](https://github.com/can1357/oh-my-pi/blob/main/docs/providers.md) for its OAuth/token flow, including `OPENAI_CODEX_OAUTH_TOKEN`. A generic OpenAI API key does not automatically authenticate the separate `openai-codex` provider.
+3. **Check model access.** The [configured selections](config/agent/config.yml) use `gpt-6.1-sol` and `gpt-6-luna`. Successful use depends on your account/provider exposing those identifiers; their availability is not established here. If unavailable, choose supported models in your own settings.
+4. **Check installer utilities separately.** See [Requirements and scope](#requirements-and-scope) for POSIX, remote ZIP, and PowerShell prerequisites and the unresolved Windows installer caveat.
+
+### Feature-specific integrations
+
+| Third party | Needed for | What to provide | Setup / source |
+|---|---|---|---|
+| GitHub MCP server | GitHub tools; feature-specific, declared by default | Network access to `https://api.githubcopilot.com/mcp/` and a valid `GITHUB_TOKEN` exported in the environment inherited by OMP. This declaration uses a bearer token/PAT, not host-managed OAuth. Grant only permissions needed by intended operations; individual tools may require corresponding account/feature access. No local GitHub server or Docker installation is needed for this hosted HTTP declaration. | [Official GitHub MCP setup](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp-in-your-ide/set-up-the-github-mcp-server); [declaration](config/agent/mcp.json) |
+| OpenDesign and Node.js | Explicit OpenDesign/external-artifact workflows, not ordinary UI guidance; declared by default | `node` on PATH, a built OpenDesign installation and dependencies, `OMP_OPEN_DESIGN_CLI` as an absolute WSL/Linux JavaScript CLI entrypoint (source layout `<checkout>/apps/daemon/bin/od.mjs`), and a reachable daemon at `http://127.0.0.1:7456`. Generation additionally needs that deployment's runtime/credentials. Explicit POSIX lifecycle recipes also require `curl` and a separate absolute executable `OMP_OPEN_DESIGN_LAUNCHER`, not the JS entrypoint. Installation starts neither daemon nor generation. | [OpenDesign setup](https://github.com/nexu-io/open-design); [precise contract](config/agent/skills/impeccable/reference/open-design.md#prerequisites-and-source-scope); [paths and lifecycle](#opendesign-paths-and-lifecycle) |
+| RTK (Rust Token Killer) | Optional shell-output optimization | The correct `rtk-ai/rtk` executable on PATH, not Rust Type Kit. Recommend **0.24.0+** for this rewrite integration: upstream documents `rtk rewrite` from that version. The existing hook's minimum check is **0.23.0**, distinct from this recommendation. A missing/too-old executable disables the hook; `RTK_DISABLED=1` bypasses it. | [Official RTK installation](https://github.com/rtk-ai/rtk/blob/master/INSTALL.md); [hook](config/agent/extensions/rtk.ts) |
+| herdr | Optional pane/session-state reporting | Run OMP in a Herdr-managed pane supplying `HERDR_ENV=1`, `HERDR_SOCKET_PATH`, and `HERDR_PANE_ID`; these are pane inputs, not credentials to invent. Outside that environment the hook is inactive. No minimum Herdr version is established for this bundled hook. | [Herdr integration contract](https://herdr.dev/docs/add-herdr-support/); [hook](config/agent/extensions/herdr-omp-agent-state.ts) |
+
+Missing MCP inputs can make a declared integration unavailable or produce connection/authentication errors. Optional use does not guarantee silent startup without those inputs.
+
+### Optional skill capabilities
+
+- **Impeccable engine:** the bundled launcher targets engine **0.1.11**; a compatible preinstalled binary avoids download. First download needs permitted network, a writable cache, `curl` or `wget`, and `shasum` or `sha256sum` for checksum verification. It uses a standalone binary, not Node/npm. The [existing setup guide](SKILL-USAGE.md#impeccable-setup-and-engine-prerequisites) describes the direct-context fallback.
+- **Impeccable live/browser workflows:** available browser capability, a running web surface/dev server or static HTML, and the localhost helper are needed only for that workflow. See [live setup](config/agent/skills/impeccable/reference/live.md).
+- **Google Stitch:** authorized [Google Stitch](https://labs.google/stitch) access and tool availability are needed only when making Stitch calls. Programmatic MCP access is optional and is not declared in the shipped `mcp.json`. See the [bundled Stitch guidance](config/agent/skills/stitch-skill/SKILL.md).
+- **Image generation:** an available permitted image-generation tool is required only for requested image output; this configuration selects no provider or credential variable. Supplied-image analysis does not require generation. See [Images and design documents](SKILL-USAGE.md#images-and-design-documents).
+
+[`pi-9router-ext` 0.2.4 is disabled](config/plugins/omp-plugins.lock.json), not a required installation. Libraries mentioned in skill coding recipes are target-project dependencies, not baseline OMP workstation requirements. Bundled upstream skill sources need no separate installation; see [provenance and licensing caveats](config/SKILL-SOURCES.md).
+
 ## Quick start
 
-From the repository root. The source defaults to this checkout and the destination to your existing home (`$HOME` on POSIX, `%USERPROFILE%` in PowerShell). Preview first, then install.
+From the repository root, after checking [Third-party prerequisites](#third-party-prerequisites). The source defaults to this checkout and the destination to your existing home (`$HOME` on POSIX, `%USERPROFILE%` in PowerShell). Preview first, then install.
 
 ```sh
 sh install.sh --dry-run
@@ -104,9 +135,7 @@ Choose another skill only when its goal matches your task; these examples are al
 
 - POSIX: `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp`, and `date`. Remote ZIP installation additionally requires `curl` and `unzip`.
 - Windows (beta): PowerShell 5.1+; remote ZIP installation uses `Invoke-WebRequest` and `Expand-Archive`. A disposable Windows PowerShell 5.1 smoke on 2026-10-06 rejected the valid inventory with `Inventory must include AGENTS.md and config.yml.` The required-entry lookup uses forward-slash keys after destination paths have been converted to backslashes. This pre-existing correctness issue remains unresolved; no successful Windows installation is claimed.
-- Not bundled: OMP, model credentials, Node.js, the OpenDesign daemon, the `rtk` executable, or herdr services. Every installed file is listed in the inventory.
-- `config/agent/mcp.json` declares a GitHub HTTP MCP connection (`GITHUB_TOKEN`) and a local OpenDesign stdio connection (`OMP_OPEN_DESIGN_CLI`, `OD_DAEMON_URL=http://127.0.0.1:7456`). Configure these per machine; installation does not provide or start either server.
-- The optional RTK and herdr hooks do not start services. The RTK hook disables itself unless `rtk >=0.23.0` is on `PATH`; `herdr` requires `HERDR_ENV=1`, `HERDR_SOCKET_PATH`, and `HERDR_PANE_ID`.
+- External software and credentials are not bundled; see [Third-party prerequisites](#third-party-prerequisites). Installation starts no services. Every installed file is listed in the inventory.
 - `config/SKILL-SOURCES.md` documents the canonical skill folder, its source history, and licensing caveats. Skill snapshots do not guarantee downstream redistribution rights.
 
 ## Managed files
@@ -157,6 +186,8 @@ These 17 folders/public names are historical migration identifiers, not invocati
 | `ponytail-help` | `ponytail-help` | ponytail `help`: inline `skill://ponytail` table |
 | `ponytail-gain` | `ponytail-gain` | Removed uncited static scoreboard; no replacement or measured-saving claim |
 
+
+### OpenDesign paths and lifecycle
 
 The OpenDesign start/stop guidance is explicitly user-invoked and POSIX-shell-specific; Windows installation provides no native PowerShell equivalent. The [canonical OpenDesign contract](config/agent/skills/impeccable/reference/open-design.md) is entered only for explicit OpenDesign or external generated/refined artifact requirements. Impeccable owns ordinary UI work.
 
