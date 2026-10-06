@@ -43,6 +43,12 @@ Keep these mechanisms distinct:
 
 Global delegation/routing discipline belongs to PERSONALITY; conditional procedure selection belongs here. Skills supply procedures, bounded agents perform assignments, task-specific plans/canonical documents own project decisions, and native configuration supplies requested model policy.
 
+## Commit requests
+
+When the user requests a commit or commit-message advice, MUST read `skill://commit-message` and apply it to draft the message before any Git mutation. This includes requests such as "commit", "commit and push", and "write a commit message".
+
+The skill remains read-only. Finish message drafting before any explicitly authorized Git execution, which is a separate action outside the skill. This routing rule does not grant staging, commit, amend or push authority; message-only requests never authorize those actions. If the skill is unavailable or explicitly disabled, report that limitation rather than silently bypassing it or re-enabling it.
+
 ## UI and design workflow
 
 For UI/design work, first inspect the actual project, user brief, product and brand context, and target surface. Treat the user's explicit direction and project evidence as the source of truth.
