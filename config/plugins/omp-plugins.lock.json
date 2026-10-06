@@ -1,10 +1,4 @@
 {
-  "plugins": {
-    "pi-9router-ext": {
-      "version": "0.2.4",
-      "enabledFeatures": null,
-      "enabled": false
-    }
-  },
+  "plugins": {},
   "settings": {}
 }

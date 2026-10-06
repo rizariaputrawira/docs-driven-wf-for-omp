@@ -35,7 +35,7 @@ Missing MCP inputs can make a declared integration unavailable or produce connec
 - **Google Stitch:** authorized [Google Stitch](https://labs.google/stitch) access and tool availability are needed only when making Stitch calls. Programmatic MCP access is optional and is not declared in the shipped `mcp.json`. See the [bundled Stitch guidance](config/agent/skills/stitch-skill/SKILL.md).
 - **Image generation:** an available permitted image-generation tool is required only for requested image output; this configuration selects no provider or credential variable. Supplied-image analysis does not require generation. See [Images and design documents](SKILL-USAGE.md#images-and-design-documents).
 
-[`pi-9router-ext` 0.2.4 is disabled](config/plugins/omp-plugins.lock.json), not a required installation. Libraries mentioned in skill coding recipes are target-project dependencies, not baseline OMP workstation requirements. Bundled upstream skill sources need no separate installation; see [provenance and licensing caveats](config/SKILL-SOURCES.md).
+Libraries mentioned in skill coding recipes are target-project dependencies, not baseline OMP workstation requirements. Bundled upstream skill sources need no separate installation; see [provenance and licensing caveats](config/SKILL-SOURCES.md).
 
 ## Quick start
 
@@ -70,7 +70,7 @@ The managed payload has distinct runtime roles:
 | Task-specific plans and canonical project documents | Authorized project scope, interfaces, acceptance and maintained decisions; not global routing |
 | `config/agent/commands/` | User-invoked command guidance; commands do not start services during installation |
 | `config/agent/mcp.json` | MCP declarations that refer to machine-provided credentials and executables |
-| `config/plugins/` | Plugin package/lock metadata; `pi-9router-ext` is deliberately disabled |
+| `config/plugins/` | Plugin package/lock metadata; no bundled plugins |
 | `config/files.tsv` | Explicit allowlist mapping each managed source file to its home-relative destination |
 | `scripts/` and `install.*` | Deployment checks, static configuration contracts and executable hook contracts |
 
@@ -224,7 +224,7 @@ The doctor uses these exit codes:
 
 ## How deployment and use fit together
 
-The lifecycle is explicit inventory → validated install → existing OMP reads settings and available skills → optional doctor check. Installation copies only managed files; it does not install OMP, launch agents, activate the disabled plugin, or provide credentials.
+The lifecycle is explicit inventory → validated install → existing OMP reads settings and available skills → optional doctor check. Installation copies only managed files; it does not install OMP, launch agents, install plugins, or provide credentials.
 
 - `config/files.tsv` defines the deployment boundary. Unlisted staging, credentials, caches, histories, and generated state are not installed.
 - Installers validate the complete source/destination set before writing, create only directories needed by listed files, leave byte-identical files untouched, back up changed files with collision-safe names, and do not prune old or unrelated destination data.
