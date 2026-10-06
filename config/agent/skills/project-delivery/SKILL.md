@@ -30,6 +30,6 @@ Accept an explicit goal with existing artifact paths, or `resume [handoff-path]`
 
 ## Reporting and interruption
 
-Return the acceptance-to-evidence result, actual changes, observed checks/outcomes and unresolved blockers; distinguish source inspection from exercised behavior. Retain relevant unchanged observed evidence without gratuitous replay, but invalidate it when its material basis changes. Explicit pause/export uses `skill://handoff-to-another-harness`; requested learning extraction uses `skill://retro`. No automatic commits, worktrees, tracker publishing, job restarts, new state database or provider/model changes.
+Return the acceptance-to-evidence result, actual changes, observed checks/outcomes and unresolved blockers; distinguish source inspection from exercised behavior. Retain relevant unchanged observed evidence without gratuitous replay, but invalidate it when its material basis changes. Explicit pause/export uses `skill://handoff-to-another-harness`; requested learning extraction uses `skill://retrospective`. No automatic commits, worktrees, tracker publishing, job restarts, new state database or provider/model changes.
 
 Provenance and notices: [SOURCES.md](SOURCES.md).

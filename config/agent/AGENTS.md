@@ -6,7 +6,7 @@ Ordinary work starts with Sol main: direct trivial work or bounded existing work
 
 Apply this routing only when the documentation-driven suite is available, enabled and matches the current request. Explicit skill disablement/filtering wins. Missing or disabled suite assets must not stop ordinary native OMP work or trigger automatic file-load/setup. Continue native permissions, approval and relevant context checks; block only explicitly requested unavailable suite-specific proof. Renewed explicit authorization to load a known file is distinct from automatic reactivation.
 
-When the guard applies, material authoritative-context dependencies use `engineering-docs`; new applications and explicit substantial/end-to-end documentation-dependent delivery use `project-delivery`. Context retrieval alone is not full delivery. Consequential multi-slice plan review can apply without manufacturing a documentation baseline. Other owners include `diagnosing-bugs` for difficult causes, `code-review` for requested review, `impeccable` for UI, `ponytail` for coding simplicity, and `writing-for-agents` for guidance work. Specialists are selected by actual trigger, not mandatory phases.
+When the guard applies, material authoritative-context dependencies use `engineering-docs`; new applications and explicit substantial/end-to-end documentation-dependent delivery use `project-delivery`. Context retrieval alone is not full delivery. Consequential multi-slice plan review can apply without manufacturing a documentation baseline. Other owners include `diagnosing-bugs` for difficult causes, `code-review` for requested review, `ui-design` for UI, `code-simplicity` for coding simplicity, and `writing-for-agents` for guidance work. Specialists are selected by actual trigger, not mandatory phases.
 
 | Current task trigger | Procedure owner to read on demand |
 |---|---|
@@ -28,7 +28,7 @@ When the guard applies, material authoritative-context dependencies use `enginee
 | Explicit pause/export/transfer | `skill://handoff-to-another-harness` |
 | Read/load a handoff only | `skill://resume-from-handoff`, selected snapshot only, never continuation |
 | Guidance changes or separately authorized behavioral skill assessment | `skill://writing-for-agents` |
-| Requested retrospective | `skill://retro` |
+| Requested retrospective | `skill://retrospective` |
 
 Descriptions are triggers, not loaded procedures. Use actual `read` and the installed task/tool schemas. Independent security discovery/refutation needs fresh source-inspecting read-only reviewers and effective dispatched-definition provenance, not advice-only advisor assertions or a same-named substitute. Instructions create no permissions, model binding or sandbox. For explicitly requested upgrade proof, read `skill://engineering-docs/references/omp-compatibility.md`; absent native convenience support permits a known canonical file read only for an explicitly requested enabled suite, never to defeat disablement. No dispatcher/plugin/autoload hook is added.
 
@@ -58,13 +58,13 @@ The skill remains read-only. Finish message drafting before any explicitly autho
 
 For UI/design work, first inspect the actual project, user brief, product and brand context, and target surface. Treat the user's explicit direction and project evidence as the source of truth.
 
-Use Impeccable as the primary workflow. For new or replacement surfaces, follow its context-loading and new-work path. For existing surfaces, audit the incumbent and refine in place unless redesign was requested. Route evaluation and refinement requests to the matching Impeccable command guidance; do not run a command merely because the skill is available.
+Use `skill://ui-design` as the primary workflow. For new or replacement surfaces, follow its context-loading and new-work path. For existing surfaces, audit the incumbent and refine in place unless redesign was requested. Route evaluation and refinement requests to matching command guidance; do not run a command merely because the skill is available.
 
-Load only applicable complementary guidance: Emil for component polish, meaningful motion, and interaction details; Taste for landing pages, portfolios, and redesigns. Outside Taste's scope, use only relevant anti-slop checks, not landing-page prescriptions. Impeccable governs workflow and scope; apply compatible complements selectively rather than stacking full checklists.
+Load only applicable local references: `skill://ui-design/reference/local/component-craft.md` for focused component detail and `skill://ui-design/reference/local/marketing-sites.md` for landing pages, portfolios, and marketing redesigns. Outside marketing scope, use only relevant anti-slop checks, not landing-page prescriptions. `ui-design` governs workflow and scope; selectively load compatible references rather than stacking checklists. Web motion belongs to `skill://web-motion`, Expo motion to `skill://expo-motion`, and browser/PWA platform fixes to `skill://mobile-web`. Load `skill://apple-design` only for explicitly requested specialist guidance, not automatically alongside UI or motion owners.
 
 Before implementation, reconcile recommendations with the brief, existing design system, platform, accessibility needs, and technical constraints. Resolve compatible guidance without asking. If a materially consequential conflict remains unresolved, ask one concise question before committing to that direction.
 
-Only an explicit OpenDesign request or explicit requirement for external generated/refined design artifacts enters `skill://impeccable/reference/open-design.md`; ordinary UI work does not. Follow that canonical availability, project, handoff and artifact-review contract without replacing the brief with aesthetic defaults. For direct workspace edits, preserve incumbent behavior and inspect the rendered surface after changes.
+Only an explicit OpenDesign request or explicit requirement for external generated/refined design artifacts enters `skill://ui-design/reference/open-design.md`; ordinary UI work does not. Follow that canonical availability, project, handoff and artifact-review contract without replacing the brief with aesthetic defaults. For direct workspace edits, preserve incumbent behavior and inspect the rendered surface after changes.
 
 Verify the actual resulting UI at relevant narrow and wide states, including the changed interaction and accessibility or reduced-motion implications where applicable. Report only observed verification, and distinguish missing runtime access from completed verification.
 

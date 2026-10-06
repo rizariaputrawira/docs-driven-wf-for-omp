@@ -1,7 +1,7 @@
 # omp-docflow
 
-Document-aware OMP configuration with Sol-led orchestration, bounded workers,
-security workflows, and optional documentation-driven delivery.
+Portable OMP configuration with Sol-led orchestration, bounded workers, security
+workflows, on-demand capability guidance, and optional documentation-driven delivery.
 
 > **Safety:** This configuration deliberately sets `tools.approvalMode: yolo`, an unrestricted approval mode. Review this setting and its consequences before installing.
 
@@ -29,6 +29,8 @@ full installation—see [requirements](#requirements-and-prerequisites)):
 ```
 
 The source defaults to this checkout; destination defaults to your existing home (`$HOME` or `%USERPROFILE%`). Installation validates the complete inventory before writes, copies only listed files, leaves identical files untouched, backs up changed files with collision-safe names, and does not prune old or unrelated destination data. Dry-run does not copy files or create destination directories/backups.
+
+After installing, start `omp` in your project and request the needed outcome. The [task-to-skill catalog](SKILL-USAGE.md) links current procedures; no setup pipeline or automatic external service is required. Renamed skill names have no aliases, and existing homes may retain retired copies: see the [non-pruning migration map](docs/migration.md).
 
 ### Install and update
 
@@ -97,7 +99,7 @@ Example OMP requests:
 
 - “Use diagnosing-bugs to trace this reported export failure; inspect the actual caller and relevant evidence, then explain the cause or remaining uncertainty.”
 - “Use code-review on my current changes; include untracked files and requirements, and report correctness and specification findings without editing.”
-- “Use impeccable to review this settings page for keyboard access and narrow screens; preserve its current behavior and brand.”
+- “Use ui-design to review this settings page for keyboard access and narrow screens; preserve its current behavior and brand.”
 
 ## Requirements and prerequisites
 
@@ -114,10 +116,10 @@ GitHub MCP and OpenDesign declarations are present by default and may attempt to
 | Integration | Prerequisites and scope |
 |---|---|
 | GitHub MCP | Network to `https://api.githubcopilot.com/mcp/` and a valid `GITHUB_TOKEN` inherited by OMP. This is bearer token/PAT, not host-managed OAuth; grant only needed permissions. No local server or Docker required. See [official setup](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp-in-your-ide/set-up-the-github-mcp-server) and [declaration](config/agent/mcp.json). |
-| OpenDesign | Explicit external-artifact workflows only. Requires Node, built OpenDesign installation/dependencies, absolute WSL/Linux JS entrypoint in `OMP_OPEN_DESIGN_CLI` (source layout `<checkout>/apps/daemon/bin/od.mjs`), and reachable daemon at `http://127.0.0.1:7456`. Explicit POSIX lifecycle recipes also need `curl` and separate absolute executable `OMP_OPEN_DESIGN_LAUNCHER`. Installation starts neither daemon nor generation. See [setup](https://github.com/nexu-io/open-design) and [contract](config/agent/skills/impeccable/reference/open-design.md). |
+| OpenDesign | Explicit external-artifact workflows only. Requires Node, built OpenDesign installation/dependencies, absolute WSL/Linux JS entrypoint in `OMP_OPEN_DESIGN_CLI` (source layout `<checkout>/apps/daemon/bin/od.mjs`), and reachable daemon at `http://127.0.0.1:7456`. Explicit POSIX lifecycle recipes also need `curl` and separate absolute executable `OMP_OPEN_DESIGN_LAUNCHER`. Installation starts neither daemon nor generation. See [setup](https://github.com/nexu-io/open-design) and [contract](config/agent/skills/ui-design/reference/open-design.md). |
 | RTK | Optional shell-output optimization; requires `rtk-ai/rtk` executable on PATH (not Rust Type Kit). Recommend 0.24.0+ for `rtk rewrite`; hook minimum is 0.23.0. Missing/old executable disables hook; `RTK_DISABLED=1` bypasses it. See [installation](https://github.com/rtk-ai/rtk/blob/master/INSTALL.md). |
 | herdr | Optional pane/session reporting; hook is active only in a Herdr-managed pane providing `HERDR_ENV=1`, `HERDR_SOCKET_PATH` and `HERDR_PANE_ID`. No minimum version is established. |
-| Impeccable engine | Bundled launcher targets engine 0.1.11. First download may need permitted network, writable cache, `curl`/`wget` and `shasum`/`sha256sum`; compatible preinstalled binary avoids download. See [skill usage setup](SKILL-USAGE.md#impeccable-setup-and-engine-prerequisites). |
+| Impeccable engine | Bundled `ui-design` launcher targets engine 0.1.11. First download may need permitted network, writable cache, `curl`/`wget` and `shasum`/`sha256sum`; compatible preinstalled binary avoids download. See [ui-design setup](config/agent/skills/ui-design/SKILL.md#setup). |
 | Browser, Stitch, image tools | Live Impeccable workflows need browser capability and a running surface. Google Stitch access/tool availability and permitted image-generation tools are needed only when requested. No generator, credential or provider is configured here. |
 
 Libraries mentioned in skill coding recipes are target-project dependencies, not baseline workstation requirements. Bundled upstream snapshots need no separate install; see [provenance and licensing](config/SKILL-SOURCES.md).
@@ -144,7 +146,7 @@ Exit codes: `0` every mapped file matches; `1` one or more files are missing/dri
 
 Installation is non-pruning. Old native folders remain discoverable in existing homes until a separately authorized retirement moves them outside **all skill discovery roots**. Inspect and preserve customized contents first; do not blanket-delete directories. Managed discovery settings leave `customDirectories` empty and disable Agents user/project skill-source discovery, but other runtime providers may exist; this is not application-wide isolation.
 
-The [migration map and history](docs/migration.md) records all 17 retired identifiers, surviving owners, root consolidation and historical verification. No live-home migration was performed. Updaters targeting `.agent/skills/` or `.agents/skills/` can recreate retired roots; choose the native destination and update complete packages plus `config/files.tsv`, not piecemeal files.
+The [migration map](docs/migration.md) records 36 retired public/folder identifiers (17 earlier folders plus 19 newly retired identifiers), surviving references and non-pruning behavior. The current source contains 36 public skills, 222 skill assets and 244 managed mappings; [decisions and full inventory](docs/capabilities.md) cover all 41 original skills. No live-home migration was performed. Updaters targeting `.agent/skills/` or `.agents/skills/` can recreate retired roots; choose the native destination and update complete packages plus `config/files.tsv`, not piecemeal files.
 
 ## Verification and known limits
 

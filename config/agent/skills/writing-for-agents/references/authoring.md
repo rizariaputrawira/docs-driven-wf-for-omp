@@ -6,7 +6,7 @@ Load when writing an instruction body or context pointer. The document is for a 
 
 A pointer names out-of-context material **and the observable branch that should reach it**. Put the distinctive leading trigger first and collapse synonyms for the same branch. Example: “When a correction and prior findings are supplied, read the fix-review reference before dispositioning them.” A bare “see review docs” hides the branch; an always-loaded paragraph reproducing the entire review procedure spends attention on unrelated turns.
 
-Give an exact local relative target or enabled `skill://name/relative-path` target. Do not make a pointer an unconditional autoload of every reference. A missing material target blocks that dependent claim/action; disabled suite files are not automatically reloaded by path fallback. Shared references remain callable plain material, not imaginary runtime invocations.
+Give an exact local relative target or enabled `skill://<name>/<relative-path>` target, replacing the placeholders with the actual owner and asset. Do not make a pointer an unconditional autoload of every reference. A missing material target blocks that dependent claim/action; disabled suite files are not automatically reloaded by path fallback. Shared references remain callable plain material, not imaginary runtime invocations.
 
 ## Information hierarchy
 

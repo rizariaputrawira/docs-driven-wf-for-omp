@@ -6,7 +6,7 @@ Load when packaging an OMP skill or authoring skill-selection guidance. This is 
 
 Use a canonical skill directory with `SKILL.md`; supported discovery reads the one-level entrypoint metadata. Newly authored frontmatter in this suite contains only `name` and `description`. Name is the retained canonical identity. Description says when to load, not the steps, output schema or enforcement claims. Provenance/license belongs in `SOURCES.md` and actual notice files, not invented flags.
 
-Place conditional references/templates within that owner and link exact relative paths. Cross-skill shared guidance uses a conditional `skill://name/relative-path` pointer to the enabled owner rather than copying its procedure. Namespace/collision handling depends on the actual OMP registry; do not create a second same-named managed variant or hard-code a package installation path.
+Place conditional references/templates within that owner and link exact relative paths. Cross-skill shared guidance uses a conditional `skill://<name>/<relative-path>` pointer with the actual enabled owner and asset rather than copying its procedure. Namespace/collision handling depends on the actual OMP registry; do not create a second same-named managed variant or hard-code a package installation path.
 
 ## Real invocation and loading
 

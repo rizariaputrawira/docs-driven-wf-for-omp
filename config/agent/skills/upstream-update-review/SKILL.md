@@ -46,7 +46,7 @@ Recommend these owners without executing downstream work:
 
 - For external skills/plugins/MCP/executables/dependencies or material authority/network/process/filesystem changes, point to `skill://security-intake` with candidate revision and a supplied-source evidence packet. Preserve its no-fetch boundary, independent assessment and own verdicts. If material is unavailable, recommend separately authorized source-view preparation, not intake fetching or automatic approval.
 - For useful upstream skill/agent guidance, point to `skill://writing-for-agents` for bounded selective adaptation and attribution, not wholesale copying.
-- For integration/native behavior, name exact discovered config/extension/command/document owner paths. For OpenDesign use `skill://impeccable/reference/open-design.md`. Only for a requested version-specific OMP compatibility next task, use `skill://engineering-docs/references/omp-compatibility.md`. Refresh generated herdr integration through its owner, not contrary to its header. Keep dormant integrations dormant.
+- For integration/native behavior, name exact discovered config/extension/command/document owner paths. For OpenDesign use `skill://ui-design/reference/open-design.md`. Only for a requested version-specific OMP compatibility next task, use `skill://engineering-docs/references/omp-compatibility.md`. Refresh generated herdr integration through its owner, not contrary to its header. Keep dormant integrations dormant.
 
 ## Report and bounded next task
 
