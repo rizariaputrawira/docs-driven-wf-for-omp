@@ -1,52 +1,111 @@
-# Verification scope and evidence
+# Verification and current limits
 
-This file owns current check commands, actual outcomes and meaningful unresolved limits. Routine dated session journals and duplicate receipts are intentionally omitted; their exact historical records remain in repository history. Historical results do not accept the current catalog change.
+Basis: inspected main `e850b6a07a55bc893d97c786928c45906952bbe7` plus the
+architecture revision documented here. Installed and official latest OMP observed on
+2026-10-06: **18.6.3**, immutable release source
+`093275112f7adff207608673c0e33c7f3d16e27f`. Linux/WSL, Bun 1.4.2 and Node
+24.20.0. One tested release is not a minimum-version or future-upgrade promise.
 
-## Current catalog cutover
+## Reproducible repository checks
 
-Verified on 2026-10-06 against source main `ae057bd421a0a66354a0334d3e270b53f0a4f296` plus this uncommitted cutover. Local runtime: Linux/WSL, Bun 1.4.2, Node 24.20.0, OMP 18.6.3. No live-home deployment, authenticated generation, engine download, image generation or external service was performed.
+```sh
+bun scripts/test_skill_catalog.mjs
+bun scripts/test_agent_config.mjs
+node scripts/test_model_routing.mjs
+node scripts/test_antislop.mjs
+python3 scripts/test_install.py
+```
 
-| Check | Actual result |
+| Exercised check | Outcome / evidence boundary |
 |---|---|
-| `bun scripts/test_skill_catalog.mjs` | Passed: 36 unique valid public identities, 222 exactly mapped skill assets, 244 mappings, 25 unchanged notice files, complete 41-original inventory/decision coverage, active full skill URI and lazy-reference targets. |
-| `python3 scripts/test_install.py` | Passed production POSIX installer/doctor integration for 244 inventory entries, including dry-run, equality/backups, invalid inventory/destination handling and local HTTP ZIP cases. No PowerShell runtime available. |
-| `bun scripts/test_agent_config.mjs` | Passed model/worker contract and 16 negative cases. This is static configuration, not authenticated dispatch identity. |
-| `node scripts/test_model_routing.mjs` | Seven named tool-boundary handler cases passed; not OS containment. |
-| `node scripts/test_antislop.mjs` | 16 positive and 18 negative handler cases passed; not authenticated model behavior. |
-| Disposable-home production install/check/reinstall/fix | Passed. Byte-identical reinstall preserved the current entrypoint timestamp. Doctor warned about a retired Impeccable folder without failing healthy managed state; customized old content survived install and fix. |
-| Passive native `omp read skill://<current-name>` | All 36 current public entrypoints and four merged UI/motion procedure references resolved from the disposable home. This exercises native URI discovery/read, not semantic routing or generation. |
-| Pre-move preservation comparison | All 25 notice files retained unchanged and mapped. All 64 original Impeccable paths retained under ui-design; 63 files byte-identical, with only the adapted SKILL.md metadata/local routing changed. All 13 captured model config, agent definition and extension files byte-identical. |
+| `omp --version`, `omp --help`, `npm view @oh-my-pi/pi-coding-agent version repository --json` | Installed and published package both 18.6.3; official latest/tag source independently checked. No update performed. |
+| `python3 scripts/test_install.py` | PASS: production POSIX installer/doctor integration for 282 mappings, including dry-run, equality/backups, unsafe/missing inventory and local HTTP ZIP cases. Neither pwsh nor Windows PowerShell available. |
+| `bun scripts/test_skill_catalog.mjs` | PASS: 35 canonical capabilities (33 visible, 2 explicit-only), 14 hidden aliases, 263 exactly mapped assets, 282 mappings, 38 notices; all full URI/relative targets resolve, flat names/exposure/tiny pointer destinations valid, retained notice hashes unchanged. |
+| `bun scripts/test_agent_config.mjs` | PASS: Sol-medium main/plan, seven role selectors/definitions, maxConcurrency 3, maxRecursionDepth 1 and 16 negative cases. Static configuration, not authenticated dispatch. |
+| `node scripts/test_model_routing.mjs` | PASS: seven named tool-boundary handler cases; not OS containment or actual agent-session loading. |
+| `node scripts/test_antislop.mjs` | PASS: 16 positive and 18 negative cases; native result shape, prompt preservation, chained/repeated injection and fresh preparation. Not model obedience. |
+| Disposable production dry-run/install/check/reinstall/fix | PASS: 282 managed mappings; stale web-motion procedure and unrelated notes retained, customized old impeccable SKILL backed up while managed hidden pointer installed; doctor reported stale owner advisory, not managed alias as legacy. |
+| Protected architecture/package comparison | 14 runtime/config/agent files byte-identical; security-reviewer changes only its canonical security-lifecycle URI, with frontmatter/tools/schema/authority unchanged. Both complete image procedure bodies retained in lazy references. Impeccable scripts/original technical assets unchanged; only entrypoint and local supplemental routing pointers changed. |
+| Installed `omp skill list --json` in isolated native state | RUNTIME VERIFIED: 49 discovered identities, 33 visible, 16 hidden, zero warnings. Hidden set is exactly 14 aliases plus ui-prototyping/ui-library-selection. All 35 canonical and all 14 alias native URI reads passed. |
+| Disposable `skills.includeSkills: [ui-*]` / `[code-*]` local lists | RUNTIME VERIFIED: 11 UI and four code canonical results, no out-of-prefix entries. Nonmatching unprefixed aliases excluded. |
+| Immutable source license comparison | Full retained notice text matched all nine inspected immutable LICENSE sources, ignoring only transport terminal whitespace. Existing 25 notice hashes preserved separately; new Emil/Taste notices from exact cloned source bytes. Not blanket legal clearance. |
+| Emil/Taste file comparison | 19 baseline pairs: six byte-identical, eleven modified/adapted with substantial matching expression, two Stitch files source-uncertain. Comparison pins are not historical import commits. |
+| Inventory presentation simplification | 36 baseline records and all 15 fields retained through contract tables, proven folder formulas and shared source/coupling keys; 661 → 162 lines. No procedure, notice or runtime mechanism removed. |
+| Pre-publication smoke | PASS: fresh disposable dry-run/install/doctor check preserved unrelated content; OMP 18.6.3 discovered 49 identities (33 visible, 16 hidden, no warnings), and native ui-design/impeccable reads passed. Transcript: `/tmp/docflow-publish-smoke-ntu061zi/transcript.json`. All five repository checks above rerun and passed. |
 
-Reproduce from repository root with the five checker commands above. For production deployment smoke, create an existing disposable home, then run `sh install.sh --dry-run --home <home>`, `sh install.sh --home <home>`, `sh scripts/doctor.sh --check --home <home>`, and a second install/check. Validation is invoked by installer/doctor with the source and home arguments; standalone use is `sh scripts/validate-inventory.sh <repository-root> <existing-home>`.
+## Static OMP interface evidence
 
-For native reads, set `HOME=<disposable-home>` and `PI_CODING_AGENT_DIR=<disposable-home>/.omp/agent`, start from an empty disposable working directory and run `omp read skill://ui-design`, `omp read skill://web-motion`, and the other current identities. Read the merged procedure references separately. Do not copy credentials or start the Impeccable engine to reproduce passive resolution.
+Pinned official source supports one-level native discovery; name/description and
+hide/disable-model-invocation fields; no general aliases field; enabled native
+skill URI/slash access; includeSkills globs and CLI --skills session override.
+Hidden exposure is not access control. Native local CLI list includes hidden skills; pinned `system-prompt.ts:943-944`
+and `session/agent-session.ts:9979-9980` exclude hide=true before catalog rendering.
+This source confirmation is not authenticated natural-language routing proof.
 
-Detailed local smoke and byte-comparison evidence was captured outside deployment. Routine command output is not a permanent verification journal; the outcomes and reproducible commands above are the maintained acceptance record.
+Managed configuration and agent architecture are unchanged except skill-routing
+names in instruction text. Global advisor remains disabled; an enabled WATCHDOG
+Sol entry is not automatic advice. Native settings, tool/model policy, Plan Mode
+and extensions are distinct mechanisms. The canonical full upgrade checklist is
+`config/agent/skills/docs-engineering/references/omp-compatibility.md`.
 
-## Evidence boundaries and known limitations
+## Native disposable-home reproduction
 
-- OMP v18.6.3 official skill metadata distinguishes prompt listing exposure from reachability: `disable-model-invocation` is normalized to hidden exposure, but user command and `skill://` access remain. It does not enforce authority, access control, tool isolation or explicit-only behavior. The merged web-motion review mode therefore relies on its explicit-request procedure boundary, not a retained metadata gate.
-- Passive discovery/URI resolution proves only that the tested runtime can read a skill. It is not authenticated generation, model routing, dispatch provenance, approval enforcement, visual quality, or OS containment. No authenticated model credential, generation service, or external image tool was exercised here.
-- Windows PowerShell 5.1 historically rejected a valid inventory with `Inventory must include AGENTS.md and config.yml.` The required-entry lookup used forward-slash keys after destination paths were converted to backslashes. This remains an unresolved installer limitation; no successful Windows installation is claimed. Preserve this issue until a supported-platform fix is separately verified.
-- Impeccable is a versioned 4.5.0 package with engine 0.1.11, Apache-2.0 full license and immutable source pin. The pre-move comparison retained every original path: only its adapted SKILL.md metadata/local routing changed; original scripts, references and notice were byte-identical. Independently authored complements are segregated under `reference/local/`, not represented as upstream package material.
-- Historical prior-catalog POSIX, installer, link, and native-discovery receipts are not current acceptance. Their routine session details are in Git history. Distinct compatibility/legal caveats remain in `config/SKILL-SOURCES.md` and migration records.
+Use an existing disposable home and empty working directory, not live user state:
 
-## Unique historical observations retained
+```sh
+sh install.sh --dry-run --home <home>
+sh install.sh --home <home>
+sh scripts/doctor.sh --check --home <home>
+```
 
-These observations predate this architecture cutover. Full routine receipts are in Git at `ae057bd421a0a66354a0334d3e270b53f0a4f296:docs/verification.md`; none accepts the current tree.
+Set `HOME=<home>` and `PI_CODING_AGENT_DIR=<home>/.omp/agent` from the empty
+workspace; unset OMP_PROFILE so it does not redirect state to a named profile.
+Run `omp skill list --json`, `omp read skill://ui-design`,
+`omp read skill://impeccable`, and selected canonical/alias/reference reads.
+For passive prefix checks use a disposable config with
+`skills.includeSkills: [ui-*]` or `[code-*]`, then repeat local list/URI reads.
+Do not copy credentials or send a model turn to establish passive discovery.
 
-| Historical layer | Meaningful observation and continuing limit |
-|---|---|
-| Native authority, OMP 18.6.1 | Actual pinned tokenizer/matcher/approval/resolver passed 32 inert command cases, including the critical/prompt shadowing requiring explicit rm deny in yolo. No destructive strings executed; textual patterns are not executable identity, arbitrary spelling coverage or OS containment. |
-| Worker provenance, OMP 18.6.1 | Disposable native sessions observed ordinary Luna-medium roles, slow Sol-medium and advisor Sol-high with exact managed bodies; explicit selector precedence changed slow to Luna. Interactive Plan Mode child had read-only tools and reported blockers without approval. These historical observations do not prove current fresh Sol-main dispatch. |
-| Sol-main / authenticated consumer attempts | Disposable RPC exited before ready with no available models; interactive launch showed no-model. Later isolated authenticated print attempts timed out without usable output. Fresh-main identity, generation, usage/cost comparisons and five paired architecture cases remain unverified; no credentials/profile copied to bypass it. |
-| Passive discovery, OMP 18.5.0 / 18.6.1 | Earlier disposable native discovery/URI reads resolved their then-current catalogs and excluded synthetic retired-root skills. `--no-skills` disables skills, not AGENTS/tools/models; no file-load bypass of deliberate disablement. Old counts are not current acceptance. |
-| Source-loaded procedure evidence | Bounded documentation-first, review, security, handoff and disabled/unavailable-context exercises supported their scoped cooperative behavior. Controls also succeeded, so no comparative improvement is inferred. Effective native registration/approval/OS isolation and every possible branch remain unproved. Security candidates needing unavailable impact/deployment facts remained needs-validation, not confirmed severity. |
-| Image factual accuracy | Independent assessment rejected inaccurate reference geometry both initially and after a guidance clarification. Measurement or explicit abstention remains required; text policy alone is not fidelity proof. No image generation occurred. Harness/Taste source proposals were not rendered/device proof. |
-| OpenDesign | Historical read-only bridge/health observations reported daemon 0.23.1 on loopback and MCP identity 0.2.0, distinct from running-byte identity. Unreachable-daemon call returned fetch failed; no lifecycle/generation/billing action. Consumer attempt timed out; declaration is not current connection/routing proof. |
-| Impeccable browser helper | Disposable Chromium exercised actual count-row helpers at 1280px/390px, pointer/keyboard wrap, locked/enabled states, hover and focus with inert transport. This is not complete engine/live-session/generation proof. |
-| Windows PowerShell 5.1 | Both script parsers/help and six byte-equality cases per script were smoke-checked; the full install failed as above. No successful Windows installation. |
+## Inspectable evidence and status
 
-## Anti-slop delivery note
+Actual native JSON was captured at `/tmp/docflow-runtime-gate.iSBTIw/skills.json`;
+production smoke transcript at `/tmp/docflow-install-smoke-ud31621v/install-transcript.json`;
+protected comparison at `/tmp/docflow-protected-verification.json`; source comparisons
+at `/tmp/docflow-provenance-comparison.json` and `/tmp/docflow-provenance-diffs.patch`.
+These are session inspection artifacts, not deployed runtime dependencies. The
+commands above are the maintained reproduction contract.
 
-This assignment changes agent guidance and catalog documentation, not a rendered UI. Visual inspection and a visual-result claim are not applicable. Authored UI-routing language retains project/brief evidence, real behavior and permission boundaries; no generic UI was built.
+Runtime verified means local discovery/URI/config-filter operations and exercised
+production scripts/handlers only. Slash expansion, natural-language routing,
+authenticated worker dispatch and whole-session extension loading are not inferred.
+
+## NOT VERIFIED and continuing limits
+
+- Authenticated fresh-main/subagent dispatch, provider availability, effective
+  role provenance, resolved-model badge rendering, interactive Plan Mode behavior
+  and model obedience were not exercised by this architecture change. Static
+  selectors/tests and old successful runs do not fill these gaps.
+- Interactive `/skill:<name>` expansion/argument behavior and session CLI --skills
+  filtering remain source-only. The safe non-generating attempt
+  `omp skill list --json --skills=ui-*` returned `Unknown option '--skills'`: this
+  is a launch-only flag, not a list flag. Runtime launch verification requires a safely observed non-generating session or separately
+  authorized actor run. Source support is not an installed interactive result.
+- Complete extension loading in an actual agent session, RTK executable behavior,
+  Herdr socket/pane reporting, MCP connection/tool discovery, Impeccable optional
+  engine and image-generation tools are not implied by declarations/source review.
+  No external service or generator was started.
+- Windows PowerShell 5.1 historically rejected inventory required-entry lookup after
+  slash conversion. The defect remains separately recorded, not silently fixed.
+  No successful current Windows installation is claimed.
+- Source import revisions remain unknown for confirmed Emil/Taste adaptations.
+  Ponytail body revision remains unknown. Stitch source lineage/covering grant
+  remains unresolved despite conservative candidate notice placement.
+- Installers are non-pruning. No live-home migration, user-folder cleanup or
+  transactional rollback was performed or claimed.
+
+## Anti Slop scope
+
+PASS for this guidance/documentation deliverable: no invented UI, statistics,
+product proof or visual verification claims. No rendered UI was changed, so a
+visual-surface verdict is not applicable. Source routing simulations are labeled
+as such and are not authenticated consumer runs.

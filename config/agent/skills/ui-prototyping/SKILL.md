@@ -4,13 +4,16 @@ description: Explicit-only design exploration that builds distinct isolated UI v
 disable-model-invocation: true
 ---
 
+Modified adaptation; public metadata/routing updated locally. See [SOURCES.md](SOURCES.md)
+and the complete [MIT notice](LICENSE.emil).
+
 # Prototyping Variants
 
 ## Initial Response
 
 When invoked without a specific question, briefly explain that this explicitly invoked skill can either plan divergent variants or implement an isolated picker when authorized. Do not send a greeting-only response.
 
-A divergence skill. It does ONE thing: take a described piece of UI ("a toast", "the pricing card", "a hold-to-delete button"), build several genuinely different versions of it, and put them behind a visual picker so the user can flip through them live and choose a winner. It does not review existing motion (that's explicit `web-motion` diff review), plan motion fixes (that's `web-motion` existing-motion planning), or choose dependencies (that's `pick-ui-library`).
+A divergence skill. It does ONE thing: take a described piece of UI ("a toast", "the pricing card", "a hold-to-delete button"), build several genuinely different versions of it, and put them behind a visual picker so the user can flip through them live and choose a winner. It does not review existing motion (that's explicit `ui-web-motion` diff review), plan motion fixes (that's `ui-web-motion` existing-motion planning), or choose dependencies (that's `ui-library-selection`).
 
 ## Operating Posture
 

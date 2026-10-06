@@ -1,7 +1,10 @@
 ---
 name: ui-stress-test
-description: Stress-test a requested UI surface with plausible or schema-backed edge-case data. For inspection-only requests, report scoped fixture and development-harness proposals without writing a toggle or fixture. Build an authorized development-only harness only when requested or otherwise authorized, inspect rendered behavior, report observed defects and proposed fixes, and stop before production corrections unless requested.
+description: "Stress-test a requested UI surface with plausible or schema-backed edge-case data. For inspection-only requests, report scoped fixture and development-harness proposals without writing a toggle or fixture. Build an authorized development-only harness only when requested or otherwise authorized, inspect rendered behavior, report observed defects and proposed fixes, and stop before production corrections unless requested. Also applies when explicitly requested as break-ui."
 ---
+
+Modified adaptation; public metadata/routing updated locally. See [SOURCES.md](SOURCES.md)
+and the complete [MIT notice](LICENSE.emil).
 
 # Breaking UI
 
@@ -9,7 +12,7 @@ description: Stress-test a requested UI surface with plausible or schema-backed 
 
 When invoked without a specific question, briefly offer the available scope: inspect and propose cases, or build an authorized development-only harness and report rendered findings. Do not send a greeting-only response that prevents useful scope selection.
 
-An adversarial skill. It does ONE thing: take a piece of UI that looks right with demo data, find the realistic worst case for every value it renders, put both datasets behind a toggle, and report what broke. It does not redesign the component (that's `ui-prototyping` when alternatives are explicitly requested), critique its taste (that's `ui-design` with the local component-craft reference), or review its motion (that's explicit `web-motion` diff review).
+An adversarial skill. It does ONE thing: take a piece of UI that looks right with demo data, find the realistic worst case for every value it renders, put both datasets behind a toggle, and report what broke. It does not redesign the component (that's `ui-prototyping` when alternatives are explicitly requested), critique its taste (that's `ui-design` with the local component-craft reference), or review its motion (that's explicit `ui-web-motion` diff review).
 
 ## Operating Posture
 

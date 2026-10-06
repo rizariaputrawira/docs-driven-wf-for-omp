@@ -30,7 +30,7 @@ full installation—see [requirements](#requirements-and-prerequisites)):
 
 The source defaults to this checkout; destination defaults to your existing home (`$HOME` or `%USERPROFILE%`). Installation validates the complete inventory before writes, copies only listed files, leaves identical files untouched, backs up changed files with collision-safe names, and does not prune old or unrelated destination data. Dry-run does not copy files or create destination directories/backups.
 
-After installing, start `omp` in your project and request the needed outcome. The [task-to-skill catalog](SKILL-USAGE.md) links current procedures; no setup pipeline or automatic external service is required. Renamed skill names have no aliases, and existing homes may retain retired copies: see the [non-pruning migration map](docs/migration.md).
+After installing, start `omp` in your project and request the needed outcome. The [task-to-skill catalog](SKILL-USAGE.md) links current procedures; no setup pipeline or automatic external service is required. Selected legacy names have tiny hidden compatibility entrypoints; existing homes may also retain stale full procedures: see the [non-pruning migration map](docs/migration.md).
 
 ### Install and update
 
@@ -63,10 +63,10 @@ Remote ZIP archives must contain exactly one top-level directory, including hidd
 | `config/agent/skills/` | Passive on-demand procedures selected by public `name:` |
 | `config/agent/commands/` | User-invoked command guidance; installation starts no services |
 | `config/agent/mcp.json` | MCP declarations that refer to machine-provided credentials and executables |
-| `config/plugins/` | Plugin package/lock metadata; no bundled plugins |
+| Native OMP plugin state | Empty plugin scaffolding is no longer managed; OMP owns future plugin metadata |
 | `scripts/`, `install.*` | Deployment checks, static configuration contracts and executable hook contracts |
 
-`config/agent/` maps to `~/.omp/agent/`; `config/plugins/` maps to `~/.omp/plugins/`. Managed skills use one source folder and deploy in native flat `<folder>/SKILL.md` layout. Existing homes retain obsolete native skills until separately authorized retirement; fresh installs do not imply a completed migration.
+`config/agent/` maps to `~/.omp/agent/`; existing user plugin state is preserved, not managed. Managed skills use one source folder and deploy in native flat `<folder>/SKILL.md` layout. Existing homes retain obsolete native skills until separately authorized retirement; fresh installs do not imply a completed migration.
 
 ## Architecture and safe use
 
@@ -89,15 +89,15 @@ Use scout for bounded discovery, routine/task for clear implementation, and the 
 
 ### Two workflows, not a universal pipeline
 
-**Ordinary native work:** Sol main handles trivial work directly or uses bounded workers, then performs proportionate verification. No engineering-docs setup, delivery baseline, manifest, extra approval or new document is needed unless the actual task boundary requires it.
+**Ordinary native work:** Sol main handles trivial work directly or uses bounded workers, then performs proportionate verification. No docs-engineering setup, delivery baseline, manifest, extra approval or new document is needed unless the actual task boundary requires it.
 
-**Documentation-dependent delivery:** when enabled and available, matching engineering-docs supplies material authoritative context. Project-delivery owns new applications and explicit substantial/end-to-end documentation-dependent delivery, including whole-boundary readiness, native approval and affected-owner reconciliation. Context lookup alone is not full delivery; consequential multi-slice plan review can apply independently.
+**Documentation-dependent delivery:** when enabled and available, matching docs-engineering supplies material authoritative context. Project-delivery owns new applications and explicit substantial/end-to-end documentation-dependent delivery, including whole-boundary readiness, native approval and affected-owner reconciliation. Context lookup alone is not full delivery; consequential multi-slice plan review can apply independently.
 
-For practical guidance, prompt examples, capabilities and boundaries, see the [skill usage guide](SKILL-USAGE.md). For new or substantial delivery, consult the [canonical delivery baseline procedure](config/agent/skills/project-delivery/references/documentation-baseline.md); [engineering-docs context](config/agent/skills/engineering-docs/references/context-routing.md) and [standards reference](config/agent/skills/engineering-docs/references/standards.md) define their respective procedures. These are alternatives selected for the actual task, not a required sequence.
+For practical guidance, prompt examples, capabilities and boundaries, see the [skill usage guide](SKILL-USAGE.md). For new or substantial delivery, consult the [canonical delivery baseline procedure](config/agent/skills/workflow-delivery/references/documentation-baseline.md); [docs-engineering context](config/agent/skills/docs-engineering/references/context-routing.md) and [standards reference](config/agent/skills/docs-engineering/references/standards.md) define their respective procedures. These are alternatives selected for the actual task, not a required sequence.
 
 Example OMP requests:
 
-- “Use diagnosing-bugs to trace this reported export failure; inspect the actual caller and relevant evidence, then explain the cause or remaining uncertainty.”
+- “Use code-debugging to trace this reported export failure; inspect the actual caller and relevant evidence, then explain the cause or remaining uncertainty.”
 - “Use code-review on my current changes; include untracked files and requirements, and report correctness and specification findings without editing.”
 - “Use ui-design to review this settings page for keyboard access and narrow screens; preserve its current behavior and brand.”
 
@@ -146,9 +146,11 @@ Exit codes: `0` every mapped file matches; `1` one or more files are missing/dri
 
 Installation is non-pruning. Old native folders remain discoverable in existing homes until a separately authorized retirement moves them outside **all skill discovery roots**. Inspect and preserve customized contents first; do not blanket-delete directories. Managed discovery settings leave `customDirectories` empty and disable Agents user/project skill-source discovery, but other runtime providers may exist; this is not application-wide isolation.
 
-The [migration map](docs/migration.md) records 36 retired public/folder identifiers (17 earlier folders plus 19 newly retired identifiers), surviving references and non-pruning behavior. The current source contains 36 public skills, 222 skill assets and 244 managed mappings; [decisions and full inventory](docs/capabilities.md) cover all 41 original skills. No live-home migration was performed. Updaters targeting `.agent/skills/` or `.agents/skills/` can recreate retired roots; choose the native destination and update complete packages plus `config/files.tsv`, not piecemeal files.
+The [migration map](docs/migration.md) distinguishes shipped hidden compatibility pointers from stale unmanaged folders. The current catalog has 35 canonical capabilities (33 visible, 2 explicit-only), 14 hidden aliases, 263 skill assets and 282 managed mappings. [Decisions and inventory](docs/capabilities.md) account for all 36 current-main input capabilities. No live-home migration was performed. Retired provider roots can be recreated by external updaters; use the native skill destination.
 
 ## Verification and known limits
+
+Last verified OMP: **18.6.3** (official release/source `093275112f7adff207608673c0e33c7f3d16e27f`). This is not a minimum-version or future-compatibility guarantee. [The canonical upgrade gate](config/agent/skills/docs-engineering/references/omp-compatibility.md) separates static, native-runtime and authenticated checks.
 
 The repository includes static configuration, installer/doctor, routing-hook,
 and disposable-home verification. Scope, receipts, historical evidence, and
@@ -166,4 +168,4 @@ Anti Slop is a compact UI/product-copy filter, not another design workflow. Its 
 
 No project-wide `LICENSE` was present in the inspected root listing. Historical snapshot roots had no separate LICENSE/COPYING files; unchanged snapshots and some retained third-party assets have unresolved licensing caveats. Titus material was not copied or translated because no covering grant was established. Local presence, attribution, a source URL, or a notice belonging to a different adaptation does not establish redistribution rights. Resolve exact upstream terms or exclude/rewrite material before relying on permission to redistribute it. This repository-content review is not legal advice or compliance certification.
 
-For practical skill selection see [SKILL-USAGE.md](SKILL-USAGE.md). For runtime details consult OMP's [v18.6.1 agent discovery](https://github.com/can1357/oh-my-pi/blob/v18.6.1/docs/task-agent-discovery.md) and [Plan Mode child restrictions](https://github.com/can1357/oh-my-pi/blob/v18.6.1/packages/coding-agent/src/task/structured-subagent.ts).
+For practical skill selection see [SKILL-USAGE.md](SKILL-USAGE.md). For runtime details consult OMP's [18.6.3 agent discovery](https://github.com/can1357/oh-my-pi/blob/093275112f7adff207608673c0e33c7f3d16e27f/docs/task-agent-discovery.md) and [Plan Mode child restrictions](https://github.com/can1357/oh-my-pi/blob/093275112f7adff207608673c0e33c7f3d16e27f/packages/coding-agent/src/task/structured-subagent.ts).

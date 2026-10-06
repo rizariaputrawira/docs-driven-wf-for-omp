@@ -2,35 +2,35 @@
 
 ## Engineering workflow
 
-Ordinary work starts with Sol main: direct trivial work or bounded existing workers, then proportionate verification and done. It requires no engineering-docs setup, project-delivery, plan-review, baseline, manifest, extra approval or new documents unless the actual task boundary needs them. Update materially affected existing owners rather than manufacturing a delivery pipeline.
+Ordinary work starts with Sol main: direct trivial work or bounded existing workers, then proportionate verification and done. It requires no docs-engineering setup, workflow-delivery, docs-plan-review, baseline, manifest, extra approval or new documents unless the actual task boundary needs them. Update materially affected existing owners rather than manufacturing a delivery pipeline.
 
 Apply this routing only when the documentation-driven suite is available, enabled and matches the current request. Explicit skill disablement/filtering wins. Missing or disabled suite assets must not stop ordinary native OMP work or trigger automatic file-load/setup. Continue native permissions, approval and relevant context checks; block only explicitly requested unavailable suite-specific proof. Renewed explicit authorization to load a known file is distinct from automatic reactivation.
 
-When the guard applies, material authoritative-context dependencies use `engineering-docs`; new applications and explicit substantial/end-to-end documentation-dependent delivery use `project-delivery`. Context retrieval alone is not full delivery. Consequential multi-slice plan review can apply without manufacturing a documentation baseline. Other owners include `diagnosing-bugs` for difficult causes, `code-review` for requested review, `ui-design` for UI, `code-simplicity` for coding simplicity, and `writing-for-agents` for guidance work. Specialists are selected by actual trigger, not mandatory phases.
+When the guard applies, material authoritative-context dependencies use `docs-engineering`; new applications and explicit substantial/end-to-end documentation-dependent delivery use `workflow-delivery`. Context retrieval alone is not full delivery. Consequential multi-slice plan review can apply without manufacturing a documentation baseline. Other owners include `code-debugging` for difficult causes, `code-review` for requested review, `ui-design` for UI, `code-simplicity` for coding simplicity, and `agent-guidance` for guidance work. Specialists are selected by actual trigger, not mandatory phases.
 
 | Current task trigger | Procedure owner to read on demand |
 |---|---|
-| Material documentation/context dependency | `skill://engineering-docs`, context branch before dependent work. No manifest is required for safe provisional inspection; no automatic setup. |
-| Unresolved consequential behavior | `skill://brainstorming` |
-| Active domain terminology, relationships or consequential ADR work | `skill://domain-modeling` |
-| New applications, explicit substantial/end-to-end documentation-dependent delivery or authorized continuation | `skill://project-delivery`, with `resume` for actual continuation; prepare/review the selected documentation baseline before app code and reconcile all affected owners at completion |
-| Consequential multi-slice plan coverage/integration check | `skill://plan-review` before native proposal/reapproval, not a second approval ritual |
-| Requested/approved test-first or red-green-refactor | `skill://tdd`. Ordinary regression coverage alone does not force TDD. |
-| Difficult, flaky or performance diagnosis | `skill://diagnosing-bugs` |
+| Material documentation/context dependency | `skill://docs-engineering`, context branch before dependent work. No manifest is required for safe provisional inspection; no automatic setup. |
+| Unresolved consequential behavior | `skill://workflow-brainstorming` |
+| Active domain terminology, relationships or consequential ADR work | `skill://docs-domain-modeling` |
+| New applications, explicit substantial/end-to-end documentation-dependent delivery or authorized continuation | `skill://workflow-delivery`, with `resume` for actual continuation; prepare/review the selected documentation baseline before app code and reconcile all affected owners at completion |
+| Consequential multi-slice plan coverage/integration check | `skill://docs-plan-review` before native proposal/reapproval, not a second approval ritual |
+| Requested/approved test-first or red-green-refactor | `skill://code-tdd`. Ordinary regression coverage alone does not force TDD. |
+| Difficult, flaky or performance diagnosis | `skill://code-debugging` |
 | Ordinary patch, WIP, spec/correctness or correction review | `skill://code-review` |
-| Issue/PR queue triage | `skill://github-triage` |
-| Bounded issue/change implementation and PR preparation | `skill://work-with-pr` |
-| Local/published/released Git change status | `skill://unpublished-changes` |
-| Check whether managed upstream/third-party sources have useful newer changes (all or named source) | `skill://upstream-update-review`, read-only recommendations; adoption is separate |
+| Issue/PR queue triage | `skill://git-triage` |
+| Bounded issue/change implementation and PR preparation | `skill://git-pr-work` |
+| Local/published/released Git change status | `skill://git-change-status` |
+| Check whether managed upstream/third-party sources have useful newer changes (all or named source) | `skill://workflow-upstream-review`, read-only recommendations; adoption is separate |
 | External bundle adoption/update | `skill://security-intake` |
 | Focused security diff/base/head review | `skill://security-review` |
 | Explicit bounded deep security audit | `skill://security-audit` |
-| Explicit pause/export/transfer | `skill://handoff-to-another-harness` |
-| Read/load a handoff only | `skill://resume-from-handoff`, selected snapshot only, never continuation |
-| Guidance changes or separately authorized behavioral skill assessment | `skill://writing-for-agents` |
-| Requested retrospective | `skill://retrospective` |
+| Explicit pause/export/transfer | `skill://workflow-handoff` |
+| Read/load a handoff only | `skill://workflow-handoff-read`, selected snapshot only, never continuation |
+| Guidance changes or separately authorized behavioral skill assessment | `skill://agent-guidance` |
+| Requested workflow-retrospective | `skill://workflow-retrospective` |
 
-Descriptions are triggers, not loaded procedures. Use actual `read` and the installed task/tool schemas. Independent security discovery/refutation needs fresh source-inspecting read-only reviewers and effective dispatched-definition provenance, not advice-only advisor assertions or a same-named substitute. Instructions create no permissions, model binding or sandbox. For explicitly requested upgrade proof, read `skill://engineering-docs/references/omp-compatibility.md`; absent native convenience support permits a known canonical file read only for an explicitly requested enabled suite, never to defeat disablement. No dispatcher/plugin/autoload hook is added.
+Descriptions are triggers, not loaded procedures. Use actual `read` and the installed task/tool schemas. Independent security discovery/refutation needs fresh source-inspecting read-only reviewers and effective dispatched-definition provenance, not advice-only advisor assertions or a same-named substitute. Instructions create no permissions, model binding or sandbox. For explicitly requested upgrade proof, read `skill://docs-engineering/references/omp-compatibility.md`; absent native convenience support permits a known canonical file read only for an explicitly requested enabled suite, never to defeat disablement. No dispatcher/plugin/autoload hook is added.
 
 Native config prompts matching force-push/reset/clean forms, denies matching recursive force-rm forms, and independently prompts every eval call. Do not route shell commands through eval to evade bash-pattern policy; these rules are approval, not containment.
 
@@ -50,7 +50,7 @@ Global delegation/routing discipline belongs to PERSONALITY; conditional procedu
 
 ## Commit requests
 
-When the user requests a commit or commit-message advice, MUST read `skill://commit-message` and apply it to draft the message before any Git mutation. This includes requests such as "commit", "commit and push", and "write a commit message".
+When the user requests a commit or git-commit-message advice, MUST read `skill://git-commit-message` and apply it to draft the message before any Git mutation. This includes requests such as "commit", "commit and push", and "write a commit message".
 
 The skill remains read-only. Finish message drafting before any explicitly authorized Git execution, which is a separate action outside the skill. This routing rule does not grant staging, commit, amend or push authority; message-only requests never authorize those actions. If the skill is unavailable or explicitly disabled, report that limitation rather than silently bypassing it or re-enabling it.
 
@@ -60,7 +60,7 @@ For UI/design work, first inspect the actual project, user brief, product and br
 
 Use `skill://ui-design` as the primary workflow. For new or replacement surfaces, follow its context-loading and new-work path. For existing surfaces, audit the incumbent and refine in place unless redesign was requested. Route evaluation and refinement requests to matching command guidance; do not run a command merely because the skill is available.
 
-Load only applicable local references: `skill://ui-design/reference/local/component-craft.md` for focused component detail and `skill://ui-design/reference/local/marketing-sites.md` for landing pages, portfolios, and marketing redesigns. Outside marketing scope, use only relevant anti-slop checks, not landing-page prescriptions. `ui-design` governs workflow and scope; selectively load compatible references rather than stacking checklists. Web motion belongs to `skill://web-motion`, Expo motion to `skill://expo-motion`, and browser/PWA platform fixes to `skill://mobile-web`. Load `skill://apple-design` only for explicitly requested specialist guidance, not automatically alongside UI or motion owners.
+Load only applicable local references: `skill://ui-design/reference/local/component-craft.md` for focused component detail and `skill://ui-design/reference/local/marketing-sites.md` for landing pages, portfolios, and marketing redesigns. Outside marketing scope, use only relevant anti-slop checks, not landing-page prescriptions. `ui-design` governs workflow and scope; selectively load compatible references rather than stacking checklists. Web motion belongs to `skill://ui-web-motion`, Expo motion to `skill://ui-expo-motion`, and browser/PWA platform fixes to `skill://ui-mobile-web`. Load `skill://ui-gesture-design` only for explicitly requested specialist guidance, not automatically alongside UI or motion owners.
 
 Before implementation, reconcile recommendations with the brief, existing design system, platform, accessibility needs, and technical constraints. Resolve compatible guidance without asking. If a materially consequential conflict remains unresolved, ask one concise question before committing to that direction.
 

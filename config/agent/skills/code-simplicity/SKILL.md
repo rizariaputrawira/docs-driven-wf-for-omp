@@ -1,6 +1,6 @@
 ---
 name: code-simplicity
-description: Coding simplicity guidance with lite/full/ultra conversational levels, or one-shot complexity review, repository audit, shortcut debt ledger and help. Simplify implementation, never requested acceptance criteria.
+description: "Coding simplicity guidance with lite/full/ultra conversational levels, or one-shot complexity review, repository audit, shortcut debt ledger and help. Simplify implementation, never requested acceptance criteria. Also applies when explicitly requested as Ponytail."
 homepage: https://github.com/DietrichGebert/ponytail
 license: MIT
 ---

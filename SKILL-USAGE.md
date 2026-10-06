@@ -1,34 +1,67 @@
-# Skill routing
+# Choose a capability
 
-Skills are passive procedures, not tools, permissions, sandboxes, or proof of runtime selection. Start from the requested outcome and use the matching procedure, not a procession. Native authority, approval, model selection and runtime availability remain separate. See [managed routing](config/agent/AGENTS.md), [global policy](config/agent/PERSONALITY.md), [capability decisions](docs/capabilities.md), the [41-name original inventory](docs/capability-inventory.md), [retirement map](docs/migration.md), and [verification limits](docs/verification.md).
+Skills are passive procedures, not tools, permissions, model selection or runtime
+proof. Start from the requested outcome and read the selected canonical skill.
+[Managed routing](config/agent/AGENTS.md) and [policy](config/agent/PERSONALITY.md)
+retain native authority boundaries. [Decisions](docs/capabilities.md),
+[inventory](docs/capability-inventory.md), [migration](docs/migration.md) and
+[verification](docs/verification.md) own architecture and evidence details.
 
-Use public frontmatter `name`, not a folder guess. Renamed public names have no aliases. `disable-model-invocation: true` hides a skill from model prompt listings in OMP v18.6.3 but user commands and `skill://` reads remain possible; it is not authority enforcement. Explicit-only behavior must be honored as procedure guidance. The actual native runtime should be checked for current version behavior.
+## Families
 
-## Outcome to procedure
-
-| Task | Skill / procedure | Why / boundary |
+| Family | Choose for | Canonical skills |
 |---|---|---|
-| New app, substantial delivery, authorized resume | [project-delivery](config/agent/skills/project-delivery/SKILL.md) | Whole-boundary readiness and integration; not routine bounded edits. |
-| Material docs context, governance, audit or reconciliation | [engineering-docs](config/agent/skills/engineering-docs/SKILL.md) | Evidence and canonical ownership; context alone is read-only. |
-| Unresolved behavior; domain terms/relationships | [brainstorming](config/agent/skills/brainstorming/SKILL.md); [domain-modeling](config/agent/skills/domain-modeling/SKILL.md) | Resolve consequential choices or terminology before dependent work. |
-| Difficult diagnosis; code review; plan review | [diagnosing-bugs](config/agent/skills/diagnosing-bugs/SKILL.md); [code-review](config/agent/skills/code-review/SKILL.md); [plan-review](config/agent/skills/plan-review/SKILL.md) | Root cause, actual changes, or coverage/integration; reviews do not approve execution. |
-| Requested test-first development | [tdd](config/agent/skills/tdd/SKILL.md) | Opt-in red/green/refactor, not every regression check. |
-| UI design/refinement | [ui-design](config/agent/skills/ui-design/SKILL.md) | Primary UI workflow; lazy [component](config/agent/skills/ui-design/reference/local/component-craft.md) / [marketing](config/agent/skills/ui-design/reference/local/marketing-sites.md) supplements only in scope. |
-| Build/suggest/name web motion; existing-motion lifecycle or explicit diff review | [web-motion](config/agent/skills/web-motion/SKILL.md) | Browser motion modes retain distinct authority; audit/review never automatic, review explicit-only. |
-| Expo/React Native animation, gesture or haptic implementation | [expo-motion](config/agent/skills/expo-motion/SKILL.md) | Reanimated/Gesture Handler and native device runtime, not browser motion. |
-| Phone browser/PWA; isolated alternatives; UI stress harness | [mobile-web](config/agent/skills/mobile-web/SKILL.md); [ui-prototyping](config/agent/skills/ui-prototyping/SKILL.md); [ui-stress-test](config/agent/skills/ui-stress-test/SKILL.md) | Browser fixes, explicit prototypes, or authorized dev fixtures; no implicit production correction. |
-| Supplied reference analysis / implementation or requested images | [image-to-code](config/agent/skills/image-to-code/SKILL.md); [web images](config/agent/skills/imagegen-frontend-web/SKILL.md); [mobile images](config/agent/skills/imagegen-frontend-mobile/SKILL.md) | Keep image-only generation separate from coding and actual tool availability. |
-| Brand concept; Stitch design input | [brand-concepts](config/agent/skills/brand-concepts/SKILL.md); [stitch-design-input](config/agent/skills/stitch-design-input/SKILL.md) | Concept imagery or external design input, not production identity/canonical truth. |
-| Explicit specialist interaction; Sonner; library recommendation | [apple-design](config/agent/skills/apple-design/SKILL.md); [ask-sonner](config/agent/skills/ask-sonner/SKILL.md); [pick-ui-library](config/agent/skills/pick-ui-library/SKILL.md) | Select specialist deliberately; troubleshooting/install still needs authority; picker explicit-only. |
-| Swift work; coding simplicity | [swift-development](config/agent/skills/swift-development/SKILL.md); [code-simplicity](config/agent/skills/code-simplicity/SKILL.md) | Native Swift scope or less complexity without reduced acceptance. |
-| External intake; diff security review; bounded deep audit | [security-intake](config/agent/skills/security-intake/SKILL.md); [security-review](config/agent/skills/security-review/SKILL.md); [security-audit](config/agent/skills/security-audit/SKILL.md) | Distinct trust/source boundaries; no target execution or adoption authority. |
-| Queue triage; bounded PR work; publication-state report | [github-triage](config/agent/skills/github-triage/SKILL.md); [work-with-pr](config/agent/skills/work-with-pr/SKILL.md); [unpublished-changes](config/agent/skills/unpublished-changes/SKILL.md) | Classification, authorized implementation, or read-only lifecycle evidence; no implicit publication. |
-| Draft commit message; review upstream changes | [commit-message](config/agent/skills/commit-message/SKILL.md); [upstream-update-review](config/agent/skills/upstream-update-review/SKILL.md) | Advice only: no commit, install, or update adoption. |
-| Agent instruction authorship; requested learning extraction | [writing-for-agents](config/agent/skills/writing-for-agents/SKILL.md); [retrospective](config/agent/skills/retrospective/SKILL.md) | Guidance edits need authority; retrospective recommendations do not authorize policy writes. |
-| Explicit pause/export; load selected snapshot | [handoff-to-another-harness](config/agent/skills/handoff-to-another-harness/SKILL.md); [resume-from-handoff](config/agent/skills/resume-from-handoff/SKILL.md) | Non-overwriting transfer versus load-only; continuation belongs to delivery. |
+| ui- | Interface design, motion, mobile-web behavior and UI reference assets | [ui-design](config/agent/skills/ui-design/SKILL.md), [ui-expo-motion](config/agent/skills/ui-expo-motion/SKILL.md), [ui-gesture-design](config/agent/skills/ui-gesture-design/SKILL.md), [ui-image-generation](config/agent/skills/ui-image-generation/SKILL.md), [ui-image-to-code](config/agent/skills/ui-image-to-code/SKILL.md), [ui-library-selection](config/agent/skills/ui-library-selection/SKILL.md), [ui-mobile-web](config/agent/skills/ui-mobile-web/SKILL.md), [ui-prototyping](config/agent/skills/ui-prototyping/SKILL.md), [ui-sonner](config/agent/skills/ui-sonner/SKILL.md), [ui-stress-test](config/agent/skills/ui-stress-test/SKILL.md), [ui-web-motion](config/agent/skills/ui-web-motion/SKILL.md) |
+| code- | Implementation correctness, diagnosis, behavior tests and complexity | [code-debugging](config/agent/skills/code-debugging/SKILL.md), [code-review](config/agent/skills/code-review/SKILL.md), [code-simplicity](config/agent/skills/code-simplicity/SKILL.md), [code-tdd](config/agent/skills/code-tdd/SKILL.md) |
+| docs- | Engineering information and evidence-led model/plan review | [docs-domain-modeling](config/agent/skills/docs-domain-modeling/SKILL.md), [docs-engineering](config/agent/skills/docs-engineering/SKILL.md), [docs-plan-review](config/agent/skills/docs-plan-review/SKILL.md) |
+| workflow- | Task decision and delivery lifecycle | [workflow-brainstorming](config/agent/skills/workflow-brainstorming/SKILL.md), [workflow-delivery](config/agent/skills/workflow-delivery/SKILL.md), [workflow-handoff](config/agent/skills/workflow-handoff/SKILL.md), [workflow-handoff-read](config/agent/skills/workflow-handoff-read/SKILL.md), [workflow-retrospective](config/agent/skills/workflow-retrospective/SKILL.md), [workflow-upstream-review](config/agent/skills/workflow-upstream-review/SKILL.md) |
+| git- | Repository collaboration and change lifecycle | [git-change-status](config/agent/skills/git-change-status/SKILL.md), [git-commit-message](config/agent/skills/git-commit-message/SKILL.md), [git-pr-work](config/agent/skills/git-pr-work/SKILL.md), [git-triage](config/agent/skills/git-triage/SKILL.md) |
+| security- | Distinct source trust boundaries | [security-audit](config/agent/skills/security-audit/SKILL.md), [security-intake](config/agent/skills/security-intake/SKILL.md), [security-review](config/agent/skills/security-review/SKILL.md) |
+| agent- | Instructions consumed by agents | [agent-guidance](config/agent/skills/agent-guidance/SKILL.md) |
 
-## Catalog ownership
+Natural exceptions: [swift-development](config/agent/skills/swift-development/SKILL.md)
+for Swift, [stitch-design-input](config/agent/skills/stitch-design-input/SKILL.md)
+for Google Stitch input, [brand-concepts](config/agent/skills/brand-concepts/SKILL.md)
+for broader brand-board/logo-world concepts.
 
-`config/agent/skills/<folder>/SKILL.md` owns each procedure and its local references. `docs/capabilities.md` owns merge/keep/defer/retire decisions; `docs/capability-inventory.md` identifies all 41 original public names and summarizes their trigger, authority, procedure, output, overlap, provenance, exposure metadata and disposition. `config/SKILL-SOURCES.md` owns immutable source/notice and licensing caveats. `docs/migration.md` owns retired identifiers and existing-home caveats. Avoid copying procedure bodies here.
+## Important boundaries
 
-The original catalog had 41 public skills, 223 skill files and 245 managed mappings. The current catalog has 36 public entrypoints, 222 skill files and 244 managed mappings. `config/files.tsv` owns deployment; [verification](docs/verification.md) records exercised checks and limits. Source counts are not authenticated generation or semantic routing proof.
+- `ui-design` is the primary UI workflow. Component craft and marketing references
+  stay lazy and conditional; motion/platform owners are selected only in scope.
+- `ui-web-motion` selects build/opportunities/vocabulary, bounded existing-motion
+  lifecycle or explicit diff review. Reviews are not native execution approval.
+  `ui-expo-motion` owns Expo/RN, `ui-mobile-web` owns browser/PWA, not native apps.
+- `ui-image-generation` generates requested images only, selecting web or mobile
+  procedure lazily. `ui-image-to-code` implements a supplied/authorized reference.
+  Tool availability and actual image output are required, not assumed.
+- `ui-sonner` troubleshoots one library; `ui-library-selection` recommends a library
+  only when explicitly requested. It does not authorize installation. The picker
+  and `ui-prototyping` are hidden canonical explicit-only procedures.
+- `code-review` reviews correctness/spec; `security-review` is scoped changed-source
+  security review; `security-audit` is explicit bounded deep audit;
+  `security-intake` assesses supplied external sources without execution/adoption.
+- `docs-engineering` governs necessary information. `workflow-delivery` owns
+  authorized whole-boundary delivery; ordinary bounded edits need no docflow setup.
+  `docs-plan-review` reviews coverage/integration without approving execution.
+- `workflow-handoff` creates a non-overwriting transfer when authorized;
+  `workflow-handoff-read` reads one snapshot only. Continuing work belongs to
+  authorized delivery, not load-only handoff reading.
+- Git advice/status/triage never implies commit, push, publish, merge or labels.
+  `git-pr-work` implements only authorized scope and may draft unpublished PR text.
+
+## Legacy names and filters
+
+Fourteen tiny hidden compatibility entrypoints preserve selected explicit names,
+including `impeccable`, `animate`, `animate-expo`, `ponytail`, `write-swift`,
+`mobile-native`, `prototype`, `break-ui`, `brandkit`, `retro`, `engineering-docs`,
+`tdd`, `commit-message` and `writing-for-agents`. Each points to one canonical
+procedure. Natural-language legacy synonyms in canonical descriptions are a
+separate routing aid. [Migration](docs/migration.md) classifies other old names.
+
+At last verified OMP 18.6.3, `disable-model-invocation: true` hides listing exposure,
+not enabled URI/slash reachability. Family filters, for example `--skills 'ui-*'`
+or `skills.includeSkills: [ui-*]`, match public names. They can exclude an
+unprefixed alias and must not be bypassed by direct file loading. Use the canonical
+name when operating under a family filter.
+
+Current catalog: 35 canonical capabilities (33 model-visible, 2 explicit-only), 14 hidden compatibility pointers, 263 skill assets and 282 mappings. Counts are not authenticated routing proof.

@@ -16,113 +16,169 @@ function walk(dir) {
 const entries = walk(skillsRoot).sort();
 const rows = text("config/files.tsv").trimEnd().split(/\r?\n/).map(line => {
   const fields = line.split("\t");
-  assert.equal(fields.length, 2, `malformed inventory row: ${line}`);
+  assert.equal(fields.length, 2, `malformed inventory: ${line}`);
   const [source, destination] = fields;
-  assert.ok(source.startsWith("config/") && !source.split("/").includes(".."), `invalid source: ${source}`);
-  assert.equal(destination, `.omp/${source.slice("config/".length)}`, `wrong home destination: ${source}`);
+  assert.ok(source.startsWith("config/") && !source.split("/").includes(".."), `unsafe source: ${source}`);
+  assert.equal(destination, `.omp/${source.slice(7)}`, `destination mismatch: ${source}`);
   assert.ok(existsSync(join(root, source)) && statSync(join(root, source)).isFile(), `missing source: ${source}`);
   return { source, destination };
 });
-assert.equal(new Set(rows.map(row => row.source)).size, rows.length, "duplicate inventory source");
-assert.equal(new Set(rows.map(row => row.destination)).size, rows.length, "duplicate inventory destination");
-assert.deepEqual(rows.filter(row => row.source.startsWith("config/agent/skills/")).map(row => row.source).sort(), entries, "skill inventory must exactly equal every asset");
+assert.equal(new Set(rows.map(r => r.source)).size, rows.length, "duplicate source");
+assert.equal(new Set(rows.map(r => r.destination)).size, rows.length, "duplicate destination");
+assert.deepEqual(rows.filter(r => r.source.startsWith("config/agent/skills/")).map(r => r.source).sort(), entries, "all skill assets must be exactly mapped");
+const aliases = {
+  "impeccable": "ui-design",
+  "animate": "ui-web-motion",
+  "animate-expo": "ui-expo-motion",
+  "ponytail": "code-simplicity",
+  "write-swift": "swift-development",
+  "mobile-native": "ui-mobile-web",
+  "prototype": "ui-prototyping",
+  "break-ui": "ui-stress-test",
+  "brandkit": "brand-concepts",
+  "retro": "workflow-retrospective",
+  "engineering-docs": "docs-engineering",
+  "tdd": "code-tdd",
+  "commit-message": "git-commit-message",
+  "writing-for-agents": "agent-guidance"
+};
+const canonicalNames = new Set([
+  "agent-guidance",
+  "brand-concepts",
+  "code-debugging",
+  "code-review",
+  "code-simplicity",
+  "code-tdd",
+  "docs-domain-modeling",
+  "docs-engineering",
+  "docs-plan-review",
+  "git-change-status",
+  "git-commit-message",
+  "git-pr-work",
+  "git-triage",
+  "security-audit",
+  "security-intake",
+  "security-review",
+  "stitch-design-input",
+  "swift-development",
+  "ui-design",
+  "ui-expo-motion",
+  "ui-gesture-design",
+  "ui-image-generation",
+  "ui-image-to-code",
+  "ui-library-selection",
+  "ui-mobile-web",
+  "ui-prototyping",
+  "ui-sonner",
+  "ui-stress-test",
+  "ui-web-motion",
+  "workflow-brainstorming",
+  "workflow-delivery",
+  "workflow-handoff",
+  "workflow-handoff-read",
+  "workflow-retrospective",
+  "workflow-upstream-review"
+]);
+const hiddenCanonical = new Set(["ui-prototyping", "ui-library-selection"]);
 const retired = new Set(text("scripts/retired-skills.txt").trim().split(/\s+/));
 const identities = new Map();
-for (const path of entries.filter(path => /^config\/agent\/skills\/[^/]+\/SKILL\.md$/.test(path))) {
-  const frontmatter = text(path).match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
-  assert.ok(frontmatter, `${path}: missing frontmatter`);
-  let parsed;
-  try { parsed = Bun.YAML.parse(frontmatter[1]); }
-  catch (error) { throw new Error(`${path}: invalid YAML: ${error.message}`); }
-  assert.ok(parsed && typeof parsed === "object" && !Array.isArray(parsed), `${path}: frontmatter must be a mapping`);
-  for (const field of ["name", "description"]) assert.ok(typeof parsed[field] === "string" && parsed[field].trim(), `${path}: nonempty ${field} required`);
-  assert.match(parsed.name, /^[a-z0-9]+(?:-[a-z0-9]+)*$/, `${path}: invalid public name`);
-  assert.ok(!identities.has(parsed.name), `duplicate identity: ${parsed.name}`);
-  assert.equal(parsed.name, path.split("/")[3], `${path}: canonical folder must match identity`);
-  assert.ok(!retired.has(parsed.name), `${path}: retired entrypoint active`);
-  identities.set(parsed.name, dirname(join(root, path)));
+for (const path of entries.filter(p => /^config\/agent\/skills\/[^/]+\/SKILL\.md$/.test(p))) {
+  const fm = text(path).match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  assert.ok(fm, `${path}: frontmatter required`);
+  const parsed = Bun.YAML.parse(fm[1]);
+  assert.ok(parsed && typeof parsed === "object" && !Array.isArray(parsed), `${path}: mapping required`);
+  for (const key of ["name", "description"]) assert.ok(typeof parsed[key] === "string" && parsed[key].trim(), `${path}: nonempty ${key}`);
+  assert.match(parsed.name, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+  assert.equal(parsed.name, path.split("/")[3], `${path}: name/folder mismatch`);
+  assert.ok(!identities.has(parsed.name), `duplicate name: ${parsed.name}`);
+  assert.ok(!retired.has(parsed.name), `retired skill active: ${parsed.name}`);
+  const hidden = parsed.hide === true || parsed["disable-model-invocation"] === true;
+  if (Object.hasOwn(aliases, parsed.name)) {
+    assert.equal(parsed["disable-model-invocation"], true, `${path}: alias must be hidden`);
+    const body = text(path).slice(fm[0].length);
+    const targets = [...body.matchAll(/skill:\/\/([a-z0-9-]+)/g)].map(m => m[1]);
+    assert.deepEqual(targets, [aliases[parsed.name]], `${path}: one exact canonical destination`);
+    assert.ok(canonicalNames.has(targets[0]), `${path}: alias chain/unknown destination`);
+    assert.ok(body.length < 600, `${path}: alias must not duplicate a procedure`);
+    assert.deepEqual(walk(dirname(join(root, path))).map(p => p.split("/").at(-1)), ["SKILL.md"], `${path}: alias has independent assets`);
+  } else {
+    assert.ok(canonicalNames.has(parsed.name), `unexpected canonical: ${parsed.name}`);
+    assert.equal(hidden, hiddenCanonical.has(parsed.name), `${path}: changed canonical exposure`);
+    assert.ok(/^(ui|code|docs|workflow|git|security|agent)-/.test(parsed.name) || ["swift-development", "stitch-design-input", "brand-concepts"].includes(parsed.name), `${path}: functional family required`);
+  }
+  identities.set(parsed.name, { base: dirname(join(root, path)), hidden });
 }
-assert.equal(identities.size, 36, "approved catalog has 36 unique public skills");
+assert.deepEqual([...identities.keys()].sort(), [...canonicalNames, ...Object.keys(aliases)].sort(), "complete intended discovery set");
+for (const path of entries.filter(p => p.endsWith("/SKILL.md"))) assert.match(path, /^config\/agent\/skills\/[^/]+\/SKILL\.md$/, `nested public entrypoint: ${path}`);
 
-// Exact original public identities, not a prose-wording snapshot.
-const originals = ["animate", "animate-expo", "apple-design", "ask-sonner", "brainstorming", "brandkit", "break-ui", "code-review", "commit-message", "design-taste-frontend", "diagnosing-bugs", "domain-modeling", "emil-design-eng", "engineering-docs", "github-triage", "handoff-to-another-harness", "image-to-code", "imagegen-frontend-mobile", "imagegen-frontend-web", "impeccable", "improve-animations", "mobile-native", "full-output-enforcement", "pick-ui-library", "plan-review", "ponytail", "project-delivery", "prototype", "resume-from-handoff", "retro", "review-animations", "security-audit", "security-intake", "security-review", "stitch-design-taste", "tdd", "unpublished-changes", "upstream-update-review", "work-with-pr", "write-swift", "writing-for-agents"].sort();
-const inventoryNames = [...text("docs/capability-inventory.md").split("## Exact baseline discovery metadata")[0].matchAll(/^\| ([a-z0-9-]+) \(`/gm)].map(match => match[1]).sort();
-const decisionNames = [...text("docs/capabilities.md").split("## Plugin machinery")[0].matchAll(/^\| ([a-z0-9-]+) \|/gm)].map(match => match[1]).sort();
-assert.deepEqual(inventoryNames, originals, "every original skill must have one inventory row");
-assert.deepEqual(decisionNames, originals, "every original skill must have one decision row");
-for (const folder of readdirSync(skillsRoot)) assert.ok(!retired.has(folder), `retired folder remains discoverable: ${folder}`);
-
-// Immutable retained notice receipt from the approved pre-move baseline (25 assets).
-const notices = {
+// Legal notices are protected bytes, not incidental prose snapshots.
+const retainedNotices = {
   "config/agent/extensions/LICENSE.antislop": "9fd83fb1fda52ca0094b96e2ed5a3d6c42a81b95a6c6326553f5bbe570f443de",
-  "config/agent/skills/writing-for-agents/LICENSE.superpowers": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
-  "config/agent/skills/writing-for-agents/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
-  "config/agent/skills/tdd/LICENSE.superpowers": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
-  "config/agent/skills/tdd/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
+  "config/agent/skills/agent-guidance/LICENSE.superpowers": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+  "config/agent/skills/agent-guidance/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
+  "config/agent/skills/code-tdd/LICENSE.superpowers": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+  "config/agent/skills/code-tdd/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
   "config/agent/skills/security-review/LICENSE.anthropic": "a9ac868c004c4cce26430b3117767b46397ba4fa25026b1e5ea6694b463baf4b",
   "config/agent/skills/security-intake/LICENSE.skillspector": "62362df4f604c9e583a6aaa6ec0c3b83884feae797c8c2bee550024ff7cf082c",
   "config/agent/skills/security-audit/LICENSE.cloudflare": "21c9c8cbae1f717f735ff3a4174200f9de9bc907ab9093b4453cc6da565f0ae4",
-  "config/agent/skills/retrospective/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
-  "config/agent/skills/resume-from-handoff/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
-  "config/agent/skills/project-delivery/LICENSE.superpowers": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
-  "config/agent/skills/project-delivery/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
-  "config/agent/skills/project-delivery/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
+  "config/agent/skills/workflow-retrospective/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
+  "config/agent/skills/workflow-handoff-read/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
+  "config/agent/skills/workflow-delivery/LICENSE.superpowers": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+  "config/agent/skills/workflow-delivery/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
+  "config/agent/skills/workflow-delivery/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
   "config/agent/skills/code-simplicity/LICENSE.ponytail": "fb1bc6909ac3ef82d5c22106e32ef682b0cff66788fa915fb9b53b15c9d2f3ab",
-  "config/agent/skills/plan-review/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
+  "config/agent/skills/docs-plan-review/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
   "config/agent/skills/ui-design/LICENSE": "02bb8c3b4e70190e3986c0404ad2fd8d639b4f534252d82379cc1b502b6d1812",
-  "config/agent/skills/handoff-to-another-harness/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
-  "config/agent/skills/engineering-docs/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
-  "config/agent/skills/domain-modeling/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
-  "config/agent/skills/diagnosing-bugs/LICENSE.superpowers": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
-  "config/agent/skills/diagnosing-bugs/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
+  "config/agent/skills/workflow-handoff/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
+  "config/agent/skills/docs-engineering/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
+  "config/agent/skills/docs-domain-modeling/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
+  "config/agent/skills/code-debugging/LICENSE.superpowers": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+  "config/agent/skills/code-debugging/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
   "config/agent/skills/code-review/LICENSE.superpowers": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
   "config/agent/skills/code-review/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
-  "config/agent/skills/brainstorming/LICENSE.superpowers": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
-  "config/agent/skills/brainstorming/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
+  "config/agent/skills/workflow-brainstorming/LICENSE.superpowers": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+  "config/agent/skills/workflow-brainstorming/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
 };
-const mappedNotices = rows.map(row => row.source).filter(path => /\/(?:LICENSE(?:\.[^/]+)?|NOTICE(?:\.[^/]+)?|COPYING(?:\.[^/]+)?)$/i.test(path)).sort();
-assert.deepEqual(mappedNotices, Object.keys(notices).sort(), "exact retained notice mappings");
-for (const [path, hash] of Object.entries(notices)) {
-  assert.equal(createHash("sha256").update(readFileSync(join(root, path))).digest("hex"), hash, `notice changed: ${path}`);
+for (const [path, hash] of Object.entries(retainedNotices)) {
+  assert.ok(rows.some(r => r.source === path), `unmapped retained notice: ${path}`);
+  assert.equal(createHash("sha256").update(readFileSync(join(root, path))).digest("hex"), hash, `retained notice changed: ${path}`);
 }
+const newNoticeHashes = {
+  "LICENSE.emil": "4ff5bdb7887ec1435c9cab0e8d1a7caee704d894d65c2a008ccc68b1cc2f260b",
+  "LICENSE.taste": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df"
+};
+for (const path of entries.filter(p => /\/LICENSE\.(emil|taste)$/.test(p))) {
+  const name = path.split("/").at(-1);
+  assert.equal(createHash("sha256").update(readFileSync(join(root, path))).digest("hex"), newNoticeHashes[name], `incomplete/new notice: ${path}`);
+  const sources = `${dirname(path)}/SOURCES.md`;
+  assert.ok(rows.some(r => r.source === sources), `notice source scope not deployed: ${path}`);
+}
+const mappedNotices = rows.filter(r => /\/(?:LICENSE(?:\.[^/]+)?|NOTICE(?:\.[^/]+)?|COPYING(?:\.[^/]+)?)$/i.test(r.source));
+assert.equal(mappedNotices.length, Object.keys(retainedNotices).length + entries.filter(p => /\/LICENSE\.(emil|taste)$/.test(p)).length, "notice mappings accounted for");
 
-// Active prose only: fenced code is example payload, not a routing directive.
-// The original-metadata appendix is explicitly historical; source/provenance URLs
-// retain immutable upstream identities and are not public-routing aliases.
-function activeProse(path) {
-  let content = text(path).replace(/^\s*(`{3,}|~{3,})[^\n]*\n[\s\S]*?^\s*\1\s*$/gm, "");
-  if (path === "docs/capability-inventory.md") content = content.split("## Exact baseline discovery metadata")[0];
-  return content;
+function prose(path) {
+  return text(path).replace(/^\s*(`{3,}|~{3,})[^\n]*\n[\s\S]*?^\s*\1\s*$/gm, "");
 }
-const guidance = new Set([
-  ...rows.map(row => row.source).filter(path => path.endsWith(".md")),
-  "README.md", "SKILL-USAGE.md", "config/SKILL-SOURCES.md", ...walk(join(root, "docs")).filter(path => path.endsWith(".md")),
-]);
+const guidance = new Set([...rows.map(r => r.source).filter(p => p.endsWith(".md")), "README.md", "SKILL-USAGE.md", "config/SKILL-SOURCES.md", ...walk(join(root, "docs")).filter(p => p.endsWith(".md"))]);
 for (const path of guidance) {
-  const content = activeProse(path);
-  for (const match of content.matchAll(/skill:\/\/([a-z0-9-]+)(\/[^\s`\])<>"',;]*)?/g)) {
-    const [, name, suffix = ""] = match;
-    assert.ok(!retired.has(name), `${path}: retired routing URI ${match[0]}`);
-    const base = identities.get(name);
-    assert.ok(base, `${path}: unknown URI ${match[0]}`);
-    const target = resolve(base, suffix ? decodeURIComponent(suffix.slice(1).split(/[?#]/)[0]) : "SKILL.md");
-    assert.ok(target.startsWith(base + sep), `${path}: URI escapes owner ${match[0]}`);
-    assert.ok(existsSync(target) && statSync(target).isFile(), `${path}: missing full URI target ${match[0]}`);
+  for (const m of prose(path).matchAll(/skill:\/\/([a-z0-9-]+)(\/[^\s`\])<>"',;]*)?/g)) {
+    const [, name, suffix = ""] = m;
+    const identity = identities.get(name);
+    assert.ok(identity, `${path}: unknown URI ${m[0]}`);
+    if (!Object.hasOwn(aliases, path.split("/")[3]) && !path.endsWith("SOURCES.md") && !["docs/migration.md", "docs/capability-inventory.md", "docs/verification.md", "config/SKILL-SOURCES.md"].includes(path)) assert.ok(!Object.hasOwn(aliases, name), `${path}: active URI uses compatibility rather than canonical owner ${name}`);
+    const target = resolve(identity.base, suffix ? decodeURIComponent(suffix.slice(1).split(/[?#]/)[0]) : "SKILL.md");
+    assert.ok(target.startsWith(identity.base + sep), `${path}: URI escapes owner`);
+    assert.ok(existsSync(target) && statSync(target).isFile(), `${path}: missing URI target ${m[0]}`);
   }
-}
-// Resolve actual lazy Markdown links in changed skill owners, and the catalog/docs.
-const changedOwners = new Set(["ui-design", "web-motion", "expo-motion", "ui-prototyping", "ui-stress-test", "mobile-web", "brand-concepts", "stitch-design-input", "code-simplicity", "retrospective", "swift-development", "image-to-code"]);
-for (const path of guidance) {
-  if (path.startsWith("config/agent/skills/") && !changedOwners.has(path.split("/")[3])) continue;
-  if (path.endsWith("/SOURCES.md")) continue; // immutable source mappings, not local lazy routing
-  for (const match of activeProse(path).matchAll(/!?\[[^\]\n]*\]\(([^\s)]+)(?:\s+"[^"]*")?\)/g)) {
-    const href = match[1];
+  for (const m of prose(path).matchAll(/!?\[[^\]\n]*\]\(([^\s)]+)(?:\s+"[^"]*")?\)/g)) {
+    const href = m[1];
     if (/^(?:[a-z][a-z0-9+.-]*:|#|\/)/i.test(href)) continue;
-    const targetPath = decodeURIComponent(href.split(/[?#]/)[0]);
-    if (!targetPath) continue;
-    const target = resolve(dirname(join(root, path)), targetPath);
-    assert.ok(target.startsWith(root + sep), `${path}: link outside source tree: ${href}`);
-    assert.ok(existsSync(target), `${path}: missing local reference: ${href}`);
+    const local = decodeURIComponent(href.split(/[?#]/)[0]);
+    if (!local) continue;
+    const target = resolve(dirname(join(root, path)), local);
+    assert.ok(target.startsWith(root + sep), `${path}: reference outside repository: ${href}`);
+    assert.ok(existsSync(target), `${path}: missing relative reference: ${href}`);
   }
 }
-console.log(`Skill catalog: ${identities.size} public skills, ${entries.length} exactly mapped assets, ${rows.length} mappings, ${mappedNotices.length} unchanged notices; active URI and lazy-reference targets resolve.`);
+const visible = [...identities.values()].filter(v => !v.hidden).length;
+console.log(`Skill catalog: ${canonicalNames.size} canonical (${visible} model-visible, ${hiddenCanonical.size} explicit-only), ${Object.keys(aliases).length} hidden aliases, ${entries.length} mapped assets, ${rows.length} mappings, ${mappedNotices.length} notices; URI/relative references resolve.`);

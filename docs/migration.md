@@ -1,57 +1,147 @@
-# Skill migration and retirement
+# Skill migration and compatibility
 
-This file owns old public identifiers, old native folder identifiers and existing-home cleanup boundaries. Renames are not aliases. Installation is non-pruning: existing homes may retain old folders and customized data. Inspect before any separately authorized cleanup; never blanket-delete discovery roots. No live-home migration is claimed.
+This file owns identifier migration, not procedure bodies. Installation remains
+non-pruning. A current repository-shipped hidden pointer is managed compatibility;
+a previous full procedure left in an old home is stale unmanaged data, not an
+alias. Do not automatically delete old skill folders or users' custom content.
 
-## Public-name migration
+## Current canonical rename map
 
-| Old public name | Old source folder | Current public owner |
+| Baseline public name | Result canonical owner | Disposition |
 |---|---|---|
-| `impeccable` | `impeccable` | `ui-design` |
-| `animate` | `animate` | `web-motion` |
-| `improve-animations` | `improve-animations` | `web-motion` audit/plan mode |
-| `review-animations` | `review-animations` | `web-motion` explicit review mode |
-| `emil-design-eng` | `emil-design-eng` | `ui-design` local component-craft reference |
-| `design-taste-frontend` | `design-taste-frontend` | `ui-design` local marketing-site references |
-| `animate-expo` | `animate-expo` | `expo-motion` |
-| `prototype` | `prototype` | `ui-prototyping` |
-| `break-ui` | `break-ui` | `ui-stress-test` |
-| `mobile-native` | `mobile-native` | `mobile-web` |
-| `brandkit` | `brandkit` | `brand-concepts` |
-| `stitch-design-taste` | `stitch-skill` | `stitch-design-input` |
-| `ponytail` | `ponytail` | `code-simplicity` |
-| `retro` | `retro` | `retrospective` |
-| `write-swift` | `write-swift` | `swift-development` |
-| `image-to-code` | `image-to-code-skill` | `image-to-code` |
-| `full-output-enforcement` | `output-skill` | Retired; no replacement |
+| `apple-design` | `ui-gesture-design` | RENAME, procedure preserved |
+| `ask-sonner` | `ui-sonner` | RENAME, procedure preserved |
+| `brainstorming` | `workflow-brainstorming` | RENAME, procedure preserved |
+| `commit-message` | `git-commit-message` | RENAME, procedure preserved |
+| `diagnosing-bugs` | `code-debugging` | RENAME, procedure preserved |
+| `domain-modeling` | `docs-domain-modeling` | RENAME, procedure preserved |
+| `engineering-docs` | `docs-engineering` | RENAME, procedure preserved |
+| `expo-motion` | `ui-expo-motion` | RENAME, procedure preserved |
+| `github-triage` | `git-triage` | RENAME, procedure preserved |
+| `handoff-to-another-harness` | `workflow-handoff` | RENAME, procedure preserved |
+| `image-to-code` | `ui-image-to-code` | RENAME, procedure preserved |
+| `imagegen-frontend-mobile` | `ui-image-generation` | MERGE, lazy platform reference |
+| `imagegen-frontend-web` | `ui-image-generation` | MERGE, lazy platform reference |
+| `mobile-web` | `ui-mobile-web` | RENAME, procedure preserved |
+| `pick-ui-library` | `ui-library-selection` | RENAME, procedure preserved |
+| `plan-review` | `docs-plan-review` | RENAME, procedure preserved |
+| `project-delivery` | `workflow-delivery` | RENAME, procedure preserved |
+| `resume-from-handoff` | `workflow-handoff-read` | RENAME, procedure preserved |
+| `retrospective` | `workflow-retrospective` | RENAME, procedure preserved |
+| `tdd` | `code-tdd` | RENAME, procedure preserved |
+| `unpublished-changes` | `git-change-status` | RENAME, procedure preserved |
+| `upstream-update-review` | `workflow-upstream-review` | RENAME, procedure preserved |
+| `web-motion` | `ui-web-motion` | RENAME, procedure preserved |
+| `work-with-pr` | `git-pr-work` | RENAME, procedure preserved |
+| `writing-for-agents` | `agent-guidance` | RENAME, procedure preserved |
 
-## Prior historical identifiers
+## Legacy classification
 
-The following migration identifiers predate this catalog change; they remain records only and are not current entrypoints: `emil-animate`, `emil-find-animation-opportunities`, `emil-review-animations`, `find-animation-opportunities`, `animation-vocabulary`, `taste-skill`, `taste-skill-v1`, `gpt-tasteskill`, `redesign-skill`, `brutalist-skill`, `minimalist-skill`, `soft-skill`, `ponytail-review`, `ponytail-audit`, `ponytail-debt`, `ponytail-help`, `ponytail-gain`. Their records are also retained in [retired-skills.txt](../scripts/retired-skills.txt); no version-1 Taste procedure or gain-scoreboard replacement is claimed.
-
-| Retired folder under `.omp/agent/skills/` | Former public name | Surviving action/reference or removal |
+| Previous/original identifier | Classification | Destination / reason |
 |---|---|---|
-| `emil-animate` | `emil-animate` | web-motion `build`: `skill://web-motion/references/build.md` |
-| `emil-find-animation-opportunities` | `emil-find-animation-opportunities` | web-motion `opportunities`: `skill://web-motion/references/opportunities.md` |
-| `emil-review-animations` | `emil-review-animations` | explicit web-motion diff review: `skill://web-motion/references/diff-review.md` |
-| `find-animation-opportunities` | `find-animation-opportunities` | web-motion `opportunities`: `skill://web-motion/references/opportunities.md` |
-| `animation-vocabulary` | `animation-vocabulary` | web-motion `vocabulary`: `skill://web-motion/references/vocabulary.md` |
-| `taste-skill` | `taste-skill` | selective marketing: `skill://ui-design/reference/local/marketing-sites.md` |
-| `taste-skill-v1` | `design-taste-frontend-v1` | Exact v1 procedure removed; current selective `skill://ui-design/reference/local/marketing-sites.md`, not v1 compatibility |
-| `gpt-tasteskill` | `gpt-taste` | Taste optional scroll: `skill://ui-design/reference/local/marketing-sites/scroll-storytelling.md` |
-| `redesign-skill` | `redesign-existing-projects` | Impeccable workflow plus `skill://ui-design/reference/local/marketing-sites/redesign.md` |
-| `brutalist-skill` | `industrial-brutalist-ui` | Taste opt-in industrial-print/tactical-crt: `skill://ui-design/reference/local/marketing-sites/style-directions.md` |
-| `minimalist-skill` | `minimalist-ui` | Taste opt-in minimalist-editorial: `skill://ui-design/reference/local/marketing-sites/style-directions.md#minimalist-editorial` |
-| `soft-skill` | `high-end-visual-design` | Taste opt-in high-end-editorial: `skill://ui-design/reference/local/marketing-sites/style-directions.md#high-end-editorial` |
-| `ponytail-review` | `ponytail-review` | code-simplicity `review`: `skill://code-simplicity/references/complexity-review.md` |
-| `ponytail-audit` | `ponytail-audit` | code-simplicity `audit`: `skill://code-simplicity/references/complexity-review.md` |
-| `ponytail-debt` | `ponytail-debt` | code-simplicity `debt`: `skill://code-simplicity/references/debt-ledger.md` |
-| `ponytail-help` | `ponytail-help` | code-simplicity `help`: inline `skill://code-simplicity` table |
-| `ponytail-gain` | `ponytail-gain` | Removed uncited static scoreboard; no replacement or measured-saving claim |
+| `animate` | LEGACY ALIAS | `ui-web-motion`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `animate-expo` | LEGACY ALIAS | `ui-expo-motion`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `animation-vocabulary` | MIGRATION ONLY | `ui-web-motion`. Documentation migration only; no evidence supports another permanent pointer. |
+| `apple-design` | DESCRIPTION TRIGGER | `ui-gesture-design`. Concise canonical description synonym; no explicit /skill compatibility. |
+| `ask-sonner` | DESCRIPTION TRIGGER | `ui-sonner`. Concise canonical description synonym; no explicit /skill compatibility. |
+| `brainstorming` | MIGRATION ONLY | `workflow-brainstorming`. Documentation migration only; no evidence supports another permanent pointer. |
+| `brandkit` | LEGACY ALIAS | `brand-concepts`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `break-ui` | LEGACY ALIAS | `ui-stress-test`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `brutalist-skill` | REMOVE | `No independent replacement`. Obsolete, misleading or superseded procedure; do not reinstate. |
+| `commit-message` | LEGACY ALIAS | `git-commit-message`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `design-taste-frontend` | MIGRATION ONLY | `ui-design`. Documentation migration only; no evidence supports another permanent pointer. |
+| `diagnosing-bugs` | MIGRATION ONLY | `code-debugging`. Documentation migration only; no evidence supports another permanent pointer. |
+| `domain-modeling` | MIGRATION ONLY | `docs-domain-modeling`. Documentation migration only; no evidence supports another permanent pointer. |
+| `emil-animate` | MIGRATION ONLY | `No independent replacement`. Documentation migration only; no evidence supports another permanent pointer. |
+| `emil-design-eng` | MIGRATION ONLY | `ui-design`. Documentation migration only; no evidence supports another permanent pointer. |
+| `emil-find-animation-opportunities` | MIGRATION ONLY | `No independent replacement`. Documentation migration only; no evidence supports another permanent pointer. |
+| `emil-review-animations` | MIGRATION ONLY | `No independent replacement`. Documentation migration only; no evidence supports another permanent pointer. |
+| `engineering-docs` | LEGACY ALIAS | `docs-engineering`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `expo-motion` | MIGRATION ONLY | `ui-expo-motion`. Documentation migration only; no evidence supports another permanent pointer. |
+| `find-animation-opportunities` | MIGRATION ONLY | `ui-web-motion`. Documentation migration only; no evidence supports another permanent pointer. |
+| `full-output-enforcement` | REMOVE | `No independent replacement`. Obsolete, misleading or superseded procedure; do not reinstate. |
+| `github-triage` | MIGRATION ONLY | `git-triage`. Documentation migration only; no evidence supports another permanent pointer. |
+| `gpt-tasteskill` | REMOVE | `No independent replacement`. Obsolete, misleading or superseded procedure; do not reinstate. |
+| `handoff-to-another-harness` | MIGRATION ONLY | `workflow-handoff`. Documentation migration only; no evidence supports another permanent pointer. |
+| `image-to-code` | MIGRATION ONLY | `ui-image-to-code`. Documentation migration only; no evidence supports another permanent pointer. |
+| `image-to-code-skill` | MIGRATION ONLY | `ui-image-to-code`. Documentation migration only; no evidence supports another permanent pointer. |
+| `imagegen-frontend-mobile` | MIGRATION ONLY | `ui-image-generation`. Documentation migration only; no evidence supports another permanent pointer. |
+| `imagegen-frontend-web` | MIGRATION ONLY | `ui-image-generation`. Documentation migration only; no evidence supports another permanent pointer. |
+| `impeccable` | LEGACY ALIAS | `ui-design`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `improve-animations` | MIGRATION ONLY | `ui-web-motion`. Documentation migration only; no evidence supports another permanent pointer. |
+| `minimalist-skill` | REMOVE | `No independent replacement`. Obsolete, misleading or superseded procedure; do not reinstate. |
+| `mobile-native` | LEGACY ALIAS | `ui-mobile-web`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `mobile-web` | MIGRATION ONLY | `ui-mobile-web`. Documentation migration only; no evidence supports another permanent pointer. |
+| `output-skill` | REMOVE | `No independent replacement`. Obsolete, misleading or superseded procedure; do not reinstate. |
+| `pick-ui-library` | MIGRATION ONLY | `ui-library-selection`. Documentation migration only; no evidence supports another permanent pointer. |
+| `plan-review` | MIGRATION ONLY | `docs-plan-review`. Documentation migration only; no evidence supports another permanent pointer. |
+| `ponytail` | LEGACY ALIAS | `code-simplicity`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `ponytail-audit` | MIGRATION ONLY | `code-simplicity`. Documentation migration only; no evidence supports another permanent pointer. |
+| `ponytail-debt` | MIGRATION ONLY | `code-simplicity`. Documentation migration only; no evidence supports another permanent pointer. |
+| `ponytail-gain` | REMOVE | `code-simplicity`. Obsolete, misleading or superseded procedure; do not reinstate. |
+| `ponytail-help` | MIGRATION ONLY | `code-simplicity`. Documentation migration only; no evidence supports another permanent pointer. |
+| `ponytail-review` | MIGRATION ONLY | `code-simplicity`. Documentation migration only; no evidence supports another permanent pointer. |
+| `project-delivery` | MIGRATION ONLY | `workflow-delivery`. Documentation migration only; no evidence supports another permanent pointer. |
+| `prototype` | LEGACY ALIAS | `ui-prototyping`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `redesign-skill` | REMOVE | `No independent replacement`. Obsolete, misleading or superseded procedure; do not reinstate. |
+| `resume-from-handoff` | MIGRATION ONLY | `workflow-handoff-read`. Documentation migration only; no evidence supports another permanent pointer. |
+| `retro` | LEGACY ALIAS | `workflow-retrospective`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `retrospective` | MIGRATION ONLY | `workflow-retrospective`. Documentation migration only; no evidence supports another permanent pointer. |
+| `review-animations` | MIGRATION ONLY | `ui-web-motion`. Documentation migration only; no evidence supports another permanent pointer. |
+| `soft-skill` | REMOVE | `No independent replacement`. Obsolete, misleading or superseded procedure; do not reinstate. |
+| `stitch-design-taste` | MIGRATION ONLY | `stitch-design-input`. Documentation migration only; no evidence supports another permanent pointer. |
+| `stitch-skill` | MIGRATION ONLY | `No independent replacement`. Documentation migration only; no evidence supports another permanent pointer. |
+| `taste-skill` | MIGRATION ONLY | `No independent replacement`. Documentation migration only; no evidence supports another permanent pointer. |
+| `taste-skill-v1` | REMOVE | `No independent replacement`. Obsolete, misleading or superseded procedure; do not reinstate. |
+| `tdd` | LEGACY ALIAS | `code-tdd`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `unpublished-changes` | MIGRATION ONLY | `git-change-status`. Documentation migration only; no evidence supports another permanent pointer. |
+| `upstream-update-review` | MIGRATION ONLY | `workflow-upstream-review`. Documentation migration only; no evidence supports another permanent pointer. |
+| `web-motion` | MIGRATION ONLY | `ui-web-motion`. Documentation migration only; no evidence supports another permanent pointer. |
+| `work-with-pr` | MIGRATION ONLY | `git-pr-work`. Documentation migration only; no evidence supports another permanent pointer. |
+| `write-swift` | LEGACY ALIAS | `swift-development`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
+| `writing-for-agents` | LEGACY ALIAS | `agent-guidance`. Hidden tiny pointer; meaningful upstream muscle memory or common explicit suite reference. |
 
-## Existing-home behavior and compatibility
+## Hidden pointers versus canonical exposure
 
-Managed skills deploy to the native OMP root. The installer copies explicit `config/files.tsv` rows and does not prune obsolete files. An updater targeting `.agent/skills/` or `.agents/skills/` may recreate retired roots. Select the native destination and update complete packages and inventory rather than copying partial payloads. Existing custom content remains outside automatic cleanup.
+Every shipped compatibility SKILL.md sets `disable-model-invocation: true`, has no
+independent authority/body, and points to exactly one canonical owner. Fourteen
+aliases are hidden. `ui-prototyping` and `ui-library-selection` are the two
+explicit-only hidden **canonical procedures**, not aliases.
 
-Historical root consolidation retired legacy duplicate singular/plural roots and retained the pinned Impeccable 4.5.0 package with engine 0.1.11; older 4.3.1/4.2.2 packages and mixed-version engine 0.1.5 were not retained as current assets. The launcher may require permitted network access on first use; no launcher or engine execution is implied by this document. Unversioned differing native copies were selected without a recency claim: differences were bare-invocation greetings or a course link, and native variants were retained. Exact source pin, Apache-2.0 notice and complete-package preservation evidence belong to [provenance](../config/SKILL-SOURCES.md) and the pre-move artifact evidence held by Main.
+At last verified OMP 18.6.3, hiding omits a skill from the model-visible prompt
+catalog, not local discovery, native URI reads or enabled `/skill:<name>` commands.
+This is not access control. Natural-language synonyms in canonical descriptions
+are separate from explicit compatibility. Hidden canonical specialists keep their
+explicit-request procedure boundary.
 
-The old Windows installer limitation remains documented in [verification](verification.md): PowerShell 5.1 rejected a valid inventory because a required-entry lookup used forward-slash keys after destination paths were converted to backslashes. Do not infer a successful Windows install. Compatibility evidence is version-scoped and historical, not current catalog verification.
+## Existing-home migration
+
+1. Preview and install the current explicit inventory into the intended existing
+   home. Inspect collision-safe backups before any separately authorized cleanup.
+2. Doctor compares managed files. Its legacy/unmanaged observations are advisory;
+   it neither recursively scans nor deletes old skill/plugin data.
+3. A shipped alias replaces its old managed SKILL.md through normal backup rules,
+   but old auxiliary files in the folder can remain. Fresh installs receive only
+   the tiny pointer; existing custom files are preserved. Retiring old reference
+   files/folders requires separately authorized, inspected cleanup.
+4. Migration-only old owners can remain installed and model-visible until the user
+   separately removes them. This repository does not claim a completed live-home
+   migration. No live home was modified for verification.
+
+The empty plugin package/locks are no longer managed. Existing installed plugin
+state remains untouched; native OMP creates/manages plugin metadata when needed.
+
+## Filters and native invocation
+
+Canonical families use flat names, for example `ui-web-motion`, not nested public
+`ui/motion` directories. OMP 18.6.3 supports `--skills 'ui-*'`, `--skills 'code-*'`
+and `skills.includeSkills` globs. Filters apply to names: `ui-*` does not include
+an `animate` alias. Explicit aliases do not bypass disabled/filtered skills. Use
+the canonical name under a family filter, or explicitly include the legacy name
+and its target where supported. Legacy pointer resolution requires its canonical
+owner to remain available and enabled, never a file-load bypass.
+
+URI references and relative links in active managed guidance use canonical owners.
+Immutable upstream paths, source names, this migration table and deliberate legacy
+trigger descriptions retain original identifiers. [Verification](verification.md)
+separates source-supported behavior from actually exercised runtime operations.
