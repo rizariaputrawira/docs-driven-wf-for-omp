@@ -83,11 +83,12 @@ You do not need to run every skill. Choose the job that matches your need. These
 - **New project:** Use `project-delivery` to prepare the documentation baseline and complete implementation plan. Keep gaps explicit; do not write app code before native approval covers the reviewed scope. **First:** readiness gaps and a plan, not scaffolding.
 - **Diagnose a bug:** Use `diagnosing-bugs` for the reported export-order failure despite passing library tests. Treat the report as ground truth; trace the real caller and propose a focused correction without editing or running commands. **First:** a source-grounded cause or remaining uncertainty.
 - **Review changes:** Use `code-review` on staged, unstaged, and untracked work plus relevant requirements. Return separate Standards/correctness and Spec verdicts with file references; do not edit, test, publish, or approve. **First:** scoped findings and coverage limits.
+- **Review upstream usefulness:** Use `upstream-update-review` to check all managed sources or a named upstream for materially useful changes. **First:** read-only recommendations and evidence gaps, not upgrades. See [Upstream changes](SKILL-USAGE.md#upstream-changes).
 - **Coordinate independent work:** Divide a feature into independent slices with shared interfaces, bounded ownership, and observable acceptance. Integrate and verify once; keep dependent work in sequence. **First:** isolated contributions or a reason to work serially.
 - **Audit an existing UI:** Use `impeccable` to assess accessibility, keyboard use, narrow screens, and loading/empty/error states. Preserve the current brand and behavior; report findings only. **First:** scoped polish recommendations.
 - **Load a handoff only:** Use `resume-from-handoff` to summarize the selected `.handoff` snapshot; do not inspect cited files, validate claims, run commands, edit, or continue. **First:** a snapshot summary or notice that none is available.
 
-For every bundled choice, see [the full skill usage guide](SKILL-USAGE.md): **36 public names**, when to use each,
+For every bundled choice, see [the full skill usage guide](SKILL-USAGE.md): **37 public names**, when to use each,
 concrete prompts, expected outputs, permission/tool limits, and all **eight engineering-docs actions**.
 Choose another skill only when its goal matches your task; these examples are alternatives, not a required sequence.
 
@@ -106,7 +107,7 @@ Choose another skill only when its goal matches your task; these examples are al
 
 - `config/agent/` maps to `~/.omp/agent/`; `config/plugins/` maps to `~/.omp/plugins/`.
 - Managed skills have one source at `config/agent/skills/` and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout.
-- Current counts: **235 mappings**, including **214 skill files** and **36 entrypoints with 36 unique public names**. The TSV is source metadata and is not installed. Existing homes retain obsolete native skills until separately authorized retirement; fresh-install catalog counts are not migration claims.
+- Current counts: **236 mappings**, including **215 skill files** and **37 entrypoints with 37 unique public names**. The TSV is source metadata and is not installed. Existing homes retain obsolete native skills until separately authorized retirement; fresh-install catalog counts are not migration claims.
 
 Managed skills use OMP's native user-skill convention. Native user/project skill discovery remains available, while the [managed discovery settings](config/agent/config.yml) leave `customDirectories` empty and disable Agents user/project skill-source discovery. Retired `.agent`/`.agents` copies cannot reenter through those configured sources. Other runtime providers may exist; these settings do not prove application-wide isolation.
 
@@ -183,19 +184,6 @@ The doctor uses these exit codes:
 
 The lifecycle is explicit inventory → validated install → existing OMP reads settings and available skills → optional doctor check. Installation copies only managed files; it does not install OMP, launch agents, activate the disabled plugin, or provide credentials.
 
-```mermaid
-flowchart LR
-  A[Repository payload] --> B[Explicit config/files.tsv]
-  B --> C[Dry run or install]
-  C --> D[Validate sources and destinations]
-  D --> E[Copy changed files to selected home]
-  E --> F[Existing OMP reads settings and available skills]
-  F --> G[User requests matching guidance or tools]
-  E --> H[Doctor check]
-  H -->|drift| I[Doctor fix delegates to installer]
-  I --> H
-```
-
 - `config/files.tsv` defines the deployment boundary. Unlisted staging, credentials, caches, histories, and generated state are not installed.
 - Installers validate the complete source/destination set before writing, create only directories needed by listed files, leave byte-identical files untouched, back up changed files with collision-safe names, and do not prune old or unrelated destination data.
 - Doctor compares the same inventory; `--fix` delegates to the installer and checks again.
@@ -209,6 +197,16 @@ The documentation suite comprises fifteen skills and 109 regular assets deployed
 ## Verification scope
 
 `python3 scripts/test_install.py` exercises the POSIX installer and doctor against isolated fixtures; it does not test PowerShell. `bun scripts/test_agent_config.mjs` parses real YAML/frontmatter and checks seven configured mappings plus deterministic negative cases; it is static configuration, not dispatch proof. `bun scripts/test_model_routing.mjs` and `node scripts/test_model_routing.mjs` invoke the real retained handler using native-shaped main/sub events and assert no slow/advisor spawn replacement. These are tool-handler contracts, not authenticated dispatch, native approval or OS containment. The complexity-only removal of the installer's directory alias and break-ui's duplicate Rule 6 was exercised with a disposable default-source POSIX install from an unrelated working directory, complete payload byte comparison, doctor check/fix, skill backup/repair and repeat-install mtime preservation.
+
+### Upstream review verification
+
+- Private stdlib/Bun checks found **236 unique mappings / 215 fully mapped skill files / 37 unique public names**, exactly one upstream-update-review entrypoint, and 532 resolved live links/pointers. External/template references were classified separately; historical migration identifiers are not live invocations.
+- `python3 scripts/test_install.py` passed the production POSIX installer/doctor scenarios for 236 entries. `bun scripts/test_agent_config.mjs` passed seven-role configuration and ten negative cases; `node scripts/test_model_routing.mjs` passed seven hook-contract groups. PowerShell remains unverified.
+- Two fresh source-loaded scout consumers, observed as Luna-medium without fallback, assessed nine paired private scenarios per arm. A fresh independent reader accepted all nine candidate expectations from full native tool/result traces; all 117 fixture file hashes remained unchanged. The control also handled the upstream fixtures correctly, so no comparative improvement is claimed. Actors were fresh per arm, not per case; fixture upstream documents were simulated, not live evidence.
+- The live read-only Impeccable smoke confirmed the recorded 4.5.0 tag/commit remains the latest published skill release and inspected unreleased head changes at `a40571a45f51625ddc5cd3399bbbe82796eed992`. An accepted-screenshot clarification was marked investigate, not adopted; byte-capped comparison coverage and unexercised engine compatibility remain limits. Managed payload hashes were unchanged.
+- A separate production install in a disposable home matched every deployed byte. With extensions and MCP disabled in that probe copy, OMP **18.6.1**'s passive resolver listed exactly the 37 expected names and resolved the new installed body. An isolated no-tools authenticated print attempt timed out after 30 seconds without usable output. Authenticated standalone consumer execution is therefore unverified; source-loaded task observations and passive discovery remain separate evidence.
+
+No live-home deployment, scheduling, auto-updates, daemons/databases, new agents/extensions/MCP, source registry or automatic escalation was added. No visible UI changed. Anti-slop **PASS** for authored guidance: no invented product claims, decorative filler or adoption-authority shortcut.
 
 ### Minimal OpenDesign contract verification
 

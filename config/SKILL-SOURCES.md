@@ -2,7 +2,7 @@
 
 ## Canonical OMP-native payload
 
-All managed skills have one source folder, `config/agent/skills/`, and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout. The balanced payload contains **36 skill directories/entrypoints and unique public names, 214 skill files and 235 explicit mappings**. The fifteen-skill engineering suite remains **109 regular assets**, including fifteen entrypoints, fifteen SOURCES files, seven engineering-docs templates and 22 full license notices. No discovery provider/profile or installer pruning was added.
+All managed skills have one source folder, `config/agent/skills/`, and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout. The balanced payload contains **37 skill directories/entrypoints and unique public names, 215 skill files and 236 explicit mappings**. The fifteen-skill engineering suite remains **109 regular assets**, including fifteen entrypoints, fifteen SOURCES files, seven engineering-docs templates and 22 full license notices. No discovery provider/profile or installer pruning was added.
 
 Native user/project skill discovery remains available. Managed `customDirectories` is empty and Agents user/project skill-source discovery is disabled, so retired `.agent`/`.agents` copies cannot reenter through those configured sources. External runtime/providers may still exist. These source settings do not prove native resolution, application-wide isolation or OS enforcement. Model, approval, agent, plugin and MCP settings remain unchanged.
 
@@ -58,29 +58,11 @@ Existing-file changes to Impeccable, images/brand, Stitch, break-ui and prototyp
 
 The local Impeccable routing modification additionally links the independently authored [OpenDesign reference](agent/skills/impeccable/reference/open-design.md), with a conditional pointer in managed AGENTS.md. It defines explicit external-artifact availability, project selection, handoff, run inspection and proposal boundaries without adding a public skill, role or routing engine. Immutable official OpenDesign interface/source links and inspected-version distinctions are evidence only; no upstream executable or prose payload is redistributed. Existing Impeccable attribution, Apache-2.0 notice and package pin remain unchanged.
 
+The [upstream-update-review procedure](agent/skills/upstream-update-review/SKILL.md) is independently authored original guidance. It consumes the existing inventory/provenance and authoritative upstream evidence without copying upstream payload or creating a source registry. Its recommendations do not authorize adoption; existing security, authoring and integration owners retain their boundaries. No separate SOURCES file or notice is needed for this original procedure.
+
 ## Retired entrypoints: migration map
 
-These 17 folders/public names are historical migration identifiers, not invocations or links to retained aliases. Installation is non-pruning: old native folders remain discoverable in existing homes until a separately authorized retirement moves them outside **all skill discovery roots**. Inspect and preserve customized contents first; do not blanket-delete directories. This task does not mutate a live home or claim 36-name discovery there.
-
-| Retired folder under `.omp/agent/skills/` | Former public name | Surviving action/reference or removal |
-|---|---|---|
-| `emil-animate` | `emil-animate` | animate `build`: `skill://animate/references/build.md` |
-| `emil-find-animation-opportunities` | `emil-find-animation-opportunities` | animate `opportunities`: `skill://animate/references/opportunities.md` |
-| `emil-review-animations` | `emil-review-animations` | explicit review-animations: `skill://review-animations` |
-| `find-animation-opportunities` | `find-animation-opportunities` | animate `opportunities`: `skill://animate/references/opportunities.md` |
-| `animation-vocabulary` | `animation-vocabulary` | animate `vocabulary`: `skill://animate/references/vocabulary.md` |
-| `taste-skill` | `taste-skill` | design-taste-frontend: `skill://design-taste-frontend` |
-| `taste-skill-v1` | `design-taste-frontend-v1` | Exact v1 procedure removed; current selective `skill://design-taste-frontend`, not v1 compatibility |
-| `gpt-tasteskill` | `gpt-taste` | Taste optional scroll: `skill://design-taste-frontend/references/scroll-storytelling.md` |
-| `redesign-skill` | `redesign-existing-projects` | Impeccable workflow plus `skill://design-taste-frontend/references/redesign.md` |
-| `brutalist-skill` | `industrial-brutalist-ui` | Taste opt-in industrial-print/tactical-crt: `skill://design-taste-frontend/references/style-directions.md` |
-| `minimalist-skill` | `minimalist-ui` | Taste opt-in minimalist-editorial: `skill://design-taste-frontend/references/style-directions.md#minimalist-editorial` |
-| `soft-skill` | `high-end-visual-design` | Taste opt-in high-end-editorial: `skill://design-taste-frontend/references/style-directions.md#high-end-editorial` |
-| `ponytail-review` | `ponytail-review` | ponytail `review`: `skill://ponytail/references/complexity-review.md` |
-| `ponytail-audit` | `ponytail-audit` | ponytail `audit`: `skill://ponytail/references/complexity-review.md` |
-| `ponytail-debt` | `ponytail-debt` | ponytail `debt`: `skill://ponytail/references/debt-ledger.md` |
-| `ponytail-help` | `ponytail-help` | ponytail `help`: inline `skill://ponytail` table |
-| `ponytail-gain` | `ponytail-gain` | Removed uncited static scoreboard; no replacement or measured-saving claim |
+See the canonical [existing-home skill retirement map](../README.md#existing-home-skill-retirement) for all 17 historical identifiers, surviving owners and non-pruning cleanup boundaries.
 
 ## Updates, deployment and evidence limits
 

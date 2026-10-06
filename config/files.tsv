@@ -222,6 +222,7 @@ config/agent/skills/tdd/SOURCES.md	.omp/agent/skills/tdd/SOURCES.md
 config/agent/skills/tdd/references/honest-tests.md	.omp/agent/skills/tdd/references/honest-tests.md
 config/agent/skills/tdd/references/mocking.md	.omp/agent/skills/tdd/references/mocking.md
 config/agent/skills/tdd/references/tests.md	.omp/agent/skills/tdd/references/tests.md
+config/agent/skills/upstream-update-review/SKILL.md	.omp/agent/skills/upstream-update-review/SKILL.md
 config/agent/skills/write-swift/SKILL.md	.omp/agent/skills/write-swift/SKILL.md
 config/agent/skills/writing-for-agents/LICENSE.matt	.omp/agent/skills/writing-for-agents/LICENSE.matt
 config/agent/skills/writing-for-agents/LICENSE.superpowers	.omp/agent/skills/writing-for-agents/LICENSE.superpowers

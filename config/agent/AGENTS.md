@@ -18,6 +18,7 @@ When the guard applies, material authoritative-context dependencies use `enginee
 | Requested/approved test-first or red-green-refactor | `skill://tdd`. Ordinary regression coverage alone does not force TDD. |
 | Difficult, flaky or performance diagnosis | `skill://diagnosing-bugs` |
 | Ordinary patch, WIP, spec/correctness or correction review | `skill://code-review` |
+| Check whether managed upstream/third-party sources have useful newer changes (all or named source) | `skill://upstream-update-review`, read-only recommendations; adoption is separate |
 | External bundle adoption/update | `skill://security-intake` |
 | Focused security diff/base/head review | `skill://security-review` |
 | Explicit bounded deep security audit | `skill://security-audit` |

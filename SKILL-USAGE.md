@@ -12,6 +12,7 @@ Use [managed semantic routing](config/agent/AGENTS.md#engineering-workflow), [gl
 | Improve an existing interface | [UI workflow](#ui-workflow): impeccable first |
 | Name, plan, review or build motion | [Motion](#motion) |
 | Choose a visual direction or generate concepts | [Style specialists](#style-specialists), [Images and design documents](#images-and-design-documents) |
+| Upstream changes | [Upstream changes](#upstream-changes): upstream-update-review |
 | Inspect a bundle or security boundary | [Source-only security](#source-only-security) |
 | Pause, load a snapshot or continue | [Handoff and continuation](#handoff-and-continuation) |
 | Simplify code, collect shortcuts or request full output | [Coding and output tools](#coding-and-output-tools) |
@@ -36,7 +37,7 @@ All managed skills use one OMP-native source and deployment folder:
 |---|---|
 | `config/agent/skills/<folder>/SKILL.md` | `~/.omp/agent/skills/<folder>/SKILL.md` |
 
-This guide covers **36 directories/entrypoints and 36 unique public names**, one entrypoint per name. The [explicit inventory](config/files.tsv) has **235 mappings**, including **214 skill files**; the fifteen-skill engineering suite retains **109 assets**. [Provenance](config/SKILL-SOURCES.md) records origin, adaptation, licensing caveats and historical roots.
+This guide covers **37 directories/entrypoints and 37 unique public names**, one entrypoint per name. The [explicit inventory](config/files.tsv) has **236 mappings**, including **215 skill files**; the fifteen-skill engineering suite retains **109 assets**. [Provenance](config/SKILL-SOURCES.md) records origin, adaptation, licensing caveats and historical roots.
 
 OMP's native user/project skill discovery remains available. [Managed discovery settings](config/agent/config.yml) leave `customDirectories` empty and disable Agents user/project skill-source discovery, preventing retired `.agent`/`.agents` copies from reentering through those sources. External runtime/providers may still exist. This is not proof of what any session loads, native enforcement or application-wide OS isolation; inspect the running session's available skills and selected source.
 
@@ -97,6 +98,17 @@ Details: [sequence](config/agent/skills/engineering-docs/references/sequence.md)
 | [diagnosing-bugs](config/agent/skills/diagnosing-bugs/SKILL.md): difficult, flaky, causal or performance investigation | Use diagnosing-bugs: CLI denial leaks rows although the helper test passes. Treat my report as ground truth, not a confirmation replay. Trace/correct the cause; add regressions and run authorized original-path remediation checks. | Discriminating hypotheses/evidence, cause or uncertainty, root correction and consumer/regression proof. Source-only diagnosis is possible; probes/edits require authority. Plausibility is not verified fix. Investigation alone needs no tests/docs; permanent fixes need original-path evidence, not just green helpers. |
 | [writing-for-agents](config/agent/skills/writing-for-agents/SKILL.md): skills and agent-facing instructions | Use writing-for-agents to revise AGENTS.md export routing. Reuse acceptance only when behavior is affected. You may update guidance/pointers; no installation or assessment actors. | Actionable instructions, triggers, owners, boundaries and completion criteria. Authoring does not authorize deployment or behavioral assessment. Separately authorized assessment needs actual source-loaded baseline/candidate consumers and independent judgment; source review is not behavioral proof. |
 | [retro](config/agent/skills/retro/SKILL.md): learn from completed work | Use retro for the completed correction. Read plan/code/review/actual results; separate decisions, lessons, candidate patterns and surprises. Recommend improvements without changing files, settings or memory. | Evidence-linked ranked recommendations, counterevidence/unknowns, existing owners and adoption/revisit conditions. Recommendation-only by default. One success is not a recurring pattern; hindsight grants no policy or requirement authority. Authorize selected changes separately. |
+
+## Upstream changes
+
+Use [upstream-update-review](config/agent/skills/upstream-update-review/SKILL.md) to discover used third-party sources from existing metadata and compare authoritative changes with evidenced local baselines.
+
+- **All managed sources:** “Use upstream-update-review to check all managed upstreams for materially useful changes. Return recommendations only.”
+- **One source:** “Use upstream-update-review to check Impeccable changes useful to omp-config. Review only its affected consumers and necessary compatibility evidence.”
+
+Expect a source-linked recommendation report with baselines and evidence purposes, exact checked revisions, local impact, adopt/investigate/no-action/blocked dispositions, independent significance, owners and a bounded next task. Unknown baselines or unavailable official sources remain incomplete with an evidence-collection action, not invented changes or clean no-action.
+
+No installation, replacement, persistent report, baseline update or automatic adoption occurs, including for “check and update.” Adoption needs a distinct authorized task. External bundles or changed authority go to security-intake with supplied source and evidence, preserving its no-fetch security boundary; useful guidance goes to writing-for-agents for selective adaptation and attribution. A usefulness recommendation is not either owner's verdict or execution approval.
 
 ## Source-only security
 
@@ -230,25 +242,5 @@ Animate vocabulary names and opportunities proposes static seams; improve-animat
 
 ## Retired entrypoints: migration map
 
-These 17 folders/public names are historical migration identifiers, not invocations or links to retained aliases. Installation is non-pruning: old native folders remain discoverable in existing homes until a separately authorized retirement moves them outside **all skill discovery roots**. Inspect and preserve customized contents first; do not blanket-delete directories. This task does not mutate a live home or claim 36-name discovery there.
-
-| Retired folder under `.omp/agent/skills/` | Former public name | Surviving action/reference or removal |
-|---|---|---|
-| `emil-animate` | `emil-animate` | animate `build`: `skill://animate/references/build.md` |
-| `emil-find-animation-opportunities` | `emil-find-animation-opportunities` | animate `opportunities`: `skill://animate/references/opportunities.md` |
-| `emil-review-animations` | `emil-review-animations` | explicit review-animations: `skill://review-animations` |
-| `find-animation-opportunities` | `find-animation-opportunities` | animate `opportunities`: `skill://animate/references/opportunities.md` |
-| `animation-vocabulary` | `animation-vocabulary` | animate `vocabulary`: `skill://animate/references/vocabulary.md` |
-| `taste-skill` | `taste-skill` | design-taste-frontend: `skill://design-taste-frontend` |
-| `taste-skill-v1` | `design-taste-frontend-v1` | Exact v1 procedure removed; current selective `skill://design-taste-frontend`, not v1 compatibility |
-| `gpt-tasteskill` | `gpt-taste` | Taste optional scroll: `skill://design-taste-frontend/references/scroll-storytelling.md` |
-| `redesign-skill` | `redesign-existing-projects` | Impeccable workflow plus `skill://design-taste-frontend/references/redesign.md` |
-| `brutalist-skill` | `industrial-brutalist-ui` | Taste opt-in industrial-print/tactical-crt: `skill://design-taste-frontend/references/style-directions.md` |
-| `minimalist-skill` | `minimalist-ui` | Taste opt-in minimalist-editorial: `skill://design-taste-frontend/references/style-directions.md#minimalist-editorial` |
-| `soft-skill` | `high-end-visual-design` | Taste opt-in high-end-editorial: `skill://design-taste-frontend/references/style-directions.md#high-end-editorial` |
-| `ponytail-review` | `ponytail-review` | ponytail `review`: `skill://ponytail/references/complexity-review.md` |
-| `ponytail-audit` | `ponytail-audit` | ponytail `audit`: `skill://ponytail/references/complexity-review.md` |
-| `ponytail-debt` | `ponytail-debt` | ponytail `debt`: `skill://ponytail/references/debt-ledger.md` |
-| `ponytail-help` | `ponytail-help` | ponytail `help`: inline `skill://ponytail` table |
-| `ponytail-gain` | `ponytail-gain` | Removed uncited static scoreboard; no replacement or measured-saving claim |
+See the canonical [existing-home skill retirement map](README.md#existing-home-skill-retirement) for all 17 historical identifiers, surviving owners and non-pruning cleanup boundaries.
 
