@@ -15,7 +15,7 @@ Use [managed semantic routing](config/agent/AGENTS.md#engineering-workflow), [gl
 | Upstream changes | [Upstream changes](#upstream-changes): upstream-update-review |
 | Inspect a bundle or security boundary | [Source-only security](#source-only-security) |
 | Pause, load a snapshot or continue | [Handoff and continuation](#handoff-and-continuation) |
-| Simplify code, collect shortcuts or request full output | [Coding and output tools](#coding-and-output-tools) |
+| Suggest a commit message | [Coding and output tools](#coding-and-output-tools): commit-message |
 
 ## One practical prompt template
 
@@ -37,7 +37,7 @@ All managed skills use one OMP-native source and deployment folder:
 |---|---|
 | `config/agent/skills/<folder>/SKILL.md` | `~/.omp/agent/skills/<folder>/SKILL.md` |
 
-This guide covers **37 directories/entrypoints and 37 unique public names**, one entrypoint per name. The [explicit inventory](config/files.tsv) has **236 mappings**, including **215 skill files**; the fifteen-skill engineering suite retains **109 assets**. [Provenance](config/SKILL-SOURCES.md) records origin, adaptation, licensing caveats and historical roots.
+This guide covers **38 directories/entrypoints and 38 unique public names**, one entrypoint per name. The [explicit inventory](config/files.tsv) has **238 mappings**, including **217 skill files**; the fifteen-skill engineering suite retains **109 assets**. [Provenance](config/SKILL-SOURCES.md) records origin, adaptation, licensing caveats and historical roots.
 
 OMP's native user/project skill discovery remains available. [Managed discovery settings](config/agent/config.yml) leave `customDirectories` empty and disable Agents user/project skill-source discovery, preventing retired `.agent`/`.agents` copies from reentering through those sources. External runtime/providers may still exist. This is not proof of what any session loads, native enforcement or application-wide OS isolation; inspect the running session's available skills and selected source.
 
@@ -214,6 +214,7 @@ Select the requested stage, not the library. Reuse compatible tokens, protect im
 | [ponytail debt](config/agent/skills/ponytail/references/debt-ledger.md) | Use ponytail debt to collect actual shortcut comments, skipping dependencies/build/VCS. Chat ledger only. | File/line, ceiling, trigger and no-trigger flags; honest counts. Saving requires an authorized exact destination. No tracker, mode change or scoreboard. |
 | **ponytail help** | Use ponytail help to explain lite/full/ultra and review/audit/debt/help. No activation or writes. | Inline reference table only, no runtime shortcut claim. |
 | [write-swift](config/agent/skills/write-swift/SKILL.md): Swift implementation/review/migration | Use write-swift to review the concurrency diagnostic against sources/toolchain/targets. Propose compatible root correction; no unchecked Sendable suppression or code/build-setting edits yet. | Isolation/ownership/task/value-type guidance or authorized implementation. Needs Swift project/compiler-language/target context; compilation/profiling needs real tools. Source baseline is not installed availability. Not mobile-web/PWA or Expo motion, nor substitute UI/platform testing. Include a specific task. |
+| [commit-message](config/agent/skills/commit-message/SKILL.md): suggest concise text for actual Git changes | Use commit-message to suggest a message for the staged changes. Return text only; do not stage or commit. | Read-only advice grounded in actual diffs and recent history. Staged changes take precedence; no staged change means inspect relevant unstaged/untracked content. No changes means no fabricated message. |
 | [full-output-enforcement](config/agent/skills/output-skill/SKILL.md): exhaustive scoped output | Use full-output-enforcement for the agreed patch. Read current files; return every complete final file in chat without skeletons/omissions/placeholders. No writes or extra scope. | Full requested deliverables; interruption uses clean section/file/function break and completed-count/next-section marker. Paused is incomplete. Missing inputs stay blockers, not fake code. Cannot override scope, permissions, Plan Mode/readiness or authorize tools/tests. Full code is not verified code. |
 
 ## Short choose-this-not-that workflows

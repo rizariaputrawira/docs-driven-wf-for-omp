@@ -2,7 +2,7 @@
 
 ## Canonical OMP-native payload
 
-All managed skills have one source folder, `config/agent/skills/`, and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout. The balanced payload contains **37 skill directories/entrypoints and unique public names, 215 skill files and 236 explicit mappings**. The fifteen-skill engineering suite remains **109 regular assets**, including fifteen entrypoints, fifteen SOURCES files, seven engineering-docs templates and 22 full license notices. No discovery provider/profile or installer pruning was added.
+All managed skills have one source folder, `config/agent/skills/`, and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout. The balanced payload contains **38 skill directories/entrypoints and unique public names, 217 skill files and 238 explicit mappings**. The fifteen-skill engineering suite remains **109 regular assets**, including fifteen entrypoints, fifteen SOURCES files, seven engineering-docs templates and 22 full license notices. No discovery provider/profile or installer pruning was added.
 
 Native user/project skill discovery remains available. Managed `customDirectories` is empty and Agents user/project skill-source discovery is disabled, so retired `.agent`/`.agents` copies cannot reenter through those configured sources. External runtime/providers may still exist. These source settings do not prove native resolution, application-wide isolation or OS enforcement. Model, approval, agent, plugin and MCP settings remain unchanged.
 
@@ -61,6 +61,7 @@ The later complexity-only cleanup consolidates repeated image/detail guidance an
 The local Impeccable routing modification additionally links the independently authored [OpenDesign reference](agent/skills/impeccable/reference/open-design.md), with a conditional pointer in managed AGENTS.md. It defines explicit external-artifact availability, project selection, handoff, run inspection and proposal boundaries without adding a public skill, role or routing engine. Immutable official OpenDesign interface/source links and inspected-version distinctions are evidence only; no upstream executable or prose payload is redistributed. Existing Impeccable attribution, Apache-2.0 notice and package pin remain unchanged.
 
 The [upstream-update-review procedure](agent/skills/upstream-update-review/SKILL.md) is independently authored original guidance. It consumes the existing inventory/provenance and authoritative upstream evidence without copying upstream payload or creating a source registry. Its recommendations do not authorize adoption; existing security, authoring and integration owners retain their boundaries. No separate SOURCES file or notice is needed for this original procedure.
+The `commit-message` skill is original, locally authored guidance based on the task requirements and supplied current repository-style observations. Its `SOURCES.md` records conceptual research and rejected mutation behavior; no upstream prose, templates, or code were copied or adapted.
 
 ## Retired entrypoints: migration map
 

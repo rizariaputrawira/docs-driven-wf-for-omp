@@ -129,7 +129,7 @@ You do not need to run every skill. Choose the job that matches your need. These
 - **Audit an existing UI:** Use `impeccable` to assess accessibility, keyboard use, narrow screens, and loading/empty/error states. Preserve the current brand and behavior; report findings only. **First:** scoped polish recommendations.
 - **Load a handoff only:** Use `resume-from-handoff` to summarize the selected `.handoff` snapshot; do not inspect cited files, validate claims, run commands, edit, or continue. **First:** a snapshot summary or notice that none is available.
 
-For every bundled choice, see [the full skill usage guide](SKILL-USAGE.md): **37 public names**, when to use each,
+For every bundled choice, see [the full skill usage guide](SKILL-USAGE.md): **38 public names**, when to use each,
 concrete prompts, expected outputs, permission/tool limits, and all **eight engineering-docs actions**.
 Choose another skill only when its goal matches your task; these examples are alternatives, not a required sequence.
 
@@ -147,7 +147,7 @@ Choose another skill only when its goal matches your task; these examples are al
 
 - `config/agent/` maps to `~/.omp/agent/`; `config/plugins/` maps to `~/.omp/plugins/`.
 - Managed skills have one source at `config/agent/skills/` and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout.
-- Current counts: **236 mappings**, including **215 skill files** and **37 entrypoints with 37 unique public names**. The TSV is source metadata and is not installed. Existing homes retain obsolete native skills until separately authorized retirement; fresh-install catalog counts are not migration claims.
+- Current counts: **238 mappings**, including **217 skill files** and **38 entrypoints with 38 unique public names**. The TSV is source metadata and is not installed. Existing homes retain obsolete native skills until separately authorized retirement; fresh-install catalog counts are not migration claims.
 
 Managed skills use OMP's native user-skill convention. Native user/project skill discovery remains available, while the [managed discovery settings](config/agent/config.yml) leave `customDirectories` empty and disable Agents user/project skill-source discovery. Retired `.agent`/`.agents` copies cannot reenter through those configured sources. Other runtime providers may exist; these settings do not prove application-wide isolation.
 

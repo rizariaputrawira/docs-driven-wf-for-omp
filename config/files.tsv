@@ -41,6 +41,8 @@ config/agent/skills/code-review/SKILL.md	.omp/agent/skills/code-review/SKILL.md
 config/agent/skills/code-review/SOURCES.md	.omp/agent/skills/code-review/SOURCES.md
 config/agent/skills/code-review/references/fix-review.md	.omp/agent/skills/code-review/references/fix-review.md
 config/agent/skills/code-review/references/review-brief.md	.omp/agent/skills/code-review/references/review-brief.md
+config/agent/skills/commit-message/SKILL.md	.omp/agent/skills/commit-message/SKILL.md
+config/agent/skills/commit-message/SOURCES.md	.omp/agent/skills/commit-message/SOURCES.md
 config/agent/skills/design-taste-frontend/SKILL.md	.omp/agent/skills/design-taste-frontend/SKILL.md
 config/agent/skills/design-taste-frontend/references/landing-and-portfolio.md	.omp/agent/skills/design-taste-frontend/references/landing-and-portfolio.md
 config/agent/skills/design-taste-frontend/references/redesign.md	.omp/agent/skills/design-taste-frontend/references/redesign.md
