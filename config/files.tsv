@@ -236,3 +236,9 @@ config/agent/skills/writing-for-agents/references/omp-skill-contract.md	.omp/age
 config/plugins/bun.lock	.omp/plugins/bun.lock
 config/plugins/omp-plugins.lock.json	.omp/plugins/omp-plugins.lock.json
 config/plugins/package.json	.omp/plugins/package.json
+config/agent/skills/github-triage/SKILL.md	.omp/agent/skills/github-triage/SKILL.md
+config/agent/skills/github-triage/SOURCES.md	.omp/agent/skills/github-triage/SOURCES.md
+config/agent/skills/work-with-pr/SKILL.md	.omp/agent/skills/work-with-pr/SKILL.md
+config/agent/skills/work-with-pr/SOURCES.md	.omp/agent/skills/work-with-pr/SOURCES.md
+config/agent/skills/unpublished-changes/SKILL.md	.omp/agent/skills/unpublished-changes/SKILL.md
+config/agent/skills/unpublished-changes/SOURCES.md	.omp/agent/skills/unpublished-changes/SOURCES.md

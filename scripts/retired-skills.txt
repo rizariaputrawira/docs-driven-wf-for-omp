@@ -1,0 +1,17 @@
+emil-animate
+emil-find-animation-opportunities
+emil-review-animations
+find-animation-opportunities
+animation-vocabulary
+taste-skill
+taste-skill-v1
+gpt-tasteskill
+redesign-skill
+brutalist-skill
+minimalist-skill
+soft-skill
+ponytail-review
+ponytail-audit
+ponytail-debt
+ponytail-help
+ponytail-gain

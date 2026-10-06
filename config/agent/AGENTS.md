@@ -18,6 +18,9 @@ When the guard applies, material authoritative-context dependencies use `enginee
 | Requested/approved test-first or red-green-refactor | `skill://tdd`. Ordinary regression coverage alone does not force TDD. |
 | Difficult, flaky or performance diagnosis | `skill://diagnosing-bugs` |
 | Ordinary patch, WIP, spec/correctness or correction review | `skill://code-review` |
+| Issue/PR queue triage | `skill://github-triage` |
+| Bounded issue/change implementation and PR preparation | `skill://work-with-pr` |
+| Local/published/released Git change status | `skill://unpublished-changes` |
 | Check whether managed upstream/third-party sources have useful newer changes (all or named source) | `skill://upstream-update-review`, read-only recommendations; adoption is separate |
 | External bundle adoption/update | `skill://security-intake` |
 | Focused security diff/base/head review | `skill://security-review` |
@@ -28,6 +31,8 @@ When the guard applies, material authoritative-context dependencies use `enginee
 | Requested retrospective | `skill://retro` |
 
 Descriptions are triggers, not loaded procedures. Use actual `read` and the installed task/tool schemas. Independent security discovery/refutation needs fresh source-inspecting read-only reviewers and effective dispatched-definition provenance, not advice-only advisor assertions or a same-named substitute. Instructions create no permissions, model binding or sandbox. For explicitly requested upgrade proof, read `skill://engineering-docs/references/omp-compatibility.md`; absent native convenience support permits a known canonical file read only for an explicitly requested enabled suite, never to defeat disablement. No dispatcher/plugin/autoload hook is added.
+
+Native config prompts matching force-push/reset/clean forms, denies matching recursive force-rm forms, and independently prompts every eval call. Do not route shell commands through eval to evade bash-pattern policy; these rules are approval, not containment.
 
 ## Permission and model ownership
 

@@ -5,6 +5,8 @@ security workflows, and optional documentation-driven delivery.
 
 > **Safety:** This configuration deliberately sets `tools.approvalMode: yolo`, an unrestricted approval mode. Review this setting and its consequences before installing.
 
+The native yolo config keeps ordinary commands yolo, prompts for selected force-push/reset/clean bash forms, and denies matching recursive force-rm forms. It prompts every `eval` call because eval can reach an independent shell surface. These policies are textual approval rules, not containment. The doctor reports managed-file health separately from advisory legacy/unmanaged observations and never prunes them. See [capability decisions](docs/capabilities.md) for rationale and read-only Git triage/PR/status workflows.
+
 This repository is a portable, inventory-managed snapshot of user-level configuration and guidance for an existing OMP installation. It is not OMP, an installer for OMP, a plugin marketplace installer, or a project template. It contains no OMP application or credentials and starts no external services.
 
 ## Quick start
@@ -122,7 +124,7 @@ Libraries mentioned in skill coding recipes are target-project dependencies, not
 
 ## Configuration doctor
 
-Check is the default read-only mode and compares every inventory entry:
+Check is the default read-only mode and compares every managed inventory entry, then reports bounded immediate legacy/unmanaged observations separately. Advisory observations never make a healthy inventory fail or cause cleanup. External dependencies remain unverified: the doctor does not start or check services.
 
 ```sh
 sh scripts/doctor.sh

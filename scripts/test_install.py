@@ -40,7 +40,7 @@ def make_fixture(directory: Path) -> Path:
     fixture = directory / "source fixture"
     (fixture / "config").mkdir(parents=True)
     shutil.copy2(INVENTORY, fixture / "config/files.tsv")
-    for source in ("install.sh", "scripts/doctor.sh", "scripts/validate-inventory.sh", *(source for source, _ in mappings())):
+    for source in ("install.sh", "scripts/doctor.sh", "scripts/validate-inventory.sh", "scripts/retired-skills.txt", *(source for source, _ in mappings())):
         src = ROOT / source
         dst = fixture / source
         dst.parent.mkdir(parents=True, exist_ok=True)
@@ -93,6 +93,16 @@ def main() -> None:
         default_home.mkdir()
         run("sh", str(INSTALL), "--source", str(source), env={**os.environ, "HOME": str(default_home)})
         assert_install(default_home, rows)
+        empty_legacy = default_home / ".agents/skills"
+        empty_legacy.mkdir(parents=True)
+        external = tmp / "external-home-skills"
+        (external / "skills" / "outside-helper").mkdir(parents=True)
+        (default_home / ".agent").symlink_to(external, target_is_directory=True)
+        empty_observation = doctor(default_home)
+        assert "LEGACY skill root present:" in empty_observation.stdout
+        assert "not traversed:" in empty_observation.stdout
+        assert "outside-helper" not in empty_observation.stdout
+        assert "managed summary: healthy" in empty_observation.stdout
         run("sh", str(INSTALL), "--source", str(source), "--home", str(home))
         assert_install(home, rows)
 
@@ -109,6 +119,34 @@ def main() -> None:
         state = [(p.stat().st_mtime_ns, p.read_bytes()) for p in target_paths]
         doctor(home, "--check")
         assert state == [(p.stat().st_mtime_ns, p.read_bytes()) for p in target_paths]
+
+        # Legacy/unmanaged observations are advisory, bounded to immediate entries, and never affect health.
+        retired = home / ".omp/agent/skills/ponytail-review"
+        retired.mkdir(parents=True, exist_ok=True)
+        legacy_root = home / ".agent/skills/old-helper"
+        legacy_root.mkdir(parents=True, exist_ok=True)
+        unmanaged = home / ".omp/agent/skills/private-helper"
+        unmanaged.mkdir(parents=True, exist_ok=True)
+        plural_legacy_root = home / ".agents/skills/old-project-helper"
+        plural_legacy_root.mkdir(parents=True, exist_ok=True)
+        helper = home / ".omp/agent/old-routing-helper.sh"
+        helper.write_bytes(b"custom legacy helper\n")
+        advisory = doctor(home, "--check")
+        assert "managed summary: healthy" in advisory.stdout
+        assert "LEGACY retired skill:" in advisory.stdout and "ponytail-review" in advisory.stdout
+        assert "LEGACY skill root entry:" in advisory.stdout and "old-helper" in advisory.stdout and "old-project-helper" in advisory.stdout
+        for managed_name in ("agents", "extensions", "commands"):
+            assert f"UNMANAGED native entry: {home / '.omp/agent' / managed_name}" not in advisory.stdout
+        assert "UNMANAGED native skill:" in advisory.stdout and "private-helper" in advisory.stdout
+        assert f"UNMANAGED native entry: {helper}" in advisory.stdout
+        assert retired.is_dir() and legacy_root.is_dir() and unmanaged.is_dir()
+        run("sh", str(INSTALL), "--source", str(source), "--home", str(home))
+        assert retired.is_dir() and legacy_root.is_dir() and plural_legacy_root.is_dir() and unmanaged.is_dir()
+        repaired = doctor(home, "--fix")
+        assert "LEGACY retired skill:" in repaired.stdout and "ponytail-review" in repaired.stdout
+        assert "LEGACY skill root entry:" in repaired.stdout and "old-project-helper" in repaired.stdout
+        assert retired.is_dir() and legacy_root.is_dir() and plural_legacy_root.is_dir() and unmanaged.is_dir()
+        assert helper.read_bytes() == b"custom legacy helper\n"
         cmp_bin = tmp / "cmp-bin"
         cmp_bin.mkdir()
         cmp_command = cmp_bin / "cmp"
@@ -118,11 +156,13 @@ def main() -> None:
         nested_agent = home / ".omp/agent/agents/task.md"
         nested_skill = home / ".omp/agent/skills/tdd/SKILL.md"
         nested_agent.unlink()
-        assert "missing:" in doctor(home, expected=1).stdout
+        missing_result = doctor(home, expected=1)
+        assert "missing:" in missing_result.stdout and "managed summary: errors found" in missing_result.stdout
         doctor(home, "--fix")
         assert nested_agent.read_bytes() == (ROOT / "config/agent/agents/task.md").read_bytes()
         nested_skill.write_bytes(b"drift\n")
-        assert "drift:" in doctor(home, expected=1).stdout
+        drift_result = doctor(home, expected=1)
+        assert "drift:" in drift_result.stdout and "managed summary: errors found" in drift_result.stdout
         doctor(home, "--fix")
         assert nested_skill.read_bytes() == (ROOT / "config/agent/skills/tdd/SKILL.md").read_bytes()
 

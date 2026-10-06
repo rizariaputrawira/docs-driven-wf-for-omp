@@ -99,8 +99,76 @@ dev:
   autoqa: false
 tools:
   approvalMode: yolo
+  approval:
+    eval: prompt
   xdev: false
   intentTracing: false
+bash:
+  patterns:
+    - match: "git *push *--force*"
+      approval: prompt
+    - match: "* git *push *--force*"
+      approval: prompt
+    - match: "git *push *-f*"
+      approval: prompt
+    - match: "* git *push *-f*"
+      approval: prompt
+    - match: "git *reset *--hard*"
+      approval: prompt
+    - match: "* git *reset *--hard*"
+      approval: prompt
+    - match: "git *clean *-*f*d*"
+      approval: prompt
+    - match: "* git *clean *-*f*d*"
+      approval: prompt
+    - match: "git *clean *-*d*f*"
+      approval: prompt
+    - match: "* git *clean *-*d*f*"
+      approval: prompt
+    - match: "git *clean *--force*"
+      approval: prompt
+    - match: "* git *clean *--force*"
+      approval: prompt
+    - match: "rm *-rf*"
+      approval: deny
+    - match: "* rm *-rf*"
+      approval: deny
+    - match: "rm *-fr*"
+      approval: deny
+    - match: "* rm *-fr*"
+      approval: deny
+    - match: "rm *-Rf*"
+      approval: deny
+    - match: "* rm *-Rf*"
+      approval: deny
+    - match: "rm *-fR*"
+      approval: deny
+    - match: "* rm *-fR*"
+      approval: deny
+    - match: "rm *-r *-f*"
+      approval: deny
+    - match: "* rm *-r *-f*"
+      approval: deny
+    - match: "rm *-f *-r*"
+      approval: deny
+    - match: "* rm *-f *-r*"
+      approval: deny
+    - match: "rm *-R *-f*"
+      approval: deny
+    - match: "* rm *-R *-f*"
+      approval: deny
+    - match: "rm *-f *-R*"
+      approval: deny
+    - match: "* rm *-f *-R*"
+      approval: deny
+    - match: "rm *--recursive*--force*"
+      approval: deny
+    - match: "* rm *--recursive*--force*"
+      approval: deny
+    - match: "rm *--force*--recursive*"
+      approval: deny
+    - match: "* rm *--force*--recursive*"
+      approval: deny
 terminal:
   showProgress: false
 power:
