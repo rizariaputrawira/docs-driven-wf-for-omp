@@ -6,10 +6,10 @@ theme:
   light: onyx
 setupVersion: 2
 modelRoles:
-  default: openai-codex/gpt-6-luna:medium
+  default: openai-codex/gpt-6.1-sol:medium
   smol: openai-codex/gpt-6-luna:medium
   routine: openai-codex/gpt-6-luna:medium
-  plan: openai-codex/gpt-6-luna:medium
+  plan: openai-codex/gpt-6.1-sol:medium
   task: openai-codex/gpt-6-luna:medium
   advisor: openai-codex/gpt-6.1-sol:high
   slow: openai-codex/gpt-6.1-sol:medium

@@ -20,6 +20,12 @@ function frontmatter(text, path) {
   return parseYaml(match[1], path);
 }
 function validate(config, definitions) {
+  for (const role of ["default", "plan"]) {
+    assert.equal(config.modelRoles?.[role], "openai-codex/gpt-6.1-sol:medium", `${configPath}: ${role} selector`);
+  }
+  assert.equal(config.defaultThinkingLevel, "medium", `${configPath}: default thinking level`);
+  assert.equal(config.task?.maxConcurrency, 3, `${configPath}: max concurrency`);
+  assert.equal(config.task?.maxRecursionDepth, 1, `${configPath}: max recursion depth`);
   const names = new Set();
   for (const [path, text] of definitions) {
     const data = frontmatter(text, path);
@@ -59,4 +65,10 @@ for (const name of ["slow", "advisor"]) {
   }, /thinking level/);
   rejects(`${name} concrete selector`, (cfg) => { cfg.modelRoles[name] = "openai-codex/gpt-6-luna:medium"; }, new RegExp(`${name} selector`));
 }
-console.log("Agent configuration contract: seven definitions, native overrides and selectors agree; 10 negative cases passed. Static configuration is not dispatch proof.");
+rejects("Luna default", (cfg) => { cfg.modelRoles.default = "openai-codex/gpt-6-luna:medium"; }, /default selector/);
+rejects("high default", (cfg) => { cfg.modelRoles.default = "openai-codex/gpt-6.1-sol:high"; }, /default selector/);
+rejects("Luna plan", (cfg) => { cfg.modelRoles.plan = "openai-codex/gpt-6-luna:medium"; }, /plan selector/);
+rejects("high default thinking", (cfg) => { cfg.defaultThinkingLevel = "high"; }, /default thinking level/);
+rejects("nested delegation", (cfg) => { cfg.task.maxRecursionDepth = 2; }, /max recursion depth/);
+rejects("excess concurrency", (cfg) => { cfg.task.maxConcurrency = 4; }, /max concurrency/);
+console.log("Agent configuration contract: Sol-medium main/plan, bounded concurrency/depth and seven worker definitions/overrides/selectors agree; 16 negative cases passed. Static configuration is not dispatch proof.");

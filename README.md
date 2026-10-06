@@ -60,8 +60,16 @@ See [canonical permission distinctions](config/agent/AGENTS.md#permission-and-mo
 
 Native OMP selects invocation model, then settings override, then agent frontmatter, then live parent/default. `@default` selects the live parent, not a fixed role. Alias resolution, unknown agents, invalid explicit selectors and credential fallback remain native behavior. Authentication fallback limits unconditional identity guarantees; static selectors are not dispatch evidence. See [version-matched discovery and precedence](https://github.com/can1357/oh-my-pi/blob/v18.6.1/docs/task-agent-discovery.md) and [native resolver](https://github.com/can1357/oh-my-pi/blob/v18.6.1/packages/coding-agent/src/config/model-resolver.ts).
 
+Fresh unforced main and native plan roles request `openai-codex/gpt-6.1-sol:medium`, with medium default thinking. Sol owns orchestration, consequential decisions, integration and final acceptance; substantial bounded execution normally goes to Luna-medium. Explicit CLI selections remain authoritative, and resuming a session restores its recorded model/thinking before the configured fresh-session default. An invocation selecting `@default` under a Sol parent therefore requests Sol, not Luna.
+
+Use scout for bounded discovery, routine/task for clear implementation, and the existing review agents for source review. Select slow only for evidence-backed difficult reasoning or consequential uncertainty, not file count or missing access. Advisor remains optional evidence-only Sol-high advice, not automatic investigation or pairing. Max concurrency is three, recursion depth one, and one writer owns a shared checkout unless isolation is established. Native approval, Plan Mode, security role contracts and the unchanged exact-identity tool hook retain their boundaries.
+
+The cost goal is to reserve Sol context for reasoning/orchestration/integration while Luna collects and executes mechanical context. Delegation can increase total tokens; total usage, identity-specific usage, latency, quality and verification confidence are distinct. No token or dollar savings are implied without measurements.
+
 | Agent | Native override | Configured model/thinking |
 |---|---|---|
+| Fresh main | `modelRoles.default` | `openai-codex/gpt-6.1-sol:medium` |
+| Native plan | `modelRoles.plan` | `openai-codex/gpt-6.1-sol:medium` |
 | scout | `@smol` | `openai-codex/gpt-6-luna:medium` |
 | routine | `@routine` | `openai-codex/gpt-6-luna:medium` |
 | task | `@task` | `openai-codex/gpt-6-luna:medium` |
@@ -72,7 +80,7 @@ Native OMP selects invocation model, then settings override, then agent frontmat
 
 ### Two paths, not a universal pipeline
 
-**Ordinary native work:** direct Luna or a bounded existing worker, proportionate verification, done. No engineering-docs setup, delivery skill, baseline, manifest, extra approval or new document is required unless the actual boundary needs it.
+**Ordinary native work:** Sol main handles trivial work directly or uses bounded existing workers, with Luna-medium the normal substantial executor, then proportionate verification and done. No engineering-docs setup, delivery skill, baseline, manifest, extra approval or new document is required unless the actual boundary needs it.
 
 **Documentation-dependent delivery:** available/enabled matching engineering-docs supplies material authoritative context; project-delivery handles new applications and explicit substantial/end-to-end delivery with whole-boundary readiness, native approval and affected-owner reconciliation. Context retrieval alone is not full delivery. Consequential plan review can apply independently without creating a baseline.
 
@@ -220,9 +228,22 @@ Fresh scoped checks for this guidance change:
 
 Anti-slop contract **PASS** for the authored guidance: no invented product content and no artifact-to-implementation authorization shortcut. No visible UI changed, so rendered verification is not applicable. No real-home deployment, project creation, generation, billing, package installation, shared-daemon start/stop, installed OMP MCP startup, native approval enforcement or generated visual-quality check was exercised. Historical receipts below remain historical.
 
+### Sol-led migration verification (OMP 18.6.1)
+
+The migration baseline was tracked main `aaa6190f7fc18f1e74b80dbe70352598cdfa0ef4`, also observed at remote main before editing. Its config, PERSONALITY and AGENTS were preserved before mutation. Only the default/plan selectors, bounded policy, ordinary-work opening, this README and semantic config contract changed; managed worker definitions and the boundary hook were not remapped.
+
+- `bun scripts/test_agent_config.mjs` passed the seven worker contracts plus Sol-medium main/plan, medium default thinking, concurrency three and recursion depth one, including all **16 negative cases**.
+- The unchanged `scripts/test_model_routing.mjs` passed **seven named groups** under both Bun and Node. This proves the handler contract, not OS containment or authenticated dispatch.
+- `python3 scripts/test_install.py` passed the production POSIX integration scenarios for **236 inventory entries**. A separate actual-payload install and doctor check both exited zero in a disposable home. Neither PowerShell runtime was available.
+- An isolated installed-payload OMP 18.6.1 RPC launch exited one before `ready`, with `No models available. Use /login or set an API key environment variable.` An ordinary interactive PTY launch showed `no-model` and the same warning, then its own deadline terminated it. Neither attempt proves resolved Sol identity or successful generation.
+
+The seven-worker identity/provenance probe, invocation/CLI/resume compatibility checks, native Plan Mode startup/override/child checks and all five paired architecture cases remain blocked by unavailable models/authorized authentication in isolation. No live profile, credential copy, login, model replacement or external service was used to bypass that prerequisite. Usage, context peaks, quality comparison and dollar savings are unavailable, not zero. Approval and tool-boundary settings were preserved; their new runtime exercise is unverified.
+
+Receipts are under `/tmp/omp-sol-led-h9rafar_/`: `baseline/`, `install.log`, `doctor.log`, `target-startup/rpc.jsonl`, `target-startup/stderr.log`, `target-startup/result.json`, `verification.json` and `benchmark.json`. These are local ephemeral artifacts, not shipped dependencies. Historical successful dispatch receipts below do not establish this migration's fresh-main behavior.
+
 ### Native ownership verification (OMP 18.6.1)
 
-The ownership change was exercised in disposable homes and native project fixtures, without installing to a real home:
+The following historical ownership receipts predate the Sol-main migration. They exercised native worker ownership in disposable homes and project fixtures, not the new fresh-main default, without installing to a real home:
 
 - Static configuration contract passed for seven definitions and ten in-memory negative cases. The retained hook contract passed seven named groups under both Bun and Node; a native-shaped regression rejects the old slow/advisor `@task` replacement.
 - POSIX installer/doctor integration passed all 233 mappings. Real-payload dry-run wrote no payload; install/check matched all destination bytes; an unrelated sentinel survived and identical reinstall preserved files/mtimes without unnecessary backups. Source validation found seven agents, 36 public skills, 233 regular payload assets/mappings, 163 local links and 96 live skill references with no broken target in the inspected owners.
