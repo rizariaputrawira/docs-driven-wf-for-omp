@@ -52,7 +52,7 @@ Load only applicable complementary guidance: Emil for component polish, meaningf
 
 Before implementation, reconcile recommendations with the brief, existing design system, platform, accessibility needs, and technical constraints. Resolve compatible guidance without asking. If a materially consequential conflict remains unresolved, ask one concise question before committing to that direction.
 
-For OpenDesign generation or refinement, carry the confirmed brief and relevant project evidence into the workflow, and use the appropriate existing project/artifact and required OpenDesign handoff. Do not replace the brief with a skill's aesthetic defaults. For direct workspace edits, preserve incumbent behavior and inspect the rendered surface after changes.
+Only an explicit OpenDesign request or explicit requirement for external generated/refined design artifacts enters `skill://impeccable/reference/open-design.md`; ordinary UI work does not. Follow that canonical availability, project, handoff and artifact-review contract without replacing the brief with aesthetic defaults. For direct workspace edits, preserve incumbent behavior and inspect the rendered surface after changes.
 
 Verify the actual resulting UI at relevant narrow and wide states, including the changed interaction and accessibility or reduced-motion implications where applicable. Report only observed verification, and distinguish missing runtime access from completed verification.
 

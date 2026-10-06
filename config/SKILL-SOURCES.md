@@ -2,7 +2,7 @@
 
 ## Canonical OMP-native payload
 
-All managed skills have one source folder, `config/agent/skills/`, and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout. The balanced payload contains **36 skill directories/entrypoints and unique public names, 213 skill files and 234 explicit mappings**. The fifteen-skill engineering suite remains **109 regular assets**, including fifteen entrypoints, fifteen SOURCES files, seven engineering-docs templates and 22 full license notices. No discovery provider/profile or installer pruning was added.
+All managed skills have one source folder, `config/agent/skills/`, and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout. The balanced payload contains **36 skill directories/entrypoints and unique public names, 214 skill files and 235 explicit mappings**. The fifteen-skill engineering suite remains **109 regular assets**, including fifteen entrypoints, fifteen SOURCES files, seven engineering-docs templates and 22 full license notices. No discovery provider/profile or installer pruning was added.
 
 Native user/project skill discovery remains available. Managed `customDirectories` is empty and Agents user/project skill-source discovery is disabled, so retired `.agent`/`.agents` copies cannot reenter through those configured sources. External runtime/providers may still exist. These source settings do not prove native resolution, application-wide isolation or OS enforcement. Model, approval, agent, plugin and MCP settings remain unchanged.
 
@@ -55,6 +55,8 @@ Impeccable's `skill-v4.5.0` tag resolves to commit `508d7e8955de3b3caf2d8676e852
 Ponytail snapshots identify [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) and declare MIT. The complete upstream notice is now deployed as `ponytail/LICENSE.ponytail`, including Copyright (c) 2026 DietrichGebert. License-only evidence was read on 2026-10-05 at immutable revision `dbdfc8de29fb91609ed2df2ae378782a956d8e86`: [LICENSE](https://raw.githubusercontent.com/DietrichGebert/ponytail/dbdfc8de29fb91609ed2df2ae378782a956d8e86/LICENSE). This pin identifies inspected license evidence, **not** the revision of the older unversioned local skill bodies. Local adaptations consolidate review/audit/debt/help, correct scope reduction and authority/persistence/intelligence/check rules; no upstream plugin/benchmark is adopted.
 
 Existing-file changes to Impeccable, images/brand, Stitch, break-ui and prototype are local authority/brief corrections; no legacy content is moved into new assets. A later complexity-only correction removes break-ui's duplicated Rule 6 while retaining the existing general trust rule and all other procedures. Stitch DESIGN.md is an independently authored, explicitly labeled example, not canonical project truth. Shared motion guidance is lazy-loaded from animate rather than stacked automatically.
+
+The local Impeccable routing modification additionally links the independently authored [OpenDesign reference](agent/skills/impeccable/reference/open-design.md), with a conditional pointer in managed AGENTS.md. It defines explicit external-artifact availability, project selection, handoff, run inspection and proposal boundaries without adding a public skill, role or routing engine. Immutable official OpenDesign interface/source links and inspected-version distinctions are evidence only; no upstream executable or prose payload is redistributed. Existing Impeccable attribution, Apache-2.0 notice and package pin remain unchanged.
 
 ## Retired entrypoints: migration map
 

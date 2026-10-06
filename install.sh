@@ -48,8 +48,6 @@ case "$SOURCE" in
 esac
 [ -d "$SOURCE" ] && [ ! -L "$SOURCE" ] || { echo 'source must be a real directory' >&2; exit 2; }
 SOURCE=$(CDPATH= cd -P -- "$SOURCE" && pwd) || { echo 'unusable source directory' >&2; exit 2; }
-INVENTORY=$SOURCE/config/files.tsv
-[ -f "$INVENTORY" ] && [ ! -L "$INVENTORY" ] && [ -r "$INVENTORY" ] || { echo "unusable inventory: $INVENTORY" >&2; exit 2; }
 
 HOME_DIR=${HOME_OVERRIDE:-${HOME:-}}
 [ -n "$HOME_DIR" ] && [ -d "$HOME_DIR" ] && [ ! -L "$HOME_DIR" ] || { echo 'home must be an existing real directory' >&2; exit 2; }

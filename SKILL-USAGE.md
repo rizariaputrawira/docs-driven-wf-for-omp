@@ -36,7 +36,7 @@ All managed skills use one OMP-native source and deployment folder:
 |---|---|
 | `config/agent/skills/<folder>/SKILL.md` | `~/.omp/agent/skills/<folder>/SKILL.md` |
 
-This guide covers **36 directories/entrypoints and 36 unique public names**, one entrypoint per name. The [explicit inventory](config/files.tsv) has **234 mappings**, including **213 skill files**; the fifteen-skill engineering suite retains **109 assets**. [Provenance](config/SKILL-SOURCES.md) records origin, adaptation, licensing caveats and historical roots.
+This guide covers **36 directories/entrypoints and 36 unique public names**, one entrypoint per name. The [explicit inventory](config/files.tsv) has **235 mappings**, including **214 skill files**; the fifteen-skill engineering suite retains **109 assets**. [Provenance](config/SKILL-SOURCES.md) records origin, adaptation, licensing caveats and historical roots.
 
 OMP's native user/project skill discovery remains available. [Managed discovery settings](config/agent/config.yml) leave `customDirectories` empty and disable Agents user/project skill-source discovery, preventing retired `.agent`/`.agents` copies from reentering through those sources. External runtime/providers may still exist. This is not proof of what any session loads, native enforcement or application-wide OS isolation; inspect the running session's available skills and selected source.
 
@@ -134,6 +134,14 @@ Supply the actual brief, product/brand, platform, accessibility needs and incumb
 | [impeccable](config/agent/skills/impeccable/SKILL.md): primary UI plan/evaluate/build/refine | Use impeccable to shape settings before coding. Read product/design context; cover loading/empty/error, keyboard and narrow screens. Return a brief for confirmation. | Shape proposes a brief and stops without code/direction-contract writes. Audit reports technical defects, not fixes. Critique reports UX/design and normally archives under `.impeccable/critique/`, so is not strictly no-write. Authorized polish/build writes code/artifacts. Bare invocation recommends; engine prerequisites below apply. |
 | [emil-design-eng](config/agent/skills/emil-design-eng/SKILL.md): component interaction polish | Use emil-design-eng to review dropdown focus, press feedback, interruption and reduced motion. Return Before/After/Why; no edits yet. | Concrete recommendations; implementation if separately requested/authorized. Not inherently read-only or a primary-workflow replacement. Preserve personality/conventions and justify motion purpose/frequency. |
 | [design-taste-frontend](config/agent/skills/design-taste-frontend/SKILL.md): selective landing/portfolio/redesign complement | Use impeccable with design-taste-frontend to refine this portfolio's heading spacing. Preserve our font, brand, facts and URLs; no animation, images or dependency changes. | Load only relevant composition/redesign guidance. Not dashboard or multi-step product prescriptions. Optional styles and scroll techniques require matching intent; writes require current authority. |
+
+OpenDesign is conditional, not an ordinary UI prerequisite. Follow the [canonical external-artifact contract](config/agent/skills/impeccable/reference/open-design.md):
+
+- “Fix the spacing and mobile layout of this existing settings page.” Use direct Impeccable refinement and actual surface verification, without OpenDesign or a documentation baseline.
+- “Use OpenDesign to explore a redesign of this dashboard from the existing brief and design system.” Check availability, resolve the exact project, hand off evidenced context, inspect and reconcile the artifact, then return a reviewed proposal and stop. Exploration does not authorize implementation.
+- “Use OpenDesign for the UI composition required by our reviewed documentation baseline.” Consume the existing canonical requirements/design context, revision and approval evidence; return reviewed scoped composition/provenance to established baseline/readiness/implementation-plan owners. Do not create a competing document suite.
+
+Missing prerequisites are reported exactly, without implicit setup. Missing or ambiguous projects require selection; no implicit creation or first/latest fallback. Generated pricing, metrics or other unsupported facts are rejected or omitted, not promoted to requirements. Artifact acceptance grants no code authorization. Impeccable's named-element live-browser `generate` remains a separate command.
 
 ### Impeccable setup and engine prerequisites
 

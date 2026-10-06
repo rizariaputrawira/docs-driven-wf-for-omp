@@ -106,7 +106,7 @@ Choose another skill only when its goal matches your task; these examples are al
 
 - `config/agent/` maps to `~/.omp/agent/`; `config/plugins/` maps to `~/.omp/plugins/`.
 - Managed skills have one source at `config/agent/skills/` and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout.
-- Current counts: **234 mappings**, including **213 skill files** and **36 entrypoints with 36 unique public names**. The TSV is source metadata and is not installed. Existing homes retain obsolete native skills until separately authorized retirement; fresh-install catalog counts are not migration claims.
+- Current counts: **235 mappings**, including **214 skill files** and **36 entrypoints with 36 unique public names**. The TSV is source metadata and is not installed. Existing homes retain obsolete native skills until separately authorized retirement; fresh-install catalog counts are not migration claims.
 
 Managed skills use OMP's native user-skill convention. Native user/project skill discovery remains available, while the [managed discovery settings](config/agent/config.yml) leave `customDirectories` empty and disable Agents user/project skill-source discovery. Retired `.agent`/`.agents` copies cannot reenter through those configured sources. Other runtime providers may exist; these settings do not prove application-wide isolation.
 
@@ -149,7 +149,11 @@ These 17 folders/public names are historical migration identifiers, not invocati
 | `ponytail-gain` | `ponytail-gain` | Removed uncited static scoreboard; no replacement or measured-saving claim |
 
 
-The OpenDesign start/stop command guidance is user-invoked and POSIX-shell-specific. Set `OMP_OPEN_DESIGN_LAUNCHER` to an installed executable before running those commands; Windows installation does not provide a native PowerShell equivalent.
+The OpenDesign start/stop guidance is explicitly user-invoked and POSIX-shell-specific; Windows installation provides no native PowerShell equivalent. The [canonical OpenDesign contract](config/agent/skills/impeccable/reference/open-design.md) is entered only for explicit OpenDesign or external generated/refined artifact requirements. Impeccable owns ordinary UI work.
+
+Set `OMP_OPEN_DESIGN_CLI` to an absolute WSL/Linux **JavaScript CLI entrypoint** used by Node. For a source installation this is `<checkout>/apps/daemon/bin/od.mjs`, with the matching built distribution and dependencies present. Set `OMP_OPEN_DESIGN_LAUNCHER` separately to an absolute trusted **executable wrapper** for explicit lifecycle commands, not a JavaScript file or ambiguous PATH `od`. A shell wrapper cannot be passed to Node as its JavaScript entrypoint, so these names intentionally describe different forms.
+
+The MCP declaration explicitly sets `OD_DAEMON_URL=http://127.0.0.1:7456`; a shell export does not override it. Bundled lifecycle recipes also use fixed loopback port 7456. A custom deployment must explicitly align MCP, lifecycle and start arguments rather than assume these recipes support arbitrary URLs. Use the same WSL Node, modules, credentials and daemon; `/usr/bin/od` and Windows `od.exe` can be unrelated executables. Installation provides or starts no services, projects or runs.
 
 ## Configuration doctor
 
@@ -173,7 +177,7 @@ The doctor uses these exit codes:
 - `1`: one or more files are missing or drifted.
 - `2`: invalid arguments, inventory/home/read/compare errors, or repair failures.
 
-`--fix` delegates once to the platform installer, then checks every file. Both POSIX entrypoints use the shared [inventory validator](scripts/validate-inventory.sh).
+`--fix` delegates once to the platform installer, then checks every file. Both POSIX entrypoints use the shared [inventory validator](scripts/validate-inventory.sh) as the single owner of inventory-file checks; callers do not repeat its regular-file, readability or symlink checks. The validator still completes all source and destination validation before any installation writes.
 
 ## How deployment and use fit together
 
@@ -205,6 +209,18 @@ The documentation suite comprises fifteen skills and 109 regular assets deployed
 ## Verification scope
 
 `python3 scripts/test_install.py` exercises the POSIX installer and doctor against isolated fixtures; it does not test PowerShell. `bun scripts/test_agent_config.mjs` parses real YAML/frontmatter and checks seven configured mappings plus deterministic negative cases; it is static configuration, not dispatch proof. `bun scripts/test_model_routing.mjs` and `node scripts/test_model_routing.mjs` invoke the real retained handler using native-shaped main/sub events and assert no slow/advisor spawn replacement. These are tool-handler contracts, not authenticated dispatch, native approval or OS containment. The complexity-only removal of the installer's directory alias and break-ui's duplicate Rule 6 was exercised with a disposable default-source POSIX install from an unrelated working directory, complete payload byte comparison, doctor check/fix, skill backup/repair and repeat-install mtime preservation.
+
+### Minimal OpenDesign contract verification
+
+Fresh scoped checks for this guidance change:
+
+- Python standard-library parsing confirmed the unchanged Node MCP argv and fixed daemon URL, exactly one new reference mapping, resolved local OpenDesign links, and **235 mappings / 214 skill files**. MCP declaration and both lifecycle recipes remained byte-identical. Extracted recipes passed `sh -n`; that is syntax proof, not lifecycle execution.
+- `python3 scripts/test_install.py` passed real POSIX install/check/fix integration for **235 inventory entries** in disposable homes. A separate disposable install supplied the OMP consumer attempt. Neither PowerShell runtime was available; no Windows result is inferred.
+- Read-only HTTP health and daemon status reported `ok:true`, version **0.23.1**, loopback `127.0.0.1:7456`, and `shuttingDown:false`. This is not running-byte identity with the source checkout.
+- A disposable Python stdlib JSON-RPC client launched the existing built JavaScript entrypoint with Node, initialized the real stdio bridge, inspected `tools/list`, and received a successful read-only `list_projects` response. Project contents were withheld. Actual project/run/artifact/file schemas included `start_run.requestId`, explicit project fields, artifact include/byte caps and file offset/limit. The MCP server identified itself as `open-design` version **0.2.0**, distinct from the daemon version. With `OD_DAEMON_URL=http://127.0.0.1:1`, the same read-only call returned `isError:true`, `fetch failed`; no startup action was invoked. Only smoke bridge processes were closed.
+- A fresh OMP 18.6.1 consumer attempt used the disposable installed guidance with tools/extensions disabled and proposal-only cases. It timed out without usable consumer output; no provider credential environment was present. This is **not runtime routing or authenticated consumer proof**. Source review covers ordinary refinement, explicit exploration, existing documentation context, exact missing prerequisites, missing/ambiguous project selection, and rejection of unsupported pricing/metrics with an explicit proposal boundary.
+
+Anti-slop contract **PASS** for the authored guidance: no invented product content and no artifact-to-implementation authorization shortcut. No visible UI changed, so rendered verification is not applicable. No real-home deployment, project creation, generation, billing, package installation, shared-daemon start/stop, installed OMP MCP startup, native approval enforcement or generated visual-quality check was exercised. Historical receipts below remain historical.
 
 ### Native ownership verification (OMP 18.6.1)
 

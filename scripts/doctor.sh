@@ -27,8 +27,6 @@ REPO=$(dirname -- "$SCRIPT_DIR")
 HOME_DIR=${HOME_OVERRIDE:-${HOME:-}}
 [ -n "$HOME_DIR" ] && [ -d "$HOME_DIR" ] && [ ! -L "$HOME_DIR" ] || { echo 'home must be an existing real directory' >&2; exit 2; }
 HOME_DIR=$(CDPATH= cd -P -- "$HOME_DIR" && pwd) || { echo 'unusable home directory' >&2; exit 2; }
-INVENTORY=$REPO/config/files.tsv
-[ -f "$INVENTORY" ] && [ ! -L "$INVENTORY" ] && [ -r "$INVENTORY" ] || { echo "unusable inventory: $INVENTORY" >&2; exit 2; }
 TMP=$(mktemp -d) || { echo 'cannot create temporary directory' >&2; exit 2; }
 trap 'rm -rf "$TMP"' EXIT HUP INT TERM
 PLAN=$TMP/plan

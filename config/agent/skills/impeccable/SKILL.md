@@ -70,6 +70,7 @@ Choose the mode from the requested surface, not the product, and persist it only
 
 Routing:
 
+- **Explicit OpenDesign request or explicit external generated/refined artifact requirement:** follow [reference/open-design.md](reference/open-design.md). Ordinary refinement and this skill's named-element live-browser `generate` do not require OpenDesign.
 - **No argument:** read [routing.md](reference/routing.md) and present its context-aware menu; never auto-run a command.
 - **Explicit or clearly implied request to run a command:** load its reference (native variant on native platforms) and follow it. Ask once if two commands fit.
 - **Workflow or command-selection question:** read [Workflow questions](reference/routing.md#workflow-questions).
