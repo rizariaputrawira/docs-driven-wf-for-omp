@@ -106,7 +106,7 @@ Choose another skill only when its goal matches your task; these examples are al
 
 - `config/agent/` maps to `~/.omp/agent/`; `config/plugins/` maps to `~/.omp/plugins/`.
 - Managed skills have one source at `config/agent/skills/` and deploy to `~/.omp/agent/skills/` in flat `<folder>/SKILL.md` layout.
-- Current counts: **233 mappings**, including **212 skill files** and **36 entrypoints with 36 unique public names**. The TSV is source metadata and is not installed. Existing homes retain obsolete native skills until separately authorized retirement; fresh-install catalog counts are not migration claims.
+- Current counts: **234 mappings**, including **213 skill files** and **36 entrypoints with 36 unique public names**. The TSV is source metadata and is not installed. Existing homes retain obsolete native skills until separately authorized retirement; fresh-install catalog counts are not migration claims.
 
 Managed skills use OMP's native user-skill convention. Native user/project skill discovery remains available, while the [managed discovery settings](config/agent/config.yml) leave `customDirectories` empty and disable Agents user/project skill-source discovery. Retired `.agent`/`.agents` copies cannot reenter through those configured sources. Other runtime providers may exist; these settings do not prove application-wide isolation.
 
@@ -201,22 +201,6 @@ flowchart LR
 The documentation suite comprises fifteen skills and 109 regular assets deployed to `~/.omp/agent/skills/`. See [Managed files](#managed-files) for the complete inventory totals, layout and destination details.
 
 `config/agent/AGENTS.md` routes conditionally; matching procedures are read on demand. The suite does not override OMP permissions or approval, and unavailable assets do not load themselves. See [SKILL-USAGE.md](SKILL-USAGE.md) for the public-name catalog and practical prompts.
-
-## Selective OMO architecture comparison
-
-The [OMO overview at `a8019016f47a9d814ebcc24bd921a561f065ee80`](https://github.com/code-yeongyu/oh-my-openagent/blob/a8019016f47a9d814ebcc24bd921a561f065ee80/docs/guide/overview.md) is a reference for principles, not a requirement to import prompts or machinery. OMP remains authoritative for this payload, with [v18.6.1 native agent contracts](https://github.com/can1357/oh-my-pi/blob/v18.6.1/docs/task-agent-discovery.md) and [Plan Mode child restrictions](https://github.com/can1357/oh-my-pi/blob/v18.6.1/packages/coding-agent/src/task/structured-subagent.ts).
-
-| Reference concept | Local disposition |
-|---|---|
-| Main integration ownership | Already represented: main owns scope, integration and evidence acceptance. |
-| Repository versus documentation research | Useful minimal scout enhancement, with versioned provenance; no librarian role. |
-| Skill versus execution-role distinction | Useful documentation principle, already represented by composing passive procedures with bounded workers. |
-| Independent plan review | Already represented; clarify review-only slow + plan-review and exact native local-plan access. |
-| Evidence acceptance and plan-driven decomposition | Already represented; strengthen the seven-field packet and per-slice executor rationale. |
-| Category routing, team/DAG framework, Boulder/persistent state, continuation loops and keyword routing | Unnecessary duplication for this configuration payload; no orchestration state or router added. |
-| Architect/librarian/plan-consultant/plan-reviewer, extra plugin and model-prompt families | No distinct contract justifies more public roles, integrations or model taxonomy. Preserve seven roles and dormant plugin state. |
-| Universal documentation/approval pipeline | Incompatible with ordinary lightweight native flow; documentation-dependent delivery remains conditional. |
-| Cross-harness hard read-only/security claims | Uncertain without matching native evidence; do not import containment guarantees. |
 
 ## Verification scope
 
@@ -458,8 +442,31 @@ Installed OMP **18.5.0**, using that private home/project, exposed exactly the e
 
 ## References and acknowledgements
 
-The bundled skill snapshots include adaptations or reference material from projects whose maintainers made their work available. Thank you to the teams behind [Matt Pocock's skills](https://github.com/mattpocock/skills), [Superpowers](https://github.com/obra/superpowers), [GSD](https://github.com/open-gsd/gsd-core), [NVIDIA SkillSpector](https://github.com/NVIDIA/SkillSpector), [Anthropic Security Review](https://github.com/anthropics/claude-code-security-review), and [Cloudflare Security Audit](https://github.com/cloudflare/security-audit-skill).
+Acknowledgements: this configuration adapts or references work from [Matt Pocock's skills](https://github.com/mattpocock/skills), [Superpowers](https://github.com/obra/superpowers), [GSD](https://github.com/open-gsd/gsd-core), [NVIDIA SkillSpector](https://github.com/NVIDIA/SkillSpector), [Anthropic Security Review](https://github.com/anthropics/claude-code-security-review), and [Cloudflare Security Audit](https://github.com/cloudflare/security-audit-skill). The exact source, revision, adaptation and notice mappings are recorded in [skill payload provenance](config/SKILL-SOURCES.md) and each adapted skill's `SOURCES.md`.
 
 See [skill payload provenance](config/SKILL-SOURCES.md) for exact revisions, adaptations, and license notices, and the [skill usage guide](SKILL-USAGE.md) for practical selection and examples. Attribution is not an endorsement or a blanket statement of redistribution rights; consult the provenance notes and included notices.
 
 For the upstream project's broader workflow, supported-harness installation/update instructions, and skill-library overview, see the [Superpowers README](https://github.com/obra/superpowers#readme). This repository is an OMP-specific portable configuration snapshot: it contains selected, locally adapted Superpowers material with provenance in [skill payload sources](config/SKILL-SOURCES.md); it is not the upstream Superpowers plugin, and upstream installation commands do not install this repository.
+
+### OMO architecture comparison
+
+The [OMO architecture overview at commit `a8019016f47a9d814ebcc24bd921a561f065ee80`](https://github.com/code-yeongyu/oh-my-openagent/blob/a8019016f47a9d814ebcc24bd921a561f065ee80/docs/guide/overview.md) was consulted as a comparative reference. The table is an attributed summary of local design decisions against themes in that guide; this audit found no OMO prompt, code, or package asset in the managed payload. A request for the repository-root `LICENSE` at that commit returned HTTP 404, so this audit did not establish an OMO license grant or assess other possible licensing terms. OMP remains authoritative for this payload; see its [v18.6.1 native agent contracts](https://github.com/can1357/oh-my-pi/blob/v18.6.1/docs/task-agent-discovery.md) and [Plan Mode child restrictions](https://github.com/can1357/oh-my-pi/blob/v18.6.1/packages/coding-agent/src/task/structured-subagent.ts).
+
+| Reference concept | Local disposition |
+|---|---|
+| Main integration ownership | Already represented: main owns scope, integration and evidence acceptance. |
+| Repository versus documentation research | Useful minimal scout enhancement, with versioned provenance; no librarian role. |
+| Skill versus execution-role distinction | Useful documentation principle, already represented by composing passive procedures with bounded workers. |
+| Independent plan review | Already represented: review-only slow plus plan-review and exact native local-plan access. |
+| Evidence acceptance and plan-driven decomposition | Already represented: the seven-field packet and per-slice executor rationale. |
+| Category routing, team/DAG framework, Boulder/persistent state, continuation loops and keyword routing | Unnecessary duplication for this configuration payload; no orchestration state or router added. |
+| Architect/librarian/plan-consultant/plan-reviewer, extra plugin and model-prompt families | No distinct contract justifies more public roles, integrations or model taxonomy. Preserve seven roles and dormant plugin state. |
+| Universal documentation/approval pipeline | Incompatible with ordinary lightweight native flow; documentation-dependent delivery remains conditional. |
+| Cross-harness hard read-only/security claims | Uncertain without matching native evidence; do not import containment guarantees. |
+
+### Third-party source and license notes
+
+The current provenance records map 15 adapted-skill source ledgers to 24 bundled license-notice files. They identify pinned MIT sources (Matt Pocock, Superpowers, GSD, Anthropic and Cloudflare), Apache-2.0 NVIDIA SkillSpector and Impeccable adaptations, and a MIT Ponytail snapshot. The ledgers associate adaptations with the relevant full notices and document source paths and modifications; Apache-2.0 records include attribution and modification notices. Consult [skill payload provenance](config/SKILL-SOURCES.md) and each skill's `SOURCES.md`/notice for the per-file mapping.
+
+This is a repository-content review, not legal advice or a compliance certification. No project-wide `LICENSE` was present in the inspected root listing. The original snapshot history records that legacy skill roots had no separate LICENSE/COPYING files; unresolved licensing caveats remain for unchanged historical snapshots. Local presence, attribution, a source URL, or a notice belonging to a different adaptation does not establish redistribution rights. Rights for those unresolved materials and any independent third-party assets within retained packages were not verified here; resolve exact upstream terms or exclude/rewrite the material before relying on permission to redistribute it.
+

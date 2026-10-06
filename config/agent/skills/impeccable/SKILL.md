@@ -5,6 +5,8 @@ metadata:
   version: 4.5.0
 ---
 
+Adapted from [pbakaus/impeccable](https://github.com/pbakaus/impeccable) `skill-v4.5.0` at commit `508d7e8955de3b3caf2d8676e85206723d41a887`. This file is modified for OMP-native permissions, authorization, routing, and local workflow. The retained Impeccable package is licensed under Apache-2.0; see [LICENSE](LICENSE).
+
 Impeccable provides design workflows and project context for frontend interface work. The requested outcome and native tools, approval and authorization determine what can be inspected, proposed or changed. This skill grants no permission by itself.
 
 Core principles:

@@ -94,6 +94,7 @@ config/agent/skills/handoff-to-another-harness/references/portable-format.md	.om
 config/agent/skills/image-to-code-skill/SKILL.md	.omp/agent/skills/image-to-code-skill/SKILL.md
 config/agent/skills/imagegen-frontend-mobile/SKILL.md	.omp/agent/skills/imagegen-frontend-mobile/SKILL.md
 config/agent/skills/imagegen-frontend-web/SKILL.md	.omp/agent/skills/imagegen-frontend-web/SKILL.md
+config/agent/skills/impeccable/LICENSE	.omp/agent/skills/impeccable/LICENSE
 config/agent/skills/impeccable/SKILL.md	.omp/agent/skills/impeccable/SKILL.md
 config/agent/skills/impeccable/agents/impeccable_asset_producer.toml	.omp/agent/skills/impeccable/agents/impeccable_asset_producer.toml
 config/agent/skills/impeccable/agents/impeccable_documenter.toml	.omp/agent/skills/impeccable/agents/impeccable_documenter.toml
