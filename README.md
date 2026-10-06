@@ -1,10 +1,10 @@
-# omp-config
+# Document Driven AI Workflow Config (for OMP)
 
 > **Safety:** This configuration deliberately sets `tools.approvalMode: yolo`, an unrestricted approval mode. Review this setting and its consequences before installing.
 
 ## Overview
 
-`omp-config` is a portable, inventory-managed snapshot of user-level configuration and guidance for an existing OMP installation. It is not the OMP application, a plugin marketplace installer, or a project template. It does not include OMP or credentials, or start external services.
+Document Driven AI Workflow Config (for OMP) is a portable, inventory-managed snapshot of user-level configuration and guidance for an existing OMP installation. It is not the OMP application, a plugin marketplace installer, or a project template. It does not include OMP or credentials, or start external services.
 
 ## Third-party prerequisites
 
