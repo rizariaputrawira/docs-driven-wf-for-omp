@@ -1,5 +1,6 @@
 /**
  * Impeccable Live Variant Mode - Browser Script
+ * Local modification: share variant-count click behavior between configure rows.
  *
  * Injected into the user's page via <script src="http://localhost:PORT/live.js">.
  * The server prepends window.__IMPECCABLE_TOKEN__ and window.__IMPECCABLE_PORT__
@@ -1609,7 +1610,7 @@
     return selectedCount;
   }
 
-  function buildConfigureCountControl({ controlsLocked, onClick }) {
+  function buildConfigureCountControl({ controlsLocked }) {
     const count = el('button', configureInlineControlStyle({
       fontFamily: MONO, fontWeight: '600', letterSpacing: '0',
     }));
@@ -1619,7 +1620,14 @@
     count.style.opacity = controlsLocked ? '0.58' : '1';
     bindConfigureInlineControlHover(count, controlsLocked);
     bindConfigureCountPillTooltip(count, controlsLocked);
-    count.addEventListener('click', onClick);
+    count.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (controlsLocked) { showManualApplyBusyToast(); return; }
+      count.textContent = '\u00D7' + cycleSelectedCount();
+      if (count.matches(':hover')) {
+        showConfigureBarTooltip(count, variantCountTooltipText(selectedCount));
+      }
+    });
     return count;
   }
 
@@ -2436,17 +2444,7 @@
       },
     });
 
-    const count = buildConfigureCountControl({
-      controlsLocked,
-      onClick: (e) => {
-        e.stopPropagation();
-        if (controlsLocked) { showManualApplyBusyToast(); return; }
-        count.textContent = '\u00D7' + cycleSelectedCount();
-        if (count.matches(':hover')) {
-          showConfigureBarTooltip(count, variantCountTooltipText(selectedCount));
-        }
-      },
-    });
+    const count = buildConfigureCountControl({ controlsLocked });
 
     inputShell.appendChild(buildSelectionPill({ el: selectedElement, controlsLocked }));
     inputShell.appendChild(input);
@@ -2517,17 +2515,7 @@
       input.style.opacity = '0.58';
     }
 
-    const count = buildConfigureCountControl({
-      controlsLocked,
-      onClick: (e) => {
-        e.stopPropagation();
-        if (controlsLocked) { showManualApplyBusyToast(); return; }
-        count.textContent = '\u00D7' + cycleSelectedCount();
-        if (count.matches(':hover')) {
-          showConfigureBarTooltip(count, variantCountTooltipText(selectedCount));
-        }
-      },
-    });
+    const count = buildConfigureCountControl({ controlsLocked });
 
     inputShell.appendChild(buildSelectionPill({ el: selectedElement, controlsLocked }));
     inputShell.appendChild(input);

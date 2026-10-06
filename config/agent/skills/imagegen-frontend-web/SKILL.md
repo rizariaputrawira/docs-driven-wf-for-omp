@@ -120,13 +120,9 @@ Never force backgrounds, gradients, or full-bleed treatments where the brief ask
 ---
 
 ## 2. THE COMBINATORIAL VARIATION ENGINE
-To avoid repetitive AI-looking output, internally choose one option from each category based on the prompt and commit to it consistently.
-
-Do not mash everything together into chaos.
-Pick a strong combination and execute it clearly.
+Use the following options as prompts for a coherent direction when useful; choose only what fits the brief and supplied brand guidance. No category, count, component, motion cue or visual treatment is required.
 
 ### Theme Paradigm
-Choose 1:
 1. Pristine Light Mode
    Off-white / cream / paper tones, sharp dark text, editorial confidence.
 2. Deep Dark Mode
@@ -137,14 +133,12 @@ Choose 1:
    Bone, sand, taupe, stone, smoke, muted contrast, restrained luxury.
 
 ### Background Character
-Choose 1:
 1. Subtle technical grid / dotted field
 2. Pure solid field with soft ambient gradient depth
 3. Full-bleed cinematic imagery with proper contrast control
 4. Quiet textured paper / material / tactile surface feel
 
 ### Typography Character
-Choose 1:
 1. Satoshi-like clean grotesk
 2. Neue-Montreal-like refined grotesk
 3. Cabinet / Clash-like expressive display
@@ -155,7 +149,6 @@ Choose 1:
 Never drift into boring default web typography energy.
 
 ### Hero Architecture
-Choose 1:
 1. Cinematic Centered Minimalist
 2. Asymmetric Split Hero
 3. Floating Polaroid Scatter
@@ -164,7 +157,6 @@ Choose 1:
 6. Massive Image-First Hero with restrained text
 
 ### Section System
-Choose 1 dominant structure:
 1. Strict modular bento rhythm
 2. Alternating editorial blocks
 3. Poster-like stacked storytelling
@@ -173,7 +165,6 @@ Choose 1 dominant structure:
 6. Asymmetric premium marketing flow
 
 ### Signature Component Set
-Choose exactly 4 unique components:
 - Diagonal Staggered Square Masonry
 - 3D Cascading Card Deck
 - Hover-Accordion Slice Layout
@@ -188,7 +179,6 @@ Choose exactly 4 unique components:
 - Layered Image Crop Frames
 
 ### Motion-Implied Language
-Choose exactly 2:
 - scrubbing text reveal energy
 - pinned narrative section energy
 - staggered float-up energy
@@ -199,7 +189,6 @@ Choose exactly 2:
 ### Composition Anchor (per-section)
 The **left-text / right-image** layout is allowed, but it is the most overused AI pattern — do not use it as the default. Reach for it only when it is the genuinely best fit.
 
-Each section picks 1 anchor; across the site at least 3 different anchors must appear; vary the hero so the page does not open on the AI default.
 - Centered statement
 - Top-left lead, support bottom-right
 - Bottom-left text over background image
@@ -212,7 +201,6 @@ Each section picks 1 anchor; across the site at least 3 different anchors must a
 - Image-as-canvas with text overlaid in a clean safe area
 
 ### Background Mode (per-section)
-Pick 1 per section; vary across the page so it is never all the same mode. Be **confident** with backgrounds — they are a primary tool, not a risk.
 - Solid surface with inline asset
 - Subtle texture / paper / grid as background
 - Full-bleed image background with tonal overlay (text remains highly readable)
@@ -227,7 +215,6 @@ Pick 1 per section; vary across the page so it is never all the same mode. Be **
 - Color-blocked diptych (two flat fields meeting, modernist)
 
 ### CTA Variation
-Pick the CTA style that fits each section, not a default pill every time:
 - Classic primary pill
 - Outline / ghost
 - Underlined inline link with arrow
@@ -238,7 +225,6 @@ Pick the CTA style that fits each section, not a default pill every time:
 Across the site, vary CTA style at least once. The page's primary action stays unmistakable.
 
 ### Hero Scale (per-page)
-Pick 1 — must match brand mood:
 - Giant Statement Hero (massive type, large image, dominant first viewport)
 - Mid Editorial Hero (balanced type/image, cinematic but not screen-filling)
 - Mini Minimalist Hero (tiny logo + short statement + thin CTA, almost no image, lots of negative space)
@@ -246,7 +232,6 @@ Pick 1 — must match brand mood:
 Mini does not mean weak — it means confident restraint.
 
 ### Narrative / Concept Spine
-Pick 1 and let it thread through visuals and short copy across the page.
 - Artifact / collectible — proof, specimen, treasured object framing
 - Journey / pilgrimage — directional flow, waypoint sections, roadmap feeling
 - Tool / precision instrument — machined detail, calibrated UI, tactile controls
@@ -255,7 +240,6 @@ Pick 1 and let it thread through visuals and short copy across the page.
 - Archive / dossier — indexed rows, captions, understated authority
 
 ### Second-Read Moment
-Pick exactly 1 unobvious but legible motif and place it deliberately, once across the page:
 - asymmetric bleed that still respects hierarchy
 - one oversized punctuation or numeral serving structure
 - a single unexpected material switch (paper vs gloss vs metal accent)

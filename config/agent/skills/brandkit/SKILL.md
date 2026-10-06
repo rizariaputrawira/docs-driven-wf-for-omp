@@ -82,8 +82,6 @@ If the user gives references, match their quality and rhythm, not their exact co
 
 ---
 
-# BRAND STRATEGY FIRST
-
 # BRAND STRATEGY AND EVIDENCE
 
 Use the user's brief and supplied references/assets as authority for the brand. Base factual product, audience, history or market claims only on supplied/inspected evidence. Do not invent proof, customers, metrics, certifications, product screens or brand attributes. Where information is absent, keep the concept abstract or label the assumption as a proposal rather than fact. The category-to-symbol examples below are optional ideation prompts, not factual inferences or mandatory choices.

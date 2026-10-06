@@ -134,23 +134,9 @@ Generate the screens or flow images requested in the brief, using an available p
 
 ---
 
-## 5. DO NOT CROP OLD IMAGES RULE
+## 5. OPTIONAL DETAIL VIEW
 
-When a screen or detail needs a dedicated view, do not just crop or zoom into a previously generated larger image.
-
-Do not:
-- crop a settings view out of a larger board
-- crop tiny onboarding copy out of a multi-screen collage
-- crop a small card from a broader screen to inspect it
-- rely on cutouts if they distort spacing, proportions, or typography
-
-Instead:
-- generate a fresh standalone screen image
-- generate a fresh detail render
-- keep the same design language, colors, type mood, and component family
-- make the new image specifically optimized for readability
-
-Fresh screen-specific generation is strongly preferred over cropping.
+Analyze supplied screens directly. If a requested, permitted generation is available and a specific detail remains unclear, a standalone screen or detail view may help; preserve the app's platform and design system. Cropping and extra views are optional, never prerequisites. Describe unresolved details as uncertain.
 
 ---
 
@@ -602,10 +588,9 @@ Avoid fake brand slop:
 
 ## 22. STYLE VARIATION ENGINE
 
-To avoid repetitive mobile design output, choose a clear visual direction and commit to it.
+Use these options as prompts for a coherent direction when useful; choose only what fits the brief, platform and supplied product guidance. No category, count, component, motion cue or visual treatment is required.
 
 ### Theme Paradigm
-Choose 1:
 1. pristine light
 2. deep dark
 3. soft wellness neutral
@@ -616,7 +601,6 @@ Choose 1:
 8. calm productivity minimal
 
 ### Typography Character
-Choose 1:
 1. clean system-like sans
 2. refined grotesk
 3. expressive premium display + clean body
@@ -624,7 +608,6 @@ Choose 1:
 5. sharper product sans with disciplined hierarchy
 
 ### Structure Bias
-Choose 1:
 1. list-led utility
 2. card-led modular
 3. dashboard-led overview
@@ -635,7 +618,6 @@ Choose 1:
 8. wellness-led calm block rhythm
 
 ### Image Art Direction Bias
-Choose 1:
 1. editorial photography
 2. cinematic lifestyle imagery
 3. soft illustration-led
@@ -646,7 +628,6 @@ Choose 1:
 8. collage-lite layered imagery
 
 ### Texture / Surface Treatment
-Choose 1:
 1. ultra-subtle grain
 2. matte paper texture
 3. foggy gradient atmosphere
@@ -657,7 +638,6 @@ Choose 1:
 8. low-opacity technical pattern
 
 ### Palette Logic
-Choose 1:
 1. restrained monochrome + one accent
 2. warm neutral palette + sharp dark contrast
 3. cool mineral palette + clean highlight accent
@@ -668,7 +648,6 @@ Choose 1:
 8. desaturated premium palette with one bold hit
 
 ### Signature Component Set
-Choose exactly 4:
 - large hero metric card
 - compact stat strip
 - modular collection grid
@@ -689,7 +668,6 @@ Choose exactly 4:
 - achievement tile row
 
 ### Decorative Asset Set
-Choose exactly 2:
 - minimal line icon cluster
 - abstract orbit lines
 - dotted arc accents
@@ -702,7 +680,6 @@ Choose exactly 2:
 - mini geometric markers
 
 ### Motion-Implied Language
-Choose exactly 2:
 - springy card lift energy
 - sheet rise energy
 - tab transition calmness

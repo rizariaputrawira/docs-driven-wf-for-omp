@@ -62,92 +62,9 @@ Separate visible hierarchy from verified geometry. Do not assert pixel dimension
 
 ---
 
-## 5. DO NOT CROP OLD IMAGES RULE
+## OPTIONAL REFERENCE CLARITY
 
-When a section needs a dedicated image or a closer detail view, do not simply crop, cut out, zoom into, or slice it from a previously generated larger image.
-
-Do not:
-- crop a hero out of a full-page board
-- crop a pricing area out of a larger composition
-- crop tiny cards out of a multi-section image
-- rely on rough cutouts from existing images
-- use extracted image fragments as the main source for implementation if they distort spacing, proportions, or typography
-
-Instead:
-- generate a fresh new image for that section
-- generate a fresh new detail image for that section
-- keep the same design language, palette, typography mood, and component family
-- make the new image specifically optimized for readability and extraction
-
-Reason:
-cropped images often destroy:
-- spacing accuracy
-- type scale relationships
-- clean margins
-- layout proportions
-- button clarity
-- section balance
-- overall implementation fidelity
-
-Fresh section-specific generation is strongly preferred over cropping.
-
----
-
-## 6. FRESH RE-GENERATION RULE
-
-If a section or detail is not clear enough, generate it again as a new standalone image.
-
-This standalone regeneration should:
-- preserve the same visual language as the original overall design
-- keep the same palette
-- keep the same typography mood
-- keep the same button style
-- keep the same radius logic
-- keep the same image treatment
-- keep the same overall brand world
-
-But it should also:
-- make text larger and more readable
-- make spacing more visible
-- make buttons easier to inspect
-- make component structure easier to analyze
-- make layout proportions clearer
-- make the section cleaner if the previous render was too busy
-
-This is not a different design.
-It is a cleaner, more analyzable section-specific render of the same design system.
-
----
-
-## 7. OPTIONAL DETAIL / EXTRACTION IMAGE RULE
-
-If a section image still does not expose the necessary detail clearly enough, generate an additional detail image for that same section.
-
-Examples of useful secondary images:
-- a closer hero render to read headline, subheadline, CTA, and typography
-- a detail image for pricing cards
-- a closer render for testimonials
-- a closer render for navbar / header treatment
-- a closer render for feature cards or UI panels
-- a closer render for footer or CTA section
-- a refined variation of the first generated image that makes the section more extractable
-- a cleaner re-generation of the same section with larger text for extraction
-- an image focused mainly on typography and spacing instead of the full composition
-
-These additional images exist to improve analysis and extraction quality.
-
-Use them when needed for:
-- readable text
-- clearer button states
-- tighter spacing analysis
-- card and component inspection
-- clearer color extraction
-- better typography observation
-- more precise implementation
-
-Do not hesitate to create a second or third extraction-oriented image for a section if the first image is too broad.
-
----
+Use the supplied image as-is for analysis. If an authorized, requested generation is available and a specific detail remains unclear, a standalone regeneration or detail view may help; preserve the established design language and use only the views needed. Cropping or extra views are optional, never prerequisites. Describe unresolved details as uncertain and do not claim unsupported fidelity.
 
 ## 8. CLEAN ANALYSIS STANDARD
 
@@ -235,27 +152,21 @@ For a visual task, use supplied references if available. If the task explicitly 
 
 ## 12. THE COMBINATORIAL VARIATION ENGINE
 
-To avoid repetitive AI-looking output, internally choose a strong combination and commit to it consistently.
-
-Do not mash everything into chaos.
-Pick a coherent visual direction and execute it clearly.
+Use these options as prompts for a coherent direction when useful; choose only what fits the brief and supplied assets. No category, count, component or motion cue is required.
 
 ### Theme Paradigm
-Choose 1:
 1. Pristine Light Mode
 2. Deep Dark Mode
 3. Bold Studio Solid
 4. Quiet Premium Neutral
 
 ### Background Character
-Choose 1:
 1. subtle technical grid / dotted field
 2. pure solid field with soft ambient gradient depth
 3. full-bleed cinematic imagery
 4. tactile textured surface feel
 
 ### Typography Character
-Choose 1:
 1. clean grotesk
 2. refined grotesk
 3. expressive display
@@ -264,7 +175,6 @@ Choose 1:
 6. Swiss rational hierarchy
 
 ### Hero Architecture
-Choose 1:
 1. cinematic centered minimalist
 2. asymmetric split hero
 3. floating polaroid scatter
@@ -273,7 +183,6 @@ Choose 1:
 6. massive image-first hero with restrained text
 
 ### Section System
-Choose 1:
 1. modular bento rhythm
 2. alternating editorial blocks
 3. poster-like stacked storytelling
@@ -282,7 +191,6 @@ Choose 1:
 6. asymmetric premium marketing flow
 
 ### Signature Component Set
-Choose exactly 4 unique components:
 - diagonal staggered square masonry
 - 3D cascading card deck
 - hover-accordion slice layout
@@ -296,7 +204,6 @@ Choose exactly 4 unique components:
 - layered image crop frames
 
 ### Motion-Implied Language
-Choose exactly 2:
 - scrubbing text reveal energy
 - pinned narrative section energy
 - staggered float-up energy

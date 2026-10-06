@@ -228,6 +228,14 @@ Fresh scoped checks for this guidance change:
 
 Anti-slop contract **PASS** for the authored guidance: no invented product content and no artifact-to-implementation authorization shortcut. No visible UI changed, so rendered verification is not applicable. No real-home deployment, project creation, generation, billing, package installation, shared-daemon start/stop, installed OMP MCP startup, native approval enforcement or generated visual-quality check was exercised. Historical receipts below remain historical.
 
+### Complexity-only cleanup verification
+
+The whole tracked tree was scanned for duplicate payloads, repeated prose and implementation declarations; legal notices, optional integrations and supported fallback assets were retained. Four image/brand skills now use compact optional reference/detail guidance and direction lists without repeated selection quotas. Impeccable's replace/insert count buttons share their existing click behavior in the count-control builder, without an injectable callback or new wrapper.
+
+`node --check` passed for the changed browser script; the config contract (16 negatives), Node hook contract (seven groups) and POSIX installer/doctor integration (236 mappings) passed. Actual count rows matched the pre-edit source in Chromium at 1280px and 390px, enabled and locked, including pointer/keyboard cycling, wraparound, hover tooltip and focus. The fixture used real helper/row code with service initialization suppressed, not the complete live engine. Five candidate source-loaded image-guidance briefs preserved supplied-image analysis and unavailable-tool/count/platform/brand boundaries; a proposed baseline arm loaded live skills instead of assigned copies and is excluded from comparative proof. No image generation or Windows verification occurred. Anti-slop PASS for the scoped changes.
+
+Local receipts: `/tmp/omp-ponytail-audit-nnxeth15/` (tree/complexity scans, frozen briefs, baseline sources and browser outcomes); source-loaded candidate trace: `history://AfterGuidanceSmoke`.
+
 ### Sol-led migration verification (OMP 18.6.1)
 
 The migration baseline was tracked main `aaa6190f7fc18f1e74b80dbe70352598cdfa0ef4`, also observed at remote main before editing. Its config, PERSONALITY and AGENTS were preserved before mutation. Only the default/plan selectors, bounded policy, ordinary-work opening, this README and semantic config contract changed; managed worker definitions and the boundary hook were not remapped.
