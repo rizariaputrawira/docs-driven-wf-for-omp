@@ -94,7 +94,7 @@ Choose another skill only when its goal matches your task; these examples are al
 ## Requirements and scope
 
 - POSIX: `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp`, and `date`. Remote ZIP installation additionally requires `curl` and `unzip`.
-- Windows (beta): PowerShell 5.1+; remote ZIP installation uses `Invoke-WebRequest` and `Expand-Archive`.
+- Windows (beta): PowerShell 5.1+; remote ZIP installation uses `Invoke-WebRequest` and `Expand-Archive`. A disposable Windows PowerShell 5.1 smoke on 2026-10-06 rejected the valid inventory with `Inventory must include AGENTS.md and config.yml.` The required-entry lookup uses forward-slash keys after destination paths have been converted to backslashes. This pre-existing correctness issue remains unresolved; no successful Windows installation is claimed.
 - Not bundled: OMP, model credentials, Node.js, the OpenDesign daemon, the `rtk` executable, or herdr services. Every installed file is listed in the inventory.
 - `config/agent/mcp.json` declares a GitHub HTTP MCP connection (`GITHUB_TOKEN`) and a local OpenDesign stdio connection (`OMP_OPEN_DESIGN_CLI`, `OD_DAEMON_URL=http://127.0.0.1:7456`). Configure these per machine; installation does not provide or start either server.
 - The optional RTK and herdr hooks do not start services. The RTK hook disables itself unless `rtk >=0.23.0` is on `PATH`; `herdr` requires `HERDR_ENV=1`, `HERDR_SOCKET_PATH`, and `HERDR_PANE_ID`.
@@ -220,7 +220,7 @@ The [OMO overview at `a8019016f47a9d814ebcc24bd921a561f065ee80`](https://github.
 
 ## Verification scope
 
-`python3 scripts/test_install.py` exercises the POSIX installer and doctor against isolated fixtures; it does not test PowerShell. `bun scripts/test_agent_config.mjs` parses real YAML/frontmatter and checks seven configured mappings plus deterministic negative cases; it is static configuration, not dispatch proof. `bun scripts/test_model_routing.mjs` and `node scripts/test_model_routing.mjs` invoke the real retained handler using native-shaped main/sub events and assert no slow/advisor spawn replacement. These are tool-handler contracts, not authenticated dispatch, native approval or OS containment.
+`python3 scripts/test_install.py` exercises the POSIX installer and doctor against isolated fixtures; it does not test PowerShell. `bun scripts/test_agent_config.mjs` parses real YAML/frontmatter and checks seven configured mappings plus deterministic negative cases; it is static configuration, not dispatch proof. `bun scripts/test_model_routing.mjs` and `node scripts/test_model_routing.mjs` invoke the real retained handler using native-shaped main/sub events and assert no slow/advisor spawn replacement. These are tool-handler contracts, not authenticated dispatch, native approval or OS containment. The complexity-only removal of the installer's directory alias and break-ui's duplicate Rule 6 was exercised with a disposable default-source POSIX install from an unrelated working directory, complete payload byte comparison, doctor check/fix, skill backup/repair and repeat-install mtime preservation.
 
 ### Native ownership verification (OMP 18.6.1)
 

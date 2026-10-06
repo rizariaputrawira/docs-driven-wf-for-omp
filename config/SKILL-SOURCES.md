@@ -51,7 +51,7 @@ Motion inspiration remains informational attribution to [Emil Kowalski](https://
 
 Ponytail snapshots identify [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) and declare MIT. The complete upstream notice is now deployed as `ponytail/LICENSE.ponytail`, including Copyright (c) 2026 DietrichGebert. License-only evidence was read on 2026-10-05 at immutable revision `dbdfc8de29fb91609ed2df2ae378782a956d8e86`: [LICENSE](https://raw.githubusercontent.com/DietrichGebert/ponytail/dbdfc8de29fb91609ed2df2ae378782a956d8e86/LICENSE). This pin identifies inspected license evidence, **not** the revision of the older unversioned local skill bodies. Local adaptations consolidate review/audit/debt/help, correct scope reduction and authority/persistence/intelligence/check rules; no upstream plugin/benchmark is adopted.
 
-Existing-file changes to Impeccable, images/brand, Stitch, break-ui and prototype are local authority/brief corrections; no legacy content is moved into new assets. Stitch DESIGN.md is an independently authored, explicitly labeled example, not canonical project truth. Shared motion guidance is lazy-loaded from animate rather than stacked automatically.
+Existing-file changes to Impeccable, images/brand, Stitch, break-ui and prototype are local authority/brief corrections; no legacy content is moved into new assets. A later complexity-only correction removes break-ui's duplicated Rule 6 while retaining the existing general trust rule and all other procedures. Stitch DESIGN.md is an independently authored, explicitly labeled example, not canonical project truth. Shared motion guidance is lazy-loaded from animate rather than stacked automatically.
 
 ## Retired entrypoints: migration map
 

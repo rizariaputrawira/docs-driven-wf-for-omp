@@ -26,8 +26,7 @@ cleanup() { [ -z "$TMP" ] || rm -rf "$TMP"; }
 trap cleanup 0
 trap 'cleanup; exit 2' HUP INT TERM
 SCRIPT_DIR=$(CDPATH= cd -P -- "$(dirname -- "$0")" && pwd)
-REPO=$SCRIPT_DIR
-[ -n "$SOURCE" ] || SOURCE=$REPO
+[ -n "$SOURCE" ] || SOURCE=$SCRIPT_DIR
 case "$SOURCE" in
   http://*|https://*)
     command -v curl >/dev/null 2>&1 || { echo 'curl is required for remote installation' >&2; exit 2; }
