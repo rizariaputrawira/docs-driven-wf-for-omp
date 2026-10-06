@@ -12,6 +12,7 @@ config/agent/commands/close-open-design.md	.omp/agent/commands/close-open-design
 config/agent/commands/start-open-design.md	.omp/agent/commands/start-open-design.md
 config/agent/config.yml	.omp/agent/config.yml
 config/agent/extensions/antislop.js	.omp/agent/extensions/antislop.js
+config/agent/extensions/LICENSE.antislop	.omp/agent/extensions/LICENSE.antislop
 config/agent/extensions/herdr-omp-agent-state.ts	.omp/agent/extensions/herdr-omp-agent-state.ts
 config/agent/extensions/luna-tool-boundary.js	.omp/agent/extensions/luna-tool-boundary.js
 config/agent/extensions/rtk.ts	.omp/agent/extensions/rtk.ts

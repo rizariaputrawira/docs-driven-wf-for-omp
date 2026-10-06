@@ -37,7 +37,7 @@ All managed skills use one OMP-native source and deployment folder:
 |---|---|
 | `config/agent/skills/<folder>/SKILL.md` | `~/.omp/agent/skills/<folder>/SKILL.md` |
 
-This guide covers **41 directories/entrypoints and 41 unique public names**, one entrypoint per name. The [explicit inventory](config/files.tsv) has **244 mappings**, including **223 skill files**; the fifteen-skill engineering suite retains **109 assets**. [Provenance](config/SKILL-SOURCES.md) records origin, adaptation, licensing caveats and historical roots.
+This guide covers **41 directories/entrypoints and 41 unique public names**, one entrypoint per name. The [explicit inventory](config/files.tsv) has **245 mappings**, including **223 skill files**; the fifteen-skill engineering suite retains **109 assets**. [Provenance](config/SKILL-SOURCES.md) records origin, adaptation, licensing caveats and historical roots.
 
 OMP's native user/project skill discovery remains available. [Managed discovery settings](config/agent/config.yml) leave `customDirectories` empty and disable Agents user/project skill-source discovery, preventing retired `.agent`/`.agents` copies from reentering through those sources. External runtime/providers may still exist. This is not proof of what any session loads, native enforcement or application-wide OS isolation; inspect the running session's available skills and selected source.
 
