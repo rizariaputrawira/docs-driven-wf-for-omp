@@ -1,3 +1,5 @@
+<!-- Locally modified: ENOENT-only optional ignore discovery; canonical history storage is unchanged. -->
+
 ### Purpose
 
 Resolve one stable target, run two independent assessments, synthesize a design critique, persist a snapshot, and ask the user what to improve next. The chat response is the primary deliverable; the snapshot is an archive of that run.
@@ -26,7 +28,28 @@ Resolve one stable target, run two independent assessments, synthesize a design 
    <skill-base-dir>/scripts/impeccable critique-storage slug "<resolved-path-or-url>"
    ```
    Every later command also accepts the resolved target directly and derives the same slug internally; never hand-write a slug. If this exits non-zero, skip persistence and trend for this run, but continue the critique.
-3. **Read `.impeccable/critique/ignore.md`** if it exists. Drop matching findings silently; it is the only prior-run input critique consumes.
+3. **Read optional prior-run guidance.** In the project cwd, run the following with an already available Python 3 interpreter (`python3` on POSIX; `py -3` on Windows). Do not install a runtime for this probe. A native filesystem metadata/read tool may substitute only if it distinguishes missing paths from lookup/read failures; a shell existence predicate or an empty glob result does not establish that distinction. If neither interface is available, report `ignore guidance unavailable: <reason>` rather than claiming there is no ignore list.
+
+   ```python
+   import errno
+   import os
+   import stat
+   import sys
+
+   path = ".impeccable/critique/ignore.md"
+   try:
+       info = os.stat(path)
+   except OSError as error:
+       if error.errno != errno.ENOENT:
+           raise
+   else:
+       if not stat.S_ISREG(info.st_mode):
+           raise OSError(errno.EINVAL, "ignore guidance is not a regular file", path)
+       with open(path, "rb") as guidance:
+           sys.stdout.buffer.write(guidance.read())
+   ```
+
+   Execute this block through the interpreter's stdin in the project cwd (on POSIX, `python3 - <<'PY'`, the block, then `PY`). Only a missing file or parent directory is normal empty state; this inspection creates nothing. Surface every other lookup error, invalid path type, and read failure, including permission denial; do not convert them into absence. On success, drop findings matching the returned ignore guidance silently; this is the only prior-run input critique consumes. Never use `critique-storage write` for discovery: snapshot creation and trend remain owned by the canonical helpers in Persist the Snapshot.
 
 ### Assessment Orchestration
 

@@ -22,6 +22,8 @@ Core principles:
 
 **Launcher unavailable:** On refusal or failure, send a separate message **before the next tool call**: “Context loading did not run; I’ll read the existing project context directly.” Then read existing PRODUCT.md and DESIGN.md without inventing missing context, follow applicable steps 2–3, and continue using only tools and access permitted by the native environment. This applies to planning and editing; launcher failure alone does not block either.
 
+**Optional critique state:** `.impeccable/critique/` and its `ignore.md` may not exist before a first critique; absence is normal. Do not read a directory as an existence probe or create it during inspection. Use the error-distinguishing discovery recipe in [critique Setup](reference/critique.md#setup); genuine lookup/read failures are reported, not treated as empty state. That reference owns ignore discovery; canonical `critique-storage` helpers still own snapshot writes and history.
+
 ## How to design
 
 - **The brief wins.** Honor pinned aesthetics, eras, materials, fonts, and palettes even when they conflict with a saturated-pattern warning. Redirecting a clear brief toward your taste is failure.

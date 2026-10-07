@@ -361,3 +361,65 @@ PASS for this guidance/documentation deliverable: no invented UI, statistics,
 product proof or visual verification claims. No rendered UI was changed, so a
 visual-surface verdict is not applicable. Source routing simulations are labeled
 as such and are not authenticated consumer runs.
+
+## Optional critique state correction
+
+The local `ui-design` entrypoint now identifies critique state as optional and
+routes discovery to the single executable recipe in
+`reference/critique.md#setup`. That recipe suppresses only `ENOENT` from metadata
+lookup, rejects non-regular files, and leaves all subsequent read errors visible.
+It creates no inspection directories. An existing Python 3 interpreter is one
+supported interface, not a new installation prerequisite; without it or a native
+metadata/read interface that distinguishes errors, discovery is reported
+unavailable rather than absent.
+
+Focused regression passed on Linux with Bun 1.4.2, Python 3 and preinstalled
+Impeccable engine 0.1.11:
+
+```sh
+IMPECCABLE_BIN="$HOME/.impeccable/bin/0.1.11/impeccable" \
+  bun scripts/test_critique_optional_state.mjs
+```
+
+`node` can replace `bun`; `PYTHON3` may name an existing Python 3 executable.
+The engine must already be installed (launcher target 0.1.11); the test does not
+download one. It executes the Python block extracted from the maintained
+playbook against absent parent/file, existing guidance, invalid file/parent
+types, unreadable file and denied parent-lookup fixtures. POSIX root runs use an
+unprivileged child for permission fixtures. Windows ACL denial is explicitly
+unverified by these POSIX fixtures.
+
+The regression also uses the unchanged canonical launcher/storage helper to
+write two real snapshots, read their trend, and check the first snapshot survives
+the second write. It is not a source-string assertion of filesystem behavior or
+an actual OMP consumer/model-obedience run. The original missing-state error is
+user-reported; no failing baseline consumer run is claimed.
+
+Current upstream was inspected at
+[`bbcb29d9dee6c94915d760bcfc36818ad5be66ad`](https://github.com/pbakaus/impeccable/commit/bbcb29d9dee6c94915d760bcfc36818ad5be66ad).
+Its critique guidance still says to read `ignore.md` if it exists; no ignore-read
+helper or exact upstream fix was found. Its storage implementation treats missing
+history as empty and creates directories when writing. The local engine,
+launcher, command semantics and history persistence remain unchanged.
+Upstream also collapses some history-listing errors to empty history and ignores
+the Rust snapshot `write_all` result; this guidance correction does not claim to
+repair those pre-existing engine limitations.
+
+`python3 scripts/test_install.py` passed POSIX installer/doctor integration for
+285 inventory entries. PowerShell was unavailable. The broader
+`bun scripts/test_skill_catalog.mjs` stopped at its pre-existing telemetry
+destination assertion (`.omp/privacy/telemetry.env` expected versus the inventory's
+intentional `.omp/telemetry.env`); telemetry and that unrelated assertion were not
+changed.
+
+One source-loaded OMP 18.8.0 consumer smoke exercised the candidate entrypoint
+and critique Setup in a disposable HTML project, not a full visual critique.
+The Python probe returned no ignore guidance; canonical `latest` exited 2 and
+`trend` returned `[]`. Post-inspection metadata checks still reported `ENOENT`
+for all optional critique paths. Canonical `write` then created a snapshot, and
+`latest`/`trend` read it back; the verifier also read the persisted report.
+The consumer's direct context invocation failed because the checkout launcher
+was not executable; invoking the unchanged launcher through `sh` successfully
+loaded context with normal missing-product/design/surface directives. No launcher
+mode or behavior was changed. GitHub/OpenDesign MCP connection warnings were
+unrelated to the local filesystem branch and neither service was used.
