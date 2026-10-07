@@ -17,7 +17,7 @@ A section, component, feature, or state inside an established surface inherits t
 
 ## 2. Ask what will change the work
 
-Before implementation, get the user's answer through the structured question tool when available. Ask two or three related questions; a precise request needs only a compact confirmation. Skip settled facts, not the confirmation: DESIGN.md settles the visual world, not this surface's purpose or concept.
+Resolve only material missing choices before implementation. Use the supplied request and existing project context; ask only when the unresolved answer would materially change purpose, product behavior, direction, scope or consequences. A direct request authorizes implementation of its clear outcome and routine design choices; do not require a compact confirmation round merely to repeat settled direction. DESIGN.md settles the visual world, not this surface's purpose or concept.
 
 - **Persuade:** who must act, what they should believe, which real proof, content, or assets earn that belief.
 - **Operate:** the task, information, important states, frequency, constraints.

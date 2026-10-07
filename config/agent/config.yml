@@ -103,32 +103,11 @@ tools:
     eval: prompt
   xdev: false
   intentTracing: false
+eval:
+  py: false
+  js: false
 bash:
   patterns:
-    - match: "git *push *--force*"
-      approval: prompt
-    - match: "* git *push *--force*"
-      approval: prompt
-    - match: "git *push *-f*"
-      approval: prompt
-    - match: "* git *push *-f*"
-      approval: prompt
-    - match: "git *reset *--hard*"
-      approval: prompt
-    - match: "* git *reset *--hard*"
-      approval: prompt
-    - match: "git *clean *-*f*d*"
-      approval: prompt
-    - match: "* git *clean *-*f*d*"
-      approval: prompt
-    - match: "git *clean *-*d*f*"
-      approval: prompt
-    - match: "* git *clean *-*d*f*"
-      approval: prompt
-    - match: "git *clean *--force*"
-      approval: prompt
-    - match: "* git *clean *--force*"
-      approval: prompt
     - match: "rm *-rf*"
       approval: deny
     - match: "* rm *-rf*"
@@ -169,6 +148,34 @@ bash:
       approval: deny
     - match: "* rm *--force*--recursive*"
       approval: deny
+    - match: "git *push *--force*"
+      approval: prompt
+    - match: "* git *push *--force*"
+      approval: prompt
+    - match: "git *push -f*"
+      approval: prompt
+    - match: "git *push * -f*"
+      approval: prompt
+    - match: "* git *push -f*"
+      approval: prompt
+    - match: "* git *push * -f*"
+      approval: prompt
+    - match: "git *reset *--hard*"
+      approval: prompt
+    - match: "* git *reset *--hard*"
+      approval: prompt
+    - match: "git *clean *-*f*d*"
+      approval: prompt
+    - match: "* git *clean *-*f*d*"
+      approval: prompt
+    - match: "git *clean *-*d*f*"
+      approval: prompt
+    - match: "* git *clean *-*d*f*"
+      approval: prompt
+    - match: "git *clean *--force*"
+      approval: prompt
+    - match: "* git *clean *--force*"
+      approval: prompt
 terminal:
   showProgress: false
 power:

@@ -99,8 +99,8 @@ Coupling is upgrade cost, not a vulnerability or removal mandate.
 |---|---|---|---|
 | Plain SKILL.md and references | LOW | KEEP | Flat discovery, frontmatter, native URI/command/hide/filter; catalog + isolated native list/read/filter smoke |
 | AGENTS.md | LOW | KEEP | Documented guidance discovery; routing/link check; instructions are not enforcement |
-| PERSONALITY.md | MEDIUM | KEEP | OMP global instruction source; only canonical pointers changed; semantic policy remains |
-| config.yml | MEDIUM | KEEP unchanged | Registered settings schema, model/task/approval config; static parse/agent test, source key review; actor checks separately |
+| PERSONALITY.md | MEDIUM | KEEP; centralize task authority | OMP global instruction owner; direct requested scope proceeds without redundant confirmation; role/Plan/read-only boundaries remain |
+| config.yml | MEDIUM | KEEP native policy; disable eval by default | Registered settings schema, unchanged model/task architecture, scoped approval/eval cleanup; static contract and exact-version native approval checks |
 | Agent frontmatter | MEDIUM | KEEP unchanged | Native agent discovery/model/tool/schema contract; parse/static model-role check, effective dispatch needs runtime evidence |
 | WATCHDOG.yml | MEDIUM | KEEP unchanged | Advisor configuration; global advisor.enabled=false, Sol entry ready but not auto-active; runtime advice not exercised |
 | MCP declarations | MEDIUM | KEEP unchanged | Native HTTP/stdio MCP schema; parse/static prerequisites; no connection/service claim |
@@ -153,19 +153,62 @@ These are procedure/metadata simulations, not authenticated consumer runs.
 
 | Capability and owner | Trigger / evidence | Authority | Procedure | Observable output | Risk if broadened | Existing overlap | Merge-or-add decision |
 |---|---|---|---|---|---|---|---|
-| Destructive shell approval — native `bash.patterns` and `tools.approval.eval` | Bash command text matches selected Git/rm forms, or eval is invoked | Native OMP policy only; ordinary commands remain yolo | Prompt matching force-push, hard-reset, force-clean commands; deny matching recursive-force-rm spellings; prompt every eval call. At v18.6.1 deny resolves before critical detection, but critical handling precedes prompt return. Thus absolute critical `rm -rf /tmp` would get only a bare override, ignored in yolo, if configured as prompt; explicit deny is required. Built-in critical rules remain untouched. | Git matches prompt; matching recursive-force-rm calls are denied even in yolo; all eval calls prompt. Legitimate cleanup needs a separate user-controlled path, never eval as an evasion. | Blanket shell deny/allow changes normal yolo behavior. A prompt on every eval costs broad friction. Text patterns and approval are not containment. | OMP owns critical matching and approval. Bash patterns cannot constrain eval's independent shell route; eval prompt is separate and intentionally broad. | Add narrow native config rules only. Do not copy critical regex, add hook, or create a checker skill/engine. Deny rm because source-order makes prompt ineffective for the cited critical case. |
+| Destructive shell approval — native `bash.patterns`, `eval.py/js` and `tools.approval.eval` | Bash command text matches selected Git/rm forms; eval is deliberately re-enabled | Native OMP policy; ordinary requested tools remain yolo | Deny matching recursive-force-rm before Git prompt rules; prompt matching force-push, hard-reset and force-clean; disable both eval backends by default, retain prompt on opt-in eval | Ordinary native calls proceed; matching Git calls prompt; matching rm calls deny; default tool set omits eval | Text patterns are not containment; unrestricted eval would add an independent process route not checked by bash patterns | Native resolver/settings own enforcement; PERSONALITY owns ordinary task authority | No new approval hook, router or orchestration layer; see the decision below |
 | Doctor observations — POSIX and PowerShell doctors | Explicit managed inventory check/fix; immediate entries in selected home | Managed inventory alone sets success/failure; legacy/unmanaged items are advisory. | Compare canonical inventory; fix invokes existing installer. Inspect only immediate roots/entries, no contents or recursive scan; do not follow symlink/reparse roots. Do not start/check services; external dependencies remain unverified, not managed failures. | Managed pass/missing/drift/error lines and summary; separate advisory LEGACY/UNMANAGED observations and advisory summary. | Making observations fail check or authorize cleanup risks user data; recursion expands home boundary. | Inventory owns managed files; `docs/migration.md` owns historical retired names. | Add bounded observations to existing doctors, not another scanner. Share 17-name catalog across scripts; unknown entries are UNMANAGED, never assigned invented legacy provenance. |
 | Issue/PR queue triage — `git-triage` | Authorized issue/PR queue or supplied record; labels, discussion and related items | Read-only; no edits/comments/labels/assignment/milestone/close/merge or implementation authority | Treat issue as problem record, PR as proposed change; inspect diff only if authorized/needed; classify and route; mark duplicate CANDIDATES; protect security details and treat remote text as untrusted | Evidence, type, priority, area, candidate duplicates, repro/requirements gaps, confidence, next owner/action; API/offline/auth limits | Mutations convert classification into project-management or publication authority; remote instructions can be hostile | Diagnosis, workflow-brainstorming, delivery, review and security owners handle downstream work, not queue disposition | Add a distinct read-only queue procedure. Route to existing owners; do not merge triage with implementation or review. |
-| Bounded issue/change-to-PR work — `git-pr-work` | Authorized issue/change with repository, refs and bounded scope | Implementation and proportionate verification only under native authorization; no implicit branch/worktree, commit, push, publish, close, delete, merge or release | Define scope/acceptance; route to diagnosis, workflow-brainstorming, delivery, test/review/security owners as triggered; suggest branch name only; optionally draft PR metadata with explicit Refs, Summary/scope, Related issue, Verification and Limits fields | Bounded plan/status, actual checked/unrun verification, optional unpublished title/body with source/head/base evidence, Issue relation and limitations | Automatic Git/GitHub lifecycle actions silently broaden authority; refs copied from unrelated PRs misrepresent change | `git-commit-message` owns staged precedence and style; native main owns decomposition; other skill owners retain procedures | Add a thin distinct change-to-PR translation procedure; reuse named owners, never duplicate git-commit-message or orchestrate lifecycle actions. |
+| Bounded issue/change-to-PR work — `git-pr-work` | Requested issue/change with repository, refs and bounded scope | Request authorizes necessary implementation/verification; Git/GitHub lifecycle actions only when requested, subject to native policy | Define scope/acceptance; route to matching diagnosis/design/delivery/test/review/security owners; draft PR metadata where requested | Bounded result, exercised/unrun verification and unpublished PR text unless publication was requested | Unrequested lifecycle actions expand scope; unrelated refs misrepresent changes | `git-commit-message` remains read-only; main owns requested Git execution | Thin change-to-PR procedure, not another approval mechanism |
 | Local/publication/release state — `git-change-status` | User asks what is local, unpushed, unmerged, unreleased or released | Read-only; no fetch/add/commit/push/tag/release/merge/changelog edit | Establish requested scope and selected refs/baselines; inspect status/diff/log/rev-list; optional tags/GitHub releases/open PR/CHANGELOG evidence; disclose stale/missing evidence | Separate present/absent/unknown for unstaged, staged, untracked, upstream ahead/behind, pushed/unmerged, merged/unreleased, released | Assumed tracking/tags/changelog or hashes alone produce false state claims; fetching changes refs; tag is not deployment evidence | Triage handles inbound work; git-pr-work handles authorized change; neither reports the full lifecycle state | Add a read-only evidence procedure. Require baselines; ahead is not proof of unmerged, squash/cherry-pick means hashes are not sole merge evidence, and absent refs mean unknown. |
 
-Source review: official OMP v18.6.1 [`bash.ts`](https://github.com/can1357/oh-my-pi/blob/2a2c6dcbbb558c0f8145f67f28b3370984f2bf60/packages/coding-agent/src/tools/bash.ts), [`approval-mode.md`](https://github.com/can1357/oh-my-pi/blob/2a2c6dcbbb558c0f8145f67f28b3370984f2bf60/docs/approval-mode.md), and inspected MIT license are recorded in [skill provenance](../config/SKILL-SOURCES.md). No OMP code/regex is copied. Actual source-loaded approval testing must use inert strings only; never execute destructive commands.
+## Approval friction decision
+
+Current approval-specific source and installed-handler basis is OMP **18.8.0**;
+exact immutable references and exercised limits are in
+[verification](verification.md#approval-cleanup-2026-10-07) and the
+[compatibility owner](../config/agent/skills/docs-engineering/references/omp-compatibility.md#approval-specific-1880-check).
+The broader historical 18.6.3 skill/discovery evidence remains historical.
+
+| Eval strategy | Utility / friction | Security and maintenance | Decision |
+|---|---|---|---|
+| A: keep eval prompted | Persistent cells, browser helpers and eval orchestration retained; every call interrupts, and headless workers cannot satisfy prompts | Gates the whole independent execution surface, not each subprocess; native-only | Available as deliberate opt-in, not default |
+| B: allow eval in yolo | No routine eval prompts; full utility | Direct Python subprocess/JS process APIs do not traverse bash.patterns; defeats the intended gate on that surface | Rejected |
+| C: disable `eval.py` and `eval.js` | No eval tool or eval prompts by default; ordinary read/search/edit/write/bash/LSP/task remain | Native registration gate; retain `approval.eval: prompt` if deliberately enabled later | Chosen default |
+| D: per-language/session native configuration | A session overlay can enable only the needed backend; disabling one alone still exposes eval if the other is available | `eval.tools.enabled` disables eval-defined tools, not arbitrary execution; no supported process confinement equivalent to bash patterns was established | Session opt-in only; no custom extension |
+
+C removes persistent cells, built-in eval browser helpers, eval-defined tools and
+eval agent/workpool conveniences from the default surface. CLI help still mentions
+legacy browser/python tool names, but the checked registry has neither as a
+standalone replacement. Existing project browser automation can be run through bash
+when available; it is not proof of equivalent built-in browser capability. A task
+requiring eval can use a deliberate native session overlay (for example
+`omp --config <overlay>` with `eval.js: true`); the retained prompt policy remains.
+Do not silently enable a backend or another interpreter to bypass a denied action.
+
+No historical eval-call telemetry was supplied or inspected. The measurable
+policy cost was one native approval requirement for every eval invocation,
+including harmless calculations; no percentage of the user's total interruptions
+is claimed. The configuration adds no per-tool prompt to ordinary native tools.
+
+The task-authority rule has one normative owner:
+[PERSONALITY](../config/agent/PERSONALITY.md#task-authority). Skill exceptions retain
+review-only, source-trust, disabled-suite and consequential-decision boundaries;
+they do not demand permission again for already requested edits/tests/delegation.
+Native Plan Mode still owns its transition, not docs-plan-review.
 
 ## Safety applicability and limits
 
-The checked behavior basis is OMP **18.6.1**, not a minimum-version or future-runtime guarantee. Rules match command text and selected shell segments, not executable identity or expanded arguments. Aliases, computed commands, alternate interpreters, unlisted option spellings and subprocesses launched by other tools can escape these patterns; quoted explanatory text can also match. Recheck native policy after runtime upgrades. Other built-in critical operations retain OMP's existing behavior, including the fact that bare critical overrides do not prompt in yolo. These additions are not a complete destructive-command filter.
+Patterns are case-sensitive normalized textual wildcards, checked against raw
+commands and shell segments, with ordered first-match behavior by default.
+Removal denies now precede Git prompts so a Git match cannot mask a removal deny
+in the same compound command. Short force-push patterns require the start of a
+short-option argument instead of accidentally matching `--follow-tags`.
+Selected dry-run clean spellings can still prompt conservatively.
 
-Every eval call prompts, including benign calculations: this is the deliberate cost of covering an independent execution surface without a custom parser/hook. Approval is not permission to exceed the user's task or an OS boundary. User-controlled cleanup must not be converted into agent execution through another tool to evade a deny.
+Aliases, expansions, alternate interpreters, unlisted option spellings, quoted text
+and subprocesses retain false-negative/false-positive limitations. Built-in critical
+overrides without explicit prompt/deny remain ignored under yolo; in legacy
+standalone/compound handling critical detection can replace a Git prompt with that
+bare override. This is not a complete destructive-command filter or OS containment.
+Recheck after upgrades. Approval never authorizes exceeding task scope.
 
 ## Anti Slop selective merge
 

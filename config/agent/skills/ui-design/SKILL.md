@@ -72,7 +72,7 @@ Routing:
 
 - **Explicit OpenDesign request or explicit external generated/refined artifact requirement:** follow [reference/open-design.md](reference/open-design.md). Ordinary refinement and this skill's named-element live-browser `generate` do not require OpenDesign.
 - **No argument:** read [routing.md](reference/routing.md) and present its context-aware menu; never auto-run a command.
-- **Explicit or clearly implied request to run a command:** load its reference (native variant on native platforms) and follow it. Ask once if two commands fit.
+- **Explicit or clearly implied request to run a command:** load its reference (native variant on native platforms) and follow it. Choose the best-fitting command from the requested outcome and evidence; ask only if competing choices would materially change direction or outcome.
 - **Workflow or command-selection question:** read [Workflow questions](reference/routing.md#workflow-questions).
 - **Otherwise:** treat the request as general design work. Missing PRODUCT.md routes a new surface or replacement world through init, then new-work; a narrow refinement of existing code proceeds on the incumbent implementation as `impeccable context` directs, offering init afterward rather than blocking on it.
 - `teach` aliases `init`. `craft` is a deprecated alias for ordinary new-work and adds nothing. `shape` owns task discovery, then enters new-work only for visual-world and surface-concept decisions.

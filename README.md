@@ -5,7 +5,7 @@ workflows, on-demand capability guidance, and optional documentation-driven deli
 
 > **Safety:** This configuration deliberately sets `tools.approvalMode: yolo`, an unrestricted approval mode. Review this setting and its consequences before installing.
 
-The native yolo config keeps ordinary commands yolo, prompts for selected force-push/reset/clean bash forms, and denies matching recursive force-rm forms. It prompts every `eval` call because eval can reach an independent shell surface. These policies are textual approval rules, not containment. The doctor reports managed-file health separately from advisory legacy/unmanaged observations and never prunes them. See [capability decisions](docs/capabilities.md) for rationale and read-only Git triage/PR/status workflows.
+Ordinary requested work proceeds within scope without repeated conversational confirmation; [PERSONALITY](config/agent/PERSONALITY.md#task-authority) owns that rule. Native yolo still prompts for selected force-push/reset/clean bash forms and denies matching recursive force-rm forms. Eval backends are disabled by default, avoiding routine eval prompts without opening its independent process-execution surface; deliberately re-enabled eval still prompts. This also removes eval-only browser helpers, persistent Python/JS cells and eval orchestration by default: use available native tools or existing project automation, or deliberately opt into eval for a session. These are textual approval rules, not containment. The doctor never prunes unrelated data. See [capability decisions](docs/capabilities.md#approval-friction-decision) for the tradeoff and limits.
 
 This repository is a portable, inventory-managed snapshot of user-level configuration and guidance for an existing OMP installation. It is not OMP, an installer for OMP, a plugin marketplace installer, or a project template. It contains no OMP application or credentials and starts no external services.
 
@@ -150,7 +150,7 @@ The [migration map](docs/migration.md) distinguishes shipped hidden compatibilit
 
 ## Verification and known limits
 
-Last verified OMP: **18.6.3** (official release/source `093275112f7adff207608673c0e33c7f3d16e27f`). This is not a minimum-version or future-compatibility guarantee. [The canonical upgrade gate](config/agent/skills/docs-engineering/references/omp-compatibility.md) separates static, native-runtime and authenticated checks.
+Approval-specific compatibility is checked against installed OMP **18.8.0**; the previous broader discovery/architecture verification was **18.6.3** (official source `093275112f7adff207608673c0e33c7f3d16e27f`). Neither is a minimum-version or future-compatibility guarantee. [The canonical upgrade gate](config/agent/skills/docs-engineering/references/omp-compatibility.md) and [verification records](docs/verification.md) separate static, handler, native-runtime and authenticated checks.
 
 The repository includes static configuration, installer/doctor, routing-hook,
 and disposable-home verification. Scope, receipts, historical evidence, and

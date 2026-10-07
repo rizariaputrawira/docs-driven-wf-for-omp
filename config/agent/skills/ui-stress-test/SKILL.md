@@ -142,7 +142,7 @@ Close with the actual harness location and states only if a harness was implemen
 | Invocation | Behavior |
 | --- | --- |
 | `<component or screen>` | Scope the request; inspection-only yields case/harness proposals, while authorized harness work may proceed to rendered inspection and report. |
-| `<component> + fix` | Build/inspect only within granted harness and fix scope; do not assume production corrections are authorized. |
+| `<component> + fix` | Build/inspect within the requested harness and fix scope; direct `+ fix` authorizes the named production corrections, not unrelated changes. |
 | `fix all` / `fix 1, 3` | Apply named fixes from a prior report only when requested; re-check relevant states when possible. |
 | `data only <component>` | Propose a case fixture and harness shape without writes unless implementation is explicitly authorized. |
 

@@ -29,8 +29,9 @@ for broader brand-board/logo-world concepts.
 - `ui-design` is the primary UI workflow. Component craft and marketing references
   stay lazy and conditional; motion/platform owners are selected only in scope.
 - `ui-web-motion` selects build/opportunities/vocabulary, bounded existing-motion
-  lifecycle or explicit diff review. Reviews are not native execution approval.
-  `ui-expo-motion` owns Expo/RN, `ui-mobile-web` owns browser/PWA, not native apps.
+  lifecycle or explicit diff review. Review-only requests stay read-only; a request
+  to review and fix includes implementation. `ui-expo-motion` owns Expo/RN,
+  `ui-mobile-web` owns browser/PWA, not native apps.
 - `ui-image-generation` generates requested images only, selecting web or mobile
   procedure lazily. `ui-image-to-code` implements a supplied/authorized reference.
   Tool availability and actual image output are required, not assumed.
@@ -47,7 +48,10 @@ for broader brand-board/logo-world concepts.
   `workflow-handoff-read` reads one snapshot only. Continuing work belongs to
   authorized delivery, not load-only handoff reading.
 - Git advice/status/triage never implies commit, push, publish, merge or labels.
-  `git-pr-work` implements only authorized scope and may draft unpublished PR text.
+  An explicit request for those actions counts as task authority under
+  [the canonical working policy](config/agent/PERSONALITY.md); native approval
+  still applies. `git-commit-message` itself remains read-only.
+  `git-pr-work` implements requested scope and may draft unpublished PR text.
 
 ## Legacy names and filters
 

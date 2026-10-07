@@ -2,11 +2,47 @@
 
 This is the sole compatibility owner. It governs evidence, not runtime authority,
 installation or an upgrade service. No minimum-version range is claimed.
-**Last verified OMP: 18.6.3**, official release/source
+**Last broader skill/discovery verification: 18.6.3**, official release/source
 [093275112f7adff207608673c0e33c7f3d16e27f](https://github.com/can1357/oh-my-pi/tree/093275112f7adff207608673c0e33c7f3d16e27f).
-Installed version, source support and authenticated behavior are different proofs.
+Approval-specific checks below use **18.8.0**. Installed version, source support,
+passive registration, handler behavior and authenticated execution are different proofs.
 Current outcomes live in the source checkout's `docs/verification.md`, which is
 not deployed as part of this skill package.
+
+## Approval-specific 18.8.0 check
+
+Official main and release v18.8.0 resolved to
+[`4ef97c8826ee012829a3e756b693a2a16a414f47`](https://github.com/can1357/oh-my-pi/tree/4ef97c8826ee012829a3e756b693a2a16a414f47).
+The installed Linux-x64 binary SHA-256 matched the release asset. Re-resolve the
+installed version and current official source before applying this result to an upgrade.
+
+- Inspect [approval documentation](https://github.com/can1357/oh-my-pi/blob/4ef97c8826ee012829a3e756b693a2a16a414f47/docs/approval-mode.md),
+  [resolver](https://github.com/can1357/oh-my-pi/blob/4ef97c8826ee012829a3e756b693a2a16a414f47/packages/coding-agent/src/tools/approval.ts),
+  [bash matcher](https://github.com/can1357/oh-my-pi/blob/4ef97c8826ee012829a3e756b693a2a16a414f47/packages/coding-agent/src/tools/bash.ts)
+  and [extension wrapper](https://github.com/can1357/oh-my-pi/blob/4ef97c8826ee012829a3e756b693a2a16a414f47/packages/coding-agent/src/extensibility/extensions/wrapper.ts).
+  Per-tool prompt/deny still apply under yolo; recheck final rewritten arguments,
+  ordered raw/segment matches and critical-before-prompt behavior.
+- Inspect [eval settings](https://github.com/can1357/oh-my-pi/blob/4ef97c8826ee012829a3e756b693a2a16a414f47/packages/coding-agent/src/eval/settings.ts)
+  and [built-in selection](https://github.com/can1357/oh-my-pi/blob/4ef97c8826ee012829a3e756b693a2a16a414f47/packages/coding-agent/src/tools/index.ts).
+  Both backends disabled must remove eval; one enabled backend exposes it. Retain
+  the prompt policy for deliberate opt-in. Check browser/prelude and Code-Mode
+  capability implications; do not infer standalone browser/python tools from CLI help.
+- Inspect [structured child policy](https://github.com/can1357/oh-my-pi/blob/4ef97c8826ee012829a3e756b693a2a16a414f47/packages/coding-agent/src/task/structured-subagent.ts)
+  and [executor](https://github.com/can1357/oh-my-pi/blob/4ef97c8826ee012829a3e756b693a2a16a414f47/packages/coding-agent/src/task/executor.ts):
+  ordinary children are headless yolo but inherit per-tool policies; prompt-required
+  calls reject without UI. Native Plan Mode retains its read-only child restrictions.
+- Run the existing configuration and hook checks. Use inert command strings for
+  destructive-pattern handler verification, never execute the destructive examples.
+  Source-loaded handlers with fixture settings/UI are not installed TUI-dialog proof.
+- For passive native registration, use isolated HOME/PI_CODING_AGENT_DIR/empty cwd,
+  no copied credentials/extensions/MCP and a non-generating RPC `get_state` call.
+  Explicitly select the intended configured model if auth-free default selection
+  cannot resolve it; do not send a model turn merely to inspect `dumpTools`.
+  Record exact config/overlays, model, version, tool list and zero message/stream state.
+
+Current exercised results, reproduction commands, authority simulations and
+unverified dialog/model-behavior limits remain in the checkout's
+`docs/verification.md`; this reference is the upgrade checklist, not an approval router.
 
 ## Status vocabulary and safe execution
 
