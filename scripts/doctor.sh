@@ -50,6 +50,12 @@ while IFS="$(printf '\t')" read -r template dest; do
     fi
   fi
 done < "$PLAN"
+if sh "$SCRIPT_DIR/telemetry-profiles.sh" "$HOME_DIR" check; then :
+else
+  result=$?
+  [ "$result" -eq 1 ] || { echo 'managed summary: errors found'; exit 2; }
+  status=1
+fi
 if [ "$status" -eq 0 ]; then echo 'managed summary: healthy'; else echo 'managed summary: errors found'; fi
 legacy=0
 for base in .agent .agents; do

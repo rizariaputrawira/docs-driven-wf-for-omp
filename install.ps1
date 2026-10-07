@@ -53,9 +53,13 @@ function Read-Inventory([string]$Path, [string]$Root, [string]$TargetHome) {
         $items.Add(@{ Source = $source; Destination = $destination; Bytes = $bytes; Actual = $actual })
     }
     if ($items.Count -eq 0) { throw 'Inventory is empty.' }
-    if (-not $destinations.ContainsKey('.omp/agent/AGENTS.md') -or -not $destinations.ContainsKey('.omp/agent/config.yml')) { throw 'Inventory must include AGENTS.md and config.yml.' }
+    $requiredAgents = '.omp/agent/AGENTS.md'.Replace('/', [IO.Path]::DirectorySeparatorChar)
+    $requiredConfig = '.omp/agent/config.yml'.Replace('/', [IO.Path]::DirectorySeparatorChar)
+    if (-not $destinations.ContainsKey($requiredAgents) -or -not $destinations.ContainsKey($requiredConfig)) { throw 'Inventory must include AGENTS.md and config.yml.' }
     return ,$items
 }
+. (Join-Path $PSScriptRoot 'scripts/telemetry-profiles.ps1')
+
 
 $dryRun = $false; $homeOverride = $null; $sourceOverride = $null; $help = $false
 for ($i = 0; $i -lt $args.Count; $i++) {
@@ -93,6 +97,7 @@ try {
     $targetHome = (Resolve-Path -LiteralPath $homePath).Path
     $inventory = Join-Path $sourceRoot 'config/files.tsv'
     if (-not (Test-Path -LiteralPath $inventory -PathType Leaf) -or (Is-Reparse $inventory)) { throw "Missing or unsafe inventory: $inventory" }
+    $profiles = @(Get-TelemetryProfilePlan $targetHome)
     $items = Read-Inventory $inventory $sourceRoot $targetHome
     foreach ($item in $items) {
         if ($null -ne $item.Actual -and (EqualBytes $item.Bytes $item.Actual)) { Write-Output "unchanged: $($item.Destination)"; continue }
@@ -110,5 +115,6 @@ try {
         [IO.File]::WriteAllBytes($item.Destination, $item.Bytes)
         Write-Output "installed: $($item.Destination)"
     }
+    Install-TelemetryProfiles $profiles $dryRun
 } catch { [Console]::Error.WriteLine($_.Exception.Message); exit 2 }
 finally { if ($tempRoot -and (Test-Path -LiteralPath $tempRoot)) { Remove-Item -LiteralPath $tempRoot -Recurse -Force } }

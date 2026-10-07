@@ -20,8 +20,8 @@ sh install.sh --dry-run
 sh install.sh
 ```
 
-Windows PowerShell (beta; a known inventory-validation failure currently blocks
-full installation—see [requirements](#requirements-and-prerequisites)):
+Windows PowerShell (beta; the telemetry/profile changes still require
+PowerShell runtime verification—see [requirements](#requirements-and-prerequisites)):
 
 ```powershell
 .\install.ps1 -DryRun
@@ -106,7 +106,7 @@ Example OMP requests:
 - Install OMP separately using its [official installation choices](https://github.com/can1357/oh-my-pi#install). Authenticate with `omp login openai-codex` or `/login openai-codex` inside OMP. A generic OpenAI API key does not automatically authenticate the separate provider. See [OMP provider documentation](https://github.com/can1357/oh-my-pi/blob/main/docs/providers.md).
 - Configured model identifiers are `gpt-6.1-sol` and `gpt-6-luna`; account/provider availability is not established here. Select supported models in your own settings if needed.
 - POSIX installation requires `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp` and `date`. Remote ZIP additionally requires `curl` and `unzip`.
-- Windows installer is beta and requires PowerShell 5.1+; remote ZIP uses `Invoke-WebRequest` and `Expand-Archive`. A disposable Windows PowerShell 5.1 run rejected a valid inventory, so successful full installation is not established; details and preserved evidence are in [verification records](docs/verification.md).
+- Windows installer is beta and requires PowerShell 5.1+; remote ZIP uses `Invoke-WebRequest` and `Expand-Archive`. Normalized-key inventory lookup is repaired in source; PowerShell runtime verification is unavailable for the new telemetry/profile changes. Windows PowerShell 5.1 and native-Windows behavior remain unverified; historical evidence is in [verification records](docs/verification.md).
 - Third-party software and credentials are not bundled. Installation starts no services. Every installed file is inventoried.
 
 ### Optional integrations and capabilities
@@ -123,6 +123,55 @@ GitHub MCP and OpenDesign declarations are present by default and may attempt to
 | Browser, Stitch, image tools | Live Impeccable workflows need browser capability and a running surface. Google Stitch access/tool availability and permitted image-generation tools are needed only when requested. No generator, credential or provider is configured here. |
 
 Libraries mentioned in skill coding recipes are target-project dependencies, not baseline workstation requirements. Bundled upstream snapshots need no separate install; see [provenance and licensing](config/SKILL-SOURCES.md).
+
+### Optional outbound observability
+
+The managed OMP configuration explicitly disables `telemetry.otlpExportEnabled`
+and `dev.autoqa`, with `dev.autoqaConsent: denied`. Keep those values explicit:
+OMP 18.8.0 defaults OTLP export and AutoQA to enabled, although export also
+requires an endpoint and automatic issue submission requires consent.
+Local session, usage-accounting and troubleshooting logs remain enabled.
+
+Installers deploy `.omp/telemetry.env` and `.omp/telemetry.ps1` and add an
+idempotent managed source stanza to POSIX `.profile` and `.bashrc`, plus
+existing `.bash_profile`, `.bash_login`, and `.zshenv`. Changed profiles are
+backed up before modification; their existing bytes are preserved. A zsh
+configuration directory is not created or managed. PowerShell uses the default
+WindowsPowerShell and PowerShell profile layouts under the selected home; no
+machine-wide environment or registry setting is written. Unsupported or
+redirected shell profiles and independently launched OpenDesign daemons remain
+outside this managed boundary. Malformed managed stanzas are rejected before
+payload writes rather than rewriting unknown user code.
+
+The environment disables Bun/OMP/RTK/Next telemetry, OMP AutoQA, and the
+discovered OpenDesign PostHog, Langfuse, relay, and Vela telemetry controls.
+OMP's extension applies the same opt-outs at load so OMP-launched children
+inherit them. A Bun native binary started before OMP initialization still
+needs a shell/PowerShell profile launch to inherit `DO_NOT_TRACK`.
+`DO_NOT_TRACK=1` disables Bun crash uploads and telemetry
+([Bun reference](https://bun.com/docs/runtime/environment-variables.md));
+`OTEL_SDK_DISABLED=true` disables OMP exporter initialization. Restart
+existing launches to inherit environment changes.
+
+Do not enable `PI_AUTO_QA` or `PI_AUTO_QA_PUSH` through launch overlays.
+Intentional later environment overrides, `--no-extensions`, and remote server
+policies are outside this default-off installation guarantee.
+
+Independent integration preferences are not overwritten: RTK supports
+`RTK_TELEMETRY_DISABLED=1`, and `rtk telemetry disable` also persists denied
+consent. Keep OpenDesign's `telemetry.metrics`, `telemetry.content`, and
+`telemetry.artifactManifest` false in its own app preferences. OpenDesign's
+browser exception transport bypasses analytics consent when a PostHog key
+exists; managed launches mask that telemetry-specific key and the separate
+Langfuse/relay inputs. Check an independently launched daemon's local
+`/api/analytics/config` response for `key: null` and `host: null`.
+Provider/authentication, model-catalog/update and explicitly requested network
+traffic remain available.
+
+Run `python3 scripts/test_install.py` for the production POSIX integration
+checks. `pwsh -NoProfile -File scripts/test_telemetry_install.ps1` covers the
+PowerShell telemetry install path, including UTF-16 profile preservation; it
+requires a PowerShell runtime and is not native-Windows proof when run on Linux.
 
 ## Configuration doctor
 
@@ -146,7 +195,7 @@ Exit codes: `0` every mapped file matches; `1` one or more files are missing/dri
 
 Installation is non-pruning. Old native folders remain discoverable in existing homes until a separately authorized retirement moves them outside **all skill discovery roots**. Inspect and preserve customized contents first; do not blanket-delete directories. Managed discovery settings leave `customDirectories` empty and disable Agents user/project skill-source discovery, but other runtime providers may exist; this is not application-wide isolation.
 
-The [migration map](docs/migration.md) distinguishes shipped hidden compatibility pointers from stale unmanaged folders. The current catalog has 35 canonical capabilities (33 visible, 2 explicit-only), 14 hidden aliases, 263 skill assets and 282 managed mappings. [Decisions and inventory](docs/capabilities.md) account for all 36 current-main input capabilities. No live-home migration was performed. Retired provider roots can be recreated by external updaters; use the native skill destination.
+The [migration map](docs/migration.md) distinguishes shipped hidden compatibility pointers from stale unmanaged folders. The current catalog has 35 canonical capabilities (33 visible, 2 explicit-only), 14 hidden aliases, 263 skill assets and 285 managed mappings. [Decisions and inventory](docs/capabilities.md) account for all 36 current-main input capabilities. No live-home migration was performed. Retired provider roots can be recreated by external updaters; use the native skill destination.
 
 ## Verification and known limits
 

@@ -40,7 +40,7 @@ def make_fixture(directory: Path) -> Path:
     fixture = directory / "source fixture"
     (fixture / "config").mkdir(parents=True)
     shutil.copy2(INVENTORY, fixture / "config/files.tsv")
-    for source in ("install.sh", "scripts/doctor.sh", "scripts/validate-inventory.sh", "scripts/retired-skills.txt", *(source for source, _ in mappings())):
+    for source in ("install.sh", "scripts/doctor.sh", "scripts/validate-inventory.sh", "scripts/telemetry-profiles.sh", "scripts/retired-skills.txt", *(source for source, _ in mappings())):
         src = ROOT / source
         dst = fixture / source
         dst.parent.mkdir(parents=True, exist_ok=True)
@@ -85,8 +85,29 @@ def main() -> None:
 
         # Dry-run leaves destination trees untouched; explicit source/home path handling.
         result = run("sh", str(INSTALL), "--dry-run", "--source", str(source), "--home", str(home))
-        assert len(result.stdout.splitlines()) == len(rows)
+        assert len([line for line in result.stdout.splitlines() if line.startswith("would install:")]) == len(rows)
         assert not (home / ".omp").exists() and not (home / ".agents").exists()
+        assert not list(home.iterdir())
+        unsafe_home = tmp / "unsafe-profile-home"
+        unsafe_home.mkdir()
+        (unsafe_home / ".profile").symlink_to(home / ".profile")
+        run("sh", str(INSTALL), "--source", str(source), "--home", str(unsafe_home), expected=2)
+        assert not (unsafe_home / ".omp").exists()
+        marker = "# >>> omp telemetry opt-out >>>"
+        end_marker = "# <<< omp telemetry opt-out <<<"
+        source_line = '[ -r "$HOME/.omp/telemetry.env" ] && . "$HOME/.omp/telemetry.env"'
+        for index, text in enumerate((
+            f"{marker}\n# {source_line}\n{end_marker}\n",
+            f"if false; then\n{marker}\n{source_line}\n{end_marker}\nfi\n",
+            f"{end_marker}\n{source_line}\n{marker}\n",
+        )):
+            invalid_home = tmp / f"invalid-profile-{index}"
+            invalid_home.mkdir()
+            (invalid_home / ".profile").write_text(text, encoding="utf-8")
+            run("sh", str(INSTALL), "--source", str(source), "--home", str(invalid_home), expected=2)
+            assert not (invalid_home / ".omp").exists()
+            assert (invalid_home / ".profile").read_text(encoding="utf-8") == text
+
 
         # Default HOME and explicit home both install the complete inventory.
         default_home = tmp / "default-home"
@@ -105,6 +126,23 @@ def main() -> None:
         assert "managed summary: healthy" in empty_observation.stdout
         run("sh", str(INSTALL), "--source", str(source), "--home", str(home))
         assert_install(home, rows)
+        profile = home / ".profile"
+        original_profile = b"# user bytes\nexport USER_VALUE='kept'"
+        profile.write_bytes(original_profile)
+        run("sh", str(INSTALL), "--source", str(source), "--home", str(home))
+        updated = profile.read_bytes()
+        assert updated.startswith(original_profile)
+        backups = list(home.glob(".profile.bak.*"))
+        assert len(backups) == 1 and backups[0].read_bytes() == original_profile
+        run("sh", str(INSTALL), "--source", str(source), "--home", str(home))
+        assert len(list(home.glob(".profile.bak.*"))) == 1
+        env_probe = run("sh", "-c", '. "$HOME/.profile"; printf "%s|%s|%s|%s|%s" "$DO_NOT_TRACK" "$OTEL_SDK_DISABLED" "$RTK_TELEMETRY_DISABLED" "$PI_AUTO_QA" "$POSTHOG_KEY"', env={**os.environ, "HOME": str(home), "PI_AUTO_QA": "1", "POSTHOG_KEY": "enabled"})
+        assert env_probe.stdout == "1|true|1|0|"
+        profile.unlink()
+        doctor(home, expected=1)
+        doctor(home, "--fix")
+        loaded = run("sh", "-c", '. "$HOME/.profile"; printf "%s" "$DO_NOT_TRACK"', env={**os.environ, "HOME": str(home), "DO_NOT_TRACK": "0"})
+        assert loaded.stdout == "1"
 
         # Identical installs preserve mtimes and create no backups.
         target = home / ".omp/agent/config.yml"

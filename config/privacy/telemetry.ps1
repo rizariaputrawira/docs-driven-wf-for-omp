@@ -1,0 +1,12 @@
+# Default opt-outs for optional local telemetry integrations.
+$env:DO_NOT_TRACK = '1'
+$env:OTEL_SDK_DISABLED = 'true'
+$env:RTK_TELEMETRY_DISABLED = '1'
+$env:NEXT_TELEMETRY_DISABLED = '1'
+$env:POSTHOG_KEY = ''
+$env:LANGFUSE_PUBLIC_KEY = ''
+$env:LANGFUSE_SECRET_KEY = ''
+$env:OPEN_DESIGN_TELEMETRY_RELAY_URL = ''
+$env:OPEN_DESIGN_VELA_TELEMETRY = '0'
+$env:PI_AUTO_QA = '0'
+$env:PI_AUTO_QA_PUSH = '0'

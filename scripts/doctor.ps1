@@ -53,9 +53,13 @@ function Read-Inventory([string]$Path, [string]$Repository, [string]$TargetHome)
         $items.Add(@{ Source = $source; Destination = $destination; Expected = $expected; Actual = $actual })
     }
     if ($items.Count -eq 0) { throw 'Inventory is empty.' }
-    if (-not $destinations.ContainsKey('.omp/agent/AGENTS.md') -or -not $destinations.ContainsKey('.omp/agent/config.yml')) { throw 'Inventory must include AGENTS.md and config.yml.' }
+    $requiredAgents = '.omp/agent/AGENTS.md'.Replace('/', [IO.Path]::DirectorySeparatorChar)
+    $requiredConfig = '.omp/agent/config.yml'.Replace('/', [IO.Path]::DirectorySeparatorChar)
+    if (-not $destinations.ContainsKey($requiredAgents) -or -not $destinations.ContainsKey($requiredConfig)) { throw 'Inventory must include AGENTS.md and config.yml.' }
     return ,$items
 }
+. (Join-Path $PSScriptRoot 'telemetry-profiles.ps1')
+
 
 $check = $false; $fix = $false; $homeOverride = $null; $help = $false
 for ($i = 0; $i -lt $args.Count; $i++) {
@@ -81,13 +85,19 @@ try {
     $inventory = Join-Path $repository 'config/files.tsv'
     if (-not (Test-Path -LiteralPath $inventory -PathType Leaf) -or (Is-Reparse $inventory)) { throw "Missing or unsafe inventory: $inventory" }
     $items = Read-Inventory $inventory $repository $targetHome
+    $profiles = @(Get-TelemetryProfilePlan $targetHome)
     if ($fix) {
         $installer = Join-Path $repository 'install.ps1'
         $installerArguments = @('-Source', $repository, '-Home', $targetHome)
         & $installer @installerArguments
         if (-not $?) { throw 'Installer invocation failed.' }
+        $profiles = @(Get-TelemetryProfilePlan $targetHome)
     }
     $status = 0
+    foreach ($profile in $profiles) {
+        if ($profile.Present) { Write-Output "pass telemetry profile stanza: $($profile.Path)" }
+        else { Write-Output "missing telemetry profile stanza: $($profile.Path)"; $status = 1 }
+    }
     foreach ($item in $items) {
         if (-not (Test-Path -LiteralPath $item.Destination -PathType Leaf)) { Write-Output "missing: $($item.Destination)"; $status = 1; continue }
         $actual = [IO.File]::ReadAllBytes($item.Destination)

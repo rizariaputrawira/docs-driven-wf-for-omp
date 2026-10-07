@@ -55,6 +55,7 @@ HOME_DIR=$(CDPATH= cd -P -- "$HOME_DIR" && pwd) || { echo 'unusable home directo
 TMP=${TMP:-$(mktemp -d)} || { echo 'cannot create temporary directory' >&2; exit 2; }
 PLAN=$TMP/plan
 sh "$SCRIPT_DIR/scripts/validate-inventory.sh" "$SOURCE" "$HOME_DIR" > "$PLAN"
+sh "$SCRIPT_DIR/scripts/telemetry-profiles.sh" "$HOME_DIR" plan
 
 # All sources and targets are validated before any writes.
 while IFS="$(printf '\t')" read -r template dest; do
@@ -76,3 +77,8 @@ while IFS="$(printf '\t')" read -r template dest; do
   cp "$template" "$dest" || { echo "cannot install: $dest" >&2; exit 1; }
   echo "installed: $dest"
 done < "$PLAN"
+if [ "$DRY_RUN" -eq 1 ]; then
+  sh "$SCRIPT_DIR/scripts/telemetry-profiles.sh" "$HOME_DIR" dry-run
+else
+  sh "$SCRIPT_DIR/scripts/telemetry-profiles.sh" "$HOME_DIR" apply
+fi

@@ -280,3 +280,6 @@ config/agent/skills/workflow-retrospective/references/learning-extraction.md	.om
 config/agent/skills/workflow-upstream-review/SKILL.md	.omp/agent/skills/workflow-upstream-review/SKILL.md
 config/agent/skills/write-swift/SKILL.md	.omp/agent/skills/write-swift/SKILL.md
 config/agent/skills/writing-for-agents/SKILL.md	.omp/agent/skills/writing-for-agents/SKILL.md
+config/privacy/telemetry.env	.omp/telemetry.env
+config/privacy/telemetry.ps1	.omp/telemetry.ps1
+config/agent/extensions/telemetry-opt-out.js	.omp/agent/extensions/telemetry-opt-out.js
