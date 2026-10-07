@@ -36,6 +36,17 @@ independent glossary/ADR, family-derived delivery and dated brainstorming spec
 defaults. Global adopted-project resolution covers unchanged coding/UI/security
 consumers while preserving their ordinary non-adoption and read-only boundaries.
 
+Local deployment ran `sh install.sh --dry-run`, `sh install.sh` and
+`sh scripts/doctor.sh --check` successfully. All 287 managed mappings matched;
+changed payload received backups and model/approval/integration settings were
+unchanged. Doctor also reported legacy roots, retired skills and unrelated
+unmanaged data, preserved by design. A targeted installed Markdown path scan
+confirmed obsolete `domain-modeling`, `project-delivery`, `brainstorming` and
+leftover `engineering-docs` references still contain old defaults outside the
+managed payload. This is a local non-pruning compatibility exception, not a
+second supported registry or a clean-home migration claim. Use the current
+managed skills; no retirement or arbitrary project migration was performed.
+
 ## Optional telemetry containment audit (2026-10-07)
 
 This source-led audit and local verification start from the clean omp-docflow checkout at

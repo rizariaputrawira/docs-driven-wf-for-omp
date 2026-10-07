@@ -113,6 +113,13 @@ are not mass-created and directories appear only when they contain files.
 `status` shows the documentation home, current gaps and recommended next action;
 `next` and `sequence` remain available for a prioritized queue and dependency view.
 
+Use the managed `docs-domain-modeling`, `workflow-delivery` and
+`workflow-brainstorming` names. Non-pruning upgrades may retain obsolete full
+`domain-modeling`, `project-delivery` or `brainstorming` procedures and old
+`engineering-docs` references with conflicting defaults. They are not the
+canonical contract; inspect doctor advisories and the [migration map](docs/migration.md)
+before separately authorized retirement. Installation never deletes them.
+
 Example OMP requests:
 
 - “Use code-debugging to trace this reported export failure; inspect the actual caller and relevant evidence, then explain the cause or remaining uncertainty.”
