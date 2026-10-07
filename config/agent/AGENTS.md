@@ -8,6 +8,8 @@ Apply this routing only when the documentation-driven suite is available, enable
 
 When the guard applies, material authoritative-context dependencies use `docs-engineering`; new applications and explicit substantial/end-to-end documentation-dependent delivery use `workflow-delivery`. Context retrieval alone is not full delivery. Consequential multi-slice plan review can apply without manufacturing a documentation baseline. Other owners include `code-debugging` for difficult causes, `code-review` for requested review, `ui-design` for UI, `code-simplicity` for coding simplicity, and `agent-guidance` for guidance work. Specialists are selected by actual trigger, not mandatory phases.
 
+For documentation-relevant work in a project that has explicitly adopted docs-engineering, read `skill://docs-engineering/references/locations.md` and resolve canonical IDs through its catalog and `docs/docs-engineering.yaml`. This shared rule applies to document creation, lookup, review, coding/UI context, durable security records and handoff source references; do not guess alternate trees or create duplicate owners. `docs/README.md` is the human navigator; `PRODUCT.md` and `DESIGN.md` stay at project root. Temporary tool evidence and portable handoff snapshots are not canonical project documents. Handoff-read still reads only the selected snapshot, not its cited project files. Before adoption preserve existing locations; ordinary coding/UI and opening a project never trigger setup or migration.
+
 | Current task trigger | Procedure owner to read on demand |
 |---|---|
 | Material documentation/context dependency | `skill://docs-engineering`, context branch before dependent work. No manifest is required for safe provisional inspection; no automatic setup. |

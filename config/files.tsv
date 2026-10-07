@@ -68,6 +68,7 @@ config/agent/skills/docs-engineering/references/audit.md	.omp/agent/skills/docs-
 config/agent/skills/docs-engineering/references/catalog.yaml	.omp/agent/skills/docs-engineering/references/catalog.yaml
 config/agent/skills/docs-engineering/references/context-routing.md	.omp/agent/skills/docs-engineering/references/context-routing.md
 config/agent/skills/docs-engineering/references/game.md	.omp/agent/skills/docs-engineering/references/game.md
+config/agent/skills/docs-engineering/references/locations.md	.omp/agent/skills/docs-engineering/references/locations.md
 config/agent/skills/docs-engineering/references/manifest.md	.omp/agent/skills/docs-engineering/references/manifest.md
 config/agent/skills/docs-engineering/references/mobile.md	.omp/agent/skills/docs-engineering/references/mobile.md
 config/agent/skills/docs-engineering/references/omp-compatibility.md	.omp/agent/skills/docs-engineering/references/omp-compatibility.md
@@ -84,6 +85,7 @@ config/agent/skills/docs-engineering/references/web.md	.omp/agent/skills/docs-en
 config/agent/skills/docs-engineering/templates/architecture.md	.omp/agent/skills/docs-engineering/templates/architecture.md
 config/agent/skills/docs-engineering/templates/artifact.md	.omp/agent/skills/docs-engineering/templates/artifact.md
 config/agent/skills/docs-engineering/templates/manifest.yaml	.omp/agent/skills/docs-engineering/templates/manifest.yaml
+config/agent/skills/docs-engineering/templates/navigator.md	.omp/agent/skills/docs-engineering/templates/navigator.md
 config/agent/skills/docs-engineering/templates/requirements.md	.omp/agent/skills/docs-engineering/templates/requirements.md
 config/agent/skills/docs-engineering/templates/threat-model.md	.omp/agent/skills/docs-engineering/templates/threat-model.md
 config/agent/skills/docs-engineering/templates/traceability.yaml	.omp/agent/skills/docs-engineering/templates/traceability.yaml

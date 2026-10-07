@@ -1,5 +1,41 @@
 # Verification and current limits
 
+## Canonical documentation location adoption (2026-10-07)
+
+Source baseline: current `main` at
+`d37dd6dd5b2a45485b117cc97c5355309b7453d3`. This change is passive
+skill/catalog guidance, not a runtime extension or project-migrating installer.
+The catalog defines 128 exact local artifact destinations and one external-only
+artifact among 129 existing IDs; document selection remains selective.
+
+| Exercised check | Result and boundary |
+|---|---|
+| `bun scripts/test_document_locations.mjs` | PASS: complete unique artifact destinations, approved taxonomy/safe project-relative paths, root/native-format exceptions, infrastructure defaults, rejected unsafe/duplicate paths and retired competing fallback/registry lint. |
+| `bun scripts/test_skill_catalog.mjs` | PASS: 35 canonical skills, 14 hidden aliases, 265 mapped skill assets, 287 inventory mappings, 38 notices, URI/relative targets. Its previously documented privacy destination assertion now reflects the existing supported inventory; no privacy payload changed. |
+| `bun scripts/test_agent_config.mjs` | PASS: existing seven worker definitions/configuration contract and 24 negative cases; no model, approval or routing changes. |
+| `python3 scripts/test_install.py` | PASS: production POSIX installer/doctor integration for 287 entries; PowerShell unavailable, not verified. |
+| Source-loaded OMP 18.8.0 setup/status, `openai-codex/gpt-6-luna`, disposable half-finished Parcel CLI | PASS in this fixture: read implementation/mixed notes, reconciled product/SRS/architecture/deployment to canonical owners, retained abandoned-dashboard history, created navigator/manifest, recorded adoption, and returned `docs/testing/test-strategy.md` with a verification-gap reason. No absent substantive document forest. |
+| Source-loaded read-only pre-adoption countercase | PASS in this fixture: inspected root `requirements.md`, reported provisional context/authority limits, no migration, manifest, navigator or directory creation. |
+| Independent fixture inspection and `bun /tmp/docflow-check-smoke.mjs` | PASS: all supplied legacy facts/history retained, selected paths match catalog, navigation targets exist or are explicitly planned missing owners, implementation unchanged, only populated directories, pre-adoption file bytes/layout unchanged. |
+
+Local assessment sources were explicitly loaded from the candidate checkout,
+including its references/templates, not installed same-named skills. Prompts
+and resulting fixtures are `/tmp/docflow-smoke-adopt-prompt.md`,
+`/tmp/docflow-smoke-unadopted-prompt.md`, `/tmp/docflow-smoke-adopt/` and
+`/tmp/docflow-smoke-unadopted/`. These are disposable verification artifacts,
+not distributed project templates. CLI transcripts were captured in the
+controller's output artifacts. The baseline guidance was preserved but not
+behavior-run: no comparative red/green claim. Source-loaded behavior is not
+native discovery/registration, universal model obedience, Plan Mode enforcement,
+or full delivery/UI-runtime proof.
+
+Existing GitHub/OpenDesign MCP startup attempts failed in both CLI assessment
+runs; no MCP tools were used. The local filesystem scenarios completed despite
+those unrelated unavailable integrations. The source audit found and removed
+independent glossary/ADR, family-derived delivery and dated brainstorming spec
+defaults. Global adopted-project resolution covers unchanged coding/UI/security
+consumers while preserving their ordinary non-adoption and read-only boundaries.
+
 ## Optional telemetry containment audit (2026-10-07)
 
 This source-led audit and local verification start from the clean omp-docflow checkout at

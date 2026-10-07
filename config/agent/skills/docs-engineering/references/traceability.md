@@ -1,7 +1,7 @@
 # Traceability and evidence
 
 ## Map contract
-Reuse project ID/link conventions first. Stable IDs are necessary for risk-bearing, production, controlled and regulated behavior, not every paragraph. Lean may use durable anchors/inline links; controlled/regulated uses an explicit scoped map. Default new map `docs/traceability.yaml`, shaped by `templates/traceability.yaml`. Use the bounded authored YAML subset from [manifest](manifest.md#authored-yaml-subset).
+Reuse project ID/link conventions first. Stable IDs are necessary for risk-bearing, production, controlled and regulated behavior, not every paragraph. Lean may use durable anchors/inline links; controlled/regulated uses an explicit scoped map. Resolve adopted map/source paths through [locations](locations.md) and the catalog's `traceability-map`, shaped by `templates/traceability.yaml`; before adoption preserve existing ownership. Use the bounded authored YAML subset from [manifest](manifest.md#authored-yaml-subset).
 
 | Field | Type and invariant |
 |---|---|
@@ -55,17 +55,17 @@ version: 1
 nodes:
   "NEED-1":
     kind: need
-    source: "docs/product.md#account-privacy"
+    source: "docs/product/brief.md#account-privacy"
     scope:
       - accounts
   "PRD-1":
     kind: product-requirement
-    source: "docs/product.md#private-account-access"
+    source: "docs/product/prd.md#private-account-access"
     scope:
       - accounts
   "SEC-1":
     kind: requirement
-    source: "docs/requirements.md#sec-1"
+    source: "docs/requirements/srs.md#sec-1"
     scope:
       - accounts
     security: true
@@ -79,7 +79,7 @@ nodes:
       - accounts
   "CTRL-1":
     kind: control
-    source: "docs/security/controls.md#account-scope"
+    source: "docs/security/security-controls.md#account-scope"
     scope:
       - accounts
   "IMPL-1":
@@ -123,7 +123,7 @@ nodes:
     basis: "Illustrative planned iOS build revision 7; device validation unavailable"
   "FINDING-1":
     kind: finding
-    source: "docs/security/findings.md#finding-1"
+    source: "docs/security/security-findings.md#finding-1"
     scope:
       - accounts
     disposition: confirmed

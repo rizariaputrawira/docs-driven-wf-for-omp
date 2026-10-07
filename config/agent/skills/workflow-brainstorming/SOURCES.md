@@ -16,7 +16,7 @@ The files below are authored adaptations, not upstream executable distributions.
 
 ## Local modifications and removed incompatibilities
 
-Removed incumbent unsupported runtime-magic keyword assertions and keyword-conditioned delegation; upstream visual server, forced writing-plans transition, auto-commit, universal TDD, tracker tasks and provider directives. Preserved path-specific approval; native Plan Mode owns its single approval route. New-file default follows existing owners, then docs/specs/YYYY-MM-DD-<topic>.md, never relocates incumbents.
+Removed incumbent unsupported runtime-magic keyword assertions and keyword-conditioned delegation; upstream visual server, forced writing-plans transition, auto-commit, universal TDD, tracker tasks and provider directives. Preserved path-specific approval; native Plan Mode owns its single approval route. Adopted-project document destinations now resolve through the shared docs-engineering catalog/location contract; pre-adoption owners are not relocated implicitly. The former independent dated-spec fallback is removed.
 
 All procedures obey current higher-priority OMP/user permissions. Their instructions do not create a sandbox, model binding, execution authorization or approval API. References load only for their stated branch; shared owners are linked rather than cloned. Missing material source/evidence remains a gap, not a fabricated pass. These adaptations preserve the approved requested behavior rather than importing upstream engines.
 

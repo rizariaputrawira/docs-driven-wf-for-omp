@@ -15,6 +15,8 @@ Route only the requested capability when the suite is available/enabled:
 
 Skill loading never authorizes execution, installation, permission changes or a broader audit. Deliberate disablement/filtering wins; missing suite proof does not stop ordinary native OMP work or trigger automatic file-load/setup.
 
+For adopted projects, durable security documentation resolves through [locations](locations.md) and the manifest to its selected canonical security owner. Authorized persistence reconciles findings/review/remediation/release evidence into those owners, not a new directory convention. Temporary scanner output and raw tool artifacts stay evidence locators; do not move or duplicate them merely to populate canonical documentation. Security review/intake/audit does not itself authorize adoption or project writes.
+
 ## Requirements, data and trust
 
 Security-requirements names actor/asset/scope/invariant, rationale and negative acceptance/verification route, normally in owning requirements. Data-classification records actual categories/sensitivity/owners, collection/flow/storage/retention/access/disclosure and provenance; unknown remains unknown. Security-trust-boundary records principals/zones, privilege/data/action crossings and enforcement expectations, linked to architecture/interface/code evidence. Privacy-requirements links minimization/purpose/sharing/retention/deletion/user controls/disclosures to actual app and SDK flows plus named legal/client source where applicable. Risk-register keeps cause/event/consequence, owner, mitigation/residual risk and review trigger. Changes to data, exposure/principal/flow or obligation trigger these owners.

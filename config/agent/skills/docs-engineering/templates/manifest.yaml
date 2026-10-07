@@ -3,6 +3,8 @@
 # Field contract: references/manifest.md. Add only justified selected/omitted concepts.
 version: 1
 project:
+  # After authorized completed adoption only:
+  # documentation-location-standard: catalog-v1
   types:
     - software
   platforms: []
@@ -14,4 +16,6 @@ project:
     exposure: unknown
     rationale: "UNRESOLVED: inspect repository data, exposure, trust boundaries and obligations before selecting risk coverage."
 documents: {}
-# Optional traceability points to an existing project map, not a new competing owner.
+# Resolve local paths through references/locations.md and catalog.yaml.
+# Setup also creates templates/navigator.md at the catalog navigator path.
+# Optional traceability uses the catalog traceability-map path or a reviewed source.

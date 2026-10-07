@@ -1,9 +1,11 @@
 # Manifest v1 contract
 
 ## Discovery and ownership
-Default `docs/docs-engineering.yaml`; discover existing manifests through repository instructions and indexes first. Reuse their names and scope. Multiple independently authoritative manifests require an explicit ownership decision; do not choose the first or consolidate without authorization. Invalid/ambiguous manifests block dependent mutation and authority claims, not safe read-only reconnaissance. An absent manifest produces provisional context, not proof no constraints exist.
+Discover existing manifests through project instructions/indexes; multiple independently authoritative manifests require an explicit ownership decision. Invalid/ambiguous manifests block dependent mutation and authority claims, not safe read-only reconnaissance. An absent manifest produces provisional context, not proof no constraints exist.
 
-Choose needed information, existing owner, extension of owner, recognized concept, then a new file only for genuinely distinct ownership/audience/lifecycle. New default `docs/<family>/<canonical-id>.md` is a fallback, not a directory-creation command. Retain PRODUCT.md, DESIGN.md, GLOSSARY.md, ADR/API conventions and existing anchors. Different concepts can share a file at different anchors. Duplicate ownership means the same concept and overlapping scope asserted by competing sources, even when filenames differ; distinct anchors do not excuse semantic duplication.
+Explicit authorized setup adopts [locations](locations.md). Completed adoption records `project.documentation-location-standard: catalog-v1` at the catalog's manifest path and establishes its human navigator. A legacy manifest without this declaration retains pre-adoption semantics; do not migrate it automatically. Normalize authorized existing owners by content, preserving information/links. An unresolved canonical migration means setup is incomplete, not an alternative adopted location convention.
+
+After adoption resolve exact artifact paths/native formats through the catalog and shared location contract; no family-derived fallback. Reuse/extend sufficient information, permitting explained canonical owner/anchor consolidation and indexed external/tool-required exceptions, never arbitrary legacy-tree exceptions. Choose a standalone file only for genuinely distinct ownership/audience/lifecycle. Duplicate ownership is the same concept/overlapping scope asserted by competing sources even at different anchors.
 
 ## Authored YAML subset
 Use two-space block mappings/sequences, string mapping keys, single-line scalars and empty `[]`/`{}` only. Quote dates, IDs and potentially implicitly typed strings. Contentful flow collections, multiline keys/scalars, tags, anchors, aliases, merge keys and duplicate mapping keys are unsupported. A small source precheck tracks map key sets by indentation and sequence-item boundary before native Bun parsing; parsing success alone is insufficient. This is a bounded syntax guard, not a general parser/schema engine. Existing unsupported YAML remains read-only: report unsupported validation and await authorized conversion before dependent manifest edits.
@@ -22,6 +24,7 @@ All string values below are nonempty unless explicitly described otherwise; list
 | `project.criticality` | Optional low/normal/high/unknown; default unknown |
 | `project.security` | Required mapping with required `data-sensitivity` public/internal/sensitive/unknown, `exposure` offline/internal/internet/unknown and `rationale` string citing inspected basis |
 | `project.stage`, `project.deployment` | Optional strings; unknown can be explicitly recorded |
+| `project.documentation-location-standard` | Optional exact string `catalog-v1`; set only after explicit authorized completed adoption; absent means legacy/pre-adoption |
 | `project.obligations` | Optional list of actual named source/obligation strings; unknown interpretation stays explicit |
 | `documents` | Required mapping keyed by canonical catalog ID or explained project-specific ID; an empty map cannot support completeness claims |
 | document `required`, `reason` | Required boolean and string for both selection and relevant omission |
@@ -42,7 +45,7 @@ All string values below are nonempty unless explicitly described otherwise; list
 | document `standards` | Optional list of exact edition/release/source identifiers; applicability rationale remains in owning requirements/obligation record |
 | document `update-triggers` | Optional list of observable source/behavior/platform/evidence changes requiring review |
 | document `exceptions` | Optional list of mappings each requiring `reason`, `scope` string list (empty means project-wide), `owner`, `evidence` locator list (empty records an evidence gap), `review-trigger`; risk-bearing exceptions cannot waive missing authority or obligations |
-| `traceability` | Optional contained local path#anchor locator to an existing map or a declared planned local document location; alternatively a reviewed external handle/HTTPS locator. Default new map `docs/traceability.yaml` |
+| `traceability` | Optional contained local path#anchor to an existing map or a declared planned owner; alternatively a reviewed external handle/HTTPS locator. Adopted local maps resolve the catalog's traceability-map through [locations](locations.md) |
 
 No current-agent/current-wave/execution-state fields. Optional fields are absent, never null. Use exact field types, not arbitrary alternate lists/records. Approval obligations originate in project instructions or named obligations, not an invented approvalRequired flag.
 
@@ -50,6 +53,8 @@ No current-agent/current-wave/execution-state fields. Optional fields are absent
 `opendesign` uses the actual supplied opaque project/artifact handle; `https` requires a valid HTTPS URI; `project-artifact` identifies an existing project artifact handle. No commands, arbitrary schemes, inline credentials or credential-bearing query/fragment data. The finite validator conservatively rejects fragment assignments/separators (`=`, `&`, including percent-encoded forms), bearer/JWT shapes and malformed percent encoding; ordinary source anchors remain valid. Do not invent MCP tool names, fetch automatically or start services. Missing revision/review evidence means freshness unknown; supplied approval evidence must be inspected, not trusted because a string says approved.
 
 For local paths reject absolute/drive/UNC, traversal `..`, empty segments, NUL/control characters, leading home shorthand (`~`, `~/`, `~user`) and active-home configuration references. Preserve spaces and ordinary repository Unicode names, including unambiguous literal `./~/...`. Resolve real containment at each read/write, including the existing ancestor for planned missing targets and symlink targets; lexical prefix is insufficient. Anchors must exist when a file exists. Code symbols use available LSP navigation; inaccessible navigation is incomplete coverage, not a fabricated match. Missing file is observed missing; unreadable is a read/coverage error, never missing or clean. Locators are identifiers, not execution or network authorization.
+
+For adopted manifests, additionally validate each catalog owner against [locations](locations.md#one-path-resolver), including expanded ADR identities, supported native JSON selection, explained canonical anchor consolidation and genuine tool-required exceptions. Project-specific IDs must resolve their `concept` where they are instances of a catalog artifact; a custom concept has an explained owner/purpose and a deterministic explicit path within the approved taxonomy. No competing path registry. `approved-design-artifact` uses `source` only. Adoption never relaxes containment or evidence checks.
 
 A traceability external locator must match an existing manifest document source record of a supported kind, with revision and review date plus locally accessible inspected source evidence from verified document validation or source approval evidence. Every locator used by this evidence check is contained and inspected. Unavailable/unreviewed records are blocked; an opaque missing handle is never accepted as a planned local filename. A local trace pointer uses the same containment and locator/anchor rules. An existing map's anchors must resolve; a missing local map is a valid plan only when its path and anchor match a declared local document owner, including an explicit missing state. Plan validity leaves missing/incomplete availability explicit and establishes no inspected authority, coverage or verified result. Actual trace-node source resolution and coverage claims still require available inspected sources; validate the actual map separately. These checks establish source accessibility and recorded review basis, not trace-node correctness, semantic completeness or runtime verification. No fetch is authorized.
 
@@ -62,6 +67,7 @@ Setup reruns preserve unrelated entries and user content. Recompute only classif
 
 ## Lean local example
 These complete examples are fictional schema examples, not observed project approvals or test results. A real invocation substitutes inspected sources and keeps missing facts explicit.
+The examples below are legacy/pre-adoption manifests (no adoption declaration); their historical paths illustrate the existing v1 shape, not adopted location defaults. Authorized setup reconciles them through the catalog before recording adoption.
 
 ```yaml
 version: 1

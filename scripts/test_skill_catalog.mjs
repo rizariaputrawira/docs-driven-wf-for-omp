@@ -19,7 +19,8 @@ const rows = text("config/files.tsv").trimEnd().split(/\r?\n/).map(line => {
   assert.equal(fields.length, 2, `malformed inventory: ${line}`);
   const [source, destination] = fields;
   assert.ok(source.startsWith("config/") && !source.split("/").includes(".."), `unsafe source: ${source}`);
-  assert.equal(destination, `.omp/${source.slice(7)}`, `destination mismatch: ${source}`);
+  const expectedDestination = source.startsWith("config/privacy/") ? `.omp/${source.slice("config/privacy/".length)}` : `.omp/${source.slice(7)}`;
+  assert.equal(destination, expectedDestination, `destination mismatch: ${source}`);
   assert.ok(existsSync(join(root, source)) && statSync(join(root, source)).isFile(), `missing source: ${source}`);
   return { source, destination };
 });

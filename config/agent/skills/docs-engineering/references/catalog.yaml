@@ -1,4 +1,7 @@
 "version": 1
+"locations":
+  "manifest": "docs/docs-engineering.yaml"
+  "navigator": "docs/README.md"
 "families":
   "product":
     "audience":
@@ -182,6 +185,8 @@
 "artifacts":
   "brief":
     "id": "brief"
+    "default-path": "docs/product/brief.md"
+    "format": "markdown"
     "family": "product"
     "canonical-name": "brief"
     "aliases": []
@@ -199,6 +204,8 @@
     "dependencies": []
   "brd":
     "id": "brd"
+    "default-path": "docs/product/brd.md"
+    "format": "markdown"
     "family": "product"
     "canonical-name": "business-requirements"
     "aliases":
@@ -217,6 +224,8 @@
     "dependencies": []
   "prd":
     "id": "prd"
+    "default-path": "docs/product/prd.md"
+    "format": "markdown"
     "family": "product"
     "canonical-name": "product-requirements"
     "aliases":
@@ -235,6 +244,8 @@
     "dependencies": []
   "glossary":
     "id": "glossary"
+    "default-path": "docs/product/glossary.md"
+    "format": "markdown"
     "family": "product"
     "canonical-name": "glossary"
     "aliases":
@@ -252,6 +263,8 @@
     "dependencies": []
   "risk-register":
     "id": "risk-register"
+    "default-path": "docs/product/risk-register.md"
+    "format": "markdown"
     "family": "product"
     "canonical-name": "risk-register"
     "aliases": []
@@ -269,6 +282,8 @@
     "dependencies": []
   "srs":
     "id": "srs"
+    "default-path": "docs/requirements/srs.md"
+    "format": "markdown"
     "family": "requirements"
     "canonical-name": "system-requirements"
     "aliases":
@@ -289,6 +304,8 @@
       - "brief"
   "stories":
     "id": "stories"
+    "default-path": "docs/requirements/user-stories.md"
+    "format": "markdown"
     "family": "requirements"
     "canonical-name": "user-stories"
     "aliases": []
@@ -307,6 +324,8 @@
       - "brief"
   "use-cases":
     "id": "use-cases"
+    "default-path": "docs/requirements/use-cases.md"
+    "format": "markdown"
     "family": "requirements"
     "canonical-name": "use-cases"
     "aliases": []
@@ -325,6 +344,8 @@
       - "srs"
   "acceptance-criteria":
     "id": "acceptance-criteria"
+    "default-path": "docs/requirements/acceptance-criteria.md"
+    "format": "markdown"
     "family": "requirements"
     "canonical-name": "acceptance-criteria"
     "aliases": []
@@ -343,6 +364,8 @@
       - "srs"
   "nfr":
     "id": "nfr"
+    "default-path": "docs/requirements/nfr.md"
+    "format": "markdown"
     "family": "requirements"
     "canonical-name": "quality-requirements"
     "aliases":
@@ -362,6 +385,8 @@
       - "brief"
   "fsd":
     "id": "fsd"
+    "default-path": "docs/requirements/fsd.md"
+    "format": "markdown"
     "family": "requirements"
     "canonical-name": "functional-specification"
     "aliases":
@@ -381,6 +406,8 @@
       - "srs"
   "traceability-map":
     "id": "traceability-map"
+    "default-path": "docs/traceability.yaml"
+    "format": "yaml"
     "family": "requirements"
     "canonical-name": "traceability-map"
     "aliases":
@@ -399,6 +426,8 @@
     "dependencies": []
   "architecture-description":
     "id": "architecture-description"
+    "default-path": "docs/architecture/architecture-description.md"
+    "format": "markdown"
     "family": "architecture"
     "canonical-name": "architecture-description"
     "aliases": []
@@ -417,6 +446,8 @@
       - "srs"
   "adr":
     "id": "adr"
+    "default-path": "docs/decisions/adr-NNN-<slug>.md"
+    "format": "markdown"
     "family": "architecture"
     "canonical-name": "architecture-decision-record"
     "aliases":
@@ -434,6 +465,8 @@
     "dependencies": []
   "technical-design":
     "id": "technical-design"
+    "default-path": "docs/technical/technical-design.md"
+    "format": "markdown"
     "family": "technical"
     "canonical-name": "technical-design"
     "aliases":
@@ -456,6 +489,8 @@
       - "architecture-description"
   "openapi":
     "id": "openapi"
+    "default-path": "docs/api/openapi.yaml"
+    "format": "native"
     "family": "architecture"
     "canonical-name": "OpenAPI contract"
     "aliases":
@@ -473,6 +508,8 @@
     "dependencies": []
   "asyncapi":
     "id": "asyncapi"
+    "default-path": "docs/api/asyncapi.yaml"
+    "format": "native"
     "family": "architecture"
     "canonical-name": "AsyncAPI contract"
     "aliases":
@@ -490,6 +527,8 @@
     "dependencies": []
   "api-design-rationale":
     "id": "api-design-rationale"
+    "default-path": "docs/api/api-design-rationale.md"
+    "format": "markdown"
     "family": "architecture"
     "canonical-name": "API design rationale"
     "aliases":
@@ -508,6 +547,8 @@
     "dependencies": []
   "security-requirements":
     "id": "security-requirements"
+    "default-path": "docs/security/security-requirements.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "security-requirements"
     "aliases": []
@@ -526,6 +567,8 @@
     "phase": 2
   "data-classification":
     "id": "data-classification"
+    "default-path": "docs/security/data-classification.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "data-classification"
     "aliases": []
@@ -544,6 +587,8 @@
     "phase": 0
   "threat-model":
     "id": "threat-model"
+    "default-path": "docs/security/threat-model.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "threat-model"
     "aliases": []
@@ -563,6 +608,8 @@
       - "security-trust-boundary"
   "security-review-evidence":
     "id": "security-review-evidence"
+    "default-path": "docs/security/security-review-evidence.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "security review evidence"
     "aliases": []
@@ -580,6 +627,8 @@
     "dependencies": []
   "security-strategy":
     "id": "security-strategy"
+    "default-path": "docs/security/security-strategy.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "security strategy"
     "aliases": []
@@ -597,6 +646,8 @@
     "dependencies": []
   "security-case":
     "id": "security-case"
+    "default-path": "docs/security/security-case.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "security assurance case"
     "aliases": []
@@ -615,6 +666,8 @@
     "phase": 11
   "security-findings":
     "id": "security-findings"
+    "default-path": "docs/security/security-findings.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "security findings register"
     "aliases": []
@@ -632,6 +685,8 @@
     "dependencies": []
   "remediation-verification":
     "id": "remediation-verification"
+    "default-path": "docs/security/remediation-verification.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "security remediation verification"
     "aliases": []
@@ -650,6 +705,8 @@
       - "security-findings"
   "release-security-evidence":
     "id": "release-security-evidence"
+    "default-path": "docs/security/release-security-evidence.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "release security evidence"
     "aliases": []
@@ -669,6 +726,8 @@
     "phase": 11
   "test-strategy":
     "id": "test-strategy"
+    "default-path": "docs/testing/test-strategy.md"
+    "format": "markdown"
     "family": "testing"
     "canonical-name": "test strategy"
     "aliases": []
@@ -687,6 +746,8 @@
       - "brief"
   "verification-report":
     "id": "verification-report"
+    "default-path": "docs/testing/verification-report.md"
+    "format": "markdown"
     "family": "testing"
     "canonical-name": "verification report"
     "aliases": []
@@ -705,6 +766,8 @@
       - "test-cases"
   "release-plan":
     "id": "release-plan"
+    "default-path": "docs/release/release-plan.md"
+    "format": "markdown"
     "family": "release"
     "canonical-name": "release plan"
     "aliases": []
@@ -722,6 +785,8 @@
     "dependencies": []
   "deployment-and-environment":
     "id": "deployment-and-environment"
+    "default-path": "docs/release/deployment-and-environment.md"
+    "format": "markdown"
     "family": "release"
     "canonical-name": "deployment and environment"
     "aliases": []
@@ -740,6 +805,8 @@
   "runbook":
     "id": "runbook"
     "family": "operations"
+    "default-path": "docs/operations/runbook.md"
+    "format": "markdown"
     "canonical-name": "operations runbook"
     "aliases": []
     "purpose": "Provide evidence-grounded operator diagnosis, recovery and service boundaries."
@@ -757,6 +824,8 @@
       - "architecture-description"
   "user-documentation":
     "id": "user-documentation"
+    "default-path": "docs/user/user-documentation.md"
+    "format": "markdown"
     "family": "user-docs"
     "canonical-name": "user documentation"
     "aliases": []
@@ -774,6 +843,8 @@
     "dependencies": []
   "getting-started":
     "id": "getting-started"
+    "default-path": "docs/user/getting-started.md"
+    "format": "markdown"
     "family": "user-docs"
     "canonical-name": "getting started guide"
     "aliases": []
@@ -791,6 +862,8 @@
     "dependencies": []
   "installation-guide":
     "id": "installation-guide"
+    "default-path": "docs/user/installation-guide.md"
+    "format": "markdown"
     "family": "user-docs"
     "canonical-name": "installation guide"
     "aliases": []
@@ -808,6 +881,8 @@
     "dependencies": []
   "admin-guide":
     "id": "admin-guide"
+    "default-path": "docs/user/admin-guide.md"
+    "format": "markdown"
     "family": "user-docs"
     "canonical-name": "administrator guide"
     "aliases": []
@@ -825,6 +900,8 @@
     "dependencies": []
   "how-to":
     "id": "how-to"
+    "default-path": "docs/user/how-to.md"
+    "format": "markdown"
     "family": "user-docs"
     "canonical-name": "task how-to"
     "aliases": []
@@ -842,6 +919,8 @@
     "dependencies": []
   "reference-guide":
     "id": "reference-guide"
+    "default-path": "docs/user/reference-guide.md"
+    "format": "markdown"
     "family": "user-docs"
     "canonical-name": "user reference guide"
     "aliases": []
@@ -859,6 +938,8 @@
     "dependencies": []
   "troubleshooting":
     "id": "troubleshooting"
+    "default-path": "docs/user/troubleshooting.md"
+    "format": "markdown"
     "family": "user-docs"
     "canonical-name": "troubleshooting guide"
     "aliases": []
@@ -876,6 +957,8 @@
     "dependencies": []
   "faq":
     "id": "faq"
+    "default-path": "docs/user/faq.md"
+    "format": "markdown"
     "family": "user-docs"
     "canonical-name": "frequently asked questions"
     "aliases": []
@@ -893,6 +976,8 @@
     "dependencies": []
   "gdd":
     "id": "gdd"
+    "default-path": "docs/game/gdd.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "game design description"
     "aliases":
@@ -911,6 +996,8 @@
     "dependencies": []
   "shared-mobile-requirements":
     "id": "shared-mobile-requirements"
+    "default-path": "docs/mobile/shared-mobile-requirements.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "shared mobile requirements"
     "aliases": []
@@ -929,6 +1016,8 @@
     "phase": 2
   "android-platform-requirements":
     "id": "android-platform-requirements"
+    "default-path": "docs/mobile/android-platform-requirements.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "Android platform requirements"
     "aliases": []
@@ -949,6 +1038,8 @@
       - "shared-mobile-requirements"
   "ios-platform-requirements":
     "id": "ios-platform-requirements"
+    "default-path": "docs/mobile/ios-platform-requirements.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "iOS platform requirements"
     "aliases": []
@@ -969,6 +1060,8 @@
       - "shared-mobile-requirements"
   "game-vision":
     "id": "game-vision"
+    "default-path": "docs/game/game-vision.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "game vision"
     "aliases": []
@@ -985,6 +1078,8 @@
     "dependencies": []
   "core-loop":
     "id": "core-loop"
+    "default-path": "docs/game/core-loop.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "core loop"
     "aliases": []
@@ -1002,6 +1097,8 @@
       - "game-vision"
   "mechanics":
     "id": "mechanics"
+    "default-path": "docs/game/mechanics.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "game mechanics"
     "aliases": []
@@ -1019,6 +1116,8 @@
       - "game-vision"
   "game-systems":
     "id": "game-systems"
+    "default-path": "docs/game/game-systems.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "game systems"
     "aliases": []
@@ -1036,6 +1135,8 @@
       - "game-vision"
   "product-context":
     "id": "product-context"
+    "default-path": "PRODUCT.md"
+    "format": "markdown"
     "family": "product"
     "canonical-name": "PRODUCT.md product context"
     "aliases":
@@ -1053,6 +1154,8 @@
     "dependencies": []
   "visual-design":
     "id": "visual-design"
+    "default-path": "DESIGN.md"
+    "format": "markdown"
     "family": "product"
     "canonical-name": "DESIGN.md visual system"
     "aliases":
@@ -1070,6 +1173,7 @@
     "dependencies": []
   "approved-design-artifact":
     "id": "approved-design-artifact"
+    "format": "external-only"
     "family": "product"
     "canonical-name": "approved external design artifact"
     "aliases":
@@ -1087,6 +1191,8 @@
     "dependencies": []
   "icd":
     "id": "icd"
+    "default-path": "docs/api/icd.md"
+    "format": "markdown"
     "family": "architecture"
     "canonical-name": "interface control document"
     "aliases":
@@ -1104,6 +1210,8 @@
     "dependencies": []
   "postman":
     "id": "postman"
+    "default-path": "docs/api/postman.json"
+    "format": "json"
     "family": "architecture"
     "canonical-name": "Postman supporting collection"
     "aliases": []
@@ -1120,6 +1228,8 @@
     "dependencies": []
   "data-platform":
     "id": "data-platform"
+    "default-path": "docs/architecture/data-platform.md"
+    "format": "markdown"
     "family": "architecture"
     "canonical-name": "data platform design"
     "aliases":
@@ -1139,6 +1249,8 @@
     "dependencies": []
   "test-cases":
     "id": "test-cases"
+    "default-path": "docs/testing/test-cases.md"
+    "format": "markdown"
     "family": "testing"
     "canonical-name": "test cases"
     "aliases": []
@@ -1156,6 +1268,8 @@
       - "acceptance-criteria"
   "test-plan":
     "id": "test-plan"
+    "default-path": "docs/testing/test-plan.md"
+    "format": "markdown"
     "family": "testing"
     "canonical-name": "test plan"
     "aliases": []
@@ -1173,6 +1287,8 @@
       - "test-strategy"
   "defect-register":
     "id": "defect-register"
+    "default-path": "docs/testing/defect-register.md"
+    "format": "markdown"
     "family": "testing"
     "canonical-name": "defect register"
     "aliases": []
@@ -1189,6 +1305,8 @@
     "dependencies": []
   "release-notes":
     "id": "release-notes"
+    "default-path": "docs/release/release-notes.md"
+    "format": "markdown"
     "family": "release"
     "canonical-name": "release notes"
     "aliases": []
@@ -1205,6 +1323,8 @@
     "dependencies": []
   "changelog":
     "id": "changelog"
+    "default-path": "docs/release/changelog.md"
+    "format": "markdown"
     "family": "release"
     "canonical-name": "changelog"
     "aliases": []
@@ -1221,6 +1341,8 @@
     "dependencies": []
   "migration":
     "id": "migration"
+    "default-path": "docs/release/migration-plan.md"
+    "format": "markdown"
     "family": "release"
     "canonical-name": "data migration plan"
     "aliases": []
@@ -1238,6 +1360,8 @@
       - "technical-data-model"
   "rollback":
     "id": "rollback"
+    "default-path": "docs/release/rollback-plan.md"
+    "format": "markdown"
     "family": "release"
     "canonical-name": "rollback plan"
     "aliases": []
@@ -1255,6 +1379,8 @@
       - "deployment-and-environment"
   "postmortem":
     "id": "postmortem"
+    "default-path": "docs/operations/postmortem.md"
+    "format": "markdown"
     "family": "operations"
     "canonical-name": "incident postmortem"
     "aliases": []
@@ -1272,6 +1398,8 @@
       - "incident-response"
   "observability":
     "id": "observability"
+    "default-path": "docs/operations/observability.md"
+    "format": "markdown"
     "family": "operations"
     "canonical-name": "observability design"
     "aliases": []
@@ -1288,6 +1416,8 @@
     "dependencies": []
   "service-objectives":
     "id": "service-objectives"
+    "default-path": "docs/operations/service-objectives.md"
+    "format": "markdown"
     "family": "operations"
     "canonical-name": "service-level objectives"
     "aliases":
@@ -1306,6 +1436,8 @@
     "dependencies": []
   "stakeholders":
     "id": "stakeholders"
+    "default-path": "docs/product/stakeholders.md"
+    "format": "markdown"
     "family": "product"
     "canonical-name": "stakeholders and concerns"
     "aliases": []
@@ -1322,6 +1454,8 @@
     "dependencies": []
   "system-context":
     "id": "system-context"
+    "default-path": "docs/architecture/system-context.md"
+    "format": "markdown"
     "family": "architecture"
     "canonical-name": "system context view"
     "aliases": []
@@ -1340,6 +1474,8 @@
       - "srs"
   "container-view":
     "id": "container-view"
+    "default-path": "docs/architecture/container-view.md"
+    "format": "markdown"
     "family": "architecture"
     "canonical-name": "container and service view"
     "aliases": []
@@ -1358,6 +1494,8 @@
       - "srs"
   "component-view":
     "id": "component-view"
+    "default-path": "docs/architecture/component-view.md"
+    "format": "markdown"
     "family": "architecture"
     "canonical-name": "component view"
     "aliases": []
@@ -1376,6 +1514,8 @@
       - "srs"
   "deployment-view":
     "id": "deployment-view"
+    "default-path": "docs/architecture/deployment-view.md"
+    "format": "markdown"
     "family": "architecture"
     "canonical-name": "deployment view"
     "aliases": []
@@ -1394,6 +1534,8 @@
       - "srs"
   "data-view":
     "id": "data-view"
+    "default-path": "docs/architecture/data-view.md"
+    "format": "markdown"
     "family": "architecture"
     "canonical-name": "architecture data view"
     "aliases": []
@@ -1412,6 +1554,8 @@
       - "srs"
   "integration-view":
     "id": "integration-view"
+    "default-path": "docs/architecture/integration-view.md"
+    "format": "markdown"
     "family": "architecture"
     "canonical-name": "integration view"
     "aliases": []
@@ -1430,6 +1574,8 @@
       - "srs"
   "platform-view":
     "id": "platform-view"
+    "default-path": "docs/architecture/platform-view.md"
+    "format": "markdown"
     "family": "architecture"
     "canonical-name": "architecture platform view"
     "aliases": []
@@ -1448,6 +1594,8 @@
       - "srs"
   "technical-data-model":
     "id": "technical-data-model"
+    "default-path": "docs/technical/technical-data-model.md"
+    "format": "markdown"
     "family": "technical"
     "canonical-name": "technical data model and ERD"
     "aliases":
@@ -1468,6 +1616,8 @@
       - "architecture-description"
   "technical-state":
     "id": "technical-state"
+    "default-path": "docs/technical/technical-state.md"
+    "format": "markdown"
     "family": "technical"
     "canonical-name": "technical state design"
     "aliases": []
@@ -1486,6 +1636,8 @@
       - "architecture-description"
   "technical-sequence":
     "id": "technical-sequence"
+    "default-path": "docs/technical/technical-sequence.md"
+    "format": "markdown"
     "family": "technical"
     "canonical-name": "technical sequence design"
     "aliases": []
@@ -1504,6 +1656,8 @@
       - "architecture-description"
   "technical-error":
     "id": "technical-error"
+    "default-path": "docs/technical/technical-error.md"
+    "format": "markdown"
     "family": "technical"
     "canonical-name": "error handling design"
     "aliases": []
@@ -1522,6 +1676,8 @@
       - "architecture-description"
   "dependency-design":
     "id": "dependency-design"
+    "default-path": "docs/technical/dependency-design.md"
+    "format": "markdown"
     "family": "technical"
     "canonical-name": "dependency design"
     "aliases": []
@@ -1540,6 +1696,8 @@
       - "architecture-description"
   "security-trust-boundary":
     "id": "security-trust-boundary"
+    "default-path": "docs/security/security-trust-boundary.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "security trust boundaries"
     "aliases": []
@@ -1557,6 +1715,8 @@
     "dependencies": []
   "security-controls":
     "id": "security-controls"
+    "default-path": "docs/security/security-controls.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "security architecture and controls"
     "aliases": []
@@ -1576,6 +1736,8 @@
       - "threat-model"
   "authentication-authorization":
     "id": "authentication-authorization"
+    "default-path": "docs/security/authentication-authorization.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "authentication and authorization design"
     "aliases": []
@@ -1594,6 +1756,8 @@
       - "security-requirements"
   "key-secret-management":
     "id": "key-secret-management"
+    "default-path": "docs/security/key-secret-management.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "keys and secrets management"
     "aliases": []
@@ -1612,6 +1776,8 @@
       - "security-requirements"
   "secure-storage":
     "id": "secure-storage"
+    "default-path": "docs/security/secure-storage.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "secure storage design"
     "aliases": []
@@ -1630,6 +1796,8 @@
       - "data-classification"
   "privacy-requirements":
     "id": "privacy-requirements"
+    "default-path": "docs/security/privacy-requirements.md"
+    "format": "markdown"
     "family": "security"
     "canonical-name": "privacy requirements"
     "aliases": []
@@ -1647,6 +1815,8 @@
     "dependencies": []
   "mobile-lifecycle":
     "id": "mobile-lifecycle"
+    "default-path": "docs/mobile/mobile-lifecycle.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "shared mobile lifecycle requirements"
     "aliases": []
@@ -1664,6 +1834,8 @@
     "dependencies": []
   "mobile-storage":
     "id": "mobile-storage"
+    "default-path": "docs/mobile/mobile-storage.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "shared mobile storage requirements"
     "aliases": []
@@ -1681,6 +1853,8 @@
     "dependencies": []
   "mobile-offline":
     "id": "mobile-offline"
+    "default-path": "docs/mobile/mobile-offline.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "shared mobile offline and synchronization requirements"
     "aliases": []
@@ -1698,6 +1872,8 @@
     "dependencies": []
   "mobile-notifications":
     "id": "mobile-notifications"
+    "default-path": "docs/mobile/mobile-notifications.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "shared mobile notification requirements"
     "aliases": []
@@ -1715,6 +1891,8 @@
     "dependencies": []
   "mobile-deep-links":
     "id": "mobile-deep-links"
+    "default-path": "docs/mobile/mobile-deep-links.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "shared mobile deep-link requirements"
     "aliases": []
@@ -1732,6 +1910,8 @@
     "dependencies": []
   "mobile-accessibility":
     "id": "mobile-accessibility"
+    "default-path": "docs/mobile/mobile-accessibility.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "mobile accessibility requirements"
     "aliases": []
@@ -1749,6 +1929,8 @@
     "dependencies": []
   "mobile-compatibility":
     "id": "mobile-compatibility"
+    "default-path": "docs/mobile/mobile-compatibility.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "mobile OS and device compatibility"
     "aliases": []
@@ -1766,6 +1948,8 @@
     "dependencies": []
   "android-permissions":
     "id": "android-permissions"
+    "default-path": "docs/mobile/android-permissions.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "Android permission and manifest requirements"
     "aliases": []
@@ -1785,6 +1969,8 @@
     "dependencies": []
   "android-signing":
     "id": "android-signing"
+    "default-path": "docs/mobile/android-signing.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "Android keystore and signing"
     "aliases": []
@@ -1804,6 +1990,8 @@
     "dependencies": []
   "android-store":
     "id": "android-store"
+    "default-path": "docs/mobile/android-store.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "Google Play release and data safety"
     "aliases": []
@@ -1823,6 +2011,8 @@
     "dependencies": []
   "ios-entitlements":
     "id": "ios-entitlements"
+    "default-path": "docs/mobile/ios-entitlements.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "iOS entitlements and capabilities"
     "aliases": []
@@ -1842,6 +2032,8 @@
     "dependencies": []
   "ios-privacy-disclosure":
     "id": "ios-privacy-disclosure"
+    "default-path": "docs/mobile/ios-privacy-disclosure.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "iOS privacy declarations"
     "aliases": []
@@ -1861,6 +2053,8 @@
     "dependencies": []
   "ios-keychain":
     "id": "ios-keychain"
+    "default-path": "docs/mobile/ios-keychain.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "iOS Keychain storage"
     "aliases": []
@@ -1880,6 +2074,8 @@
     "dependencies": []
   "ios-signing-release":
     "id": "ios-signing-release"
+    "default-path": "docs/mobile/ios-signing-release.md"
+    "format": "markdown"
     "family": "mobile"
     "canonical-name": "iOS signing provisioning and App Store release"
     "aliases": []
@@ -1899,6 +2095,8 @@
     "dependencies": []
   "platform-release-requirements":
     "id": "platform-release-requirements"
+    "default-path": "docs/release/platform-release-requirements.md"
+    "format": "markdown"
     "family": "release"
     "canonical-name": "platform and store release requirements"
     "aliases": []
@@ -1916,6 +2114,8 @@
     "dependencies": []
   "scope-assumptions-constraints":
     "id": "scope-assumptions-constraints"
+    "default-path": "docs/product/scope-assumptions-constraints.md"
+    "format": "markdown"
     "family": "product"
     "canonical-name": "scope-assumptions-constraints"
     "aliases": []
@@ -1934,6 +2134,8 @@
     "reference": "references/requirements.md#business-and-product-inputs"
   "technical-integration":
     "id": "technical-integration"
+    "default-path": "docs/technical/technical-integration.md"
+    "format": "markdown"
     "family": "technical"
     "canonical-name": "technical-integration"
     "aliases": []
@@ -1953,6 +2155,8 @@
     "reference": "references/architecture.md#detailed-technical-design"
   "technical-platform":
     "id": "technical-platform"
+    "default-path": "docs/technical/technical-platform.md"
+    "format": "markdown"
     "family": "technical"
     "canonical-name": "technical-platform"
     "aliases": []
@@ -1972,6 +2176,8 @@
     "reference": "references/architecture.md#detailed-technical-design"
   "acceptance-tests":
     "id": "acceptance-tests"
+    "default-path": "docs/testing/acceptance-tests.md"
+    "format": "markdown"
     "family": "testing"
     "canonical-name": "acceptance-tests"
     "aliases": []
@@ -1991,6 +2197,8 @@
     "reference": "references/testing.md#specialized-verification"
   "performance-tests":
     "id": "performance-tests"
+    "default-path": "docs/testing/performance-tests.md"
+    "format": "markdown"
     "family": "testing"
     "canonical-name": "performance-tests"
     "aliases": []
@@ -2010,6 +2218,8 @@
     "reference": "references/testing.md#specialized-verification"
   "security-tests":
     "id": "security-tests"
+    "default-path": "docs/testing/security-tests.md"
+    "format": "markdown"
     "family": "testing"
     "canonical-name": "security-tests"
     "aliases": []
@@ -2029,6 +2239,8 @@
     "reference": "references/testing.md#specialized-verification"
   "platform-compatibility":
     "id": "platform-compatibility"
+    "default-path": "docs/testing/platform-compatibility.md"
+    "format": "markdown"
     "family": "testing"
     "canonical-name": "platform-compatibility"
     "aliases": []
@@ -2047,6 +2259,8 @@
     "reference": "references/testing.md#specialized-verification"
   "test-summary":
     "id": "test-summary"
+    "default-path": "docs/testing/test-summary.md"
+    "format": "markdown"
     "family": "testing"
     "canonical-name": "test-summary"
     "aliases": []
@@ -2066,6 +2280,8 @@
     "reference": "references/testing.md#results-summary-and-defects"
   "environment":
     "id": "environment"
+    "default-path": "docs/release/environment.md"
+    "format": "markdown"
     "family": "release"
     "canonical-name": "environment"
     "aliases": []
@@ -2085,6 +2301,8 @@
     "reference": "references/operations.md#environment-deployment-and-configuration"
   "configuration":
     "id": "configuration"
+    "default-path": "docs/release/configuration.md"
+    "format": "markdown"
     "family": "release"
     "canonical-name": "configuration"
     "aliases": []
@@ -2103,6 +2321,8 @@
     "reference": "references/operations.md#environment-deployment-and-configuration"
   "incident-response":
     "id": "incident-response"
+    "default-path": "docs/operations/incident-response.md"
+    "format": "markdown"
     "family": "operations"
     "canonical-name": "incident-response"
     "aliases": []
@@ -2121,6 +2341,8 @@
     "reference": "references/operations.md#recovery-and-incidents"
   "user-guide":
     "id": "user-guide"
+    "default-path": "docs/user/user-guide.md"
+    "format": "markdown"
     "family": "user-docs"
     "canonical-name": "user-guide"
     "aliases": []
@@ -2139,6 +2361,8 @@
     "reference": "references/software.md#user-documentation"
   "levels":
     "id": "levels"
+    "default-path": "docs/game/levels.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "levels"
     "aliases": []
@@ -2158,6 +2382,8 @@
     "reference": "references/game.md#content-and-production-direction"
   "narrative-world":
     "id": "narrative-world"
+    "default-path": "docs/game/narrative-world.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "narrative-world"
     "aliases": []
@@ -2177,6 +2403,8 @@
     "reference": "references/game.md#content-and-production-direction"
   "characters":
     "id": "characters"
+    "default-path": "docs/game/characters.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "characters"
     "aliases": []
@@ -2196,6 +2424,8 @@
     "reference": "references/game.md#content-and-production-direction"
   "art-direction":
     "id": "art-direction"
+    "default-path": "docs/game/art-direction.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "art-direction"
     "aliases": []
@@ -2215,6 +2445,8 @@
     "reference": "references/game.md#content-and-production-direction"
   "audio-direction":
     "id": "audio-direction"
+    "default-path": "docs/game/audio-direction.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "audio-direction"
     "aliases": []
@@ -2234,6 +2466,8 @@
     "reference": "references/game.md#content-and-production-direction"
   "economy":
     "id": "economy"
+    "default-path": "docs/game/economy.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "economy"
     "aliases": []
@@ -2253,6 +2487,8 @@
     "reference": "references/game.md#economy-progression-and-balance"
   "progression":
     "id": "progression"
+    "default-path": "docs/game/progression.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "progression"
     "aliases": []
@@ -2272,6 +2508,8 @@
     "reference": "references/game.md#economy-progression-and-balance"
   "balance":
     "id": "balance"
+    "default-path": "docs/game/balance.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "balance"
     "aliases": []
@@ -2291,6 +2529,8 @@
     "reference": "references/game.md#economy-progression-and-balance"
   "balance-change-log":
     "id": "balance-change-log"
+    "default-path": "docs/game/balance-change-log.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "balance-change-log"
     "aliases": []
@@ -2310,6 +2550,8 @@
     "reference": "references/game.md#economy-progression-and-balance"
   "playtest-plan":
     "id": "playtest-plan"
+    "default-path": "docs/game/playtest-plan.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "playtest-plan"
     "aliases": []
@@ -2329,6 +2571,8 @@
     "reference": "references/game.md#playtests-and-telemetry"
   "playtest-report":
     "id": "playtest-report"
+    "default-path": "docs/game/playtest-report.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "playtest-report"
     "aliases": []
@@ -2348,6 +2592,8 @@
     "reference": "references/game.md#playtests-and-telemetry"
   "telemetry":
     "id": "telemetry"
+    "default-path": "docs/game/telemetry.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "telemetry"
     "aliases": []
@@ -2366,6 +2612,8 @@
     "reference": "references/game.md#playtests-and-telemetry"
   "live-ops":
     "id": "live-ops"
+    "default-path": "docs/game/live-ops.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "live-ops"
     "aliases": []
@@ -2385,6 +2633,8 @@
     "reference": "references/game.md#persistence-networking-and-live-service"
   "localization":
     "id": "localization"
+    "default-path": "docs/game/localization.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "localization"
     "aliases": []
@@ -2403,6 +2653,8 @@
     "reference": "references/game.md#persistence-networking-and-live-service"
   "game-platform-requirements":
     "id": "game-platform-requirements"
+    "default-path": "docs/game/game-platform-requirements.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "game-platform-requirements"
     "aliases": []
@@ -2421,6 +2673,8 @@
     "reference": "references/game.md#content-and-production-direction"
   "save-persistence":
     "id": "save-persistence"
+    "default-path": "docs/game/save-persistence.md"
+    "format": "markdown"
     "family": "game"
     "canonical-name": "save-persistence"
     "aliases": []
@@ -2441,6 +2695,8 @@
   "multiplayer-networking":
     "id": "multiplayer-networking"
     "family": "game"
+    "default-path": "docs/game/multiplayer-networking.md"
+    "format": "markdown"
     "canonical-name": "multiplayer-networking"
     "aliases": []
     "purpose": "Own network synchronization and client/server authority behavior."
@@ -2459,6 +2715,8 @@
     "reference": "references/game.md#persistence-networking-and-live-service"
   "backup-restore":
     "id": "backup-restore"
+    "default-path": "docs/operations/backup-restore.md"
+    "format": "markdown"
     "family": "operations"
     "canonical-name": "backup-restore"
     "aliases": []
@@ -2477,6 +2735,8 @@
     "reference": "references/operations.md#recovery-and-incidents"
   "disaster-recovery":
     "id": "disaster-recovery"
+    "default-path": "docs/operations/disaster-recovery.md"
+    "format": "markdown"
     "family": "operations"
     "canonical-name": "disaster-recovery"
     "aliases": []

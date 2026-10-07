@@ -1,7 +1,7 @@
 # Architecture and technical information
 
 ## Architecture description and decisions
-Describe stakeholders, concerns, constraints, context, selected viewpoints/views, quality/security implications, assumptions, rationale, risks and source basis. Select views answering material concerns; no diagram-per-name policy or mandatory C4/arc42 format. Consequential choices and glossary changes reuse `docs-domain-modeling`, including its established ADR status/supersession convention. Proposal is not accepted decision. Existing diagrams retain names/location; contradictions with requirements/code are owner conflicts or drift, not resolved by filename preference.
+Describe stakeholders, concerns, constraints, context, selected viewpoints/views, quality/security implications, assumptions, rationale, risks and source basis. Select views answering material concerns; no diagram-per-name policy or mandatory C4/arc42 format. Consequential choices and glossary changes reuse `docs-domain-modeling` and its ADR status/supersession semantics; adopted destinations resolve through [locations](locations.md). Proposal is not accepted decision. Preserve diagram source assets and references, but normalize standalone canonical document owners during authorized adoption; contradictions with requirements/code are owner conflicts or drift, not resolved by filename preference.
 
 ## Architecture views
 | Concept | Content and validation boundary |

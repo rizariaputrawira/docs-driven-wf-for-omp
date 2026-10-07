@@ -95,6 +95,24 @@ Use scout for bounded discovery, routine/task for clear implementation, and the 
 
 For practical guidance, prompt examples, capabilities and boundaries, see the [skill usage guide](SKILL-USAGE.md). For new or substantial delivery, consult the [canonical delivery baseline procedure](config/agent/skills/workflow-delivery/references/documentation-baseline.md); [docs-engineering context](config/agent/skills/docs-engineering/references/context-routing.md) and [standards reference](config/agent/skills/docs-engineering/references/standards.md) define their respective procedures. These are alternatives selected for the actual task, not a required sequence.
 
+### Canonical documentation after adoption
+
+Before explicit `docs-engineering setup` adoption, inspection preserves project files
+and their locations. Installing omp-docflow does not adopt or migrate any project.
+After authorized adoption, `docs/README.md` is the compact human map and
+`docs/docs-engineering.yaml` is the machine ownership index. `PRODUCT.md` and
+`DESIGN.md` remain project-root exceptions.
+
+The [catalog](config/agent/skills/docs-engineering/references/catalog.yaml) owns
+exact artifact paths; the [location contract](config/agent/skills/docs-engineering/references/locations.md)
+explains resolution, native formats and migration. Setup inspects scattered and
+mixed-content documents before authorized moves, splits or merges, reconciles
+links without discarding information, and returns the highest-value next path
+with its reason. Only necessary documentation is selected; missing documents
+are not mass-created and directories appear only when they contain files.
+`status` shows the documentation home, current gaps and recommended next action;
+`next` and `sequence` remain available for a prioritized queue and dependency view.
+
 Example OMP requests:
 
 - “Use code-debugging to trace this reported export failure; inspect the actual caller and relevant evidence, then explain the cause or remaining uncertainty.”
@@ -215,6 +233,12 @@ The [migration map](docs/migration.md) distinguishes shipped hidden compatibilit
 ## Verification and known limits
 
 Approval-specific compatibility is checked against installed OMP **18.8.0**; the previous broader discovery/architecture verification was **18.6.3** (official source `093275112f7adff207608673c0e33c7f3d16e27f`). Neither is a minimum-version or future-compatibility guarantee. [The canonical upgrade gate](config/agent/skills/docs-engineering/references/omp-compatibility.md) and [verification records](docs/verification.md) separate static, handler, native-runtime and authenticated checks.
+
+`bun scripts/test_document_locations.mjs` checks complete catalog path ownership,
+safe paths/approved areas, stable root and native-format exceptions, and retired
+fallback/duplicate-registry drift. `bun scripts/test_skill_catalog.mjs` checks
+managed skill inventory and reference targets. These are structural checks;
+actual setup/status behavior is a separate consuming-agent verification.
 
 The repository includes static configuration, installer/doctor, routing-hook,
 and disposable-home verification. Scope, receipts, historical evidence, and
