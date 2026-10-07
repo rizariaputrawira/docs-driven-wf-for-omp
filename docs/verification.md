@@ -1,5 +1,47 @@
 # Verification and current limits
 
+## Compact communication verification
+
+Pre-publication basis: branch `main`, HEAD
+`80554641c62919d5fa2844b8f49900dc01bd0c4a`, OMP `18.8.0`, Linux/WSL.
+Configured origin remains `https://github.com/rizariaputrawira/omp-config.git`;
+GitHub resolves repository ID `1402051919` to
+`https://github.com/rizariaputrawira/omp-docflow`. Remote main matched HEAD.
+Existing README/verification edits and untracked work are excluded from this
+change. Evidence and temporary checkers: `/tmp/compact-communication-evidence/`.
+
+| Command / check | Observed outcome and boundary |
+|---|---|
+| `sh scripts/doctor.sh --check --home /home/personal` | PASS before edits: all 285 managed mappings and shell profile stanzas healthy; legacy/unmanaged advisories retained. `doctor-before.txt`. |
+| `bun scripts/test_skill_catalog.mjs` | FAIL: existing line 22 assumes `.omp/${source.slice(7)}`; `config/privacy/telemetry.env` deliberately maps to `.omp/telemetry.env`. Inventory and checker are unchanged by this task. `skill-catalog.txt`. |
+| `bun scripts/test_agent_config.mjs` | PASS: seven worker contracts, native approval settings and 24 negative cases. Static, not authenticated dispatch. `agent-config.txt`. |
+| `node scripts/test_model_routing.mjs` | PASS: seven handler cases, not OS containment. `model-routing.txt`. |
+| `node scripts/test_antislop.mjs` | PASS: 16 positive and 18 negative handler cases, not model obedience. `antislop.txt`. |
+| `python3 scripts/test_install.py` | PASS: real POSIX installer/doctor integration over 285 inventory entries. `install-tests.txt`. |
+| `pwsh -NoProfile -File scripts/test_telemetry_install.ps1` | NOT VERIFIED: no PowerShell runtime available; not executed. |
+| `python3 /tmp/compact-communication-evidence/check.py` | PASS: all other config payloads byte-identical, all seven frontmatters unchanged, exact worker sentence appends, single canonical policy owner, unchanged dirty README. Security-reviewer remains byte-identical. `protected-check.json`. |
+| `node /tmp/compact-communication-evidence/telemetry.mjs /mnt/d/user/personal/project/omp-config/config/agent/extensions/telemetry-opt-out.js` | PASS: fresh process seeded all 11 keys with enabled/sentinel values; extension restored exact opt-outs. `repository-telemetry.txt`. |
+| `bun /tmp/compact-communication-evidence/structured.mjs /mnt/d/user/personal/project/omp-config/config/agent` | PASS after correcting temporary checker assumptions about scalar/list selectors and inherited thinking: native YAML privacy, role/thinking/approval settings and seven baseline frontmatters verified. `repository-structured.txt`. |
+| `sh install.sh --dry-run --home /tmp/compact-communication-evidence/disposable-home` | PASS: no payload/profile writes; unrelated sentinel retained. `disposable-dry-run.txt`. |
+| `sh install.sh --home /tmp/compact-communication-evidence/disposable-home` | PASS: all 285 installed destinations byte-match sources; sentinel retained. `disposable-install.txt`. |
+| `sh scripts/doctor.sh --check --home /tmp/compact-communication-evidence/disposable-home` | PASS: managed payload/profile health, no unmanaged observations. `disposable-doctor.txt`. |
+| Disposable-home native `omp skill list --json` and `omp read skill://agent-guidance`, `omp read skill://ui-design`, `omp read skill://impeccable` | PASS from empty workspace with isolated HOME/config: 49 identities, zero warnings; current owners and compatibility pointer resolve. No credentials copied or model turn sent. `disposable-skills.txt`, `disposable-read-*.txt`. |
+
+The canonical five-bullet section adds **137 whitespace-delimited words and
+8 lines** to PERSONALITY; each changed worker adds one 16-word sentence without
+adding lines. No token/cost reduction is measured. Full task delta review found
+no routing, authority, approval, network, telemetry, mode or runtime integration
+changes. Operational config/inventory search found no Caveman activation/package
+patterns. The architecture citation is concept-only provenance; wording is
+independently authored, with no bundled Caveman implementation or implied
+sponsorship/integration.
+
+These are STATIC VERIFIED and disposable LOCAL INSTALL VERIFIED observations.
+Actual-home deployment, installed native checks and authenticated communication
+smoke are unrun at this pre-publication checkpoint; no future deployment or
+universal behavioral compliance is claimed. Independent daemons and arbitrary
+egress remain outside telemetry assurance.
+
 Historical broader basis: inspected main `e850b6a07a55bc893d97c786928c45906952bbe7`
 plus the architecture revision documented here. Installed/latest OMP observed on
 2026-10-06 was **18.6.3**, source

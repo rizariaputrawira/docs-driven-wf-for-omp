@@ -6,6 +6,15 @@ licenses remain separate. [Inventory](capability-inventory.md) covers every one
 of the 36 actual input capabilities. Result: 35 canonical capabilities (33 visible,
 2 explicit-only), plus 14 hidden compatibility pointers.
 
+## Default communication density
+
+[Communication density](../config/agent/PERSONALITY.md#communication-density)
+is default guidance, not a mode or runtime integration. PERSONALITY is its sole
+normative owner; worker report refinements preserve their evidence and authority
+contracts.
+
+Communication-density design was informed by public work including [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman). The wording is independently authored; no Caveman source package, runtime, CLI, plugin or proxy is bundled, and no sponsorship or official integration is implied.
+
 ## Functional taxonomy
 
 | Prefix | Scope | Belongs | Does not belong |
