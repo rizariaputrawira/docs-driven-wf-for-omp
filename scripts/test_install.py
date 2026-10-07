@@ -136,8 +136,26 @@ def main() -> None:
         assert len(backups) == 1 and backups[0].read_bytes() == original_profile
         run("sh", str(INSTALL), "--source", str(source), "--home", str(home))
         assert len(list(home.glob(".profile.bak.*"))) == 1
-        env_probe = run("sh", "-c", '. "$HOME/.profile"; printf "%s|%s|%s|%s|%s" "$DO_NOT_TRACK" "$OTEL_SDK_DISABLED" "$RTK_TELEMETRY_DISABLED" "$PI_AUTO_QA" "$POSTHOG_KEY"', env={**os.environ, "HOME": str(home), "PI_AUTO_QA": "1", "POSTHOG_KEY": "enabled"})
-        assert env_probe.stdout == "1|true|1|0|"
+        inherited = {name: "sentinel" for name in (
+            "OTEL_EXPORTER_OTLP_ENDPOINT", "OTEL_EXPORTER_OTLP_HEADERS",
+            "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT", "OTEL_EXPORTER_OTLP_TRACES_HEADERS",
+            "OTEL_EXPORTER_OTLP_METRICS_ENDPOINT", "OTEL_EXPORTER_OTLP_METRICS_HEADERS",
+            "OTEL_EXPORTER_OTLP_LOGS_ENDPOINT", "OTEL_EXPORTER_OTLP_LOGS_HEADERS",
+            "PI_AUTO_QA_PUSH_URL", "PI_AUTO_QA_PUSH_TOKEN",
+            "OPEN_DESIGN_OBJECT_RELAY_URL",
+        )}
+        shell_names = " ".join(f'"${{{name}}}"' for name in inherited)
+        env_probe = run(
+            "sh", "-c", f'. "$HOME/.profile"; printf "%s|" {shell_names}',
+            env={**os.environ, **inherited, "HOME": str(home), "PI_AUTO_QA": "1", "POSTHOG_KEY": "enabled"},
+        )
+        assert env_probe.stdout == "|" * len(inherited)
+        defaults_probe = run(
+            "sh", "-c",
+            '. "$HOME/.profile"; printf "%s|%s|%s|%s|%s|%s|%s" "$DO_NOT_TRACK" "$OTEL_SDK_DISABLED" "$RTK_TELEMETRY_DISABLED" "$NEXT_TELEMETRY_DISABLED" "$PI_AUTO_QA" "$PI_AUTO_QA_PUSH" "$POSTHOG_KEY"',
+            env={**os.environ, "HOME": str(home), "DO_NOT_TRACK": "0", "RTK_TELEMETRY_DISABLED": "0", "NEXT_TELEMETRY_DISABLED": "0", "PI_AUTO_QA": "1", "PI_AUTO_QA_PUSH": "1", "POSTHOG_KEY": "enabled"},
+        )
+        assert defaults_probe.stdout == "1|true|1|1|0|0|"
         profile.unlink()
         doctor(home, expected=1)
         doctor(home, "--fix")

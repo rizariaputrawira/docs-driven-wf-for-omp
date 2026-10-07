@@ -35,16 +35,27 @@ try {
     Remove-Item -LiteralPath $profile
     Run-Script $doctor @('-Check', '-Home', $homePath) 1
     Run-Script $doctor @('-Fix', '-Home', $homePath)
+    $env:OTEL_SDK_DISABLED = 'false'; $env:NEXT_TELEMETRY_DISABLED = '0'
     $env:DO_NOT_TRACK = '0'; $env:RTK_TELEMETRY_DISABLED = '0'
     $env:PI_AUTO_QA = '1'; $env:PI_AUTO_QA_PUSH = '1'
     $env:POSTHOG_KEY = 'test-enabled'; $env:LANGFUSE_PUBLIC_KEY = 'test-enabled'
     $env:LANGFUSE_SECRET_KEY = 'test-enabled'; $env:OPEN_DESIGN_TELEMETRY_RELAY_URL = 'https://example.invalid'
+    $env:OTEL_EXPORTER_OTLP_ENDPOINT = 'https://example.invalid'; $env:OTEL_EXPORTER_OTLP_HEADERS = 'sentinel'
+    $env:OTEL_EXPORTER_OTLP_TRACES_ENDPOINT = 'https://example.invalid'; $env:OTEL_EXPORTER_OTLP_TRACES_HEADERS = 'sentinel'
+    $env:OTEL_EXPORTER_OTLP_METRICS_ENDPOINT = 'https://example.invalid'; $env:OTEL_EXPORTER_OTLP_METRICS_HEADERS = 'sentinel'
+    $env:OTEL_EXPORTER_OTLP_LOGS_ENDPOINT = 'https://example.invalid'; $env:OTEL_EXPORTER_OTLP_LOGS_HEADERS = 'sentinel'
+    $env:PI_AUTO_QA_PUSH_URL = 'https://example.invalid'; $env:PI_AUTO_QA_PUSH_TOKEN = 'sentinel'
+    $env:OPEN_DESIGN_OBJECT_RELAY_URL = 'https://example.invalid'
+    $env:OPEN_DESIGN_VELA_TELEMETRY = '1'
     $env:OPENAI_API_KEY = 'provider-sentinel'
     . (Join-Path $homePath '.omp/telemetry.ps1')
     Assert ($env:DO_NOT_TRACK -eq '1' -and $env:OTEL_SDK_DISABLED -eq 'true') 'Native/OTel opt-outs not effective.'
     Assert ($env:RTK_TELEMETRY_DISABLED -eq '1' -and $env:NEXT_TELEMETRY_DISABLED -eq '1') 'Dependency opt-outs not effective.'
     Assert ($env:PI_AUTO_QA -eq '0' -and $env:PI_AUTO_QA_PUSH -eq '0') 'AutoQA enable overrides survived.'
-    Assert (-not $env:POSTHOG_KEY -and -not $env:LANGFUSE_PUBLIC_KEY -and -not $env:LANGFUSE_SECRET_KEY -and -not $env:OPEN_DESIGN_TELEMETRY_RELAY_URL) 'Optional telemetry destinations survived.'
+    Assert ($env:OPEN_DESIGN_VELA_TELEMETRY -eq '0') 'OpenDesign Vela telemetry opt-out did not apply.'
+    Assert (-not $env:POSTHOG_KEY -and -not $env:LANGFUSE_PUBLIC_KEY -and -not $env:LANGFUSE_SECRET_KEY -and -not $env:OPEN_DESIGN_TELEMETRY_RELAY_URL -and -not $env:OPEN_DESIGN_OBJECT_RELAY_URL) 'Optional telemetry destinations survived.'
+    Assert (-not $env:OTEL_EXPORTER_OTLP_ENDPOINT -and -not $env:OTEL_EXPORTER_OTLP_HEADERS -and -not $env:OTEL_EXPORTER_OTLP_TRACES_ENDPOINT -and -not $env:OTEL_EXPORTER_OTLP_TRACES_HEADERS -and -not $env:OTEL_EXPORTER_OTLP_METRICS_ENDPOINT -and -not $env:OTEL_EXPORTER_OTLP_METRICS_HEADERS -and -not $env:OTEL_EXPORTER_OTLP_LOGS_ENDPOINT -and -not $env:OTEL_EXPORTER_OTLP_LOGS_HEADERS) 'Inherited OTLP destination/headers survived.'
+    Assert (-not $env:PI_AUTO_QA_PUSH_URL -and -not $env:PI_AUTO_QA_PUSH_TOKEN) 'AutoQA push destination/credentials survived.'
     Assert ($env:OPENAI_API_KEY -eq 'provider-sentinel') 'Provider authentication was modified.'
     $invalidHome = Join-Path $temp 'invalid home'
     [void](New-Item -ItemType Directory -Path (Join-Path $invalidHome 'Documents/PowerShell') -Force)

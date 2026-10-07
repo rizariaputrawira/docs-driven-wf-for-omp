@@ -1,5 +1,83 @@
 # Verification and current limits
 
+## Optional telemetry containment audit (2026-10-07)
+
+This source-led audit and local verification start from the clean omp-docflow checkout at
+`20cb011f522425870304aaa9031cfe880ec1e337` and preserve
+`config/agent/config.yml` architecture byte-for-byte. The component class
+definitions and A/B/C/D/E inventory are in
+[capabilities](capabilities.md#telemetry-boundary-inventory).
+
+### Controls and variable decisions
+
+The OMP 18.8.0 native config keeps OTLP export false and AutoQA disabled/denied
+(`config/agent/config.yml:97-99,202-203`). OMP 18.8.0 source records the
+`OTEL_SDK_DISABLED` exporter gate and config gate; local sessions, usage stats,
+token display, and diagnostics remain separate local behavior and were not
+disabled.
+
+| Variable family | Decision | Control location / reason |
+|---|---|---|
+| `DO_NOT_TRACK`, `OTEL_SDK_DISABLED`, `RTK_TELEMETRY_DISABLED`, `NEXT_TELEMETRY_DISABLED` | KEEP | Existing compatible native/RTK/Next opt-outs retained in privacy files and extension. |
+| `OTEL_EXPORTER_OTLP_{ENDPOINT,HEADERS}` and per-signal traces/metrics/logs endpoint/header variants | ADD | Empty inherited exporters must not revive endpoints or credentials; set in profiles, OMP extension and OpenDesign MCP environment. |
+| `PI_AUTO_QA`, `PI_AUTO_QA_PUSH` | KEEP | Existing opt-outs retained; AutoQA remains denied in native OMP configuration. |
+| `PI_AUTO_QA_PUSH_URL`, `PI_AUTO_QA_PUSH_TOKEN` | ADD | Clear inherited optional AutoQA push destination/credentials in managed environments. |
+| `POSTHOG_KEY`, `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `OPEN_DESIGN_TELEMETRY_RELAY_URL`, `OPEN_DESIGN_OBJECT_RELAY_URL`, `OPEN_DESIGN_VELA_TELEMETRY` | KEEP + ADD object relay | Existing supported PostHog/Langfuse/telemetry-relay/Vela controls retained; add supported object-relay empty value. Source checkout evidence: daemon `analytics.ts:181-197,473-498`; `langfuse-trace.ts:410-545,2634-2700`; `trace-object-manifest.ts:149-163`; `integrations/diagnostic-relay.ts:11-18`. |
+| Provider auth, model/update endpoints, `OD_DAEMON_URL`, RTK rewrite and Herdr socket variables | KEEP | Required/functional or local optional interfaces; do not clear. |
+| `POSTHOG_HOST` | NO CHANGE | Empty key disables inspected daemon/browser keyed capture; host is inert without a key. |
+| `telemetry.metrics`, `telemetry.content`, `telemetry.artifactManifest` app preferences | NO CHANGE | User-owned preferences remain untouched; containment is enforced at outbound sink inputs instead. |
+| Obsolete variables | NONE identified | No repo control was removed or renamed. |
+
+The managed control paths are `config/privacy/telemetry.env` and
+`telemetry.ps1` → profile stanzas installed/checked by `scripts/telemetry-profiles.sh`
+and `.ps1` → OMP child override in
+`config/agent/extensions/telemetry-opt-out.js`. The OpenDesign MCP declaration
+passes explicit supported values in `config/agent/mcp.json`; the explicit
+`start-open-design` command sources installed `.omp/telemetry.env` before its
+daemon launch. `install.sh`/`.ps1` deploy all managed files through
+`config/files.tsv`; `doctor.sh`/`.ps1` audit or repair those payload/profile
+states. No architecture, approval, model, Plan Mode, OMP stats/sessions, RTK
+rewrite/tracking, Herdr local IPC, or OpenDesign functionality was removed.
+
+### Evidence and limits
+
+OpenDesign source inspected from `/home/personal/tools/open-design` at commit
+`5b19dfa4351b3eed33826ee72746a7c653c23a54` shows: POSTHOG key required for
+browser/daemon capture (`analytics.ts:473-498`); Langfuse requires relay or both
+keys, and Vela has an independent default-on path unless disabled
+(`langfuse-trace.ts:410-545,2634-2700`); object manifests and diagnostics
+accept the object relay (`trace-object-manifest.ts:149-163`,
+`integrations/diagnostic-relay.ts:11-18`). The inspected source applies
+environment controls to the local source-launch path. An alternate packaged
+OpenDesign sidecar can inject baked options that override inherited environment
+values (`sidecars.ts:659-720`); this packaged path remains an explicit
+unverified residual risk and must not be described as fully disabled.
+
+No OpenDesign daemon was started or queried. `OMP_OPEN_DESIGN_CLI` and
+`OMP_OPEN_DESIGN_LAUNCHER` were absent in the inspected environment, so live
+MCP/daemon behavior remains unverified.
+
+Executed pre-publication checks:
+
+| Check | Result |
+|---|---|
+| `python3 scripts/test_install.py` | PASS: production POSIX installer/doctor, 285 inventory entries, inherited telemetry sentinel clearing. |
+| `bun scripts/test_agent_config.mjs` | PASS: parsed YAML, seven agent contracts and 24 negative cases. |
+| `bun scripts/test_model_routing.mjs` | PASS: seven tool-boundary handler cases; not OS containment proof. |
+| Baseline byte comparison of config, all agent definitions, RTK and Herdr extensions | PASS: unchanged. |
+| Actual opt-out module execution plus child-environment smoke | PASS: telemetry endpoints/credentials cleared; provider credential and Herdr local IPC sentinel preserved. |
+| `sh install.sh --dry-run --home <temp>`, install, then `sh scripts/doctor.sh --check --home <temp>` | PASS: managed summary healthy. |
+| Native OMP 18.8.0 `config get` in the disposable home | PASS: OTLP false, AutoQA false, token display true. |
+| Native local `rtk telemetry status` and `rtk rewrite 'git status'` | PASS: telemetry blocked, rewrite returns `rtk git status` (protocol exit 3). |
+| `pwsh -NoProfile -File scripts/test_telemetry_install.ps1` | NOT VERIFIED: no PowerShell runtime available. |
+
+Source references: [OMP 18.8.0 environment controls](https://github.com/can1357/oh-my-pi/blob/v18.8.0/docs/environment-variables.md),
+[OMP AutoQA](https://github.com/can1357/oh-my-pi/blob/v18.8.0/packages/coding-agent/src/tools/report-tool-issue.ts),
+[RTK 0.51.0 telemetry](https://github.com/rtk-ai/rtk/blob/v0.51.0/src/core/telemetry.rs),
+and [OpenDesign inspected revision](https://github.com/nexu-io/open-design/tree/5b19dfa4351b3eed33826ee72746a7c653c23a54).
+Temporary verification scripts and disposable home were outside the repository
+under `/tmp/omp-docflow-audit.R3QKtAPR/`; none are deployed.
+
 ## Compact communication verification
 
 Pre-publication basis: branch `main`, HEAD

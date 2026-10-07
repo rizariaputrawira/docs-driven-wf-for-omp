@@ -127,8 +127,32 @@ Coupling is upgrade cost, not a vulnerability or removal mandate.
 | antislop.js | Conditional UI/product-copy evidence filter; removing loses deterministic per-request injection | before_agent_start; systemPrompt string[] chaining, exact duplicate policy detection | Static instructions/UI skills cannot reproduce conditional automatic injection exactly | test_antislop.mjs + pinned types/runner; KEEP |
 | luna-tool-boundary.js | Restrict workspace tool calls by exact live model/provider with narrow plan/main exceptions; removing weakens boundary | tool_call context/model/provider identity; unknown identities must remain restricted; not OS/reviewer sandbox | Native role config chooses model/tools, not same live-model-sensitive gate | test_model_routing.mjs + source context/Plan check; KEEP |
 | rtk.ts | Optional command rewrite/output optimization; removing loses RTK feature, not core skills | tool_call/exec/UI events, legacy @earendil-works/pi-coding-agent import; RTK binary protocol/version/timeout | Manual RTK/native commands, not automatic equivalent | Source gating only; native loading/process behavior NOT VERIFIED; KEEP optional |
-| herdr-omp-agent-state.ts | Optional pane/session state reporting; removing loses external telemetry | Session/agent events, Herdr env trio and external socket payload contract | No native Herdr reporter | Source env-gate only; socket/event behavior NOT VERIFIED; KEEP optional |
-| telemetry-opt-out.js | Sets supported telemetry opt-outs in OMP and inherited children; independent of RTK, and not a control for separately launched daemons | Default extension registration plus process environment; only telemetry-specific inputs are masked | Shell/PowerShell profiles cover native launches before OMP initialization | POSIX profile/doctor and installed OMP child-environment smoke passed; PowerShell runtime unavailable for this change; KEEP privacy guard |
+| herdr-omp-agent-state.ts | Optional OMP pane/session state reporting; no evidence this sends outbound telemetry | OMP events plus Herdr local socket/env protocol | No native Herdr reporter; preserve the external local consumer | Source env-gate only; real pane/socket behavior NOT VERIFIED; KEEP optional/local |
+| telemetry-opt-out.js | Sets supported telemetry opt-outs in OMP and inherited children; independent daemon boundaries require explicit env | Default extension registration plus process environment | Shell/PowerShell profiles cover native launches before OMP initialization | POSIX profile path covered by integration suite; OMP extension/MCP and PowerShell effectiveness not run here; KEEP privacy guard |
+
+## Telemetry boundary inventory
+
+Scope classification: **A** local required state/config; **B** local optional integration;
+**C** required external functional traffic; **D** optional outbound telemetry;
+**E** unknown requiring investigation. Classifications describe the component's
+role, not a claim that all behavior was exercised.
+
+| Component | Class | Decision / evidence |
+|---|---|---|
+| `config/agent/config.yml` | A + D | Preserve architecture byte-for-byte. Keep `dev.autoqaConsent: denied`, `dev.autoqa: false`, `telemetry.otlpExportEnabled: false`; preserve local stats/session/token display, approval, Plan Mode, routing and model settings. |
+| `telemetry-opt-out.js`, `telemetry.env`, `telemetry.ps1` | D | Keep and align environment opt-outs. Add clearing of generic/per-signal OTLP endpoints/headers, `PI_AUTO_QA_PUSH_URL`/`TOKEN`, and OpenDesign `OBJECT_RELAY_URL`; do not unset provider credentials. |
+| `rtk.ts` | B + D | Preserve optional local rewrite integration. `RTK_TELEMETRY_DISABLED=1` is the supported RTK opt-out; RTK 0.51 source reports core telemetry disabled by this env. Installed command behavior was not invoked. |
+| `herdr-omp-agent-state.ts` | B | Preserve local pane/session reporting over gated local IPC; no evidenced external sink. |
+| `mcp.json` OpenDesign stdio server | C + D | Preserve local daemon connection and provider/model traffic. Set supported telemetry environment values explicitly at the independent MCP process boundary. |
+| OpenDesign daemon / explicit start command | C + D | Start command sources installed `.omp/telemetry.env`; supported POSTHOG/Langfuse/relay/Vela gates disable optional sinks without disabling functional requests. Current local daemon absent and not started. |
+| Local state, OMP stats/sessions/token display, app diagnostics | A + B | Preserve locally; telemetry-disable preference changes would affect user-owned local behavior. |
+| Provider/authentication, model catalogs/updates, requested workflows | C | Preserve required network activity. |
+| Packaged OpenDesign sidecar with baked telemetry options | E | Environment controls may be overridden by bundled values; do not claim effective opt-out without version-specific runtime evidence. |
+| `install.sh`, `install.ps1`, `doctor.sh`, `doctor.ps1` | A | Preserve explicit inventory-based deploy/check/repair only; no service start or outbound network gate. |
+| POSIX/PowerShell telemetry profiles | A + D | Preserve idempotent source-stanza, encoding/backup behavior and current launch scope; source opt-outs only. |
+| `config/files.tsv` | A | Preserve managed-file mappings including both privacy payloads and extension/MCP declarations. |
+| README and capability/verification docs | A | Record supported opt-outs, functional-network exceptions, source/runtime boundary and remaining packaged-build risk. |
+| `test_install.py`, `test_telemetry_install.ps1` | A + D | Test inherited enabled-sentinel environment values are cleared by installed profiles; PowerShell execution is verifier-dependent. |
 
 ## Empty plugin scaffolding
 

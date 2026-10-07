@@ -139,19 +139,25 @@ backed up before modification; their existing bytes are preserved. A zsh
 configuration directory is not created or managed. PowerShell uses the default
 WindowsPowerShell and PowerShell profile layouts under the selected home; no
 machine-wide environment or registry setting is written. Unsupported or
-redirected shell profiles and independently launched OpenDesign daemons remain
-outside this managed boundary. Malformed managed stanzas are rejected before
-payload writes rather than rewriting unknown user code.
+redirected shell profiles remain outside this managed boundary. Malformed
+managed stanzas are rejected before payload writes rather than rewriting
+unknown user code.
 
-The environment disables Bun/OMP/RTK/Next telemetry, OMP AutoQA, and the
-discovered OpenDesign PostHog, Langfuse, relay, and Vela telemetry controls.
-OMP's extension applies the same opt-outs at load so OMP-launched children
-inherit them. A Bun native binary started before OMP initialization still
-needs a shell/PowerShell profile launch to inherit `DO_NOT_TRACK`.
+The environment disables Bun/OMP/RTK/Next telemetry, OMP AutoQA, OTLP exporter
+endpoints/headers, and discovered OpenDesign PostHog, Langfuse, telemetry-relay,
+object-relay, and Vela inputs. OMP's extension reapplies these values at load
+so OMP-launched children inherit them. The `open-design` MCP declaration
+explicitly passes the same applicable privacy values at its stdio process boundary.
+The `start-open-design` command sources installed `.omp/telemetry.env` before
+launching the daemon. Already-running daemons and arbitrary separately
+launched processes are not retroactively changed. A Bun native binary started
+before OMP initialization still needs a shell/PowerShell profile launch to
+inherit `DO_NOT_TRACK`.
 `DO_NOT_TRACK=1` disables Bun crash uploads and telemetry
 ([Bun reference](https://bun.com/docs/runtime/environment-variables.md));
-`OTEL_SDK_DISABLED=true` disables OMP exporter initialization. Restart
-existing launches to inherit environment changes.
+`OTEL_SDK_DISABLED=true` disables OMP exporter initialization. OTLP endpoint,
+header, and AutoQA push URL/token variables are also cleared to prevent
+inherited settings from supplying optional export destinations or credentials.
 
 Do not enable `PI_AUTO_QA` or `PI_AUTO_QA_PUSH` through launch overlays.
 Intentional later environment overrides, `--no-extensions`, and remote server
@@ -160,13 +166,22 @@ policies are outside this default-off installation guarantee.
 Independent integration preferences are not overwritten: RTK supports
 `RTK_TELEMETRY_DISABLED=1`, and `rtk telemetry disable` also persists denied
 consent. Keep OpenDesign's `telemetry.metrics`, `telemetry.content`, and
-`telemetry.artifactManifest` false in its own app preferences. OpenDesign's
-browser exception transport bypasses analytics consent when a PostHog key
-exists; managed launches mask that telemetry-specific key and the separate
-Langfuse/relay inputs. Check an independently launched daemon's local
-`/api/analytics/config` response for `key: null` and `host: null`.
-Provider/authentication, model-catalog/update and explicitly requested network
-traffic remain available.
+`telemetry.artifactManifest` preferences user-owned; disable outbound sink
+inputs instead of modifying local application state. For the inspected OpenDesign source commit
+`5b19dfa4351b3eed33826ee72746a7c653c23a54`, clearing `POSTHOG_KEY` prevents
+the browser exception sink from obtaining a key despite its consent bypass.
+Empty `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`,
+`OPEN_DESIGN_TELEMETRY_RELAY_URL`, and `OPEN_DESIGN_OBJECT_RELAY_URL` remove
+the inspected daemon's telemetry/object relay destinations; Vela is separately
+disabled by `OPEN_DESIGN_VELA_TELEMETRY=0`. The local `od` daemon itself was
+not started or queried, and current runtime MCP/launcher prerequisites were
+absent during this audit.
+
+The source checkout and daemon launch environment are not proof about every
+packaged OpenDesign build: bundled sidecar options may override environment
+keys, so packaged builds remain a residual risk pending a safe version-specific
+check. Provider/authentication, model-catalog/update and explicitly requested
+network traffic remain available.
 
 Run `python3 scripts/test_install.py` for the production POSIX integration
 checks. `pwsh -NoProfile -File scripts/test_telemetry_install.ps1` covers the

@@ -13,6 +13,12 @@ if [ -z "${OMP_OPEN_DESIGN_LAUNCHER:-}" ] || [ ! -x "$OMP_OPEN_DESIGN_LAUNCHER" 
   echo "Set OMP_OPEN_DESIGN_LAUNCHER to the installed executable OpenDesign launcher before starting the daemon." >&2
   exit 1
 fi
+privacy_env=$HOME/.omp/telemetry.env
+if [ ! -r "$privacy_env" ]; then
+  echo "Managed telemetry environment is missing or unreadable: $privacy_env. Install or repair omp-docflow first." >&2
+  exit 1
+fi
+. "$privacy_env"
 mkdir -p "$HOME/.local/state/open-design"
 nohup "$OMP_OPEN_DESIGN_LAUNCHER" --no-open >"$HOME/.local/state/open-design/daemon.log" 2>&1 </dev/null &
 for attempt in $(seq 1 20); do
