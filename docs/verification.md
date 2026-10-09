@@ -1,5 +1,72 @@
 # Verification and current limits
 
+## Candidate C published and installed — current receipt (2026-10-09)
+
+**Verdict: PASS — implemented, normally pushed and installed.** Payload commit
+[`b16070df90fa112a1479a5e9a68c6d360416f77b`](https://github.com/rizariaputrawira/omp-docflow/commit/b16070df90fa112a1479a5e9a68c6d360416f77b)
+was committed on `main` in the isolated clone and pushed to the canonical
+`https://github.com/rizariaputrawira/omp-docflow.git` without force/history rewrite.
+The original dirty checkout was not mutated. The clean clone initially lacked
+author identity; its repository-local identity was set from the original
+checkout's existing repository-local values, without changing global settings
+or the original checkout. This deployment receipt is recorded separately from
+the already-pushed payload.
+
+After the successful push, the supported installer dry-run, installation and
+doctor check all completed successfully against `/home/personal`:
+
+```sh
+sh install.sh --dry-run --home /home/personal
+sh install.sh --home /home/personal
+sh scripts/doctor.sh --check --home /home/personal
+```
+
+Doctor reported **managed summary: healthy** for the 288-entry inventory,
+including the new native template and restored PERSONALITY mapping. Changed
+existing managed files received collision-safe backups; the new template had
+no previous file to back up. Telemetry profile checks passed. Legacy skill roots,
+retired/unmanaged entries, history/account state and backups remained advisory
+observations and were preserved, not deleted. Command/backup evidence is
+`/tmp/omp-docflow-candidate-c-jS0TPE/evidence/deployment-receipt.txt` and the
+primary full installer/doctor output `artifact://244`.
+
+The installed executable now reports **OMP 18.8.6**, SHA-256
+`877acdc48384b80fe4c083b1e610433d28922dd9fccde9ea430aaace8765b19b`;
+the earlier observed executable was 18.8.4. No assistant binary update or
+rollback was executed, and the exact cause/time of that change was not
+established. Unstamped earlier actor runs are not retrospectively assigned a
+version. The [upstream 18.8.6 native system template](https://github.com/can1357/oh-my-pi/blob/v18.8.6/packages/coding-agent/src/prompts/system/system-prompt.md) is byte-identical to the
+pinned 18.8.4 source (SHA-256 `16193a4d43a1646b27dfb1c97810f3a92bb316c4c8773ff8a9d18c9481215dd3`),
+so this upgrade needs no instruction-template change. Current API/TUI checks
+below exercise the actual 18.8.6 runtime; future upgrades still require review.
+
+| Installed check | Observed result and basis |
+|---|---|
+| Native configuration | PASS: `omp config path` resolves `/home/personal/.omp/agent`; native modelRoles JSON shows Luna-medium default/plan, existing Luna worker/vision bindings, Sol-medium slow and Sol-high advisor; all seven worker overrides remain correct. |
+| Installed source ownership | PASS: source/installed SHA-256 values match for 13 critical files: config, PERSONALITY, AGENTS, native template, seven agents and both changed skill owners. |
+| Fresh passive RPC | PASS: actual `openai-codex/gpt-6-luna`, medium, zero messages and non-streaming; automatic native template and Candidate PERSONALITY loaded. No profile, agent-directory, model or effort selectors. |
+| Authenticated role smoke | PASS: three explicitly requested parallel verification probes completed and settled. Routine had actual `gpt-6-luna` provider turns and returned the read contract value `amber-otter-7319` with `contract.txt:1`; slow had an actual `gpt-6.1-sol` turn and returned the bounded snapshot/revocation decision; advisor had an actual `gpt-6.1-sol` turn and returned an evidence-only opinion on the supplied prior Sol receipt. Luna resumed. These explicit probes are installation verification, not a production three-level ladder or natural-routing evidence. |
+| Native TUI Plan Mode | PASS: fresh `/home/personal/.local/bin/omp --no-session --no-title --cwd <controlled-fixture>` showed `◑ GPT-6 Luna`. Submitting only `/plan` displayed `Plan mode enabled` and `GPT-6 Luna │ 🗺 Plan`; `/exit` returned 0. No substantive request, generation, proposal or approval. This is actual mode activation, not the `--plan <id>` model-selection flag. |
+
+Installed RPC evidence:
+`/tmp/omp-docflow-candidate-c-jS0TPE/evidence/installed-runtime/summary.json`,
+`passive.jsonl`, `passive-provenance.jsonl`, `role-smoke.jsonl`,
+`modelRoles.json`, `agentModelOverrides.json` and the two critical-byte manifests.
+The role smoke returned 0, completed/settled with no incomplete queries/chunks,
+in **22.899 seconds**. TUI evidence:
+`/tmp/omp-docflow-candidate-c-jS0TPE/evidence/installed-plan/README.txt`
+and `pty-transcript.txt`.
+
+The verification cwd alone disabled copied github/open-design MCP declarations,
+set RTK_DISABLED and removed Herdr/selector overrides; installed integrations
+were not changed and no optional server connection/tools were observed.
+Provider records establish the actual child model identities but do not expose
+per-child thinking effort: routine/slow medium and advisor high are verified
+installed configuration, **not independently provider-logged effort**.
+PowerShell execution remains NOT VERIFIED. No measured cost savings or universal
+model-compliance guarantee is claimed. A fresh session loads the new template;
+the already-running explicit Sol session was not hot-switched.
+
 ## Candidate C native-rule correction — source and disposable verification (2026-10-09)
 
 **Source and exercised runtime behavior: PASS.** This receipt establishes the
