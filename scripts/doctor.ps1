@@ -1,25 +1,17 @@
-$ErrorActionPreference = 'Stop'
+param(
+    [switch]$Check,
+    [switch]$Fix,
+    [Alias('Home')][string]$HomeOverride,
+    [Alias('?')][switch]$Help
+)
 
+$ErrorActionPreference = 'Stop'
 function Fail([string]$Message) { [Console]::Error.WriteLine($Message); exit 2 }
 . (Join-Path $PSScriptRoot 'validate-inventory.ps1')
 . (Join-Path $PSScriptRoot 'telemetry-profiles.ps1')
 
-
-$check = $false; $fix = $false; $homeOverride = $null; $help = $false
-for ($i = 0; $i -lt $args.Count; $i++) {
-    $arg = [string]$args[$i]
-    if ($arg -ieq '-Help' -or $arg -ieq '-?') { $help = $true; continue }
-    if ($arg -ieq '-Check') { $check = $true; continue }
-    if ($arg -ieq '-Fix') { $fix = $true; continue }
-    if ($arg -ieq '-Home') {
-        if ($i + 1 -ge $args.Count -or [string]::IsNullOrEmpty([string]$args[$i + 1]) -or ([string]$args[$i + 1]).StartsWith('-')) { Fail 'Usage: doctor.ps1 [-Check|-Fix] [-Home path]' }
-        $homeOverride = [string]$args[++$i]
-        continue
-    }
-    Fail "Unknown argument: $arg"
-}
-if ($help) { Write-Output 'Usage: doctor.ps1 [-Check|-Fix] [-Home path]'; exit 0 }
-if ($check -and $fix) { Fail 'Choose either -Check or -Fix.' }
+if ($Help) { Write-Output 'Usage: doctor.ps1 [-Check|-Fix] [-Home path]'; exit 0 }
+if ($Check -and $Fix) { Fail 'Choose either -Check or -Fix.' }
 
 try {
     $repository = (Resolve-Path -LiteralPath (Split-Path -Parent $PSScriptRoot)).Path

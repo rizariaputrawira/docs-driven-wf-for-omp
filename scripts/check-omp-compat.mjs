@@ -229,13 +229,6 @@ async function main() {
     process.exitCode = 2;
     return;
   }
-  try {
-    validateConfig(effectiveConfig);
-  } catch (error) {
-    console.log(`OMP compatibility: INCOMPATIBLE\n${error.message}`);
-    process.exitCode = 1;
-    return;
-  }
   const projectDir = process.cwd();
   const projectAppend = resolve(projectDir, "APPEND_SYSTEM.md");
   const appendPath = existsSync(projectAppend) ? projectAppend : resolve(agentDir, "APPEND_SYSTEM.md");

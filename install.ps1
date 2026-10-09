@@ -1,23 +1,16 @@
-$ErrorActionPreference = 'Stop'
+param(
+    [switch]$DryRun,
+    [Alias('Source')][string]$SourceOverride,
+    [Alias('Home')][string]$HomeOverride,
+    [Alias('?')][switch]$Help
+)
 
+$ErrorActionPreference = 'Stop'
 function Fail([string]$Message) { [Console]::Error.WriteLine($Message); exit 2 }
 . (Join-Path $PSScriptRoot 'scripts/validate-inventory.ps1')
 . (Join-Path $PSScriptRoot 'scripts/telemetry-profiles.ps1')
 
-
-$dryRun = $false; $homeOverride = $null; $sourceOverride = $null; $help = $false
-for ($i = 0; $i -lt $args.Count; $i++) {
-    $arg = [string]$args[$i]
-    if ($arg -ieq '-Help' -or $arg -ieq '-?') { $help = $true; continue }
-    if ($arg -ieq '-DryRun') { $dryRun = $true; continue }
-    if ($arg -ieq '-Home' -or $arg -ieq '-Source') {
-        if ($i + 1 -ge $args.Count -or [string]::IsNullOrEmpty([string]$args[$i + 1]) -or ([string]$args[$i + 1]).StartsWith('-')) { Fail 'Usage: install.ps1 [-DryRun] [-Source path|url] [-Home path]' }
-        if ($arg -ieq '-Home') { $homeOverride = [string]$args[++$i] } else { $sourceOverride = [string]$args[++$i] }
-        continue
-    }
-    Fail "Unknown argument: $arg"
-}
-if ($help) { Write-Output 'Usage: install.ps1 [-DryRun] [-Source path|url] [-Home path]'; exit 0 }
+if ($Help) { Write-Output 'Usage: install.ps1 [-DryRun] [-Source path|url] [-Home path]'; exit 0 }
 
 $tempRoot = $null
 try {
