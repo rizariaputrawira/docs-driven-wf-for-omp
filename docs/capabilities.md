@@ -3,8 +3,9 @@
 Canonical public names communicate capability, not source branding. Public skills
 remain one level beneath the native skills root. Source identity, copyright and
 licenses remain separate. [Inventory](capability-inventory.md) covers every one
-of the 36 actual input capabilities. Result: 35 canonical capabilities (33 visible,
-2 explicit-only), plus 14 hidden compatibility pointers.
+of the 35 baseline input capabilities plus one local health procedure. Result:
+36 canonical capabilities (33 visible, 3 explicit-only), plus 14 hidden
+compatibility pointers.
 
 ## Default communication density
 
@@ -111,14 +112,17 @@ Coupling is upgrade cost, not a vulnerability or removal mandate.
 | PERSONALITY.md | MEDIUM | KEEP; centralize task authority | OMP global instruction owner; direct requested scope proceeds without redundant confirmation; role/Plan/read-only boundaries remain |
 | config.yml | MEDIUM | KEEP native policy; disable eval by default | Registered settings schema; Candidate C changes only main/plan ownership and narrows slow's role/tool contract; native task semantics, scoped approval/eval cleanup and other settings remain. Static contract and exact-version native approval checks |
 | Agent frontmatter | MEDIUM | KEEP except slow contract | Native agent discovery/model/tool/schema contract; slow is narrowed to bounded read-only Sol decision service while other definitions remain unchanged; parse/static model-role check, effective dispatch needs runtime evidence |
-| SYSTEM_TEMPLATE.md | HIGH | KEEP; intentional native prompt override | Supported `~/.omp/agent/SYSTEM_TEMPLATE.md` replaces the template block; generated context/footer and tool schemas remain native, while literal SYSTEM.md takes precedence. Exact source pin: OMP 18.8.4 commit `40e9368ef0458fd9073329cdff4174895f91bc6b`; maintain by reviewing source diff and rerendering after upgrades/restart. |
+| SYSTEM_TEMPLATE.md | HIGH | RETAIN only until isolated append behavior gate passes | Full OMP 18.8.4 source snapshot with local delegation-only semantic delta. Native system-template discovery/precedence is a high-coupling override; if APPEND does not pass runtime cases, replace the manual fork with exact upstream source plus a small generated patch. That fallback is not yet implemented; no compatibility claim while it remains. |
+| APPEND_SYSTEM.md | MEDIUM | KEEP minimal native clarification | OMP 18.8.6 auto-discovers project then user append files and appends the text after the native system prompt; source support verified, Candidate C behavior not yet verified |
+| OMP compatibility record/checker | MEDIUM | KEEP small; fail closed | Source-reviewed OMP release, named critical upstream files, impact compare; unknown versions, critical drift and missing Candidate C runtime receipts cannot report VERIFIED |
+| workflow-omp-health | LOW | KEEP explicit-only | Post-deployment and post-upgrade operator entrypoint; quick/upgrade/full evidence, not an update manager or upstream-adoption review |
 | MCP declarations | MEDIUM | KEEP unchanged | Native HTTP/stdio MCP schema; parse/static prerequisites; no connection/service claim |
 | antislop.js | MEDIUM | KEEP unchanged | before_agent_start string-array prompt contract; handler test and source API check |
 | luna-tool-boundary.js | HIGH | KEEP unchanged | tool_call plus exact live model/context assumptions; handler regression, real dispatch/Plan Mode separately |
 | rtk.ts | HIGH | KEEP optional/env-gated | Legacy Pi type-import compatibility and RTK executable protocol; source gate review, actual RTK process not exercised |
 | Herdr integration | HIGH | KEEP optional/env-gated | OMP events plus external IPC/env/protocol assumptions; source gate review, real pane/socket not exercised |
 | Empty plugin metadata | MEDIUM | RETIRE managed scaffolding | Native loader tolerates absent empty roots; installer creates package on plugin install; no configured plugin behavior lost |
-| Native prompt template | HIGH | KEEP, version-pinned override | `packages/coding-agent/src/prompts/system/system-prompt.md` source retained as full unrendered Handlebars with delegation-only edits; dynamic helpers/blocks remain. Native rendering/actual dispatch must be checked against the supported OMP version; upgrade can change template semantics or override behavior. |
+| Native prompt template | HIGH | RETAIN pending behavior evidence | `packages/coding-agent/src/prompts/system/system-prompt.md` is the OMP 18.8.4 source for the full unrendered Handlebars template; delegation-only local delta changes execution-vs-consultation gating. Native rendering and actual dispatch remain unverified. |
 | Installer/doctor | LOW | KEEP | Explicit home-relative inventory; production POSIX tests/smoke; PowerShell remains unverified with recorded defect |
 
 ## Extension purpose and upgrade cost

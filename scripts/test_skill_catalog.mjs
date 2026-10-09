@@ -18,8 +18,12 @@ const rows = text("config/files.tsv").trimEnd().split(/\r?\n/).map(line => {
   const fields = line.split("\t");
   assert.equal(fields.length, 2, `malformed inventory: ${line}`);
   const [source, destination] = fields;
-  assert.ok(source.startsWith("config/") && !source.split("/").includes(".."), `unsafe source: ${source}`);
-  const expectedDestination = source.startsWith("config/privacy/") ? `.omp/${source.slice("config/privacy/".length)}` : `.omp/${source.slice(7)}`;
+  const managedSource = source.startsWith("config/") || source === "scripts/check-omp-compat.mjs";
+  assert.ok(managedSource && !source.split("/").includes(".."), `unsafe or unmanaged source: ${source}`);
+  assert.ok(!destination.split("/").includes(".."), `unsafe destination: ${destination}`);
+  const expectedDestination = source === "scripts/check-omp-compat.mjs"
+    ? ".omp/agent/scripts/check-omp-compat.mjs"
+    : source.startsWith("config/privacy/") ? `.omp/${source.slice("config/privacy/".length)}` : `.omp/${source.slice(7)}`;
   assert.equal(destination, expectedDestination, `destination mismatch: ${source}`);
   assert.ok(existsSync(join(root, source)) && statSync(join(root, source)).isFile(), `missing source: ${source}`);
   return { source, destination };
@@ -78,9 +82,10 @@ const canonicalNames = new Set([
   "workflow-handoff",
   "workflow-handoff-read",
   "workflow-retrospective",
+  "workflow-omp-health",
   "workflow-upstream-review"
 ]);
-const hiddenCanonical = new Set(["ui-prototyping", "ui-library-selection"]);
+const hiddenCanonical = new Set(["ui-prototyping", "ui-library-selection", "workflow-omp-health"]);
 const retired = new Set(text("scripts/retired-skills.txt").trim().split(/\s+/));
 const identities = new Map();
 for (const path of entries.filter(p => /^config\/agent\/skills\/[^/]+\/SKILL\.md$/.test(p))) {

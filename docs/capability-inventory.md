@@ -1,10 +1,9 @@
 # Current capability inventory
 
-Inspected baseline: main commit `e850b6a07a55bc893d97c786928c45906952bbe7`
-and actual one-level SKILL.md frontmatter, not historical catalog counts.
-Baseline: 36 canonical capabilities, 34 model-visible and 2 explicit-only.
-Result: 35 canonical capabilities, 33 model-visible and 2 explicit-only, plus
-14 hidden compatibility pointers. Aliases are not independent capabilities.
+Inspected source baseline: current `main` commit `7ac5bda055f1ce27e604dde95a898b7307ac6dca` and actual one-level SKILL.md frontmatter, not historical catalog counts.
+Baseline: 35 upstream input capabilities.
+Result: 36 canonical capabilities, 33 model-visible and 3 explicit-only, including
+one local `workflow-omp-health` addition, plus 14 hidden compatibility pointers.
 
 This file owns detailed semantic inventory. [Decisions](capabilities.md) own
 dispositions; [migration](migration.md) owns old identifiers; package SOURCES.md
@@ -53,6 +52,7 @@ on one owner. See [migration](migration.md) for explicit alias classifications.
 | ui-stress-test | ui-stress-test | KEEP / ui-. | Model-visible canonical. | break-ui. |
 | unpublished-changes | git-change-status | RENAME / git-. | Model-visible canonical. | unpublished-changes. |
 | upstream-update-review | workflow-upstream-review | RENAME / workflow-. | Model-visible canonical. | upstream-update-review. |
+| local addition | workflow-omp-health | ADD / workflow-. | Explicit-only hidden canonical. | No historical alias. |
 | web-motion | ui-web-motion | RENAME / ui-. | Model-visible canonical. | animate, improve-animations, review-animations, find-animation-opportunities, animation-vocabulary, web-motion. |
 | work-with-pr | git-pr-work | RENAME / git-. | Model-visible canonical. | work-with-pr. |
 | writing-for-agents | agent-guidance | RENAME / agent-. | Model-visible canonical. | writing-for-agents. |

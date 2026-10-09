@@ -32,6 +32,8 @@ The source defaults to this checkout; destination defaults to your existing home
 
 After installing, start `omp` in your project and request the needed outcome. The [task-to-skill catalog](SKILL-USAGE.md) links current procedures; no setup pipeline or automatic external service is required. Selected legacy names have tiny hidden compatibility entrypoints; existing homes may also retain stale full procedures: see the [non-pruning migration map](docs/migration.md).
 
+After installing/updating omp-docflow, invoke `/skill:workflow-omp-health quick`. After an OMP binary version change, use `/skill:workflow-omp-health upgrade`; use `/skill:workflow-omp-health full` only when requested or when evidence remains unresolved. The health workflow reports unknown runtime evidence rather than treating OMP startup as success.
+
 ### Install and update
 
 To update, refresh your checkout from `main`, then repeat the preview and install
@@ -214,6 +216,10 @@ checks. `pwsh -NoProfile -File scripts/test_telemetry_install.ps1` covers the
 PowerShell telemetry install path, including UTF-16 profile preservation; it
 requires a PowerShell runtime and is not native-Windows proof when run on Linux.
 
+`bun scripts/test_omp_compat.mjs` exercises the deterministic compatibility
+status boundaries with synthetic receipt fixtures; it is not runtime/provider
+verification.
+
 ## Configuration doctor
 
 Check is the default read-only mode and compares every managed inventory entry, then reports bounded immediate legacy/unmanaged observations separately. Advisory observations never make a healthy inventory fail or cause cleanup. External dependencies remain unverified: the doctor does not start or check services.
@@ -236,7 +242,7 @@ Exit codes: `0` every mapped file matches; `1` one or more files are missing/dri
 
 Installation is non-pruning. Old native folders remain discoverable in existing homes until a separately authorized retirement moves them outside **all skill discovery roots**. Inspect and preserve customized contents first; do not blanket-delete directories. Managed discovery settings leave `customDirectories` empty and disable Agents user/project skill-source discovery, but other runtime providers may exist; this is not application-wide isolation.
 
-The [migration map](docs/migration.md) distinguishes shipped hidden compatibility pointers from stale unmanaged folders. The current catalog has 35 canonical capabilities (33 visible, 2 explicit-only), 14 hidden aliases, 263 skill assets and 285 managed mappings. [Decisions and inventory](docs/capabilities.md) account for all 36 current-main input capabilities. No live-home migration was performed. Retired provider roots can be recreated by external updaters; use the native skill destination.
+The [migration map](docs/migration.md) distinguishes shipped hidden compatibility pointers from stale unmanaged folders. The current catalog has 36 canonical capabilities (33 visible, 3 explicit-only), 14 hidden aliases, 266 skill assets and 292 managed mappings. [Decisions and inventory](docs/capabilities.md) account for 35 current-main input capabilities plus the local health procedure. No live-home migration was performed. Retired provider roots can be recreated by external updaters; use the native skill destination.
 
 ## Verification and known limits
 
@@ -253,6 +259,8 @@ and disposable-home verification. Scope, receipts, historical evidence, and
 known limitations are preserved in [verification records](docs/verification.md).
 Historical results are not fresh authenticated-dispatch or Windows-installation
 proof.
+
+The OMP compatibility record currently has no verified runtime baseline. Official OMP v18.8.6 source supports `APPEND_SYSTEM.md` discovery and trailing append; current `main` still inventories the OMP 18.8.4 `SYSTEM_TEMPLATE.md` snapshot pending the isolated Candidate C behavior gate. The checker returns NOT VERIFIED while that override is active or runtime receipts are missing. Native `omp update` changes the active installation in place; this repository does not provide candidate installation or automatic promotion/rollback. Do not call a candidate compatible or the real update complete without isolated behavior checks and post-update `workflow-omp-health upgrade`. See [verification](docs/verification.md) for this task's exercised evidence and limits.
 
 ## Sources, licenses, and further reading
 

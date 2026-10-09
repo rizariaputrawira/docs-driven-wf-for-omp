@@ -14,7 +14,7 @@ retain native authority boundaries. [Decisions](docs/capabilities.md),
 | ui- | Interface design, motion, mobile-web behavior and UI reference assets | [ui-design](config/agent/skills/ui-design/SKILL.md), [ui-expo-motion](config/agent/skills/ui-expo-motion/SKILL.md), [ui-gesture-design](config/agent/skills/ui-gesture-design/SKILL.md), [ui-image-generation](config/agent/skills/ui-image-generation/SKILL.md), [ui-image-to-code](config/agent/skills/ui-image-to-code/SKILL.md), [ui-library-selection](config/agent/skills/ui-library-selection/SKILL.md), [ui-mobile-web](config/agent/skills/ui-mobile-web/SKILL.md), [ui-prototyping](config/agent/skills/ui-prototyping/SKILL.md), [ui-sonner](config/agent/skills/ui-sonner/SKILL.md), [ui-stress-test](config/agent/skills/ui-stress-test/SKILL.md), [ui-web-motion](config/agent/skills/ui-web-motion/SKILL.md) |
 | code- | Implementation correctness, diagnosis, behavior tests and complexity | [code-debugging](config/agent/skills/code-debugging/SKILL.md), [code-review](config/agent/skills/code-review/SKILL.md), [code-simplicity](config/agent/skills/code-simplicity/SKILL.md), [code-tdd](config/agent/skills/code-tdd/SKILL.md) |
 | docs- | Engineering information and evidence-led model/plan review | [docs-domain-modeling](config/agent/skills/docs-domain-modeling/SKILL.md), [docs-engineering](config/agent/skills/docs-engineering/SKILL.md), [docs-plan-review](config/agent/skills/docs-plan-review/SKILL.md) |
-| workflow- | Task decision and delivery lifecycle | [workflow-brainstorming](config/agent/skills/workflow-brainstorming/SKILL.md), [workflow-delivery](config/agent/skills/workflow-delivery/SKILL.md), [workflow-handoff](config/agent/skills/workflow-handoff/SKILL.md), [workflow-handoff-read](config/agent/skills/workflow-handoff-read/SKILL.md), [workflow-retrospective](config/agent/skills/workflow-retrospective/SKILL.md), [workflow-upstream-review](config/agent/skills/workflow-upstream-review/SKILL.md) |
+| workflow- | Task decision, delivery and installed OMP health | [workflow-brainstorming](config/agent/skills/workflow-brainstorming/SKILL.md), [workflow-delivery](config/agent/skills/workflow-delivery/SKILL.md), [workflow-handoff](config/agent/skills/workflow-handoff/SKILL.md), [workflow-handoff-read](config/agent/skills/workflow-handoff-read/SKILL.md), [workflow-omp-health](config/agent/skills/workflow-omp-health/SKILL.md), [workflow-retrospective](config/agent/skills/workflow-retrospective/SKILL.md), [workflow-upstream-review](config/agent/skills/workflow-upstream-review/SKILL.md) |
 | git- | Repository collaboration and change lifecycle | [git-change-status](config/agent/skills/git-change-status/SKILL.md), [git-commit-message](config/agent/skills/git-commit-message/SKILL.md), [git-pr-work](config/agent/skills/git-pr-work/SKILL.md), [git-triage](config/agent/skills/git-triage/SKILL.md) |
 | security- | Distinct source trust boundaries | [security-audit](config/agent/skills/security-audit/SKILL.md), [security-intake](config/agent/skills/security-intake/SKILL.md), [security-review](config/agent/skills/security-review/SKILL.md) |
 | agent- | Instructions consumed by agents | [agent-guidance](config/agent/skills/agent-guidance/SKILL.md) |
@@ -62,10 +62,10 @@ including `impeccable`, `animate`, `animate-expo`, `ponytail`, `write-swift`,
 procedure. Natural-language legacy synonyms in canonical descriptions are a
 separate routing aid. [Migration](docs/migration.md) classifies other old names.
 
-At last verified OMP 18.6.3, `disable-model-invocation: true` hides listing exposure,
-not enabled URI/slash reachability. Family filters, for example `--skills 'ui-*'`
-or `skills.includeSkills: [ui-*]`, match public names. They can exclude an
-unprefixed alias and must not be bypassed by direct file loading. Use the canonical
-name when operating under a family filter.
+`workflow-omp-health` sets `disable-model-invocation: true`, so it is explicit-only
+and does not join normal model skill selection. In interactive OMP, invoke
+`/skill:workflow-omp-health [quick|upgrade|full]`.
+Family filters still apply; do not bypass a filter by direct file loading.
 
-Current catalog: 35 canonical capabilities (33 model-visible, 2 explicit-only), 14 hidden compatibility pointers, 263 skill assets and 282 mappings. Counts are not authenticated routing proof.
+Current catalog: 36 canonical capabilities (35 from current main plus local `workflow-omp-health`; 33 model-visible, 3 explicit-only), 14 hidden compatibility pointers, 266 skill assets and 292 managed mappings. Counts are not authenticated routing proof.
+After an omp-docflow install/update use `/skill:workflow-omp-health quick`; after an OMP version change use `/skill:workflow-omp-health upgrade`; use `/skill:workflow-omp-health full` only for explicit deeper checks or unresolved evidence.

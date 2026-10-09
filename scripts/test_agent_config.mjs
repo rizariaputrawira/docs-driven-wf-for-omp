@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 
 const configPath = "config/agent/config.yml";
 const agentDir = "config/agent/agents";
@@ -24,6 +24,7 @@ function validate(config, definitions) {
     assert.equal(config.modelRoles?.[role], "openai-codex/gpt-6-luna:medium", `${configPath}: ${role} selector`);
   }
   assert.equal(config.defaultThinkingLevel, "medium", `${configPath}: default thinking level`);
+  assert.equal(config.task?.eager, "default", `${configPath}: no proactive execution delegation`);
   assert.equal(config.task?.maxConcurrency, 3, `${configPath}: max concurrency`);
   assert.equal(config.task?.maxRecursionDepth, 1, `${configPath}: max recursion depth`);
   assert.equal(config.task?.showResolvedModelBadge, true, `${configPath}: resolved model badge`);

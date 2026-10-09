@@ -9,6 +9,48 @@ passive registration, handler behavior and authenticated execution are different
 Current outcomes live in the source checkout's `docs/verification.md`, which is
 not deployed as part of this skill package.
 
+
+## Candidate C prompt and compatibility state (OMP 18.8.6)
+
+Installed OMP and the latest stable release checked for this implementation are
+18.8.6. Its official immutable source revision is
+[`f068751e2f1dbdbc195977776d47a26db8697495`](https://github.com/can1357/oh-my-pi/tree/f068751e2f1dbdbc195977776d47a26db8697495).
+The repository record `config/agent/omp-compatibility.yml` stores this
+source-reviewed release separately from `last_verified`; the latter remains
+null until all three Candidate C runtime receipts exist.
+
+The CLI discovers `APPEND_SYSTEM.md` at project scope before user scope when
+`--append-system-prompt` is absent, then passes it to the native prompt builder:
+[main.ts discovery](https://github.com/can1357/oh-my-pi/blob/f068751e2f1dbdbc195977776d47a26db8697495/packages/coding-agent/src/main.ts#L1291-L1315)
+and [system-prompt assembly](https://github.com/can1357/oh-my-pi/blob/f068751e2f1dbdbc195977776d47a26db8697495/packages/coding-agent/src/system-prompt.ts#L625-L634).
+This supports a small consultation clarification without maintaining the full
+upstream system template. It establishes discovery/order, not natural-language
+obedience or Luna→Sol→Luna behavior. Explicit CLI append text wins, project
+prompt overrides can shadow user prompt customization, and non-CLI SDK hosts
+must be checked separately.
+
+`task.eager` accepts `default`, `preferred` and `always`. `preferred` changes
+general execution-delegation pressure and disables the restrained inline-first
+branch; it is not a narrow way to authorize a policy-required decision
+consultation. Keep `default` and use `APPEND_SYSTEM.md` only to clarify the
+native execution-vs-consultation distinction. PERSONALITY is the sole owner of
+Candidate C consultation triggers. See the exact
+[task setting](https://github.com/can1357/oh-my-pi/blob/f068751e2f1dbdbc195977776d47a26db8697495/packages/coding-agent/src/task/settings.ts#L217-L238)
+and [prompt template](https://github.com/can1357/oh-my-pi/blob/f068751e2f1dbdbc195977776d47a26db8697495/packages/coding-agent/src/prompts/system/system-prompt.md).
+
+`scripts/check-omp-compat.mjs` compares the source interval against the paths
+listed in the compatibility record and validates both managed settings and
+effective OMP roles/task/fallback settings through `omp config get`. Installed
+mode also requires its agent directory to match `omp config path`. Critical
+drift is REVIEW REQUIRED; API failure, unknown release, a version without
+matching behavior receipts, or an active custom system template is NOT VERIFIED.
+It does not install or mutate OMP. Native `omp update` changes the active
+installation in place; no repository-owned candidate installer/promotion/
+rollback path is claimed.
+`workflow-omp-health` is the explicit operator procedure after deployment or
+upgrade. Current behavioral evidence and unverified cases are recorded in
+`docs/verification.md`.
+
 ## Approval-specific 18.8.0 check
 
 Official main and release v18.8.0 resolved to

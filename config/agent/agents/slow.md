@@ -1,6 +1,6 @@
 ---
 name: slow
-description: "Bounded Sol-medium decision service for consequential reasoning from supplied evidence."
+description: Bounded Sol-medium decision service for one identified consequential decision.
 tools: [read, find, grep, glob, web_search, yield]
 spawns: []
 model: "@slow"

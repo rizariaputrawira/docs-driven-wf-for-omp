@@ -1,0 +1,43 @@
+schema: 1
+project: omp-docflow
+source_reviewed:
+  omp_version: 18.8.6
+  channel: stable
+  revision: f068751e2f1dbdbc195977776d47a26db8697495
+  date: 2026-10-09
+last_verified: null
+candidate_c:
+  default: luna-medium
+  plan: luna-medium
+  slow: sol-medium
+  advisor: sol-high
+required_capabilities:
+  - model-roles
+  - agent-model-overrides
+  - task-dispatch
+  - plan-mode
+  - prompt-customization
+  - tool-call-extension
+critical_behavior:
+  - luna-direct
+  - luna-slow-luna
+  - plan-mode-luna
+critical_upstream_paths:
+  - packages/coding-agent/src/main.ts
+  - packages/coding-agent/src/system-prompt.ts
+  - packages/coding-agent/src/prompts/system/system-prompt.md
+  - packages/coding-agent/src/prompts/system/project-prompt.md
+  - packages/coding-agent/src/task/settings.ts
+  - packages/coding-agent/src/task/structured-subagent.ts
+  - packages/coding-agent/src/task/executor.ts
+  - packages/coding-agent/src/task/spawn-policy.ts
+  - packages/coding-agent/src/config/model-resolver.ts
+  - packages/coding-agent/src/plan-mode/settings.ts
+  - packages/coding-agent/src/plan-mode/plan-handoff.ts
+  - packages/coding-agent/src/extensibility/extensions/types.ts
+  - packages/coding-agent/src/capability/system-prompt.ts
+  - packages/coding-agent/src/capability/skill.ts
+  - packages/coding-agent/src/config/config-file.ts
+  - packages/coding-agent/src/tools/approval.ts
+  - packages/coding-agent/src/tools/bash.ts
+  - packages/coding-agent/src/cli/args.ts

@@ -1,0 +1,3 @@
+Candidate C consultation clarification
+
+PERSONALITY.md is the sole owner of the conditions that require `slow`. Native delegation restrictions govern execution delegation; they do not prohibit exactly one required bounded decision consultation. When PERSONALITY requires it, Luna MUST dispatch one native `slow` task using the bounded decision packet and no explicit model override. Sol decides only that bounded issue. Luna retains implementation, integration, verification, acceptance and approval ownership, then resumes normal execution. This clarification does not request general or additional delegation.

@@ -865,3 +865,100 @@ was not executable; invoking the unchanged launcher through `sh` successfully
 loaded context with normal missing-product/design/surface directives. No launcher
 mode or behavior was changed. GitHub/OpenDesign MCP connection warnings were
 unrelated to the local filesystem branch and neither service was used.
+
+## OMP compatibility and health implementation (2026-10-09)
+
+### Current source and runtime basis
+
+The working branch was fast-forwarded to `main` commit
+[`7ac5bda055f1ce27e604dde95a898b7307ac6dca`](https://github.com/rizariaputrawira/omp-docflow/commit/7ac5bda055f1ce27e604dde95a898b7307ac6dca).
+Installed OMP is `18.8.6`; the latest stable release checked is v18.8.6,
+official source revision
+[`f068751e2f1dbdbc195977776d47a26db8697495`](https://github.com/can1357/oh-my-pi/tree/f068751e2f1dbdbc195977776d47a26db8697495).
+`omp update --check` reported that 18.8.6 is already up to date. Its native
+updater changes the active installation in place.
+
+OMP 18.8.6 source confirms that `main.ts` discovers project then user
+`APPEND_SYSTEM.md` and passes the append into native system-prompt assembly.
+This is source/interface evidence only. It does not prove model obedience or
+natural dispatch behavior. `task.eager` remains `default`; `preferred` changes
+general execution-delegation pressure, so it was not adopted as a workaround.
+
+### Implementation and deterministic checks
+
+`config/agent/omp-compatibility.yml` records source-reviewed OMP 18.8.6, the
+critical upstream paths and Candidate C invariants; `last_verified` remains
+null. `scripts/check-omp-compat.mjs` compares the recorded upstream interval and
+validates managed plus effective Candidate C role/task/fallback settings through
+`omp config get`. It fails closed when prompt overrides or Candidate C runtime
+receipts are missing. A matching version string alone is insufficient.
+`workflow-omp-health` is an explicit-only skill (`omp skill list --json`
+reported `hide: true`) with `quick`, `upgrade` and `full` procedures; it does
+not invoke Sol by default.
+
+PASS:
+
+- `bun scripts/test_agent_config.mjs` — Candidate C configuration, bounded
+  concurrency/depth, slow read-only admission, fallback/advisor/prewalk and
+  approval contracts.
+- `node scripts/test_model_routing.mjs` — seven named tool-boundary cases.
+- `node scripts/test_antislop.mjs` — 16 positive and 18 negative handler cases.
+- `bun scripts/test_skill_catalog.mjs` — 36 canonical capabilities (33 visible,
+  3 explicit-only), 14 aliases, 266 assets and 292 managed mappings.
+- `bun scripts/test_omp_compat.mjs` — unknown-version, critical-drift,
+  override, configuration mismatch and receipt boundaries.
+- `python3 scripts/test_install.py` — POSIX install/doctor integration passed
+  for all 292 inventory entries. No PowerShell runtime was available.
+
+A disposable home was populated with the supported installer and removed after
+the checks. Its doctor reported `managed summary: healthy` for the 292-entry
+inventory. Native `omp config get modelRoles`
+returned the expected Luna-medium default/Plan/workers, Sol-medium slow and
+Sol-high advisor; `task.eager`, concurrency, recursion depth and
+`advisor.enabled` returned `default`, `3`, `1` and `false`. The health skill was
+discovered with `hide: true`.
+The existing OMP profile reports `skills.enableSkillCommands: true`; official
+[OMP 18.8.6 skills documentation](https://github.com/can1357/oh-my-pi/blob/f068751e2f1dbdbc195977776d47a26db8697495/docs/skills.md)
+defines explicit invocation as `/skill:<name> [args]`. The health skill was
+installed and explicitly invoked against the real profile; see results below.
+
+The installed checker confirmed that `omp config path` matched its own agent
+directory and read the effective Candidate C settings. It returned
+`NOT VERIFIED` (exit 2) because the managed `SYSTEM_TEMPLATE.md` override is
+active. In a separate isolated run with that override temporarily moved, it
+returned `NOT VERIFIED` for the missing Candidate C runtime receipts. Both are
+intentional fail-closed outcomes, not healthy verdicts.
+
+### NOT VERIFIED and incomplete acceptance
+
+- The first disposable profile had no default model/authentication; no provider credentials were copied into it. After the operator asked for live verification, read-only runtime probes used the existing authenticated OMP 18.8.6 profile with no model override and `--no-session`.
+- PASS under the currently installed managed `SYSTEM_TEMPLATE.md`: a clear direct calculation stayed on Luna and returned `42`; a simple implementation created only a fixture file under `/tmp` via one direct Luna write call and no worker (`artifact://122`); an unresolved snapshot/revocation/legal-hold conflict invoked exactly one native `slow` task resolved as `openai-codex/gpt-6.1-sol`, then Luna resumed and returned a bounded disposition (`artifact://119`).
+- PASS: interactive TUI showed GPT-6 Luna; `/plan` displayed `Plan mode enabled` and Plan mode in the status line; `/exit` returned 0. This verifies mode activation, not a Plan-mode task (`proc://omp-plan-mode-smoke`).
+- These are authenticated current-profile runtime observations, not an isolated-profile comparison and not evidence that `APPEND_SYSTEM.md` alone preserves the route. The actual runtime behavior probes ran with the managed template still active. The isolated profile still has no model/authentication.
+- APPEND-only isolated authentication remains unavailable: official OMP 18.8.6 docs place local credentials in the active `agent.db` and say `PI_CODING_AGENT_DIR` relocates that state. `OPENAI_CODEX_OAUTH_TOKEN`, `OPENAI_API_KEY`, and `OMP_AUTH_BROKER_URL` were unset. No live credential database was copied or shared; no separate authenticated test mechanism was established.
+- PASS, limited representative settled-size case: a read-only factual synthesis of nine repository files stayed on Luna with no task/Sol child (`artifact://124`). This is one workload, not proof of general delegation restraint.
+- NOT VERIFIED: complete A–F matrix; general over-delegation beyond these samples; APPEND-only behavior; isolated authenticated behavior. Candidate C static roles and local tool-boundary tests are not substitutes for those runtime cases.
+- `APPEND_SYSTEM.md` remains unverified as a replacement for the template: the isolated comparison could not run. The repository retains the main `SYSTEM_TEMPLATE.md` snapshot from OMP 18.8.4. It is not proven necessary, and the generated-upstream-plus-small-patch fallback has not been implemented.
+- No separate candidate OMP installer, promotion or verified rollback path was
+  added. Native `omp update` can replace the active installation in place.
+  No OMP binary update was attempted.
+- PASS: installed the checkout into `/home/personal` using the supported
+  installer, after a dry-run. A final
+  `sh scripts/doctor.sh --check --home /home/personal` reported
+  `managed summary: healthy`; advisory-only legacy roots and unmanaged entries
+  were left untouched.
+- PASS: invoked the installed skill using
+  `omp --no-session --no-title --cwd /mnt/d/user/personal/project/omp-config --mode=json -p '/skill:workflow-omp-health quick'`.
+  It ran under Luna, reported static Candidate C role/task settings and doctor
+  PASS, and returned `NOT VERIFIED` because the compatibility checker exited 2
+  with `SYSTEM_TEMPLATE.md` active. `APPEND_SYSTEM.md` exists, but the required
+  native-template condition is not established. The skill's top-level
+  fail-closed verdict was corrected from an initial `DEGRADED` to `NOT
+  VERIFIED` before this final run.
+- PASS: a targeted `omp skill list --json` query showed
+  `workflow-omp-health` installed with `hide: true` (explicit-only). Quick mode
+  did not require or exercise an authenticated runtime turn and did not invoke
+  Sol.
+- NOT VERIFIED: APPEND-only behavior, complete A–F runtime matrix, safe
+  candidate OMP protection, and post-promotion verification. No OMP binary
+  update or promotion was attempted; no `HEALTHY` verdict is claimed.
