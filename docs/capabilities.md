@@ -112,9 +112,8 @@ Coupling is upgrade cost, not a vulnerability or removal mandate.
 | PERSONALITY.md | MEDIUM | KEEP; centralize task authority | OMP global instruction owner; direct requested scope proceeds without redundant confirmation; role/Plan/read-only boundaries remain |
 | config.yml | MEDIUM | KEEP native policy; disable eval by default | Registered settings schema; Candidate C changes only main/plan ownership and narrows slow's role/tool contract; native task semantics, scoped approval/eval cleanup and other settings remain. Static contract and exact-version native approval checks |
 | Agent frontmatter | MEDIUM | KEEP except slow contract | Native agent discovery/model/tool/schema contract; slow is narrowed to bounded read-only Sol decision service while other definitions remain unchanged; parse/static model-role check, effective dispatch needs runtime evidence |
-| SYSTEM_TEMPLATE.md | HIGH | RETAIN only until isolated append behavior gate passes | Full OMP 18.8.4 source snapshot with local delegation-only semantic delta. Native system-template discovery/precedence is a high-coupling override; if APPEND does not pass runtime cases, replace the manual fork with exact upstream source plus a small generated patch. That fallback is not yet implemented; no compatibility claim while it remains. |
-| APPEND_SYSTEM.md | MEDIUM | KEEP minimal native clarification | OMP 18.8.6 auto-discovers project then user append files and appends the text after the native system prompt; source support verified, Candidate C behavior not yet verified |
-| OMP compatibility record/checker | MEDIUM | KEEP small; fail closed | Source-reviewed OMP release, named critical upstream files, impact compare; unknown versions, critical drift and missing Candidate C runtime receipts cannot report VERIFIED |
+| APPEND_SYSTEM.md | MEDIUM | KEEP narrow | Six-line Candidate C consultation distinction appended to OMP's stock prompt; content fingerprint, no full-template replacement, fresh Luna direct/slow and Plan Mode probes |
+| OMP compatibility record/checker | MEDIUM | KEEP small; fail closed | Exact addendum fingerprint, prompt-override detection, release/source comparison and three runtime receipts; reports known-patched/native-compatible or review-required |
 | workflow-omp-health | LOW | KEEP explicit-only | Post-deployment and post-upgrade operator entrypoint; quick/upgrade/full evidence, not an update manager or upstream-adoption review |
 | MCP declarations | MEDIUM | KEEP unchanged | Native HTTP/stdio MCP schema; parse/static prerequisites; no connection/service claim |
 | antislop.js | MEDIUM | KEEP unchanged | before_agent_start string-array prompt contract; handler test and source API check |
@@ -122,7 +121,7 @@ Coupling is upgrade cost, not a vulnerability or removal mandate.
 | rtk.ts | HIGH | KEEP optional/env-gated | Legacy Pi type-import compatibility and RTK executable protocol; source gate review, actual RTK process not exercised |
 | Herdr integration | HIGH | KEEP optional/env-gated | OMP events plus external IPC/env/protocol assumptions; source gate review, real pane/socket not exercised |
 | Empty plugin metadata | MEDIUM | RETIRE managed scaffolding | Native loader tolerates absent empty roots; installer creates package on plugin install; no configured plugin behavior lost |
-| Native prompt template | HIGH | RETAIN pending behavior evidence | `packages/coding-agent/src/prompts/system/system-prompt.md` is the OMP 18.8.4 source for the full unrendered Handlebars template; delegation-only local delta changes execution-vs-consultation gating. Native rendering and actual dispatch remain unverified. |
+| Native OMP system prompt | LOW | INHERIT | No local template copy; upstream prompt changes flow directly, and tracked prompt/dispatch source changes require a bounded compatibility review |
 | Installer/doctor | LOW | KEEP | Explicit home-relative inventory; production POSIX tests/smoke; PowerShell remains unverified with recorded defect |
 
 ## Extension purpose and upgrade cost

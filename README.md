@@ -59,7 +59,7 @@ Remote ZIP archives must contain exactly one top-level directory, including hidd
 |---|---|
 | `config/agent/PERSONALITY.md` | Global working, escalation, delegation and evidence-acceptance policy |
 | `config/agent/AGENTS.md` | Conditional semantic routing and canonical permission distinctions |
-| `config/agent/SYSTEM_TEMPLATE.md` | Native system-prompt template override; preserves dynamic OMP sections while correcting execution-only delegation gates |
+| `config/agent/APPEND_SYSTEM.md` | Narrow Candidate C consultation clarification appended to OMP's native system prompt |
 | `config/agent/agents/` | Seven bounded role definitions, requested built-in tools and output contracts |
 | `config/agent/extensions/` | Deterministic runtime restrictions and integrations; no worker-model router |
 | `config/agent/skills/` | Passive on-demand procedures selected by public `name:` |
@@ -69,7 +69,7 @@ Remote ZIP archives must contain exactly one top-level directory, including hidd
 | `scripts/`, `install.*` | Deployment checks, static configuration contracts and executable hook contracts |
 
 `config/agent/` maps to `~/.omp/agent/`; existing user plugin state is preserved, not managed. Managed skills use one source folder and deploy in native flat `<folder>/SKILL.md` layout. Existing homes retain obsolete native skills until separately authorized retirement; fresh installs do not imply a completed migration.
-`SYSTEM_TEMPLATE.md` is a supported native OMP override discovered at `~/.omp/agent/SYSTEM_TEMPLATE.md`; it replaces the generated system-prompt template block, while generated context/footer and tool schemas remain native. A literal `SYSTEM.md`, if present, takes precedence over the template and can mask it. The override is pinned to OMP 18.8.4 source; review its source diff and rendering behavior when upgrading OMP. Changes apply to newly initialized prompts/sessions, not an already-running session; restart OMP after installation.
+OMP owns the full system prompt. OMP 18.8.7 discovers `APPEND_SYSTEM.md` and appends this six-line clarification without replacing native prompt content. `PERSONALITY.md` owns when a bounded `slow` consultation is required; the append only separates that decision service from execution delegation. The compatibility checker fingerprints the append and requires no active `SYSTEM.md`/`SYSTEM_TEMPLATE.md` override. Existing homes preserve unlisted files, so remove the former managed `~/.omp/agent/SYSTEM_TEMPLATE.md` once during this cutover; do not delete a customized override without review. Prompt changes apply to fresh sessions.
 
 ## Architecture and safe use
 
@@ -260,7 +260,7 @@ known limitations are preserved in [verification records](docs/verification.md).
 Historical results are not fresh authenticated-dispatch or Windows-installation
 proof.
 
-The OMP compatibility record currently has no verified runtime baseline. Official OMP v18.8.6 source supports `APPEND_SYSTEM.md` discovery and trailing append; current `main` still inventories the OMP 18.8.4 `SYSTEM_TEMPLATE.md` snapshot pending the isolated Candidate C behavior gate. The checker returns NOT VERIFIED while that override is active or runtime receipts are missing. Native `omp update` changes the active installation in place; this repository does not provide candidate installation or automatic promotion/rollback. Do not call a candidate compatible or the real update complete without isolated behavior checks and post-update `workflow-omp-health upgrade`. See [verification](docs/verification.md) for this task's exercised evidence and limits.
+The compatibility record pins the latest OMP source reviewed and records the verified runtime baseline. `bun scripts/check-omp-compat.mjs` checks the current installed version offline; `bun scripts/check-omp-compat.mjs --candidate VERSION` compares tracked upstream interfaces and requires network access. `Candidate C consultation compatibility: PASS` reports `mode: known-patched` for the verified `APPEND_SYSTEM.md` path, or `mode: native-compatible` only after the append is retired and native behavior is verified. Unknown prompt text, active overrides, changed critical OMP source, or missing behavioral receipts report review/not-verified rather than guessing. Future prompt improvements flow directly from OMP; no system-template merge is needed. Before accepting an upgrade, run the compatibility check, then smoke Luna direct, Luna→slow/Sol→Luna and Plan Mode. See [verification](docs/verification.md) for this task's tested state and limits.
 
 ## Sources, licenses, and further reading
 

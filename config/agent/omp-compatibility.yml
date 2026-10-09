@@ -1,11 +1,21 @@
 schema: 1
 project: omp-docflow
 source_reviewed:
-  omp_version: 18.8.6
+  omp_version: 18.8.7
   channel: stable
-  revision: f068751e2f1dbdbc195977776d47a26db8697495
+  revision: f261ed9faf16b61880b544f599876bface4ded0d
+  date: 2026-10-10
+consultation_append_sha256: 7f504df8c2cdcb9bb378b0685063140e09c9daf60b43d2a0cdff2286cb7a8aa3
+last_verified:
+  omp_version: 18.8.7
+  revision: f261ed9faf16b61880b544f599876bface4ded0d
   date: 2026-10-09
-last_verified: null
+  evidence: docs/verification.md#omp-compatibility-and-health-implementation-2026-10-09
+  mode: known-patched
+  behavior:
+    luna_direct: PASS
+    luna_slow_luna: PASS
+    plan_mode_luna: PASS
 candidate_c:
   default: luna-medium
   plan: luna-medium

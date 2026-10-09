@@ -37,7 +37,7 @@ Windows directory. No UNC-support fix is claimed. Windows fixtures were removed.
 The full native transcript is session-local `artifact://274`; the six source
 checks and Node VM smoke returned successful terminal results in this session.
 
-## Candidate C published and installed — current receipt (2026-10-09)
+## Historical Candidate C full-template deployment — receipt (2026-10-09)
 
 **Verdict: PASS — implemented, normally pushed and installed.** Payload commit
 [`b16070df90fa112a1479a5e9a68c6d360416f77b`](https://github.com/rizariaputrawira/omp-docflow/commit/b16070df90fa112a1479a5e9a68c6d360416f77b)
@@ -104,7 +104,7 @@ PowerShell execution remains NOT VERIFIED. No measured cost savings or universal
 model-compliance guarantee is claimed. A fresh session loads the new template;
 the already-running explicit Sol session was not hot-switched.
 
-## Candidate C native-rule correction — source and disposable verification (2026-10-09)
+## Historical Candidate C native-rule correction — source and template-mode verification (2026-10-09)
 
 **Source and exercised runtime behavior: PASS.** This receipt establishes the
 candidate configuration and isolated runtime behavior, not publication or
@@ -868,33 +868,85 @@ unrelated to the local filesystem branch and neither service was used.
 
 ## OMP compatibility and health implementation (2026-10-09)
 
-### Current source and runtime basis
+### Current source and runtime basis — stable and main rechecked 2026-10-10
 
-The working branch was fast-forwarded to `main` commit
-[`7ac5bda055f1ce27e604dde95a898b7307ac6dca`](https://github.com/rizariaputrawira/omp-docflow/commit/7ac5bda055f1ce27e604dde95a898b7307ac6dca).
-Installed OMP is `18.8.6`; the latest stable release checked is v18.8.6,
-official source revision
-[`f068751e2f1dbdbc195977776d47a26db8697495`](https://github.com/can1357/oh-my-pi/tree/f068751e2f1dbdbc195977776d47a26db8697495).
-`omp update --check` reported that 18.8.6 is already up to date. Its native
-updater changes the active installation in place.
+The installed executable is `/home/personal/.local/bin/omp`, version `18.8.7`,
+SHA-256 `b87f9835a0acdbb81bbbad8273aa2d999b608a208598421a9584cffeb3139a8a`.
+The latest official stable release checked is v18.8.7, tag
+[`f261ed9faf16b61880b544f599876bface4ded0d`](https://github.com/can1357/oh-my-pi/tree/f261ed9faf16b61880b544f599876bface4ded0d).
+The current upstream `main` commit is
+[`4cd31bd6d00bb7a161443d9a5f4bce4f564664f2`](https://github.com/can1357/oh-my-pi/commit/4cd31bd6d00bb7a161443d9a5f4bce4f564664f2),
+32 commits beyond the release. The release-to-main comparison changes no
+tracked system-prompt discovery/builder, extension event, or task-dispatch/
+subagent source path. Reviewed main changes do not add bounded consultation,
+decision-only task invocation, or an equivalent native feature. No OMP binary
+update was performed for this task.
 
-OMP 18.8.6 source confirms that `main.ts` discovers project then user
-`APPEND_SYSTEM.md` and passes the append into native system-prompt assembly.
-This is source/interface evidence only. It does not prove model obedience or
-natural dispatch behavior. `task.eager` remains `default`; `preferred` changes
-general execution-delegation pressure, so it was not adopted as a workaround.
+Current v18.8.7 `main.ts` discovers project then user `APPEND_SYSTEM.md`
+unless the CLI supplies an append prompt, and the native prompt builder appends
+it without replacing the stock template. The latest release adds no native
+bounded-consultation/decision-only task feature. The extension API's
+`before_agent_start` event receives `prompt`, images, and the resolved
+`systemPrompt: string[]` before an ordinary provider request or dequeued
+user-containing batch; handlers run sequentially and may replace the full
+policy array for that request and continuations. It is not a structured
+delegation-clause patch API. The existing `antislop.js` hook is composable
+because it preserves prior blocks and appends its own policy; no new hook was
+needed or added.
 
-### Implementation and deterministic checks
+The append-only migration gate has now passed on the actual installed OMP
+18.8.7 binary. A disposable HOME was installed from the candidate, then its
+`SYSTEM_TEMPLATE.md` was removed before launching OMP. The runtime inherited the
+stock generated prompt and loaded `APPEND_SYSTEM.md`; the six-line addendum's
+SHA-256 is `7f504df8c2cdcb9bb378b0685063140e09c9daf60b43d2a0cdff2286cb7a8aa3`.
+The disposable HOME shared the existing OMP auth database through symlinks, as
+authorized, without copying credentials. OMP may record normal usage/accounting
+there. Candidate config, sessions, workspace and logs remained disposable; the
+real OMP config was not changed during these probes.
 
-`config/agent/omp-compatibility.yml` records source-reviewed OMP 18.8.6, the
-critical upstream paths and Candidate C invariants; `last_verified` remains
-null. `scripts/check-omp-compat.mjs` compares the recorded upstream interval and
-validates managed plus effective Candidate C role/task/fallback settings through
-`omp config get`. It fails closed when prompt overrides or Candidate C runtime
-receipts are missing. A matching version string alone is insufficient.
-`workflow-omp-health` is an explicit-only skill (`omp skill list --json`
-reported `hide: true`) with `quick`, `upgrade` and `full` procedures; it does
-not invoke Sol by default.
+| Fresh-session probe | Observed result |
+|---|---|
+| Clear docs-engineering status (Case A) | PASS: `omp -p` completed the supplied unadopted-project status request, read the existing owners, recommended updating README, and did not write files. Its companion native RPC state resolved `openai-codex/gpt-6-luna`, provider `openai-codex`, medium. |
+| Consequential decision (Case B) | PASS: natural prompt caused Luna to submit one native task with `agent: "slow"` and no model override. OMP resolved it to `openai-codex/gpt-6.1-sol:medium`; the worker returned a bounded recommendation and Luna resumed with the final answer. No implementation was performed; the fixture remained unchanged. |
+| Large but clear work (Case C) | PASS: reading all seven managed agent definitions and reporting their model selectors/responsibilities remained on `gpt-6-luna`; the transcript contains seven reads and no task/subagent invocation. |
+| Plan Mode | PASS: fresh OMP TUI showed `GPT-6-Luna`; `/plan` displayed `Plan mode enabled` and the Plan indicator; `/exit` returned 0. No substantive request or approval was submitted. |
+
+Private evidence: `/tmp/omp-docflow-append-probe.3MhvAY/case1-print.log`,
+`case1-direct-rpc.jsonl`, `case6-print.jsonl`, `case-large-clear.jsonl`, and
+the exited TUI transcript `proc://candidate-c-plan-probe`. The Case B
+`--no-session` record exposes OMP's resolved child identity and completed
+decision, not a separate saved child provider-turn transcript. No provider
+fallback is enabled by configuration.
+
+The compatibility checker now fingerprints the exact addendum, rejects prompt
+overrides or unknown text, and requires same-version behavior receipts. It
+reports `PASS / known-patched`; it permits `native-compatible` only with a
+separate reviewed receipt and no addendum. A changed tracked prompt/task/dispatch
+source returns REVIEW REQUIRED. The supported `before_agent_start` API was
+rejected for this narrow change because its return contract replaces a complete
+`systemPrompt` array rather than editing one stable clause. No new extension,
+model router, retries, or unrelated integration change was added.
+
+The template-based deployment receipt below records the prior installed state
+and remains historical; it is not evidence for this append-only verification.
+
+### Compatibility record and check status
+
+`config/agent/omp-compatibility.yml` records the source-reviewed 18.8.7 release,
+the exact appendix fingerprint, tracked upstream interfaces, `known-patched`
+mode, and the three observed behavior receipts. `scripts/check-omp-compat.mjs`
+compares source intervals for candidate versions and validates effective
+Candidate C model/task/fallback settings through `omp config get`. It fails
+closed for an unknown prompt, custom `SYSTEM.md`/`SYSTEM_TEMPLATE.md`, a
+mismatched appendix, changed critical upstream sources, or missing behavior
+receipts. The same-version check is offline; `--candidate VERSION` requires
+GitHub access. `workflow-omp-health` remains explicit-only and does not invoke
+Sol by default.
+
+### Historical implementation and deterministic checks (OMP 18.8.6)
+
+The following checks and disposable install were recorded against the earlier
+18.8.6 basis, not rerun for this documentation/source review:
 
 PASS:
 

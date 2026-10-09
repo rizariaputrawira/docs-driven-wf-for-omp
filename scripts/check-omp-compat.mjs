@@ -1,5 +1,6 @@
 #!/usr/bin/env bun
 import { existsSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
@@ -69,6 +70,9 @@ function validateRecord(record) {
     throw new Error("source_reviewed.omp_version is missing or invalid");
   }
   if (!/^[0-9a-f]{40}$/i.test(record.source_reviewed?.revision ?? "")) throw new Error("source_reviewed.revision must be a full Git commit");
+  if (!/^[0-9a-f]{64}$/i.test(record.consultation_append_sha256 ?? "")) {
+    throw new Error("consultation_append_sha256 must fingerprint the managed APPEND_SYSTEM.md text");
+  }
   if (!Array.isArray(record.critical_upstream_paths) || record.critical_upstream_paths.length === 0 ||
       record.critical_upstream_paths.some(path => typeof path !== "string" || !path.startsWith("packages/"))) {
     throw new Error("critical_upstream_paths must be a non-empty list of official source paths");
@@ -91,27 +95,28 @@ function validateRecord(record) {
 }
 
 
-export function classify({ version, record, config, criticalChanges = [], promptFiles = true }) {
+export function classify({ version, record, config, criticalChanges = [], promptMode = "unknown" }) {
   try {
     validateRecord(record);
     validateConfig(config);
   } catch (error) {
-    return { status: "INCOMPATIBLE", reason: error.message, criticalChanges };
+    return { status: "INCOMPATIBLE", mode: "unknown", reason: error.message, criticalChanges };
   }
-  if (!promptFiles) {
-    return { status: "NOT VERIFIED", reason: "APPEND_SYSTEM.md is absent or a SYSTEM.md/SYSTEM_TEMPLATE.md override is active", criticalChanges };
+  if (criticalChanges.length > 0) {
+    return { status: "REVIEW REQUIRED", mode: "unknown", reason: "a tracked OMP interface changed since the verified baseline", criticalChanges };
+  }
+  if (promptMode === "unknown") {
+    return { status: "REVIEW REQUIRED", mode: "unknown", reason: "the active native prompt or Candidate C append is not recognized", criticalChanges };
   }
   const baseline = record.last_verified;
-  if (criticalChanges.length > 0) {
-    return { status: "REVIEW REQUIRED", reason: "a tracked OMP interface changed since the verified baseline", criticalChanges };
-  }
   if (!baseline || baseline.omp_version !== version || !/^[0-9a-f]{40}$/i.test(baseline.revision ?? "") ||
       !baseline.date || !baseline.evidence ||
+      baseline.mode !== promptMode ||
       baseline.behavior?.luna_direct !== "PASS" || baseline.behavior?.luna_slow_luna !== "PASS" ||
       baseline.behavior?.plan_mode_luna !== "PASS") {
-    return { status: "NOT VERIFIED", reason: "no matching version with all three Candidate C runtime receipts and evidence reference", criticalChanges };
+    return { status: "NOT VERIFIED", mode: promptMode, reason: "no matching version, prompt mode, and all three Candidate C runtime receipts", criticalChanges };
   }
-  return { status: "VERIFIED", reason: "version, tracked interface gate and recorded Candidate C runtime receipts match", criticalChanges };
+  return { status: "VERIFIED", mode: promptMode, reason: "version, tracked interface gate, prompt mode and Candidate C runtime receipts match", criticalChanges };
 }
 
 async function resolveCommit(version) {
@@ -234,13 +239,21 @@ async function main() {
   const projectDir = process.cwd();
   const projectAppend = resolve(projectDir, "APPEND_SYSTEM.md");
   const appendPath = existsSync(projectAppend) ? projectAppend : resolve(agentDir, "APPEND_SYSTEM.md");
-  const appendText = existsSync(appendPath) ? readFileSync(appendPath, "utf8") : "";
-  const promptFiles = appendText.includes("PERSONALITY.md") &&
-    appendText.includes("bounded decision consultation") &&
-    !existsSync(resolve(agentDir, "SYSTEM.md")) &&
-    !existsSync(resolve(agentDir, "SYSTEM_TEMPLATE.md")) &&
-    !existsSync(resolve(projectDir, "SYSTEM.md")) &&
-    !existsSync(resolve(projectDir, "SYSTEM_TEMPLATE.md"));
+  const appendPresent = existsSync(appendPath);
+  const appendText = appendPresent ? readFileSync(appendPath, "utf8") : "";
+  const appendHash = appendPresent ? createHash("sha256").update(appendText).digest("hex") : "";
+  const hasPromptOverride = [
+    resolve(agentDir, "SYSTEM.md"),
+    resolve(agentDir, "SYSTEM_TEMPLATE.md"),
+    resolve(projectDir, "SYSTEM.md"),
+    resolve(projectDir, "SYSTEM_TEMPLATE.md"),
+  ].some(existsSync);
+  let promptMode = "unknown";
+  if (!hasPromptOverride && appendPresent && appendHash === record.consultation_append_sha256) {
+    promptMode = "known-patched";
+  } else if (!hasPromptOverride && !appendPresent && record.last_verified?.mode === "native-compatible") {
+    promptMode = "native-compatible";
+  }
   let criticalChanges = [];
   const baseline = record.last_verified ?? record.source_reviewed;
   try {
@@ -252,11 +265,13 @@ async function main() {
       criticalChanges = await changedCriticalPaths(baseCommit, candidateCommit, record.critical_upstream_paths);
     }
   } catch (error) {
-    console.log(`OMP compatibility: NOT VERIFIED\nVersion: ${version}\n${error.message}`);
+    console.log(`OMP compatibility: NOT VERIFIED\n${error.message}`);
     process.exitCode = 2;
     return;
   }
-  const result = classify({ version, record, config: effectiveConfig, criticalChanges, promptFiles });
+  const result = classify({ version, record, config: effectiveConfig, criticalChanges, promptMode });
+  console.log(`Candidate C consultation compatibility: ${result.status === "VERIFIED" ? "PASS" : result.status}`);
+  console.log(`mode: ${result.mode}`);
   console.log(`OMP compatibility: ${result.status}`);
   console.log(`Version: ${version}`);
   console.log(`Comparison baseline: ${baseline.omp_version} (${baseline.revision ?? "tag lookup"})`);

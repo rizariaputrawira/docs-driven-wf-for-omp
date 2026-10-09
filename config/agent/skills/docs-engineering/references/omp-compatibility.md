@@ -10,43 +10,72 @@ Current outcomes live in the source checkout's `docs/verification.md`, which is
 not deployed as part of this skill package.
 
 
-## Candidate C prompt and compatibility state (OMP 18.8.6)
+## Candidate C prompt and compatibility state (OMP 18.8.7)
 
-Installed OMP and the latest stable release checked for this implementation are
-18.8.6. Its official immutable source revision is
-[`f068751e2f1dbdbc195977776d47a26db8697495`](https://github.com/can1357/oh-my-pi/tree/f068751e2f1dbdbc195977776d47a26db8697495).
-The repository record `config/agent/omp-compatibility.yml` stores this
-source-reviewed release separately from `last_verified`; the latter remains
-null until all three Candidate C runtime receipts exist.
+Installed OMP and the latest stable release rechecked on 2026-10-10 are 18.8.7.
+The official release tag resolves to immutable source revision
+[`f261ed9faf16b61880b544f599876bface4ded0d`](https://github.com/can1357/oh-my-pi/tree/f261ed9faf16b61880b544f599876bface4ded0d).
+The current upstream `main` tip is
+[`4cd31bd6d00bb7a161443d9a5f4bce4f564664f2`](https://github.com/can1357/oh-my-pi/commit/4cd31bd6d00bb7a161443d9a5f4bce4f564664f2),
+32 commits beyond that release. Its release-to-main diff does not change the
+system-prompt discovery/builder, extension event contract, or task dispatch/
+subagent files tracked by the compatibility gate; no native bounded-consultation
+feature appears in the release notes or reviewed main changes. The compatibility
+record stores the reviewed stable source separately from its runtime receipt.
+Current OMP 18.8.7 is verified in `known-patched` mode after disposable
+fresh-session Luna-direct, natural Luna→slow/Sol→Luna, and Plan Mode probes.
 
-The CLI discovers `APPEND_SYSTEM.md` at project scope before user scope when
-`--append-system-prompt` is absent, then passes it to the native prompt builder:
-[main.ts discovery](https://github.com/can1357/oh-my-pi/blob/f068751e2f1dbdbc195977776d47a26db8697495/packages/coding-agent/src/main.ts#L1291-L1315)
-and [system-prompt assembly](https://github.com/can1357/oh-my-pi/blob/f068751e2f1dbdbc195977776d47a26db8697495/packages/coding-agent/src/system-prompt.ts#L625-L634).
-This supports a small consultation clarification without maintaining the full
-upstream system template. It establishes discovery/order, not natural-language
-obedience or Luna→Sol→Luna behavior. Explicit CLI append text wins, project
-prompt overrides can shadow user prompt customization, and non-CLI SDK hosts
-must be checked separately.
+OMP discovers project then user `APPEND_SYSTEM.md` when no CLI append is given:
+[main.ts discovery](https://github.com/can1357/oh-my-pi/blob/f261ed9faf16b61880b544f599876bface4ded0d/packages/coding-agent/src/main.ts#L1291-L1359)
+and [system-prompt assembly](https://github.com/can1357/oh-my-pi/blob/f261ed9faf16b61880b544f599876bface4ded0d/packages/coding-agent/src/system-prompt.ts#L956-L1066).
+The native OMP prompt is generated and retained; this repository appends only
+the six-line Candidate C distinction. `PERSONALITY.md` remains the sole owner
+of consultation triggers. The addendum SHA-256 is recorded in
+`omp-compatibility.yml`; unknown addendum text or any `SYSTEM.md` /
+`SYSTEM_TEMPLATE.md` override is rejected by the checker.
+
+This is preferable to the supported `before_agent_start` extension event:
+that event receives `prompt`, images and a resolved `systemPrompt: string[]`
+before provider turns, and may replace the entire policy array. Handlers chain
+in extension order, but OMP provides no structured clause-edit API. No
+compatibility extension or model router is added. OMP prompt changes are
+inherited directly; source changes to tracked prompt/task/dispatch interfaces
+require review rather than optimistic text rewriting.
+
+The checker distinguishes `known-patched` (the exact appendix and runtime
+receipts), `native-compatible` (append removed after native behavior is
+verified), and `unknown` (unrecognized prompt state or changed critical
+interface). Unknown states never pass. `native-compatible` is not inferred
+from a missing file: it must match a reviewed runtime receipt.
+Explicit CLI append text wins over file discovery; project prompt overrides can
+shadow user additions; non-CLI SDK hosts require separate checks.
+
 
 `task.eager` accepts `default`, `preferred` and `always`. `preferred` changes
-general execution-delegation pressure and disables the restrained inline-first
-branch; it is not a narrow way to authorize a policy-required decision
-consultation. Keep `default` and use `APPEND_SYSTEM.md` only to clarify the
-native execution-vs-consultation distinction. PERSONALITY is the sole owner of
-Candidate C consultation triggers. See the exact
-[task setting](https://github.com/can1357/oh-my-pi/blob/f068751e2f1dbdbc195977776d47a26db8697495/packages/coding-agent/src/task/settings.ts#L217-L238)
-and [prompt template](https://github.com/can1357/oh-my-pi/blob/f068751e2f1dbdbc195977776d47a26db8697495/packages/coding-agent/src/prompts/system/system-prompt.md).
+general execution-delegation pressure; it is not a narrow way to authorize a
+policy-required decision consultation. Keep `default`. PERSONALITY remains the
+sole owner of Candidate C consultation triggers. See the exact
+[task setting](https://github.com/can1357/oh-my-pi/blob/f261ed9faf16b61880b544f599876bface4ded0d/packages/coding-agent/src/task/settings.ts)
+and [prompt template](https://github.com/can1357/oh-my-pi/blob/f261ed9faf16b61880b544f599876bface4ded0d/packages/coding-agent/src/prompts/system/system-prompt.md).
 
-`scripts/check-omp-compat.mjs` compares the source interval against the paths
-listed in the compatibility record and validates both managed settings and
-effective OMP roles/task/fallback settings through `omp config get`. Installed
-mode also requires its agent directory to match `omp config path`. Critical
-drift is REVIEW REQUIRED; API failure, unknown release, a version without
-matching behavior receipts, or an active custom system template is NOT VERIFIED.
-It does not install or mutate OMP. Native `omp update` changes the active
-installation in place; no repository-owned candidate installer/promotion/
-rollback path is claimed.
+
+`scripts/check-omp-compat.mjs` compares the installed OMP version against the
+recorded release and, for a candidate version, compares tracked upstream
+interfaces. It validates managed and effective OMP roles/task/fallback settings
+through `omp config get`. Installed mode also requires its agent directory to
+match `omp config path`. A clean current-version check is offline;
+`--candidate VERSION` requires GitHub access. Changed critical paths report
+REVIEW REQUIRED; unknown prompt state or missing/mismatched runtime receipts
+cannot pass. The checker never patches or installs OMP. Native `omp update`
+changes the active installation in place; no repository-owned candidate
+installer/promotion/rollback path is claimed.
+For an upgrade: inspect release notes and changed critical sources; run the
+candidate check; if native semantics changed, review the delegation diff and
+verify whether the addendum is still needed; then smoke Luna direct,
+Luna→slow/Sol→Luna, and Plan Mode before accepting the release. If OMP natively
+supports the distinction, remove the appendix and record `native-compatible`;
+otherwise retain the exact known addendum. Do not manually merge OMP's full
+system template.
 `workflow-omp-health` is the explicit operator procedure after deployment or
 upgrade. Current behavioral evidence and unverified cases are recorded in
 `docs/verification.md`.
