@@ -1,6 +1,6 @@
 /**
  * Impeccable Live Variant Mode - Browser Script
- * Local modifications: share variant-count click behavior; remove unused private helpers and locals.
+ * Local modifications: share variant-count click behavior; remove unused private helpers and locals; bind session helpers directly.
  *
  * Injected into the user's page via <script src="http://localhost:PORT/live.js">.
  * The server prepends window.__IMPECCABLE_TOKEN__ and window.__IMPECCABLE_PORT__
@@ -72,6 +72,10 @@
     window.__IMPECCABLE_LIVE_INIT__ = false;
     return;
   }
+  const {
+    writeScrollY, readScrollY, clearScrollY, clearSession,
+    isHandled: isSessionHandled, clearHandled,
+  } = sessionState;
   const HIGHLIGHT_TRANSITION =
     'top 140ms ' + EASE +
     ', left 140ms ' + EASE +
@@ -231,9 +235,6 @@
   // (Previously: saveSession wrote scrollY alongside state, so every call
   // during resume overwrote the pre-reload value with whatever the browser
   // had landed on, typically 0.)
-  function writeScrollY(y) { sessionState.writeScrollY(y); }
-  function readScrollY() { return sessionState.readScrollY(); }
-  function clearScrollY() { sessionState.clearScrollY(); }
 
   // Pre-empt the browser: apply manual scroll restoration and jump to the
   // saved scrollY at script-parse time. Retries on fonts.ready and load
@@ -9648,24 +9649,12 @@ void main() {
     return saved;
   }
 
-  function clearSession() {
-    sessionState.clearSession();
-  }
-
   /** Mark session as handled (accepted/discarded). The agent will clean up
    *  the source, but until it does the wrapper is still in the HTML. This
    *  prevents resumeSession from picking it up again after reload. */
   function markSessionHandled() {
     if (!currentSessionId) return;
     sessionState.markHandled(currentSessionId);
-  }
-
-  function isSessionHandled(id) {
-    return sessionState.isHandled(id);
-  }
-
-  function clearHandled(sessionId) {
-    sessionState.clearHandled(sessionId);
   }
 
   function cleanup(options) {

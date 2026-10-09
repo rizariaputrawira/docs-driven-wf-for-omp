@@ -230,7 +230,7 @@ sh scripts/doctor.sh --fix --home /path/to/existing-home
 .\scripts\doctor.ps1 -Fix -Home 'C:\Users\example'
 ```
 
-Exit codes: `0` every mapped file matches; `1` one or more files are missing/drifted; `2` invalid arguments, inventory/home/read/compare errors or repair failures. `--fix` delegates once to the platform installer, then checks every file. POSIX installer and doctor share `scripts/validate-inventory.sh` as the inventory validation owner.
+Exit codes: `0` every mapped file matches; `1` one or more files are missing/drifted; `2` invalid arguments, inventory/home/read/compare errors or repair failures. `--fix` delegates once to the platform installer, then checks every file. Each platform shares one inventory validation owner between installer and doctor: `scripts/validate-inventory.sh` for POSIX and `scripts/validate-inventory.ps1` for PowerShell.
 
 ## Existing-home migration
 

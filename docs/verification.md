@@ -1,5 +1,42 @@
 # Verification and current limits
 
+## Complexity cuts — source verification (2026-10-09)
+
+The three scoped simplifications share the PowerShell inventory validator,
+replace manual profile appends with `File.AppendAllText` using the existing
+encoding, and bind the browser's six forwarding-only session helpers directly.
+Validation, backups, unrelated-content preservation, the missing-helper guard,
+project ownership checks and handled-session guards are retained. No dependency
+or model/routing change is introduced; the original dirty checkout is untouched.
+
+- PASS: native Windows PowerShell **5.1.26100.9444** executed the production
+  installer and doctor in disposable native Windows directories over all
+  **288 inventory entries**. Dry-run, install/check, identical reinstall,
+  managed-file drift/fix, exact backup and unrelated bytes, and duplicate/unsafe
+  inventory rejection before writes passed.
+- PASS: `scripts/test_telemetry_install.ps1`, including byte-exact UTF-8,
+  UTF-16 LE/BE and UTF-32 LE/BE append/reinstall cases. Existing bytes and
+  BOM-selected encodings are preserved without a second BOM.
+- PASS: `bun scripts/test_agent_config.mjs`,
+  `node scripts/test_model_routing.mjs`, `bun scripts/test_skill_catalog.mjs`,
+  `bun scripts/test_document_locations.mjs`, `node scripts/test_antislop.mjs`
+  and `python3 scripts/test_install.py`. The Python runner's PowerShell
+  availability message does not include `powershell.exe`; Windows evidence
+  above comes from the separate native invocation, not the Python runner.
+- PASS: JavaScript syntax and a disposable Node VM smoke of the maintained
+  session helper and changed browser initialization/bindings: scroll persistence
+  and reload/clear, handled-session persistence and selective/all clear, session
+  removal, foreign-project rejection, and missing-helper initialization guard.
+  **Not verified:** the full rendered live overlay or browser/backend flow.
+
+The native Windows invocation used process-only `-ExecutionPolicy Bypass`;
+no saved execution policy changed. Direct execution from the WSL UNC checkout
+first encountered the existing provider-path format limitation, so verification
+copied the explicit inventory and required scripts to a disposable native
+Windows directory. No UNC-support fix is claimed. Windows fixtures were removed.
+The full native transcript is session-local `artifact://274`; the six source
+checks and Node VM smoke returned successful terminal results in this session.
+
 ## Candidate C published and installed — current receipt (2026-10-09)
 
 **Verdict: PASS — implemented, normally pushed and installed.** Payload commit

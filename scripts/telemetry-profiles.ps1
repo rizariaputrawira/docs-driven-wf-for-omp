@@ -69,11 +69,7 @@ function Install-TelemetryProfiles($Profiles, [bool]$DryRun) {
             Write-Output "backup: $candidate"
         }
         # Append bytes in the existing BOM-selected encoding, without a second BOM.
-        $stream = [IO.File]::Open($profile.Path, [IO.FileMode]::Append, [IO.FileAccess]::Write)
-        try {
-            $append = $profile.Encoding.GetBytes($profile.Stanza)
-            $stream.Write($append, 0, $append.Length)
-        } finally { $stream.Dispose() }
+        [IO.File]::AppendAllText($profile.Path, $profile.Stanza, $profile.Encoding)
         Write-Output "updated PowerShell profile: $($profile.Path)"
     }
 }

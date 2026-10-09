@@ -62,6 +62,24 @@ try {
     [IO.File]::WriteAllText((Join-Path $invalidHome 'Documents/PowerShell/profile.ps1'), "# >>> omp telemetry opt-out >>>`r`n# <<< omp telemetry opt-out <<<")
     Run-Script $install @('-Home', $invalidHome) 2
     Assert (-not (Test-Path -LiteralPath (Join-Path $invalidHome '.omp'))) 'Invalid profile wrote payload before validation.'
+    . (Join-Path $root 'scripts/telemetry-profiles.ps1')
+    foreach ($codePage in @(65001, 1200, 1201, 12000, 12001)) {
+        $encoding = if ($codePage -eq 65001) { [Text.UTF8Encoding]::new($false) } else { [Text.Encoding]::GetEncoding($codePage) }
+        $encodingHome = Join-Path $temp "encoding-$codePage"
+        $encodingProfile = Join-Path $encodingHome 'Documents/PowerShell/profile.ps1'
+        [void](New-Item -ItemType Directory -Path (Split-Path -Parent $encodingProfile) -Force)
+        [byte[]]$original = $encoding.GetPreamble() + $encoding.GetBytes("# User bytes: caf$([char]0x00E9)`r`n")
+        [IO.File]::WriteAllBytes($encodingProfile, $original)
+        $profiles = @(Get-TelemetryProfilePlan $encodingHome)
+        $plan = $profiles | Where-Object { $_.Path -eq $encodingProfile }
+        [byte[]]$expected = $original + $plan.Encoding.GetBytes($plan.Stanza)
+        Install-TelemetryProfiles $profiles $false
+        Assert ([System.Collections.StructuralComparisons]::StructuralEqualityComparer.Equals([IO.File]::ReadAllBytes($encodingProfile), $expected)) "Profile encoding $codePage changed bytes or added a second BOM."
+        $profiles = @(Get-TelemetryProfilePlan $encodingHome)
+        Assert (@($profiles | Where-Object { -not $_.Present }).Count -eq 0) "Profile encoding $codePage was not recognized after installation."
+        Install-TelemetryProfiles $profiles $false
+        Assert (@(Get-ChildItem -LiteralPath (Split-Path -Parent $encodingProfile) -Filter 'profile.ps1.bak.*').Count -eq 1) "Profile encoding $codePage was rewritten on reinstall."
+    }
     Write-Output 'PowerShell telemetry installation integration checks passed.'
 } finally {
     Remove-Item -LiteralPath $temp -Recurse -Force
