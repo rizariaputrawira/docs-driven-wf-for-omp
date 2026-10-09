@@ -113,6 +113,29 @@ stale installed folders are not aliases and are never automatically pruned. Empt
 plugin scaffold mappings are retired, but existing users' plugin files are not
 deleted. No live home, authenticated model call or external service was used here.
 
+## Native system-template source
+
+`agent/SYSTEM_TEMPLATE.md` is a maintained copy of OMP's
+[`system-prompt.md`](https://github.com/can1357/oh-my-pi/blob/40e9368ef0458fd9073329cdff4174895f91bc6b/packages/coding-agent/src/prompts/system/system-prompt.md)
+at v18.8.4 commit `40e9368ef0458fd9073329cdff4174895f91bc6b`. The upstream
+project is MIT-licensed; the template retains the required copyright and
+permission notice in a non-rendered Handlebars comment:
+[LICENSE](https://github.com/can1357/oh-my-pi/blob/40e9368ef0458fd9073329cdff4174895f91bc6b/LICENSE).
+Only delegation wording is changed: execution-only restrictions are scoped to
+execution work, and a policy-required bounded decision consultation is explicitly
+required as one managed native task item. No semantic escalation predicates are
+copied into this native template. All other template blocks, dynamic fields and
+helpers are retained from the pinned source.
+
+OMP discovers this override at `~/.omp/agent/SYSTEM_TEMPLATE.md`; it replaces
+the default template block, not generated context/footer or tool schemas. A literal
+`SYSTEM.md` has precedence and masks the template. Existing sessions do not hot
+reload; restart for the new prompt. Each OMP upgrade requires comparing the new
+upstream template, reviewing any changed delegation/runtime semantics, reconciling
+the focused local edits, preserving the whole dynamic template and exercising
+native rendering plus actual policy-relevant dispatch before release. This is
+intentional native coupling, not a binary patch or universal runtime guarantee.
+
 Historical root snapshots and first-wave cleanup remain history, not current
 acceptance. Historical unpinned import revisions remain unknown for confirmed
 Emil/Taste adaptations, Ponytail body lineage remains unresolved, and Stitch is

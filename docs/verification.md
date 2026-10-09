@@ -1,5 +1,296 @@
 # Verification and current limits
 
+## Candidate C native-rule correction — source and disposable verification (2026-10-09)
+
+**Source and exercised runtime behavior: PASS.** This receipt establishes the
+candidate configuration and isolated runtime behavior, not publication or
+real-home deployment. The earlier blocked assessment below is retained as
+history rather than rewritten into a pass.
+
+The user authorized correcting the native delegation rule after the policy-only
+candidate skipped its required Sol consultation. OMP 18.8.4 supports a discovered
+`~/.omp/agent/SYSTEM_TEMPLATE.md`: this replaces the native instruction template
+block, while generated project context/footer, safety blocks and provider tool
+schemas remain native. The managed template copies the unrendered upstream
+template at commit `40e9368ef0458fd9073329cdff4174895f91bc6b`, preserves its live
+Handlebars fields/helpers and non-delegation content, and scopes generic
+one-slice/direct-question/fanout/spawn-idle restrictions to execution delegation.
+A policy-required bounded decision consultation can use one managed task item
+and wait when genuinely prerequisite. Semantic escalation predicates remain
+owned by PERSONALITY; no router, keyword classifier or model-switch hook was added.
+The obsolete PERSONALITY exception and late AGENTS workaround were removed.
+
+Upstream template SHA-256:
+`16193a4d43a1646b27dfb1c97810f3a92bb316c4c8773ff8a9d18c9481215dd3`.
+Final managed template SHA-256:
+`187de2f69a23a9811c01337f58b158cc8c5dd31bf5537eb49671b6c52e0e13e1`.
+The source comparison found only the intended delegation edits and a
+non-rendered MIT/source notice after integration corrected three accidental
+non-routing spelling/order/indentation differences. The native binary was not
+modified; its version string does not establish a source/binary build match.
+Literal SYSTEM.md still takes precedence; template changes require a fresh
+prompt/session, and every OMP upgrade requires reviewing the upstream diff.
+
+The five focused commands listed in the earlier assessment all passed after the
+inventory correction: `bun scripts/test_agent_config.mjs`,
+`node scripts/test_model_routing.mjs`, `bun scripts/test_skill_catalog.mjs`,
+`node scripts/test_antislop.mjs`, and `python3 scripts/test_install.py`.
+The catalog and POSIX integration now cover **288 inventory mappings/entries**.
+PowerShell remains unavailable and NOT VERIFIED. Actual output is retained in
+`/tmp/omp-docflow-candidate-c-jS0TPE/final-suite-native-rule.txt`.
+Subsequent template-only corrections were verified by the supported disposable
+installer/doctor and native no-generation rendering, not another model replay.
+
+Private evidence root:
+`/tmp/omp-docflow-candidate-c-jS0TPE/evidence/native-rule-fix/`.
+
+| Check | Observed result |
+|---|---|
+| Complete source loading | PASS: corrected manifests include config, PERSONALITY, AGENTS, native template, all seven agent definitions and both affected skills. An initial new-template actor omitted PERSONALITY because an inventory edit replaced its row; this invalid-source run is retained separately, not a model reasoning failure. Both owner mappings were restored before the accepted run. |
+| Final template preservation and discovery | PASS: `template-source-diff-review.txt`; `source-sha256-final-template.txt` and `home-sha256-final-template.txt`; `doctor-final-template.log` reports managed healthy. `receipts/case6-final-template-nogen.jsonl` automatically loads Luna-medium, zero messages/non-streaming, the Candidate PERSONALITY owner and corrected native gates, without model/template overrides. |
+| Unchanged natural case 6 | PASS: `receipts/case6-corrected-natural.jsonl`. Luna read the same fixture, sent one native `agent: "slow"` task with actual alternatives and no model override, received the bounded decision and resumed to a completed/settled answer. The child provider record reports `openai-codex/gpt-6.1-sol`; its only tool action was yield. No edits, checks, further spawning or implementation approval; fixture diff empty. |
+| Clear direct control | PASS: `receipts/control-case1-direct.jsonl`. The unchanged case-1 docs-status request stayed Luna-medium with zero children, six read-only calls and no writes; fixture diff empty. |
+| Independent behavior evaluation | PASS: the fresh read-only evaluator inspected complete identity-redacted streams, accepted both cases and reported no findings. Its review excludes model identity/effort and broader source coverage; raw provider/source evidence supplies those separate bases. |
+
+The accepted generation used template SHA-256
+`1fedc70a2f2fa605fe3e8afc511dd75888db59065217f53c001997d7a92d6eda`.
+Final bytes restore only non-routing spelling/order/indentation; the semantic
+policy, delegation clauses, config and role definitions are unchanged.
+Behavior evidence is reused on that unchanged basis; final bytes have separate
+source/home manifests, installer/doctor and no-generation proof.
+`acceptance-receipt.json` records both bases. Cases 2–5 were not rerun after this
+native-template correction; their previously accepted scoped evidence below
+remains separate from the new case-6/control observations.
+
+| Accepted run | Luna native total tokens | Sol native total tokens | Elapsed seconds |
+|---|---:|---:|---:|
+| Natural case 6 | 53,140 | 4,898 | 20.759 |
+| Direct case-1 control | 111,977 | 0 | 14.679 |
+
+Case 6's combined native total is 58,038 tokens, with parent/child separately
+itemized and streaming copies deduplicated by completed provider response.
+Accounting is in `../accounting/native-rule-fix.json` relative to the evidence
+root. Native-reported costs are usage metadata, not verified invoice amounts;
+retry counters and child reasoning-token counts are unavailable. The child
+event records the actual Sol model but no separate runtime thinking-level field:
+medium is established by the matching loaded slow definition and unoverridden
+native dispatch, not independently logged provider effort. These single runs
+establish exercised behavior, not statistical reliability or measured savings.
+
+## Earlier Candidate C assessment — blocked before publication (2026-10-09)
+
+**Verdict: RELEASE BLOCKED.** Candidate C was implemented in the isolated clean
+clone `/tmp/omp-docflow-candidate-c-jS0TPE/repo`, based on canonical `main`
+`c985d55771a0848569fd47570ac66024c1bf1d72`; the saved baseline archive is
+`/tmp/omp-docflow-candidate-c-jS0TPE/baseline.tar`
+(SHA-256 `9c3d9ebf85f3b08f574f8dac714a59e0a3aa99bb14a6e75ee6e913bb76d05531`).
+The original dirty checkout was preserved. No commit, push or real-home
+Candidate C installation was performed. No new documentation tree or benchmark
+framework was created.
+
+### Intended architecture and static evidence
+
+Candidate C configures Luna-medium as default and Plan Mode owner; Luna owns
+ordinary planning, work, integration and verification. Sol-medium (`slow`) is a
+bounded decision service only for an identified unresolved consequential
+decision; Sol-high advisor remains exceptional, evidence-only and disabled by
+default. Configured selectors are not proof of authenticated identity.
+
+At that assessment, PERSONALITY's routing text required slow consultation when supplied or
+inspected evidence meets a semantic consequential predicate and the actual
+decision remains unresolved. Luna may establish facts/options but cannot
+replace the required Sol decision. A specific exception permits the single
+native `agent: "slow"` consultation with actual alternatives in `solutionSpace`
+despite generic anti-overdelegation rules; no model override or invented
+additional workers. Luna resumes work after the decision. Clear cases, size
+alone, routine docs, and security labels alone do not route to Sol; zero workers
+is valid for clear work. Native approval, read-only, concurrency/depth and
+explicit user model boundaries remain separate.
+
+Final focused repository outcomes (all five commands rerun after the final source
+corrections; receipt: `/tmp/omp-docflow-candidate-c-jS0TPE/final-suite.txt`):
+
+| Check | Observed result and limit |
+|---|---|
+| `bun scripts/test_agent_config.mjs` | PASS at the recorded run: Luna-medium default/plan; seven role aliases and selectors/thinking; spawns empty; slow read-only tools; retry/fallback; global and per-agent advisor/prewalk/service tiers; concurrency/depth and native approval contracts. Follow-up assertions reject Sol default/plan, individual retry/fallback/advisor/prewalk/tier drift, slow writable-tool admission and spawning. This is a static contract, not dispatch proof. |
+| `node scripts/test_model_routing.mjs` | PASS: seven named handler cases; this extension registers only `tool_call`; test evidence is only the `luna-tool-boundary.js` handler, not all extensions, native worker resolution or OS containment. |
+| `bun scripts/test_skill_catalog.mjs` | PASS: 35 canonical skills, 14 hidden aliases, 265 mapped assets, 287 inventory mappings, 38 notices; URI/relative targets resolve. |
+| `node scripts/test_antislop.mjs` | PASS: 16 positive and 18 negative handler cases; not an authenticated UI/runtime review. |
+| `python3 scripts/test_install.py` | PASS: production POSIX installer/doctor integration for 287 entries. PowerShell unavailable and NOT VERIFIED. |
+
+All five final commands exited successfully. No application build, typecheck or
+linter is defined here. These static/installer passes do not offset the observed
+native case-6 routing release defect.
+
+All five managed extensions were source-inspected for registrations/API and
+model-routing behavior: `antislop.js` conditionally injects UI/copy guidance at
+`before_agent_start`; `luna-tool-boundary.js` gates tools at `tool_call` by live
+model/provider; `rtk.ts` handles RTK availability and bash rewrite; Herdr reports
+local pane/session state over IPC; `telemetry-opt-out.js` applies process privacy
+environment values without handlers. No extension replaces a worker model at
+spawn or automatically switches the main. These are source findings, not
+runtime-dispatch evidence; the handler test covers only the model-boundary
+extension.
+
+The changed slow contract requests Sol-medium and read-only tools by
+configuration; effective native authenticated child identity remains distinct.
+Likewise configured Luna default/plan and worker selectors do not alone prove
+authenticated resolution.
+
+### Disposable runtime and benchmark outcomes
+
+The exercised native executable reported OMP 18.8.4; its observed binary
+SHA-256 was
+`b2dba223fbdae27acbd99be2f3e76ba10baae1768f9c57cee30c440f308dea4e`.
+The version string does not establish a source/binary hash match.
+The source-loaded benchmark used fresh baseline/candidate homes and isolated
+fixtures. Existing provider authentication was referenced through a private
+filesystem link to the existing native account store; credentials were neither
+copied nor queried, and the store could receive normal native accounting
+writes. Usage attribution came from session/provider records, not shared
+account-counter differences. OMP protocol-v2 chunk framing was reconstructed
+by the existing RPC client; native client metadata preserves incomplete query
+and chunk diagnostics, and incomplete records are not counted as successes.
+Raw prompt/tool transcripts and session details are private temporary evidence
+under `/tmp/omp-docflow-candidate-c-jS0TPE/evidence/`; they are not distributed
+with this repository. A native cache ENOSPC interrupted a run; recovery
+removed only the 20 exact cached files, preserving their hashes and environment
+receipt. Interrupted records remain incomplete, not passes.
+
+| Case | Observed baseline/candidate result |
+|---|---|
+| 1. Docs-engineering status | Both arms accepted by the independent read-only evaluator. Candidate Luna completed without Sol and without mandatory workers. |
+| 2. Docs-engineering context | Both arms accepted: source/authority distinctions, required context fields and order constraint were handled. Candidate did not require Sol. |
+| 3. Bounded pagination implementation | Both arms accepted the scoped code correction and supplied mechanical inputs. Candidate remained Luna-owned. |
+| 4. Docs setup/adoption | The initial candidate inspected catalog/locations but left the current CSV/escaping/order requirement in root README rather than reconciling it into the canonical SRS owner; this was an actual acceptance miss. The original prompt's artificial two-file cap carried through the initial guidance-correction attempts and confounded those runs. The clarified pair removed that cap identically from both arms and supplied no SRS hint/quota: candidate passed, reconciling current CSV requirements, history and unknowns without app mutation; baseline failed because its checker wrote `/tmp/parcel-docs-check.mjs` outside the fixture. Do not collapse generations into a claim that the baseline broadly failed or that the candidate's initial miss passed. |
+| 5. Substantial workflow-delivery CLI | In the original pair both arms wrote temporary outputs outside the authorized fixture. The clarified prompt explicitly constrained implementation/test/store/malformed/temp files to the fixture: candidate passed; baseline failed on an unrequested production store-root/path restriction. These are distinct outcomes; original failures remain recorded. |
+| 6. Cross-system snapshot/revocation decision | Baseline Sol main directly made a valid bounded decision; no child was expected in that baseline architecture, so this is not evidence of a managed slow consultation. Candidate Luna initially decided directly and failed the required routing. A later actual slow Sol-medium attempt read evidence and began a yield but ended incomplete with ENOSPC; it is not a pass. After policy correction and late pointer, the final authenticated candidate still answered directly as Luna-medium after one read, spawned zero children, and exited successfully in 5.593 seconds. The required slow-child criterion still failed; this is a candidate routing release defect, not an environment limitation or reason to escalate whole task classes. |
+
+For original cases 1–3, both baseline and candidate were accepted by the
+independent Scout evaluator against the prewritten acceptance sheet. Sanitized
+evaluation receipts are retained under
+`/tmp/omp-docflow-candidate-c-jS0TPE/evidence/anonymous/final/`; native
+transcripts remain in the private `evidence/receipts/` tree. The evaluator
+judgment does not replace observable fixture diff/checker results.
+
+The first two original case pairs ran baseline-first; scenario rework and
+corrected fixtures remain separate generations. In original case 6, the candidate
+actor completed and settled its prompt, but the client capture timed out after
+630.172 seconds because `TextIOWrapper` plus selectors buffered the stats
+response. This is an actor-generation-complete, stats/capture-incomplete record,
+not a provider/model timeout or model-latency measurement. A later client used
+binary `os.read` with v2 framing; unavailable stats were not inferred from shared
+account counters. Case 6 policy-intent probing covered six semantic scenarios
+in one read-only turn and was judged consistent with intent (clear cases Luna,
+identified unresolved decisions slow). This is policy-intent evidence, not
+authenticated dispatch or proof of consuming-session routing.
+
+For per-run native input/output/reasoning/cache-read/total tokens, wall-clock
+client elapsed, child-count evidence and retry availability, see the complete
+accounting table and provenance notes at
+`/tmp/omp-docflow-candidate-c-jS0TPE/evidence/accounting/README.md` and
+`/tmp/omp-docflow-candidate-c-jS0TPE/evidence/accounting/metrics.json`.
+Missing metrics remain unavailable; retries are not exposed. These are single
+observations, not statistical quality/latency comparisons. Client elapsed is
+not model-turn latency. Shared account-counter deltas were not attributed to
+these sessions; no cost-savings claim is made.
+
+The following session-level table transcribes the recorded native metrics; the
+linked accounting artifact retains session IDs and per-record provenance. Token
+counts are native session statistics when present, otherwise explicitly
+incomplete unique-main-record sums. `—` is unavailable, and retry counts were
+not exposed. Elapsed is native-client wall time, not model-turn latency.
+
+| Run | Arm/model | Input | Output | Reasoning | Cache read | Total | Client elapsed s | Children | Retries |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Original 1 | Baseline / Sol | 24,248 | 691 | 28 | 71,808 | 96,747 | 44.582 | 0 | — |
+| Original 1 | Candidate / Luna | 31,981 | 629 | 172 | 121,856 | 154,466 | 25.757 | 0 | — |
+| Original 2 | Baseline / Sol | 47,425 | 1,422 | 67 | 138,240 | 187,087 | 71.922 | 0 | — |
+| Original 2 | Candidate / Luna | 32,714 | 959 | 151 | 157,696 | 191,369 | 33.767 | 0 | — |
+| Original 3 | Baseline / Sol | 26,324 | 647 | 14 | 48,512 | 75,483 | 36.489 | 0 | — |
+| Original 3 | Candidate / Luna | 27,132 | 548 | 57 | 58,880 | 86,560 | 24.950 | 0 | — |
+| Original 4 | Baseline / Sol | 53,957 | 5,927 | 713 | 568,704 | 628,588 | 240.406 | 0 | — |
+| Original 4 | Candidate / Luna | 46,004 | 2,346 | 448 | 429,056 | 477,406 | 72.350 | 0 | — |
+| Original 5 | Baseline / Sol | 39,783 | 5,363 | 232 | 481,024 | 526,170 | 195.453 | 0 | — |
+| Original 5 | Candidate / Luna | 26,131 | 3,328 | 61 | 379,904 | 409,363 | 111.567 | 0 | — |
+| Original 6 | Baseline / Sol | 16,580 | 527 | 72 | 37,376 | 54,483 | 31.115 | 0 | — |
+| Original 6 | Candidate / Luna (stats capture incomplete) | 3,659 | 120 | — | 20,480 | 24,259† | 630.172 | 0 | — |
+| First correction 4 | Baseline / Sol | 41,821 | 6,309 | 669 | 481,408 | 529,538 | 233.704 | 0 | — |
+| First correction 4 | Candidate / Luna | 39,985 | 2,512 | 635 | 445,440 | 487,937 | 151.577 | 0 | — |
+| First correction 5 | Baseline / Sol | 41,729 | 6,462 | 668 | 453,248 | 501,439 | 172.017 | 0 | — |
+| First correction 5 | Candidate / Luna | 34,724 | 4,889 | 24 | 325,120 | 364,733 | 70.217 | 0 | — |
+| First correction 6 | Baseline / Sol | 15,453 | 553 | 160 | 24,064 | 40,070 | 25.374 | 0 | — |
+| First correction 6 | Candidate / Luna | 16,601 | 420 | 0 | 58,880 | 75,901 | 13.215 | 0 | — |
+| Final correction 4 | Baseline / Sol | 40,405 | 1,223 | — | 105,472 | 147,100† | — | — | — |
+| Final correction 4 | Candidate / Luna | 49,947 | 1,900 | 0 | 581,120 | 632,967 | 55.871 | 0 | — |
+| Final correction 6 | Baseline / Sol | 15,349 | 386 | 47 | 24,064 | 39,799 | 22.151 | 0 | — |
+| Final correction 6 | Candidate / Luna | 12,849 | 147 | 0 | 11,776 | 24,772 | 5.654 | 0 | — |
+| Final pointer-candidate (separate) | Candidate / Luna | 12,961 | 144 | 0 | 11,776 | 24,881 | 5.593 | 0 | — |
+| Final clarified 4 | Baseline / Sol | 43,368 | 6,804 | 416 | 567,168 | 617,340 | 231.743 | 0 | — |
+| Final clarified 4 | Candidate / Luna | 49,268 | 4,442 | 351 | 566,272 | 619,982 | 67.218 | 0 | — |
+| Final-source policy-intent | Candidate / Luna | 12,509 | 570 | 0 | 0 | 13,079 | 12.088 | 0 | — |
+| ENOSPC final case6 parent partial | Candidate / Luna | 10,932 | 751 | — | 52,736 | 64,419† | — | 1 | — |
+| ENOSPC final case6 child partial | Sol-medium / Sol | 4,255 | 55 | — | 3,840 | 8,150† | — | 1 | — |
+
+† Partial unique-record sums where session stats were unavailable; do not treat
+them as complete actor totals. The original case-6 candidate actor completed
+and settled, but its client did not capture session statistics because of the
+buffering issue above; its 630.172-second elapsed value is capture wall time,
+not model latency. Separately, the final case-6 candidate parent and Sol-medium
+child have partial provider-response records before ENOSPC. The parent partial
+total is 64,419 tokens; the child partial total is 8,150 tokens across two
+captured provider responses/turn records. There is no complete session total,
+final child yield/decision or Luna continuation for that attempt; child
+authentication is not consultation completion. Do not add parent and child
+partial totals or aggregate them with recovery runs. Retry count is unavailable.
+Other rows' zero children mean native `get_subagents` explicitly returned
+`subagents: []`; missing child evidence is `—`, not zero. No across-run
+statistical quality/latency claim or cost-savings claim is derived from these
+single observations.
+
+### Source corrections and final runtime proof
+
+Benchmark evidence led to narrow source-owner corrections, not task-class
+escalation:
+
+- `PERSONALITY.md` now requires a bounded Sol decision when evidence meets a
+  semantic consequential predicate and prevents Luna from substituting its own
+  final choice. Its specific one-item native-task exception expresses the
+  intended compatibility with observed anti-overdelegation rules; runtime
+  compliance remains unproven and the final case-6 candidate still failed to
+  consult slow. No model override or extra workers are introduced; Luna resumes
+  after a successful decision receipt.
+- `workflow-delivery/references/planning.md` lists only direct/routine/task as
+  implementation-slice executors; slow may appear only as a separate bounded
+  decision consultation.
+- Generic loaded-procedure/output and temporary-output clauses were tried then
+  removed after read-only adjudication found them unsupported by the approved
+  routing contract: case 4's artificial “create only manifest/navigator”
+  restriction was not in the approved plan, and case 5's all-temporary-output
+  restriction was absent from its original prompt. The original failed runs
+  remain failed; clarified case 4/5 outcomes above use their corrected,
+  explicitly bounded fixtures. These removed clauses are not current policy.
+
+After these source corrections, a fresh no-generation candidate-root RPC probe
+resolved `gpt-6-luna` / `openai-codex` at medium thinking, zero messages and no
+streaming, with current policy markers present. This verifies source-loaded
+candidate default selection only; it does not cure the authenticated case-6
+direct-Luna routing failure.
+
+A disposable canonical installer/doctor pass on the candidate payload reported
+healthy managed state; its isolated candidate-root no-generation probe is in
+`/tmp/omp-docflow-candidate-c-jS0TPE/evidence/receipts/final-deploy-nogen.jsonl`
+and installer output in
+`/tmp/omp-docflow-candidate-c-jS0TPE/evidence/receipts/final-deploy-install.log`.
+The real native root remains `/home/personal/.omp/agent`. A read-only native
+config check observed real installed `default` and `plan` still at Sol-medium;
+Luna smol/routine/task/vision remain medium; slow Sol-medium; advisor Sol-high; commit/tiny/memory Luna-low; all seven worker overrides unchanged. Candidate C installation was not attempted and no managed backup was created.
+
+Authenticated real-install worker smoke and interactive Plan Mode TUI proof
+are **NOT VERIFIED**. No Candidate C publication or installation occurred.
+Verdict remains **RELEASE BLOCKED** by the observed final candidate case-6
+routing defect. The original dirty checkout and real home were preserved.
+
 ## Canonical documentation location adoption (2026-10-07)
 
 Source baseline: current `main` at

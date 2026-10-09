@@ -3,6 +3,8 @@ import boundary from "../config/agent/extensions/luna-tool-boundary.js";
 
 const hooks = new Map();
 boundary({ on: (name, handler) => hooks.set(name, handler) });
+// This assertion covers only this extension, not other extensions or dispatch.
+assert.deepEqual([...hooks.keys()], ["tool_call"], "the model-boundary extension registers only tool_call");
 const tool = hooks.get("tool_call");
 assert.equal(typeof tool, "function");
 let cases = 0;
@@ -33,10 +35,16 @@ const workspaceCalls = [
   ["eval", { language: "js", code: "1" }],
   ["edit", { input: patch("[README.md#ABCD]\nPUT 1.=1:\n+updated") }],
 ];
-check("native slow/advisor spawn events produce no hook replacement or block", () => {
-  for (const [agent, effort] of [["slow", "medium"], ["advisor", "high"]]) {
-    const event = { type: "before_subagent_spawn", agent, invocationKind: "task", modelRole: agent,
-      patterns: [`openai-codex/gpt-6.1-sol:${effort}`] };
+check("native seven worker bindings produce no hook replacement or block", () => {
+  const bindings = {
+    scout: "@smol", routine: "@routine", task: "@task", reviewer: "@task",
+    "security-reviewer": "@task", slow: "@slow", advisor: "@advisor",
+  };
+  for (const [agent, alias] of Object.entries(bindings)) {
+    const model = ["slow", "advisor"].includes(agent) ? "gpt-6.1-sol" : "gpt-6-luna";
+    const effort = agent === "advisor" ? "high" : "medium";
+    const event = { type: "before_subagent_spawn", agent, invocationKind: "task",
+      modelRole: alias.slice(1), patterns: [`openai-codex/${model}:${effort}`] };
     const results = [...hooks].filter(([name]) => name === event.type).map(([, handler]) => handler(event));
     assert.deepEqual(results.filter((result) => result !== undefined), []);
   }

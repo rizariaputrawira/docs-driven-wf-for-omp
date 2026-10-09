@@ -2,7 +2,7 @@
 
 ## Engineering workflow
 
-Ordinary work starts with Sol main: direct trivial work or bounded existing workers, then proportionate verification and done. It requires no docs-engineering setup, workflow-delivery, docs-plan-review, baseline, manifest, extra approval or new documents unless the actual task boundary needs them. Update materially affected existing owners rather than manufacturing a delivery pipeline.
+Ordinary work starts with Luna-medium main: direct work or selectively useful bounded Luna workers, then proportionate verification and done. Sol is consulted only for an identified consequential decision under [PERSONALITY](PERSONALITY.md#working-policy); size alone does not escalate. Ordinary work requires no docs-engineering setup, workflow-delivery, docs-plan-review, baseline, manifest, extra approval or new documents unless the actual task boundary needs them. Update materially affected existing owners rather than manufacturing a delivery pipeline.
 
 Apply this routing only when the documentation-driven suite is available, enabled and matches the current request. Explicit skill disablement/filtering wins. Missing or disabled suite assets must not stop ordinary native OMP work or trigger automatic file-load/setup. Native permissions and relevant context checks remain in force; block only explicitly requested unavailable suite-specific proof. An explicit request to load a known file is distinct from automatic reactivation.
 

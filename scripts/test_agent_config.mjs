@@ -21,13 +21,29 @@ function frontmatter(text, path) {
 }
 function validate(config, definitions) {
   for (const role of ["default", "plan"]) {
-    assert.equal(config.modelRoles?.[role], "openai-codex/gpt-6.1-sol:medium", `${configPath}: ${role} selector`);
+    assert.equal(config.modelRoles?.[role], "openai-codex/gpt-6-luna:medium", `${configPath}: ${role} selector`);
   }
   assert.equal(config.defaultThinkingLevel, "medium", `${configPath}: default thinking level`);
   assert.equal(config.task?.maxConcurrency, 3, `${configPath}: max concurrency`);
   assert.equal(config.task?.maxRecursionDepth, 1, `${configPath}: max recursion depth`);
   assert.equal(config.task?.showResolvedModelBadge, true, `${configPath}: resolved model badge`);
   assert.equal(config.tools?.approvalMode, "yolo", `${configPath}: ordinary approval mode`);
+  assert.equal(config.task?.prewalk, false, `${configPath}: task prewalk`);
+  assert.equal(config.retry?.enabled, true, `${configPath}: retry enabled`);
+  assert.equal(config.retry?.maxRetries, 1, `${configPath}: retry count`);
+  assert.equal(config.retry?.modelFallback, false, `${configPath}: model fallback`);
+  assert.equal(config.retry?.usageAwareFallback, false, `${configPath}: usage-aware fallback`);
+  assert.deepEqual(config.retry?.fallbackChains, {}, `${configPath}: fallback chains`);
+  assert.equal(config.advisor?.enabled, false, `${configPath}: advisor disabled`);
+  for (const tier of ["openai", "subagent", "advisor"]) {
+    assert.equal(config.tier?.[tier], "none", `${configPath}: ${tier} service tier`);
+  }
+  assert.equal(config.prewalk?.enabled, false, `${configPath}: global prewalk disabled`);
+  for (const name of Object.keys(roles)) {
+    assert.equal(config.task?.agentPrewalk?.[name], "off", `${configPath}: ${name} prewalk`);
+    assert.equal(config.task?.agentAdvisor?.[name], "off", `${configPath}: ${name} advisor`);
+    assert.equal(config.task?.agentServiceTierOverrides?.[name], "none", `${configPath}: ${name} service tier`);
+  }
   assert.equal(config.eval?.py, false, `${configPath}: Python eval disabled by default`);
   assert.equal(config.eval?.js, false, `${configPath}: JavaScript eval disabled by default`);
   assert.equal(config.tools?.approval?.eval, "prompt", `${configPath}: opt-in eval safety policy`);
@@ -72,6 +88,10 @@ function validate(config, definitions) {
     assert.equal(config.task?.agentModelOverrides?.[data.name], alias, `${configPath}: ${data.name} override`);
     const model = ["slow", "advisor"].includes(data.name) ? "gpt-6.1-sol" : "gpt-6-luna";
     assert.equal(config.modelRoles?.[roles[data.name]], `openai-codex/${model}:${expectedEffort}`, `${configPath}: ${roles[data.name]} selector`);
+    assert.deepEqual(data.spawns, [], `${path}: nested spawning disabled`);
+    if (data.name === "slow") {
+      assert.deepEqual(data.tools, ["read", "find", "grep", "glob", "web_search", "yield"], `${path}: slow read-only admission`);
+    }
   }
   for (const name of Object.keys(roles)) assert.ok(names.has(name), `${agentDir}/${name}.md: missing definition`);
   assert.deepEqual(Object.keys(config.task.agentModelOverrides).sort(), Object.keys(roles).sort(), `${configPath}: managed override names`);
@@ -98,10 +118,33 @@ for (const name of ["slow", "advisor"]) {
   }, /thinking level/);
   rejects(`${name} concrete selector`, (cfg) => { cfg.modelRoles[name] = "openai-codex/gpt-6-luna:medium"; }, new RegExp(`${name} selector`));
 }
-rejects("Luna default", (cfg) => { cfg.modelRoles.default = "openai-codex/gpt-6-luna:medium"; }, /default selector/);
+rejects("slow writable tool admitted", (_, defs) => {
+  const row = defs.find(([path]) => path.endsWith("/slow.md"));
+  row[1] = row[1].replace("tools: [read, find, grep, glob, web_search, yield]", "tools: [read, write, find, grep, glob, web_search, yield]");
+}, /slow read-only admission/);
+rejects("slow spawning enabled", (_, defs) => {
+  const row = defs.find(([path]) => path.endsWith("/slow.md"));
+  row[1] = row[1].replace("spawns: []", "spawns: [task]");
+}, /nested spawning disabled/);
+rejects("Sol default", (cfg) => { cfg.modelRoles.default = "openai-codex/gpt-6.1-sol:medium"; }, /default selector/);
 rejects("high default", (cfg) => { cfg.modelRoles.default = "openai-codex/gpt-6.1-sol:high"; }, /default selector/);
-rejects("Luna plan", (cfg) => { cfg.modelRoles.plan = "openai-codex/gpt-6-luna:medium"; }, /plan selector/);
-rejects("high default thinking", (cfg) => { cfg.defaultThinkingLevel = "high"; }, /default thinking level/);
+rejects("Sol plan", (cfg) => { cfg.modelRoles.plan = "openai-codex/gpt-6.1-sol:medium"; }, /plan selector/);
+rejects("retry disabled", (cfg) => { cfg.retry.enabled = false; }, /retry enabled/);
+rejects("retry count", (cfg) => { cfg.retry.maxRetries = 2; }, /retry count/);
+rejects("model fallback enabled", (cfg) => { cfg.retry.modelFallback = true; }, /model fallback/);
+rejects("usage fallback enabled", (cfg) => { cfg.retry.usageAwareFallback = true; }, /usage-aware fallback/);
+rejects("fallback chains populated", (cfg) => { cfg.retry.fallbackChains = { default: ["other"] }; }, /fallback chains/);
+rejects("advisor enabled", (cfg) => { cfg.advisor.enabled = true; }, /advisor disabled/);
+rejects("global prewalk enabled", (cfg) => { cfg.prewalk.enabled = true; }, /global prewalk disabled/);
+for (const tier of ["openai", "subagent", "advisor"]) {
+  rejects(`${tier} service tier enabled`, (cfg) => { cfg.tier[tier] = "priority"; }, new RegExp(`${tier} service tier`));
+}
+rejects("task prewalk enabled", (cfg) => { cfg.task.prewalk = true; }, /task prewalk/);
+for (const name of Object.keys(roles)) {
+  rejects(`${name} prewalk enabled`, (cfg) => { cfg.task.agentPrewalk[name] = "on"; }, new RegExp(`${name} prewalk`));
+  rejects(`${name} advisor enabled`, (cfg) => { cfg.task.agentAdvisor[name] = "on"; }, new RegExp(`${name} advisor`));
+  rejects(`${name} service tier enabled`, (cfg) => { cfg.task.agentServiceTierOverrides[name] = "priority"; }, new RegExp(`${name} service tier`));
+}
 rejects("nested delegation", (cfg) => { cfg.task.maxRecursionDepth = 2; }, /max recursion depth/);
 rejects("excess concurrency", (cfg) => { cfg.task.maxConcurrency = 4; }, /max concurrency/);
 rejects("ordinary approval mode", (cfg) => { cfg.tools.approvalMode = "write"; }, /ordinary approval mode/);
@@ -118,4 +161,4 @@ rejects("recursive removal unprotected", (cfg) => {
 rejects("prompt masks removal deny", (cfg) => {
   cfg.bash.patterns.sort((a, b) => (a.approval === "prompt" ? -1 : 1) - (b.approval === "prompt" ? -1 : 1));
 }, /protected removal/);
-console.log("Agent configuration contract: Sol-medium main/plan, bounded concurrency/depth, seven worker definitions/overrides/selectors and native approval settings agree; 24 negative cases passed. Static configuration is not dispatch or installed approval runtime proof.");
+console.log("Agent configuration contract: Luna-medium main/plan, bounded concurrency/depth, seven worker definitions/overrides/selectors, slow read-only admission, retry/fallback and advisor/prewalk/service-tier settings, and native approval agree. Static configuration is not dispatch or installed approval runtime proof.");

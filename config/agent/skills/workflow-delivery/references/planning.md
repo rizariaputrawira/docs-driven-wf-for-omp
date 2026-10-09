@@ -24,16 +24,16 @@ Use the existing plan format, with enough detail for a fresh implementer:
 - Verification: authorized checker, real entry/consumer/input, expected success and failure result, relevant automated/manual checks, environment and unavailable evidence.
 - Done condition: complete implementation, consumer integration, documentation and criterion-specific proof; shape/existence is named separately from behavior.
 - Risks/undo cost and unresolved approval/source facts.
-- Recommended executor: `direct`, `routine`, `task` or `slow`.
+- Recommended executor: `direct`, `routine` or `task`; a separate bounded `slow` consultation may be recorded only for an identified consequential decision under shared PERSONALITY policy, never as implementation-slice executor.
 - Reason: current evidence supporting the recommendation, not file count or a category.
 
 The plan also carries a global coverage table and current review dispositions. Keep product truth in canonical sources and link it. Exact changing paths/interfaces belong here; no new tracker/state schema is needed.
 
-Executor recommendations are advisory; main owns final current-evidence routing and integration. Use `direct` for small bounded main work, `routine` for specified established-pattern work, and `task` for bounded work with settled direction/interfaces. Use `slow` only for the existing PERSONALITY material uncertainty/consequence triggers.
+Executor recommendations are advisory; Luna owns current-evidence routing and integration. Use `direct` for small bounded main work, `routine` for specified established-pattern work, and `task` for bounded work with settled direction/interfaces. Consult `slow` only for a separate bounded decision matching the existing PERSONALITY material uncertainty/consequence triggers; Luna completes the plan and implementation slice.
 
 Examples:
 - Recommended executor: `task`. Reason: the export producer/CLI interface, denial behavior and fixtures are settled; the remaining bounded implementation uses those exact contracts.
-- Recommended executor: `slow`. Reason: unresolved cross-system ownership of export permission and snapshot consistency could disclose another tenant's rows; existing evidence does not establish a safe allocation.
+- Decision consultation: `slow`. Reason: inspected permission/snapshot evidence leaves consequential cross-system allocation unresolved; return that bounded decision to Luna, then direct/routine/task owns subsequent implementation.
 
 ## Self-check and native proposal
 
@@ -41,7 +41,7 @@ Read the requirements again after drafting. For each criterion follow the actual
 
 For gated delivery, inspect selected owner substance, prerequisite sufficiency and review/gap dispositions through [before-code readiness](documentation-baseline.md#before-code-readiness). A full tracer plan cannot excuse missing required app-level architecture, detailed/error design or planned test intent. Not-yet-due runtime results remain unobserved.
 
-For consequential multi-slice plans load `skill://docs-plan-review` and its single coverage checklist before native proposal/reapproval. Recommend a fresh `slow` with an explicitly review-only source-inspecting assignment for consequential integration review; advisor consumes supplied evidence only and reviewer retains patch focus. Trivial edits skip independent review. Findings inform native approval, never enlarge scope.
+For consequential multi-slice plans load `skill://docs-plan-review` and its single coverage checklist before native proposal/reapproval. Useful bounded Luna inspection may use `scout` with the plan-review procedure explicitly loaded. Escalate through shared [PERSONALITY](../../../PERSONALITY.md#working-policy) only for an identified unresolved consequential decision. Findings inform native approval, never enlarge scope.
 
 Preapproval review names the exact `local://<slug>-plan.md`, canonical source anchors and existing docs-plan-review procedure; allow inspection only, with no edits, check execution or implementation. Native Plan Mode children share the parent's local root and restrict tools, excluding LSP/MCP/injected tools. Draft plans are not automatic approved-plan handoffs. This is a runtime tool restriction, not OS isolation; outside Plan Mode review-only prose is not a hard sandbox. Native approval remains the sole approval interaction.
 

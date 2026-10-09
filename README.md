@@ -1,7 +1,7 @@
 # omp-docflow
 
-Portable OMP configuration with Sol-led orchestration, bounded workers, security
-workflows, on-demand capability guidance, and optional documentation-driven delivery.
+Portable OMP configuration with a Luna runtime, bounded Sol decisions, exceptional
+Sol-high advice, security workflows, on-demand capability guidance, and optional documentation-driven delivery.
 
 > **Safety:** This configuration deliberately sets `tools.approvalMode: yolo`, an unrestricted approval mode. Review this setting and its consequences before installing.
 
@@ -57,7 +57,7 @@ Remote ZIP archives must contain exactly one top-level directory, including hidd
 |---|---|
 | `config/agent/PERSONALITY.md` | Global working, escalation, delegation and evidence-acceptance policy |
 | `config/agent/AGENTS.md` | Conditional semantic routing and canonical permission distinctions |
-| `config/agent/config.yml` | Native model/agent policy, approval mode, discovery, concurrency/depth and isolation settings |
+| `config/agent/SYSTEM_TEMPLATE.md` | Native system-prompt template override; preserves dynamic OMP sections while correcting execution-only delegation gates |
 | `config/agent/agents/` | Seven bounded role definitions, requested built-in tools and output contracts |
 | `config/agent/extensions/` | Deterministic runtime restrictions and integrations; no worker-model router |
 | `config/agent/skills/` | Passive on-demand procedures selected by public `name:` |
@@ -67,6 +67,7 @@ Remote ZIP archives must contain exactly one top-level directory, including hidd
 | `scripts/`, `install.*` | Deployment checks, static configuration contracts and executable hook contracts |
 
 `config/agent/` maps to `~/.omp/agent/`; existing user plugin state is preserved, not managed. Managed skills use one source folder and deploy in native flat `<folder>/SKILL.md` layout. Existing homes retain obsolete native skills until separately authorized retirement; fresh installs do not imply a completed migration.
+`SYSTEM_TEMPLATE.md` is a supported native OMP override discovered at `~/.omp/agent/SYSTEM_TEMPLATE.md`; it replaces the generated system-prompt template block, while generated context/footer and tool schemas remain native. A literal `SYSTEM.md`, if present, takes precedence over the template and can mask it. The override is pinned to OMP 18.8.4 source; review its source diff and rendering behavior when upgrading OMP. Changes apply to newly initialized prompts/sessions, not an already-running session; restart OMP after installation.
 
 ## Architecture and safe use
 
@@ -83,13 +84,13 @@ See [canonical permission distinctions](config/agent/AGENTS.md#permission-and-mo
 
 ### Model and worker ownership
 
-The configured fresh main and native plan roles use `openai-codex/gpt-6.1-sol:medium` with medium default thinking. Sol owns orchestration, consequential decisions, integration and final acceptance. Substantial bounded execution normally uses Luna-medium (`openai-codex/gpt-6-luna:medium`). These are configured requests, not unconditional authenticated identity guarantees: explicit CLI selection, native precedence/resolution and credential fallback remain relevant.
+Fresh unforced main and native Plan Mode use `openai-codex/gpt-6-luna:medium` with medium default thinking. Luna owns ordinary execution, planning, decomposition, integration and verification; work size may justify bounded Luna work, never stronger reasoning by itself. Sol-medium (`openai-codex/gpt-6.1-sol:medium`) is reserved for one identified unresolved consequential decision, then returns execution to Luna. Large task ≠ Sol task; use mechanical proof before another model review. These are configured requests, not unconditional authenticated identity guarantees: explicit CLI selection, native precedence/resolution and credential fallback remain relevant.
 
-Use scout for bounded discovery, routine/task for clear implementation, and the existing review agents for source review. Select slow only for evidence-backed difficult reasoning or consequential uncertainty: it uses Sol-medium. Advisor is optional evidence-only Sol-high advice, not automatic investigation or pairing. Maximum concurrency is three, recursion depth one, and one writer owns a shared checkout unless isolation is established. `task.showResolvedModelBadge: true` displays the resolved model ID for subagent execution; it is not proof of cost, token usage, quality, isolation or authorization. Delegation may increase total tokens; no savings are implied without measurements.
+Use scout for bounded discovery, routine/task for clear implementation, and existing review agents for source review. Slow is a bounded Sol-medium decision service, not a persistent owner or generic executor. Advisor is optional evidence-only Sol-high advice, not automatic investigation or pairing. Maximum concurrency is three, recursion depth one, and one writer owns a shared checkout unless isolation is established. `task.showResolvedModelBadge: true` displays the resolved model ID for subagent execution; it is not proof of cost, token usage, quality, isolation or authorization. Delegation may increase total tokens; no savings are implied without measurements.
 
 ### Two workflows, not a universal pipeline
 
-**Ordinary native work:** Sol main handles trivial work directly or uses bounded workers, then performs proportionate verification. No docs-engineering setup, delivery baseline, manifest, extra approval or new document is needed unless the actual task boundary requires it.
+**Ordinary native work:** Luna-medium main handles work directly or selectively uses bounded Luna workers, then performs proportionate verification. No Sol escalation for size alone. No docs-engineering setup, delivery baseline, manifest, extra approval or new document is needed unless the actual task boundary requires it.
 
 **Documentation-dependent delivery:** when enabled and available, matching docs-engineering supplies material authoritative context. Project-delivery owns new applications and explicit substantial/end-to-end documentation-dependent delivery, including whole-boundary readiness, native approval and affected-owner reconciliation. Context lookup alone is not full delivery; consequential multi-slice plan review can apply independently.
 

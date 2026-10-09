@@ -1,5 +1,6 @@
 config/agent/AGENTS.md	.omp/agent/AGENTS.md
 config/agent/PERSONALITY.md	.omp/agent/PERSONALITY.md
+config/agent/SYSTEM_TEMPLATE.md	.omp/agent/SYSTEM_TEMPLATE.md
 config/agent/WATCHDOG.yml	.omp/agent/WATCHDOG.yml
 config/agent/agents/advisor.md	.omp/agent/agents/advisor.md
 config/agent/agents/reviewer.md	.omp/agent/agents/reviewer.md

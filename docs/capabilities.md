@@ -109,15 +109,16 @@ Coupling is upgrade cost, not a vulnerability or removal mandate.
 | Plain SKILL.md and references | LOW | KEEP | Flat discovery, frontmatter, native URI/command/hide/filter; catalog + isolated native list/read/filter smoke |
 | AGENTS.md | LOW | KEEP | Documented guidance discovery; routing/link check; instructions are not enforcement |
 | PERSONALITY.md | MEDIUM | KEEP; centralize task authority | OMP global instruction owner; direct requested scope proceeds without redundant confirmation; role/Plan/read-only boundaries remain |
-| config.yml | MEDIUM | KEEP native policy; disable eval by default | Registered settings schema, unchanged model/task architecture, scoped approval/eval cleanup; static contract and exact-version native approval checks |
-| Agent frontmatter | MEDIUM | KEEP unchanged | Native agent discovery/model/tool/schema contract; parse/static model-role check, effective dispatch needs runtime evidence |
-| WATCHDOG.yml | MEDIUM | KEEP unchanged | Advisor configuration; global advisor.enabled=false, Sol entry ready but not auto-active; runtime advice not exercised |
+| config.yml | MEDIUM | KEEP native policy; disable eval by default | Registered settings schema; Candidate C changes only main/plan ownership and narrows slow's role/tool contract; native task semantics, scoped approval/eval cleanup and other settings remain. Static contract and exact-version native approval checks |
+| Agent frontmatter | MEDIUM | KEEP except slow contract | Native agent discovery/model/tool/schema contract; slow is narrowed to bounded read-only Sol decision service while other definitions remain unchanged; parse/static model-role check, effective dispatch needs runtime evidence |
+| SYSTEM_TEMPLATE.md | HIGH | KEEP; intentional native prompt override | Supported `~/.omp/agent/SYSTEM_TEMPLATE.md` replaces the template block; generated context/footer and tool schemas remain native, while literal SYSTEM.md takes precedence. Exact source pin: OMP 18.8.4 commit `40e9368ef0458fd9073329cdff4174895f91bc6b`; maintain by reviewing source diff and rerendering after upgrades/restart. |
 | MCP declarations | MEDIUM | KEEP unchanged | Native HTTP/stdio MCP schema; parse/static prerequisites; no connection/service claim |
 | antislop.js | MEDIUM | KEEP unchanged | before_agent_start string-array prompt contract; handler test and source API check |
 | luna-tool-boundary.js | HIGH | KEEP unchanged | tool_call plus exact live model/context assumptions; handler regression, real dispatch/Plan Mode separately |
 | rtk.ts | HIGH | KEEP optional/env-gated | Legacy Pi type-import compatibility and RTK executable protocol; source gate review, actual RTK process not exercised |
 | Herdr integration | HIGH | KEEP optional/env-gated | OMP events plus external IPC/env/protocol assumptions; source gate review, real pane/socket not exercised |
 | Empty plugin metadata | MEDIUM | RETIRE managed scaffolding | Native loader tolerates absent empty roots; installer creates package on plugin install; no configured plugin behavior lost |
+| Native prompt template | HIGH | KEEP, version-pinned override | `packages/coding-agent/src/prompts/system/system-prompt.md` source retained as full unrendered Handlebars with delegation-only edits; dynamic helpers/blocks remain. Native rendering/actual dispatch must be checked against the supported OMP version; upgrade can change template semantics or override behavior. |
 | Installer/doctor | LOW | KEEP | Explicit home-relative inventory; production POSIX tests/smoke; PowerShell remains unverified with recorded defect |
 
 ## Extension purpose and upgrade cost
@@ -139,7 +140,7 @@ role, not a claim that all behavior was exercised.
 
 | Component | Class | Decision / evidence |
 |---|---|---|
-| `config/agent/config.yml` | A + D | Preserve architecture byte-for-byte. Keep `dev.autoqaConsent: denied`, `dev.autoqa: false`, `telemetry.otlpExportEnabled: false`; preserve local stats/session/token display, approval, Plan Mode, routing and model settings. |
+| `config/agent/config.yml` | A + D | Preserve privacy, integration and task settings; Candidate C intentionally changes only default/plan model roles. Keep `dev.autoqaConsent: denied`, `dev.autoqa: false`, `telemetry.otlpExportEnabled: false`; preserve local stats/session/token display, approval, Plan Mode, retry/fallback and remaining model settings. |
 | `telemetry-opt-out.js`, `telemetry.env`, `telemetry.ps1` | D | Keep and align environment opt-outs. Add clearing of generic/per-signal OTLP endpoints/headers, `PI_AUTO_QA_PUSH_URL`/`TOKEN`, and OpenDesign `OBJECT_RELAY_URL`; do not unset provider credentials. |
 | `rtk.ts` | B + D | Preserve optional local rewrite integration. `RTK_TELEMETRY_DISABLED=1` is the supported RTK opt-out; RTK 0.51 source reports core telemetry disabled by this env. Installed command behavior was not invoked. |
 | `herdr-omp-agent-state.ts` | B | Preserve local pane/session reporting over gated local IPC; no evidenced external sink. |
