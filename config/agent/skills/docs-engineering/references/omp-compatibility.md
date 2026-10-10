@@ -10,75 +10,107 @@ Current outcomes live in the source checkout's `docs/verification.md`, which is
 not deployed as part of this skill package.
 
 
-## Candidate C prompt and compatibility state (OMP 18.8.7)
+## Candidate C prompt and compatibility state (checked 2026-10-10)
 
-Installed OMP and the latest stable release rechecked on 2026-10-10 are 18.8.7.
-The official release tag resolves to immutable source revision
+Installed OMP and latest stable are **18.8.7**, release tag revision
 [`f261ed9faf16b61880b544f599876bface4ded0d`](https://github.com/can1357/oh-my-pi/tree/f261ed9faf16b61880b544f599876bface4ded0d).
-The current upstream `main` tip is
-[`4cd31bd6d00bb7a161443d9a5f4bce4f564664f2`](https://github.com/can1357/oh-my-pi/commit/4cd31bd6d00bb7a161443d9a5f4bce4f564664f2),
-32 commits beyond that release. Its release-to-main diff does not change the
-system-prompt discovery/builder, extension event contract, or task dispatch/
-subagent files tracked by the compatibility gate; no native bounded-consultation
-feature appears in the release notes or reviewed main changes. The compatibility
-record stores the reviewed stable source separately from its runtime receipt.
-Current OMP 18.8.7 is verified in `known-patched` mode after disposable
-fresh-session Luna-direct, natural Luna→slow/Sol→Luna, and Plan Mode probes.
+Current upstream `main` resolves to
+[`b07a1c146d0d12cfc855a2c65d52f892ef319040`](https://github.com/can1357/oh-my-pi/commit/b07a1c146d0d12cfc855a2c65d52f892ef319040).
+The check compared exact upstream content for every tracked Candidate C
+surface at both revisions: no hard-critical or watched file changed from the
+18.8.7 baseline to `main`. The stable release is still the adoption target;
+`main` is early-warning only. OMP exposes ordinary task/subagent dispatch but
+the reviewed stable release, current main source, and release notes expose no
+native decision-only consultation mechanism that guarantees Luna resumes as
+execution owner. Keep the narrow append; do not add an extension or router.
 
-OMP discovers project then user `APPEND_SYSTEM.md` when no CLI append is given:
-[main.ts discovery](https://github.com/can1357/oh-my-pi/blob/f261ed9faf16b61880b544f599876bface4ded0d/packages/coding-agent/src/main.ts#L1291-L1359)
-and [system-prompt assembly](https://github.com/can1357/oh-my-pi/blob/f261ed9faf16b61880b544f599876bface4ded0d/packages/coding-agent/src/system-prompt.ts#L956-L1066).
-The native OMP prompt is generated and retained; this repository appends only
-the six-line Candidate C distinction. `PERSONALITY.md` remains the sole owner
-of consultation triggers. The addendum SHA-256 is recorded in
-`omp-compatibility.yml`; unknown addendum text or any `SYSTEM.md` /
-`SYSTEM_TEMPLATE.md` override is rejected by the checker.
+### Native prompt discovery
 
-This is preferable to the supported `before_agent_start` extension event:
-that event receives `prompt`, images and a resolved `systemPrompt: string[]`
-before provider turns, and may replace the entire policy array. Handlers chain
-in extension order, but OMP provides no structured clause-edit API. No
-compatibility extension or model router is added. OMP prompt changes are
-inherited directly; source changes to tracked prompt/task/dispatch interfaces
-require review rather than optimistic text rewriting.
+The inspected [18.8.7 prompt customization documentation](https://github.com/can1357/oh-my-pi/blob/v18.8.7/docs/system-prompt-customization.md),
+[CLI prompt resolution](https://github.com/can1357/oh-my-pi/blob/f261ed9faf16b61880b544f599876bface4ded0d/packages/coding-agent/src/main.ts),
+[prompt builder](https://github.com/can1357/oh-my-pi/blob/f261ed9faf16b61880b544f599876bface4ded0d/packages/coding-agent/src/system-prompt.ts),
+and [config discovery](https://github.com/can1357/oh-my-pi/blob/f261ed9faf16b61880b544f599876bface4ded0d/packages/coding-agent/src/config.ts)
+establish:
 
-The checker distinguishes `known-patched` (the exact appendix and runtime
-receipts), `native-compatible` (append removed after native behavior is
-verified), and `unknown` (unrecognized prompt state or changed critical
-interface). Unknown states never pass. `native-compatible` is not inferred
-from a missing file: it must match a reviewed runtime receipt.
-Explicit CLI append text wins over file discovery; project prompt overrides can
-shadow user additions; non-CLI SDK hosts require separate checks.
+- An explicit CLI `--system-prompt` / `--system-prompt-template` replaces
+  discovered custom prompt input; `--append-system-prompt` replaces discovered
+  append input for that invocation.
+- Without those CLI flags, append discovery is project-first then user-level.
+  Supported bases are `.omp`, `.claude`, `.codex`, and `.gemini` in that
+  priority order; foreign user roots require `enabledProviders` opt-in (or
+  `CLAUDE_CONFIG_DIR` for Claude). Project `APPEND_SYSTEM.md` therefore
+  shadows the managed global Candidate C clarification. Append discovery uses
+  the launch cwd bases, not the override file's ancestor walk.
+- Discovered `SYSTEM.md` / `SYSTEM_TEMPLATE.md` selection is project-first,
+  then user-level; within each scope a literal `SYSTEM.md` beats a template.
+  Native `.omp` discovery also supports nearest ancestor roots and `.agent` /
+  `.agents`; foreign project roots are resolved from launch cwd. A selected
+  system override does not retain the stock default instruction block.
 
+The checker models those file-discovery rules and reports `known-patched` only
+when the effective discovered append is exactly the managed global file with
+the recorded SHA-256 and no discovered system override exists. A project
+append, unrecognized append, `SYSTEM.md`, or `SYSTEM_TEMPLATE.md` cannot pass
+as known-patched. A missing append is `native-compatible` only when a matching
+runtime receipt exists. The detached checker cannot observe CLI prompt flags,
+CLI-only profile selection, SDK full-prompt replacement, or an already running
+session; it prints this limit and the operator must use the checked file-based
+launch context. Never modify a project prompt file to make health pass.
 
-`task.eager` accepts `default`, `preferred` and `always`. `preferred` changes
-general execution-delegation pressure; it is not a narrow way to authorize a
-policy-required decision consultation. Keep `default`. PERSONALITY remains the
-sole owner of Candidate C consultation triggers. See the exact
-[task setting](https://github.com/can1357/oh-my-pi/blob/f261ed9faf16b61880b544f599876bface4ded0d/packages/coding-agent/src/task/settings.ts)
-and [prompt template](https://github.com/can1357/oh-my-pi/blob/f261ed9faf16b61880b544f599876bface4ded0d/packages/coding-agent/src/prompts/system/system-prompt.md).
+`PERSONALITY.md` remains the sole owner of escalation conditions. The append
+only clarifies that native execution-delegation restrictions do not prohibit
+one policy-required bounded consultation. It does not ask for general task
+delegation.
 
+### Exact upstream source comparison
 
-`scripts/check-omp-compat.mjs` compares the installed OMP version against the
-recorded release and, for a candidate version, compares tracked upstream
-interfaces. It validates managed and effective OMP roles/task/fallback settings
-through `omp config get`. Installed mode also requires its agent directory to
-match `omp config path`. A clean current-version check is offline;
-`--candidate VERSION` requires GitHub access. Changed critical paths report
-REVIEW REQUIRED; unknown prompt state or missing/mismatched runtime receipts
-cannot pass. The checker never patches or installs OMP. Native `omp update`
-changes the active installation in place; no repository-owned candidate
-installer/promotion/rollback path is claimed.
-For an upgrade: inspect release notes and changed critical sources; run the
-candidate check; if native semantics changed, review the delegation diff and
-verify whether the addendum is still needed; then smoke Luna direct,
-Luna→slow/Sol→Luna, and Plan Mode before accepting the release. If OMP natively
-supports the distinction, remove the appendix and record `native-compatible`;
-otherwise retain the exact known addendum. Do not manually merge OMP's full
-system template.
-`workflow-omp-health` is the explicit operator procedure after deployment or
-upgrade. Current behavioral evidence and unverified cases are recorded in
-`docs/verification.md`.
+`scripts/check-omp-compat.mjs` resolves release tags to immutable revisions,
+then fetches the raw bytes of the tracked files at baseline and candidate and
+compares SHA-256. It does not rely on GitHub's capped compare-file listing or
+download the repository. Missing/unavailable tracked content is `NOT VERIFIED`.
+The compatibility record classifies the bounded set into two groups:
+
+**Hard critical**: `main.ts`, `system-prompt.ts`, prompt capability/config
+discovery, model role resolver/settings, task settings/dispatch/executor/spawn
+policy, Plan Mode settings/handoff, and native system/project prompt templates.
+A changed file returns `REVIEW REQUIRED` until its contract is reviewed or
+exercised.
+
+**Watched**: extension type/runner, settings registry/config wrapper,
+approval/bash, and skill capability/discovery. A changed file asks for focused
+surface-specific checks; it does not assert that the routing architecture
+changed. Unchanged hard-critical bytes allow an existing runtime receipt tied
+to the exact reviewed baseline to carry forward without another model call.
+The checker reports watched drift separately and does not silently clear the
+focused-check requirement.
+
+`--candidate latest` resolves the official stable release. Optional
+`--inspect-main` compares the same tracked files at the moving main tip for
+early warning only. Neither path installs, promotes, or updates OMP.
+
+### Deterministic health and runtime evidence
+
+The checker validates installed effective model roles, task bounds, advisor,
+retry/fallback and prewalk settings; managed compatibility-record consistency;
+prompt discovery/hash; and source comparison when the installed/candidate
+version differs from the reviewed source. It is read-only and makes no model
+call. The explicit `workflow-omp-health` skill retains doctor and skill-list
+checks, and `full` runs the focused deterministic repository suite.
+
+Runtime evidence remains separate: the recorded 18.8.7 receipt covers fresh
+Luna-direct, Luna→one slow/Sol bounded decision→Luna, and Plan Mode. Reuse it
+only when the prompt mode and hard-critical sources remain unchanged. Changed
+prompt construction requires prompt-discovery and applicable Luna routing
+probes; task dispatch changes require the bounded slow dispatch probe; Plan
+Mode changes require its own probe. Provider/authentication evidence is not
+inferred from static config or source hashes. Do not replay unchanged cases
+just because omp-docflow documentation or unrelated files changed.
+
+The currently reviewed source and runtime receipt remain recorded separately in
+`omp-compatibility.yml`. The checker does not rewrite or bless either record.
+No OMP update, candidate install, promotion, or rollback is supplied here.
+`workflow-omp-health` is the operator entrypoint after deployment or upgrade;
+this reference defines its compatibility evidence and limits.
 
 ## Approval-specific 18.8.0 check
 
