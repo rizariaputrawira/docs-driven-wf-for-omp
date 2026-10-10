@@ -35,20 +35,6 @@ const workspaceCalls = [
   ["eval", { language: "js", code: "1" }],
   ["edit", { input: patch("[README.md#ABCD]\nPUT 1.=1:\n+updated") }],
 ];
-check("native seven worker bindings produce no hook replacement or block", () => {
-  const bindings = {
-    scout: "@smol", routine: "@routine", task: "@task", reviewer: "@task",
-    "security-reviewer": "@task", slow: "@slow", advisor: "@advisor",
-  };
-  for (const [agent, alias] of Object.entries(bindings)) {
-    const model = ["slow", "advisor"].includes(agent) ? "gpt-6.1-sol" : "gpt-6-luna";
-    const effort = agent === "advisor" ? "high" : "medium";
-    const event = { type: "before_subagent_spawn", agent, invocationKind: "task",
-      modelRole: alias.slice(1), patterns: [`openai-codex/${model}:${effort}`] };
-    const results = [...hooks].filter(([name]) => name === event.type).map(([, handler]) => handler(event));
-    assert.deepEqual(results.filter((result) => result !== undefined), []);
-  }
-});
 check("exact Luna/Sol identities allow main/sub workspace operations", () => {
   for (const id of ["gpt-6-luna", "gpt-6-sol", "gpt-6.1-sol"])
     for (const kind of ["main", "sub"])

@@ -157,9 +157,7 @@ export async function compareTrackedSources(baseRevision, candidateRevision, pat
     ]);
     if (!baseResponse.ok || !candidateResponse.ok) throw new Error(`cannot compare tracked source ${path} (baseline ${baseResponse.status}, candidate ${candidateResponse.status})`);
     const [baseBytes, candidateBytes] = await Promise.all([baseResponse.arrayBuffer(), candidateResponse.arrayBuffer()]);
-    const baseHash = createHash("sha256").update(Buffer.from(baseBytes)).digest("hex");
-    const candidateHash = createHash("sha256").update(Buffer.from(candidateBytes)).digest("hex");
-    if (baseHash !== candidateHash) changed.push(path);
+    if (!Buffer.from(baseBytes).equals(Buffer.from(candidateBytes))) changed.push(path);
   }
   return { hardCriticalChanges: changed.filter(path => HARD_CRITICAL_PATHS.includes(path)), watchedChanges: changed.filter(path => WATCHED_PATHS.includes(path)) };
 }

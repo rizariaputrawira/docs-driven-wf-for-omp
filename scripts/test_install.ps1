@@ -48,6 +48,9 @@ try {
     $repoScripts = Join-Path $repo 'scripts'
     [void](New-Item -ItemType Directory -Path $repoConfig, $repoScripts)
     Copy-Item -LiteralPath (Join-Path $root 'scripts/doctor.ps1') -Destination (Join-Path $repoScripts 'doctor.ps1')
+    foreach ($dependency in @('validate-inventory.ps1', 'telemetry-profiles.ps1', 'retired-skills.txt')) {
+        Copy-Item -LiteralPath (Join-Path $root "scripts/$dependency") -Destination (Join-Path $repoScripts $dependency)
+    }
     Copy-Item -LiteralPath (Join-Path $source 'config/files.tsv') -Destination (Join-Path $repoConfig 'files.tsv')
     foreach ($relative in @('payload/agents', 'payload/config', 'payload/other')) {
         Write-Bytes (Join-Path $repo $relative) ([IO.File]::ReadAllBytes((Join-Path $source $relative)))
@@ -56,6 +59,16 @@ try {
     $doctor = Join-Path $repoScripts 'doctor.ps1'
     $code = Invoke-Script $doctor @('-Check', '-Home', $targetHome)
     Assert ($code -eq 0) 'Doctor check rejected or reported drift for valid inventory.'
+    $originalUserProfile = $env:USERPROFILE
+    try {
+        $env:USERPROFILE = $targetHome
+        $code = Invoke-Script (Join-Path $repo 'install.ps1') @('-DryRun')
+        Assert ($code -eq 0) 'Omitted Source/Home did not select the script repository and disposable USERPROFILE.'
+        $code = Invoke-Script $doctor @('-Check')
+        Assert ($code -eq 0) 'Omitted Home did not select disposable USERPROFILE.'
+    } finally {
+        $env:USERPROFILE = $originalUserProfile
+    }
     $drift = [byte[]](0x44, 0x52, 0x49, 0x46, 0x54)
     Write-Bytes (Join-Path $targetHome '.omp/agent/config.yml') $drift
     $code = Invoke-Script $doctor @('-Fix', '-Home', $targetHome)

@@ -123,7 +123,7 @@ Coupling is upgrade cost, not a vulnerability or removal mandate.
 | Herdr integration | HIGH | KEEP optional/env-gated | OMP events plus external IPC/env/protocol assumptions; source gate review, real pane/socket not exercised |
 | Empty plugin metadata | MEDIUM | RETIRE managed scaffolding | Native loader tolerates absent empty roots; installer creates package on plugin install; no configured plugin behavior lost |
 | Native OMP system prompt | LOW | INHERIT | No local template copy; upstream prompt changes flow directly, and tracked prompt/dispatch source changes require a bounded compatibility review |
-| Installer/doctor | LOW | KEEP | Explicit home-relative inventory; production POSIX tests/smoke; PowerShell remains unverified with recorded defect |
+| Installer/doctor | LOW | KEEP | Explicit home-relative inventory; production POSIX tests/smoke and scoped native Windows PowerShell 5.1 checks; remaining platform/scenario limits in verification |
 
 ## Extension purpose and upgrade cost
 
@@ -256,7 +256,7 @@ Recheck after upgrades. Approval never authorizes exceeding task scope.
 
 Anti Slop remains a stateless, compact cross-cutting UI/product-copy filter. Impeccable owns broad UI workflow and production quality; ui-design local marketing reference is selective for landing/portfolio/redesign composition; ui-design local component craft owns focused component craft; ui-web-motion owns detailed motion. No public Anti Slop skill or parallel workflow is added.
 
-Source basis: Anti Slop `v3.2.20`, immutable `91f12ec67e9de6043cfd93b846404986ba73c3f4`; current main `388cbe3b6c37d5175b9f460015bb092ef9e34894` changes README only. Exact source paths, license and local authorship are in [provenance](../config/SKILL-SOURCES.md#anti-slop-compact-extension).
+Source basis: Anti Slop `v3.2.20`, immutable `91f12ec67e9de6043cfd93b846404986ba73c3f4`; reviewed main `388cbe3b6c37d5175b9f460015bb092ef9e34894` changes README only. Exact source paths, license and local authorship are in [provenance](../config/SKILL-SOURCES.md#retained-licensed-boundaries).
 
 | Capability | Current / resulting owner | Upstream contribution | Decision | Reason |
 |---|---|---|---|---|

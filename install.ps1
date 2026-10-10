@@ -15,7 +15,7 @@ if ($Help) { Write-Output 'Usage: install.ps1 [-DryRun] [-Source path|url] [-Hom
 $tempRoot = $null
 try {
     $repository = (Resolve-Path -LiteralPath $PSScriptRoot).Path
-    $sourcePath = if ($null -ne $sourceOverride) { $sourceOverride } else { $repository }
+    $sourcePath = if ($PSBoundParameters.ContainsKey('SourceOverride')) { $sourceOverride } else { $repository }
     if ($sourcePath -match '^https?://') {
         $tempRoot = Join-Path ([IO.Path]::GetTempPath()) ([guid]::NewGuid().ToString())
         [void](New-Item -ItemType Directory -Path $tempRoot)
@@ -29,7 +29,7 @@ try {
     }
     if (-not (Test-Path -LiteralPath $sourcePath -PathType Container) -or (Is-Reparse $sourcePath)) { throw 'Source must be an existing real directory.' }
     $sourceRoot = (Resolve-Path -LiteralPath $sourcePath).Path
-    $homePath = if ($null -ne $homeOverride) { $homeOverride } else { $env:USERPROFILE }
+    $homePath = if ($PSBoundParameters.ContainsKey('HomeOverride')) { $homeOverride } else { $env:USERPROFILE }
     if ([string]::IsNullOrEmpty($homePath) -or -not (Test-Path -LiteralPath $homePath -PathType Container) -or (Is-Reparse $homePath)) { throw 'Home must be an existing real directory.' }
     $targetHome = (Resolve-Path -LiteralPath $homePath).Path
     $inventory = Join-Path $sourceRoot 'config/files.tsv'

@@ -66,10 +66,20 @@ Locate the effective agent directory with `omp config path`; do not assume a pro
 Run quick checks plus relevant repository tests
 (`bun scripts/test_agent_config.mjs`, `node scripts/test_model_routing.mjs`,
 `node scripts/test_antislop.mjs`, `bun scripts/test_skill_catalog.mjs`,
-`bun scripts/test_omp_compat.mjs`) and repeat applicable native passive checks.
-Run only coverage relevant to an unresolved or changed surface; reuse unchanged,
-valid behavioral receipts rather than replaying model cases after unrelated
-documentation/config-payload changes.
+`bun scripts/test_document_locations.mjs`, `bun scripts/test_omp_compat.mjs`).
+For changed installer/doctor behavior, also run disposable-home POSIX or
+PowerShell tests on an available relevant host; do not substitute static parsing
+for platform execution or exercise a real user home.
+`test_skill_catalog.mjs` is the full source-tree coverage check: it compares
+deployable runtime assets against `config/files.tsv`, checks the registered
+skill/alias discovery set, source/license/coupling records, retained notices and
+reference paths/headings. This is structural coverage, not license compliance.
+The doctors check the selected
+home against the declared inventory and observe unmanaged state; they do not
+prove that the checkout inventory includes every source file or establish
+third-party rights. Run only coverage relevant to an unresolved or changed
+surface; reuse unchanged, valid behavioral receipts rather than replaying model
+cases after unrelated documentation/config-payload changes.
 
 ## Verdicts
 

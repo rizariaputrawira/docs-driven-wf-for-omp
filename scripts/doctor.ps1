@@ -15,7 +15,7 @@ if ($Check -and $Fix) { Fail 'Choose either -Check or -Fix.' }
 
 try {
     $repository = (Resolve-Path -LiteralPath (Split-Path -Parent $PSScriptRoot)).Path
-    $homePath = if ($null -ne $homeOverride) { $homeOverride } else { $env:USERPROFILE }
+    $homePath = if ($PSBoundParameters.ContainsKey('HomeOverride')) { $homeOverride } else { $env:USERPROFILE }
     if ([string]::IsNullOrEmpty($homePath) -or -not (Test-Path -LiteralPath $homePath -PathType Container) -or (Is-Reparse $homePath)) { throw 'Home must be an existing real directory.' }
     $targetHome = (Resolve-Path -LiteralPath $homePath).Path
     $inventory = Join-Path $repository 'config/files.tsv'
@@ -24,8 +24,7 @@ try {
     $profiles = @(Get-TelemetryProfilePlan $targetHome)
     if ($fix) {
         $installer = Join-Path $repository 'install.ps1'
-        $installerArguments = @('-Source', $repository, '-Home', $targetHome)
-        & $installer @installerArguments
+        & $installer -Source $repository -Home $targetHome
         if (-not $?) { throw 'Installer invocation failed.' }
         $profiles = @(Get-TelemetryProfilePlan $targetHome)
     }

@@ -305,11 +305,11 @@ def main() -> None:
             server.server_close()
             thread.join()
 
-    for runtime in ("pwsh", "powershell"):
-        if shutil.which(runtime):
-            print(f"PowerShell runtime available ({runtime}); PowerShell scenarios are not yet automated by this runner.")
-    if not shutil.which("pwsh") and not shutil.which("powershell"):
-        print("PowerShell execution unverified: neither pwsh nor Windows PowerShell is available.")
+    powershell_runtimes = [runtime for runtime in ("pwsh", "powershell", "powershell.exe") if shutil.which(runtime)]
+    if powershell_runtimes:
+        print(f"PowerShell runtime available ({', '.join(powershell_runtimes)}); this POSIX runner does not execute the separate PowerShell tests.")
+    else:
+        print("PowerShell execution unverified by this runner: no pwsh, powershell, or powershell.exe found on PATH.")
     print(f"POSIX installer/doctor integration checks passed for {len(rows)} inventory entries.")
 
 

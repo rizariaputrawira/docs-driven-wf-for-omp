@@ -138,6 +138,8 @@ config/agent/skills/swift-development/SOURCES.md	.omp/agent/skills/swift-develop
 config/agent/skills/tdd/SKILL.md	.omp/agent/skills/tdd/SKILL.md
 config/agent/skills/ui-browser/SKILL.md	.omp/agent/skills/ui-browser/SKILL.md
 config/agent/skills/ui-design/LICENSE	.omp/agent/skills/ui-design/LICENSE
+config/agent/skills/ui-design/LICENSE.platform-design-skills	.omp/agent/skills/ui-design/LICENSE.platform-design-skills
+config/agent/skills/ui-design/NOTICE.md	.omp/agent/skills/ui-design/NOTICE.md
 config/agent/skills/ui-design/SKILL.md	.omp/agent/skills/ui-design/SKILL.md
 config/agent/skills/ui-design/agents/impeccable_asset_producer.toml	.omp/agent/skills/ui-design/agents/impeccable_asset_producer.toml
 config/agent/skills/ui-design/agents/impeccable_documenter.toml	.omp/agent/skills/ui-design/agents/impeccable_documenter.toml

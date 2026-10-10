@@ -31,6 +31,10 @@ const rows = text("config/files.tsv").trimEnd().split(/\r?\n/).map(line => {
 assert.equal(new Set(rows.map(r => r.source)).size, rows.length, "duplicate source");
 assert.equal(new Set(rows.map(r => r.destination)).size, rows.length, "duplicate destination");
 assert.deepEqual(rows.filter(r => r.source.startsWith("config/agent/skills/")).map(r => r.source).sort(), entries, "all skill assets must be exactly mapped");
+const deployedRoots = ["config/agent", "config/privacy"];
+const deployedAssets = deployedRoots.flatMap(path => walk(join(root, path)));
+deployedAssets.push("scripts/check-omp-compat.mjs");
+assert.deepEqual(rows.map(row => row.source).sort(), [...deployedAssets].sort(), "deployed runtime assets must be exactly mapped");
 const aliases = {
   "impeccable": "ui-design",
   "animate": "ui-web-motion",
@@ -117,6 +121,32 @@ for (const path of entries.filter(p => /^config\/agent\/skills\/[^/]+\/SKILL\.md
 }
 assert.deepEqual([...identities.keys()].sort(), [...canonicalNames, ...Object.keys(aliases)].sort(), "complete intended discovery set");
 for (const path of entries.filter(p => p.endsWith("/SKILL.md"))) assert.match(path, /^config\/agent\/skills\/[^/]+\/SKILL\.md$/, `nested public entrypoint: ${path}`);
+const capabilityInventory = text("docs/capability-inventory.md");
+function inventoryTable(heading) {
+  const lines = capabilityInventory.split(/\r?\n/);
+  const start = lines.indexOf(`## ${heading}`);
+  assert.ok(start !== -1, `missing capability inventory section: ${heading}`);
+  const end = lines.findIndex((line, index) => index > start && line.startsWith("## "));
+  return lines.slice(start + 1, end < 0 ? lines.length : end).filter(line => /^\| [^-]/.test(line)).slice(1)
+    .map(line => line.split("|").slice(1, -1).map(cell => cell.trim()));
+}
+const identityRows = inventoryTable("Identity and routing");
+assert.deepEqual([...new Set(identityRows.map(([, owner]) => owner))].sort(), [...canonicalNames].sort(), "canonical skills require identity/routing records");
+const baselineOwners = new Map(identityRows.filter(([baseline]) => baseline !== "local addition").map(([baseline, owner]) => [baseline, owner]));
+const contractOwners = new Set(inventoryTable("Capability contracts").map(([baseline]) => canonicalNames.has(baseline) ? baseline : baselineOwners.get(baseline)));
+assert.deepEqual([...contractOwners].sort(), [...canonicalNames].sort(), "canonical skills require capability contract records");
+const provenanceOwners = new Set();
+for (const fields of inventoryTable("Source, notices and OMP coupling")) {
+  const [baseline, source, notice, coupling] = fields;
+  assert.equal(fields.length, 4, `malformed provenance record: ${baseline}`);
+  assert.ok(notice, `missing license/notice metadata: ${baseline}`);
+  assert.ok(/^S\d+$/.test(source) && new RegExp(`\\*\\*${source}:\\*\\*`).test(capabilityInventory), `unknown source/provenance key: ${baseline}`);
+  assert.ok(/^C\d+$/.test(coupling) && new RegExp(`\\*\\*${coupling}:\\*\\*`).test(capabilityInventory), `unknown OMP coupling key: ${baseline}`);
+  const owner = canonicalNames.has(baseline) ? baseline : baselineOwners.get(baseline);
+  assert.ok(canonicalNames.has(owner), `unknown provenance owner: ${baseline}`);
+  provenanceOwners.add(owner);
+}
+assert.deepEqual([...provenanceOwners].sort(), [...canonicalNames].sort(), "canonical skills require source/license/coupling records, not just identity rows");
 
 // Legal notices are protected bytes, not incidental prose snapshots.
 const retainedNotices = {
@@ -136,6 +166,8 @@ const retainedNotices = {
   "config/agent/skills/code-simplicity/LICENSE.ponytail": "fb1bc6909ac3ef82d5c22106e32ef682b0cff66788fa915fb9b53b15c9d2f3ab",
   "config/agent/skills/docs-plan-review/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
   "config/agent/skills/ui-design/LICENSE": "02bb8c3b4e70190e3986c0404ad2fd8d639b4f534252d82379cc1b502b6d1812",
+  "config/agent/skills/ui-design/NOTICE.md": "c60a093c2845fd9fb82f9c6f742ece31f379f8190b535309d32d66c45ccffdcb",
+  "config/agent/skills/ui-design/LICENSE.platform-design-skills": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685",
   "config/agent/skills/workflow-handoff/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
   "config/agent/skills/docs-engineering/LICENSE.gsd": "3a160aec61eeb28e75e8017346ee190db07986a09c4bd72555cc706f1d99e27e",
   "config/agent/skills/docs-domain-modeling/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
@@ -147,7 +179,7 @@ const retainedNotices = {
   "config/agent/skills/workflow-brainstorming/LICENSE.matt": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
 };
 for (const [path, hash] of Object.entries(retainedNotices)) {
-  assert.ok(rows.some(r => r.source === path), `unmapped retained notice: ${path}`);
+  assert.ok(rows.some(row => row.source === path), `unmapped retained notice: ${path}`);
   assert.equal(createHash("sha256").update(readFileSync(join(root, path))).digest("hex"), hash, `retained notice changed: ${path}`);
 }
 const newNoticeHashes = {
@@ -166,7 +198,22 @@ assert.equal(mappedNotices.length, Object.keys(retainedNotices).length + entries
 function prose(path) {
   return text(path).replace(/^\s*(`{3,}|~{3,})[^\n]*\n[\s\S]*?^\s*\1\s*$/gm, "");
 }
-const guidance = new Set([...rows.map(r => r.source).filter(p => p.endsWith(".md")), "README.md", "SKILL-USAGE.md", "config/SKILL-SOURCES.md", ...walk(join(root, "docs")).filter(p => p.endsWith(".md"))]);
+const guidance = new Set([...rows.map(r => r.source).filter(p => p.endsWith(".md")), ...readdirSync(root).filter(name => name.endsWith(".md") && statSync(join(root, name)).isFile()), "config/SKILL-SOURCES.md", ...walk(join(root, "docs")).filter(p => p.endsWith(".md"))]);
+const anchors = new Map();
+function markdownAnchors(path) {
+  if (anchors.has(path)) return anchors.get(path);
+  const body = prose(path);
+  const found = new Set([...body.matchAll(/\bid=["']([^"']+)["']/g)].map(match => match[1]));
+  const seen = new Map();
+  for (const match of body.matchAll(/^ {0,3}#{1,6}\s+(.+?)\s*#*\s*$/gm)) {
+    const base = match[1].toLowerCase().replace(/<[^>]*>/g, "").replace(/[^\p{L}\p{N}_ -]/gu, "").replace(/ /g, "-");
+    const count = seen.get(base) || 0;
+    found.add(count ? `${base}-${count}` : base);
+    seen.set(base, count + 1);
+  }
+  anchors.set(path, found);
+  return found;
+}
 for (const path of guidance) {
   for (const m of prose(path).matchAll(/skill:\/\/([a-z0-9-]+)(\/[^\s`\])<>"',;]*)?/g)) {
     const [, name, suffix = ""] = m;
@@ -179,13 +226,16 @@ for (const path of guidance) {
   }
   for (const m of prose(path).matchAll(/!?\[[^\]\n]*\]\(([^\s)]+)(?:\s+"[^"]*")?\)/g)) {
     const href = m[1];
-    if (/^(?:[a-z][a-z0-9+.-]*:|#|\/)/i.test(href)) continue;
+    if (/^(?:[a-z][a-z0-9+.-]*:|\/)/i.test(href)) continue;
     const local = decodeURIComponent(href.split(/[?#]/)[0]);
-    if (!local) continue;
-    const target = resolve(dirname(join(root, path)), local);
+    const target = local ? resolve(dirname(join(root, path)), local) : join(root, path);
     assert.ok(target.startsWith(root + sep), `${path}: reference outside repository: ${href}`);
     assert.ok(existsSync(target), `${path}: missing relative reference: ${href}`);
+    const fragment = href.includes("#") ? decodeURIComponent(href.slice(href.indexOf("#") + 1)) : "";
+    if (fragment && target.endsWith(".md")) {
+      assert.ok(markdownAnchors(portable(target)).has(fragment), `${path}: missing Markdown anchor: ${href}`);
+    }
   }
 }
 const visible = [...identities.values()].filter(v => !v.hidden).length;
-console.log(`Skill catalog: ${canonicalNames.size} canonical (${visible} model-visible, ${hiddenCanonical.size} explicit-only), ${Object.keys(aliases).length} hidden aliases, ${entries.length} mapped assets, ${rows.length} mappings, ${mappedNotices.length} notices; URI/relative references resolve.`);
+console.log(`Skill catalog: ${canonicalNames.size} canonical (${visible} model-visible, ${hiddenCanonical.size} explicit-only), ${Object.keys(aliases).length} hidden aliases, ${entries.length} mapped assets, ${rows.length} mappings, ${mappedNotices.length} notices; source/license metadata and URI/relative/heading references checked. Structural coverage is not license compliance or runtime proof.`);

@@ -1,9 +1,10 @@
 # Skill payload provenance and license boundaries
 
-Source catalog basis: current main `e850b6a07a55bc893d97c786928c45906952bbe7`.
-The result contains 35 canonical capabilities (33 visible, two explicit-only),
-14 hidden locally authored compatibility pointers, 263 skill assets and 282
-explicit mappings. Counts do not prove native discovery or legal clearance.
+Source catalog basis: inspected current checkout; the historical source baseline
+remains a separate provenance fact. The current result contains 37 canonical
+capabilities (34 visible, three explicit-only), 14 hidden locally authored
+compatibility pointers, 269 skill assets and 294 explicit mappings. Counts do
+not prove native discovery or legal clearance.
 
 Public capability names are separate from source identities. Renaming never erases
 upstream authorship. Full notices accompany affected deployed packages, not only
@@ -68,15 +69,40 @@ transport. Existing notice hashes and new clone-byte notices are checked separat
 
 | Source repository | Immutable revision / exact source scope | Relationship / local scope | License and copyright | Distributed notice / modification record |
 |---|---|---|---|---|
-| pbakaus/impeccable | skill-v4.5.0, 508d7e8955de3b3caf2d8676e85206723d41a887; complete versioned skill package | MODIFIED/ADAPTED entrypoint, reference/critique.md optional-state discovery, and scripts/live-browser.js (direct session-helper bindings; local modification notices); original package identity and remaining package assets retained; independent supplements under reference/local | Apache-2.0, Copyright 2025 Paul Bakaus | agent/skills/ui-design/LICENSE; entrypoint, critique reference and browser-script modification notices; original root NOTICE absent at pin |
+| pbakaus/impeccable | skill-v4.5.0, 508d7e8955de3b3caf2d8676e85206723d41a887; versioned skill package | MODIFIED/ADAPTED entrypoint, reference/critique.md optional-state discovery, and scripts/live-browser.js (direct session-helper bindings; local modification notices); provider-exported references retained; independent supplements under reference/local | Apache-2.0, Copyright 2025 Paul Bakaus; separate nested notices below | agent/skills/ui-design/LICENSE and unchanged root NOTICE.md; entrypoint, critique reference and browser-script modification notices |
+| ehmo/platform-design-skills | Parent Impeccable NOTICE identifies source/author; baff03e456864470db3ba8acebc41a003cbfa541 is inspected LICENSE evidence only, not the adapted body revision | Distilled iOS/Android references in Impeccable's pinned provider export | MIT text, Copyright (c) 2026 (no named holder); original-body/license-at-adaptation and underlying-source rights UNVERIFIED | ui-design/NOTICE.md and LICENSE.platform-design-skills; nested evidence limits below |
 | miqdadbadjuber/anti-slop | v3.2.20, 91f12ec67e9de6043cfd93b846404986ba73c3f4; skills/antislop, antislop-ui, antislop-copywriting SKILL.md | MODIFIED/ADAPTED compact policy in agent/extensions/antislop.js; integration/trigger code locally authored | MIT, Copyright (c) 2026 Miqdad Badjuber (antislop) | agent/extensions/LICENSE.antislop; extension attribution and durable decision record |
-| NVIDIA/SkillSpector | 35270064e42230dbc566e4134c55b5d581355db3; skills/skill-inspector/SKILL.md | MODIFIED/ADAPTED security-intake SKILL and intake-checklist; no scanner/dependencies distributed | Apache-2.0, Copyright 2026 NVIDIA CORPORATION & AFFILIATES | security-intake/LICENSE.skillspector and SOURCES.md; no root NOTICE; third-party scanner notices excluded with source scope rationale |
+| NVIDIA/SkillSpector | 35270064e42230dbc566e4134c55b5d581355db3; skills/skill-inspector/SKILL.md | MODIFIED/ADAPTED security-intake SKILL and intake-checklist; no scanner/dependencies distributed | Apache-2.0, Copyright 2026 NVIDIA CORPORATION & AFFILIATES | security-intake/LICENSE.skillspector and SOURCES.md; THIRD_PARTY_NOTICES.md covers unbundled scanner/runtime dependencies, excluded with source scope rationale |
 | anthropics/claude-code-security-review | 0c6a49f1fa56a1d472575da86a94dbc1edb78eda; .claude/commands/security-review.md | MODIFIED/ADAPTED security-review core/change-review; source-only native boundaries | MIT, Copyright (c) 2025 Anthropic | security-review/LICENSE.anthropic and SOURCES.md |
 | cloudflare/security-audit-skill | c1c8a8c1471069fb0e188eeaff69b8e8db6564a8; skills/security-audit/{SKILL,RECONNAISSANCE,HUNTING,VALIDATION-AND-REPORTING,ATTACK-CLASSES,AI-AND-LLM,RESOURCE-EXHAUSTION-AND-AVAILABILITY,SUPPLY-CHAIN-AND-RELEASE}.md | MODIFIED/ADAPTED security-audit and seven references, not full upstream engine | MIT, Copyright (c) 2025-2026 Cloudflare, Inc. | security-audit/LICENSE.cloudflare and exact per-file SOURCES.md |
 | DietrichGebert/ponytail | dbdfc8de29fb91609ed2df2ae378782a956d8e86 pins LICENSE only, not old body | MODIFIED/ADAPTED code-simplicity; historical body revision unresolved | MIT, Copyright (c) 2026 DietrichGebert | code-simplicity/LICENSE.ponytail; historical ponytail: debt marker retained, not dispatcher |
 | mattpocock/skills | d81f3a183412e71a5b1e84ca21bc1a35eea03a60; exact skill paths in affected package SOURCES.md | MODIFIED/ADAPTED code-review/debugging/TDD, domain modeling, brainstorming/delivery, agent guidance | MIT, Copyright (c) 2026 Matt Pocock | LICENSE.matt inside every affected deployed package; original exact source path maps retained |
 | obra/superpowers | 8ca22dba9a94f28898bbce59f2537ff4d87c747d; exact skill/reference paths in package SOURCES.md | MODIFIED/ADAPTED code-review/debugging/TDD, brainstorming/delivery, agent guidance | MIT, Copyright (c) 2025 Jesse Vincent | LICENSE.superpowers inside every affected package; SOURCES.md modifications |
 | open-gsd/gsd-core | 69f890fc36e6cfc90f2b1fcebb502ef76bbe8aa8; exact templates/skills in package SOURCES.md | MODIFIED/ADAPTED docs-engineering/plan-review, workflow-delivery/handoff/read/retrospective | MIT, Copyright (c) 2026 Open GSD | LICENSE.gsd inside every affected package; exact path/modification maps |
+
+### Impeccable nested platform attribution
+
+The pinned [root NOTICE.md](https://github.com/pbakaus/impeccable/blob/508d7e8955de3b3caf2d8676e85206723d41a887/NOTICE.md)
+names `ehmo/platform-design-skills`, MIT and author ehmo for the distilled
+iOS/Android references. The earlier claim that this notice was absent was
+incorrect. Its unchanged 503-byte text now accompanies the deployed package as
+`agent/skills/ui-design/NOTICE.md`; SHA-256
+`c60a093c2845fd9fb82f9c6f742ece31f379f8190b535309d32d66c45ccffdcb`.
+
+The local iOS/Android texts match the pinned upstream `.pi/skills/impeccable/reference/`
+exports byte-for-byte; the upstream `skill/reference/` sources additionally
+contain rule-marker comments removed by the provider export. This difference
+is not evidence of unrecorded local platform-guidance edits.
+
+The complete [original-source MIT LICENSE](https://github.com/ehmo/platform-design-skills/blob/baff03e456864470db3ba8acebc41a003cbfa541/LICENSE)
+is preserved as `agent/skills/ui-design/LICENSE.platform-design-skills`, SHA-256
+`1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685`.
+Its copyright text is exactly `Copyright (c) 2026`, without a named holder;
+author ehmo is identified in the parent NOTICE, not inserted into the license.
+Revision `baff03e456864470db3ba8acebc41a003cbfa541` pins inspected license
+evidence only, not the original body used by Impeccable. That body/license
+baseline and broader rights in underlying platform-source material remain
+UNVERIFIED. Notice preservation is not comprehensive redistribution clearance.
 
 ## Independently authored material and exclusions
 
@@ -137,12 +163,30 @@ presumptive blockers, mandatory decomposition, and unconditional abstraction,
 parallelism, or atomicity prescriptions were not adopted.
 This does not state an endorsement or a license/compliance determination.
 
-No third-party runtime or browser tooling is bundled into this repository.
-The Playwright CLI is an optional user-installed WSL tool, not an OMP
-dependency; this limited source intake does not inspect every transitive
-runtime component or grant it OS containment. Existing Impeccable optional
-engine/launcher remains part of its pinned package; no engine download or
-execution was performed for this task.
+Standalone browser binaries and the optional downloaded Impeccable engine are
+not bundled. The pinned Impeccable skill package does include scripts and the
+`modern-screenshot.umd.js` browser helper, used by `scripts/live-browser.js`.
+The Playwright CLI is an optional user-installed WSL tool, not an OMP dependency;
+this source intake does not inspect every transitive runtime component or grant
+OS containment. Earlier source intake did not download or execute the engine.
+
+## Unresolved component boundaries
+
+These records identify coverage gaps, not compliant redistribution grants.
+Resolve exact source, revision, applicable license, copyright, notice and local
+modification requirements before clearing or updating the affected material.
+
+| Managed component | Established local evidence | Remaining uncertainty / disposition |
+| --- | --- | --- |
+| `agent/skills/ui-design/scripts/modern-screenshot.umd.js` | Exact bytes match `skill/scripts/modern-screenshot.umd.js` at Impeccable 508d7e8955de3b3caf2d8676e85206723d41a887; SHA-256 bb36665889124a0b6e15f16045265737449c3bdcf2712cdb08af3cfa01563e2b; used by live-browser.js. | Original helper upstream/version, independently covering license and required notices not established. UNVERIFIED; parent Apache-2.0 notice alone is not clearance. |
+| `agent/extensions/rtk.ts` | Managed env-gated RTK wrapper; header identifies a Pi extension and PR #2753. External executable is not bundled. | Wrapper's copied/adapted/independent relationship, exact source/revision and covering license/notice not established. UNVERIFIED; executable licensing does not resolve wrapper rights. |
+| `agent/extensions/herdr-omp-agent-state.ts` | Managed env-gated integration with generated herdr header/version. External herdr service is not bundled. | Exact generated-body provenance, covering grant, copyright and required notice/modification record not established. UNVERIFIED; do not infer rights from the header. |
+
+Local modification (2026-10-10): the Herdr integration's private reverse-search
+helper was replaced with inline `Array.findLast` for last-assistant selection.
+The generated header and IPC behavior were retained; a Herdr reinstall/update
+can overwrite this local change. This records the known modification only,
+not the unresolved original source, license or required modification terms.
 
 ## Deployment and update ownership
 

@@ -70,5 +70,5 @@ and does not join normal model skill selection. In interactive OMP, invoke
 `/skill:workflow-omp-health [quick|upgrade|full]`.
 Family filters still apply; do not bypass a filter by direct file loading.
 
-Current catalog: 37 canonical capabilities (35 from current main plus local `workflow-omp-health` and `ui-browser`; 34 model-visible, 3 explicit-only), 14 hidden compatibility pointers, 267 skill assets and 292 managed mappings. Counts are not authenticated routing proof.
+Current catalog: 37 canonical capabilities (35 from current main plus local `workflow-omp-health` and `ui-browser`; 34 model-visible, 3 explicit-only), 14 hidden compatibility pointers, 269 skill assets and 294 managed mappings. Counts are not authenticated routing proof.
 After an omp-docflow install/update use `/skill:workflow-omp-health quick`; after an OMP version change use `/skill:workflow-omp-health upgrade`; use `/skill:workflow-omp-health full` only for explicit deeper checks or unresolved evidence.

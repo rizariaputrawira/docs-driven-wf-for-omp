@@ -20,11 +20,10 @@ sh install.sh --dry-run
 sh install.sh
 ```
 
-Windows PowerShell is beta; Windows 5.1 and native-Windows verification remain
-incomplete. The normalized-key inventory defect is repaired in source and
-passed isolated PowerShell 7.6.6 testing on Linux; this is not Windows
-verification (see [requirements](#requirements-and-prerequisites) and
-[verification records](docs/verification.md)):
+Windows PowerShell requires 5.1+. Native Windows installer/doctor and telemetry
+checks have bounded verification; this is not proof of every Windows path,
+remote ZIP, browser or service scenario. See [requirements](#requirements-and-prerequisites)
+and [verification records](docs/verification.md):
 
 
 ```powershell
@@ -138,8 +137,8 @@ Example OMP requests:
 - Install OMP separately using its [official installation choices](https://github.com/can1357/oh-my-pi#install). Authenticate with `omp login openai-codex` or `/login openai-codex` inside OMP. A generic OpenAI API key does not automatically authenticate the separate provider. See [OMP provider documentation](https://github.com/can1357/oh-my-pi/blob/main/docs/providers.md).
 - Configured model identifiers are `gpt-6.1-sol` and `gpt-6-luna`; account/provider availability is not established here. Select supported models in your own settings if needed.
 - POSIX installation requires `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp` and `date`. Remote ZIP additionally requires `curl` and `unzip`.
-- Windows installer is beta and requires PowerShell 5.1+; remote ZIP uses `Invoke-WebRequest` and `Expand-Archive`. Normalized inventory required-key lookup passed isolated PowerShell 7.6.6 testing on Linux; Windows PowerShell 5.1 and native-Windows behavior remain unverified. Details and evidence are in [verification records](docs/verification.md).
-- Third-party software and credentials are not bundled. Installation starts no services. Every installed file is inventoried.
+- Windows installation requires PowerShell 5.1+; remote ZIP uses `Invoke-WebRequest` and `Expand-Archive`. Native Windows PowerShell 5.1 installer/doctor and telemetry evidence, along with remaining limits, is recorded in [verification records](docs/verification.md).
+- Standalone OMP, browser binaries, optional integration services and credentials are not bundled. Third-party skill text, scripts and browser helper code are bundled where inventoried. Installation starts no services.
 
 ### Optional integrations and capabilities
 
@@ -234,6 +233,8 @@ verification.
 
 Check is the default read-only mode and compares every managed inventory entry, then reports bounded immediate legacy/unmanaged observations separately. Advisory observations never make a healthy inventory fail or cause cleanup. External dependencies remain unverified: the doctor does not start or check services.
 
+The doctors validate listed source files and selected-home state; they do not enumerate the checkout for files omitted from `config/files.tsv`, certify skill provenance/licensing, or validate external services. Run `bun scripts/test_skill_catalog.mjs` as the explicit full source-coverage check: it compares deployable runtime files against the inventory and checks skill discovery, tracked notices, and references. Full source coverage is not a legal determination; unresolved provenance or license terms remain unresolved.
+
 ```sh
 sh scripts/doctor.sh
 sh scripts/doctor.sh --check --home /path/to/existing-home
@@ -252,7 +253,7 @@ Exit codes: `0` every mapped file matches; `1` one or more files are missing/dri
 
 Installation is non-pruning. Old native folders remain discoverable in existing homes until a separately authorized retirement moves them outside **all skill discovery roots**. Inspect and preserve customized contents first; do not blanket-delete directories. Managed discovery settings leave `customDirectories` empty and disable Agents user/project skill-source discovery, but other runtime providers may exist; this is not application-wide isolation.
 
-The [migration map](docs/migration.md) distinguishes shipped hidden compatibility pointers from stale unmanaged folders. The current catalog has 37 canonical capabilities (34 visible, 3 explicit-only), 14 hidden aliases, 267 skill assets and 292 managed mappings. [Decisions and inventory](docs/capabilities.md) account for 35 current-main input capabilities plus the local `workflow-omp-health` and `ui-browser` additions. No live-home migration was performed. Retired provider roots can be recreated by external updaters; use the native skill destination.
+The [migration map](docs/migration.md) distinguishes shipped hidden compatibility pointers from stale unmanaged folders. The current catalog has 37 canonical capabilities (34 visible, 3 explicit-only), 14 hidden aliases, 269 skill assets and 294 managed mappings. [Decisions and inventory](docs/capabilities.md) account for 35 current-main input capabilities plus the local `workflow-omp-health` and `ui-browser` additions. No live-home migration was performed. Retired provider roots can be recreated by external updaters; use the native skill destination.
 
 ## Verification and known limits
 
@@ -267,10 +268,10 @@ actual setup/status behavior is a separate consuming-agent verification.
 The repository includes static configuration, installer/doctor, routing-hook,
 and disposable-home verification. Scope, receipts, historical evidence, and
 known limitations are preserved in [verification records](docs/verification.md).
-Historical results are not fresh authenticated-dispatch or Windows-installation
-proof.
+Historical results are dated evidence, not fresh authenticated-dispatch or
+blanket platform proof; later scoped receipts do not erase their limits.
 
-The compatibility record pins the latest OMP source reviewed and records the verified runtime baseline. `bun scripts/check-omp-compat.mjs` checks the current installed version offline; `bun scripts/check-omp-compat.mjs --candidate VERSION` compares tracked upstream interfaces and requires network access. `Candidate C consultation compatibility: PASS` reports `mode: known-patched` for the verified `APPEND_SYSTEM.md` path, or `mode: native-compatible` only after the append is retired and native behavior is verified. Unknown prompt text, active overrides, changed critical OMP source, or missing behavioral receipts report review/not-verified rather than guessing. Future prompt improvements flow directly from OMP; no system-template merge is needed. Before accepting an upgrade, run the compatibility check, then smoke Luna direct, Luna→slow/Sol→Luna and Plan Mode. See [verification](docs/verification.md) for this task's tested state and limits.
+The compatibility record pins the latest OMP source reviewed and records the verified runtime baseline. `bun scripts/check-omp-compat.mjs` checks the current installed version offline; `bun scripts/check-omp-compat.mjs --candidate VERSION` compares tracked upstream interfaces and requires network access. The checker reports `OMP compatibility: VERIFIED` and `Candidate C prompt: known-patched` for the verified `APPEND_SYSTEM.md` path, or `Candidate C prompt: native-compatible` only after the append is retired and native behavior is verified. Behavioral receipt `PASS` is separate from checker status. Unknown prompt text, active overrides, changed critical OMP source, or missing behavioral receipts report `REVIEW REQUIRED`, `NOT VERIFIED` or `INCOMPATIBLE` rather than guessing. Future prompt improvements flow directly from OMP; no system-template merge is needed. Before accepting an upgrade, run the compatibility check, then smoke Luna direct, Luna→slow/Sol→Luna and Plan Mode. See [verification](docs/verification.md) for tested state and limits.
 
 ## Sources, licenses, and further reading
 
@@ -278,8 +279,21 @@ Acknowledgements: this configuration adapts or references work from [Matt Pocock
 
 Full MIT and Apache-2.0 notices remain with applicable bundled skill payloads; Apache-2.0 records include attribution and modification notices. See each relevant `LICENSE*` file and source ledger for the actual association. Attribution is not endorsement or a blanket statement of redistribution rights. The [Superpowers README](https://github.com/obra/superpowers#readme) describes its upstream project; this repository contains selected locally adapted material, is not its plugin, and upstream install instructions do not install this configuration.
 
-Anti Slop is a compact UI/product-copy filter, not another design workflow. Its conditional delivery check excludes conceptual questions; Impeccable and the selective design complements retain ownership. The full MIT notice is [LICENSE.antislop](config/agent/extensions/LICENSE.antislop); selective-merge and source details are in [capabilities](docs/capabilities.md#anti-slop-compact-extension) and [provenance](config/SKILL-SOURCES.md#anti-slop-compact-extension).
+Impeccable's retained iOS/Android references derive from
+[ehmo/platform-design-skills](https://github.com/ehmo/platform-design-skills).
+Its parent [NOTICE.md](config/agent/skills/ui-design/NOTICE.md) and separately
+captured [MIT notice](config/agent/skills/ui-design/LICENSE.platform-design-skills)
+are deployed with the skill. The license-evidence pin is not the original body
+pin; [nested attribution and remaining limits](config/SKILL-SOURCES.md#impeccable-nested-platform-attribution)
+remain explicit.
+
+Anti Slop is a compact UI/product-copy filter, not another design workflow. Its conditional delivery check excludes conceptual questions; Impeccable and the selective design complements retain ownership. The full MIT notice is [LICENSE.antislop](config/agent/extensions/LICENSE.antislop); selective-merge and source details are in [capabilities](docs/capabilities.md#anti-slop-selective-merge) and [provenance](config/SKILL-SOURCES.md#retained-licensed-boundaries).
 
 No project-wide `LICENSE` was present in the inspected root listing. Historical snapshot roots had no separate LICENSE/COPYING files; unchanged snapshots and some retained third-party assets have unresolved licensing caveats. Titus material was not copied or translated because no covering grant was established. Local presence, attribution, a source URL, or a notice belonging to a different adaptation does not establish redistribution rights. Resolve exact upstream terms or exclude/rewrite material before relying on permission to redistribute it. This repository-content review is not legal advice or compliance certification.
 
-For practical skill selection see [SKILL-USAGE.md](SKILL-USAGE.md). For runtime details consult OMP's [18.6.3 agent discovery](https://github.com/can1357/oh-my-pi/blob/093275112f7adff207608673c0e33c7f3d16e27f/docs/task-agent-discovery.md) and [Plan Mode child restrictions](https://github.com/can1357/oh-my-pi/blob/093275112f7adff207608673c0e33c7f3d16e27f/packages/coding-agent/src/task/structured-subagent.ts).
+The bundled `modern-screenshot.umd.js` helper and managed RTK/Herdr extension
+bodies have unresolved exact-source or licensing metadata; they are not cleared
+by a parent package's notice or by the license of an external executable.
+See the [unresolved component boundaries](config/SKILL-SOURCES.md#unresolved-component-boundaries).
+
+For practical skill selection see [SKILL-USAGE.md](SKILL-USAGE.md). Historical OMP 18.6.3 interface references are preserved for [agent discovery](https://github.com/can1357/oh-my-pi/blob/093275112f7adff207608673c0e33c7f3d16e27f/docs/task-agent-discovery.md) and [Plan Mode child restrictions](https://github.com/can1357/oh-my-pi/blob/093275112f7adff207608673c0e33c7f3d16e27f/packages/coding-agent/src/task/structured-subagent.ts); they are not current-installed-version proof. The compatibility record and later verification receipts own current reviewed/verified baselines.

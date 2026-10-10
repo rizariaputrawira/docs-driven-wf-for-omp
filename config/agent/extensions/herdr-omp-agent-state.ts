@@ -205,19 +205,9 @@ async function drainStateQueue(): Promise<void> {
   }
 }
 
-function lastAssistantMessage(messages: unknown[]): any | undefined {
-  for (let i = messages.length - 1; i >= 0; i -= 1) {
-    const message = messages[i] as any;
-    if (message?.role === "assistant") {
-      return message;
-    }
-  }
-  return undefined;
-}
-
 function retryableErrorMessage(event: any): string | undefined {
   const messages = Array.isArray(event?.messages) ? event.messages : [];
-  const assistant = lastAssistantMessage(messages);
+  const assistant = messages.findLast(message => message?.role === "assistant");
   if (assistant?.stopReason !== "error") {
     return undefined;
   }

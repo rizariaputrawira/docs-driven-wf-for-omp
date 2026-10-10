@@ -940,7 +940,8 @@ fallback is enabled by configuration.
 
 The compatibility checker now fingerprints the exact addendum, rejects prompt
 overrides or unknown text, and requires same-version behavior receipts. It
-reports `PASS / known-patched`; it permits `native-compatible` only with a
+reports `OMP compatibility: VERIFIED` and `Candidate C prompt: known-patched`;
+behavior receipt `PASS` is separate. It permits `native-compatible` only with a
 separate reviewed receipt and no addendum. A changed tracked prompt/task/dispatch
 source returns REVIEW REQUIRED. The supported `before_agent_start` API was
 rejected for this narrow change because its return contract replaces a complete
@@ -1001,7 +1002,7 @@ active. In a separate isolated run with that override temporarily moved, it
 returned `NOT VERIFIED` for the missing Candidate C runtime receipts. Both are
 intentional fail-closed outcomes, not healthy verdicts.
 
-### NOT VERIFIED and incomplete acceptance
+### Historical OMP 18.8.6 incomplete acceptance (superseded where later receipts apply)
 
 - The first disposable profile had no default model/authentication; no provider credentials were copied into it. After the operator asked for live verification, read-only runtime probes used the existing authenticated OMP 18.8.6 profile with no model override and `--no-session`.
 - PASS under the currently installed managed `SYSTEM_TEMPLATE.md`: a clear direct calculation stayed on Luna and returned `42`; a simple implementation created only a fixture file under `/tmp` via one direct Luna write call and no worker (`artifact://122`); an unresolved snapshot/revocation/legal-hold conflict invoked exactly one native `slow` task resolved as `openai-codex/gpt-6.1-sol`, then Luna resumed and returned a bounded disposition (`artifact://119`).
@@ -1034,3 +1035,132 @@ intentional fail-closed outcomes, not healthy verdicts.
 - NOT VERIFIED: APPEND-only behavior, complete A–F runtime matrix, safe
   candidate OMP protection, and post-promotion verification. No OMP binary
   update or promotion was attempted; no `HEALTHY` verdict is claimed.
+
+## Repository discovery and documentation audit (2026-10-10)
+
+### Coverage and discovery boundary
+
+The finite filesystem inventory contains 324 regular files outside `.git`:
+272 textual documents/notices, 16 configuration or embedded-documentation data
+files, 35 implementation counterparts, and one generated `.playwright-cli`
+capture excluded from operational-document freshness. No symlinks were present.
+All 272 text documents were source-reviewed, including root guidance, all
+`docs/` records, skills, aliases, references, templates, agents, commands,
+source records and notices. The 16 data/configuration files were separately
+inspected; the font metrics corpus was structurally parsed, not remeasured.
+Relevant implementation sections and exercised tests ground the local findings.
+This is not universal runtime, external-link, upstream-synchronization or
+redistribution-rights verification.
+
+A native broad glob reproduced `[200 results limit reached]`. A narrower
+`ui-design/scripts/**/*` query found `modern-screenshot.umd.js` and other assets
+omitted from that broad result. Directory/pattern partitioning and explicit
+ranged reads closed tool-output omissions. The existing recursive catalog and
+installer/doctor implementations have no 200-result filesystem cutoff.
+The final catalog accounts for 37 canonical capabilities (34 model-visible,
+3 explicit-only), 14 aliases, 269 skill assets, 294 mappings and 40 notices.
+
+### Confirmed corrections
+
+- PowerShell omitted `Source`/`Home` parameters had become empty typed-string
+  overrides; installer/doctor now distinguish omission using bound parameters.
+  Doctor fix now passes named installer arguments rather than positional array
+  splatting. Validation still precedes destination writes.
+- The PowerShell regression fixture now copies the shared validation/profile
+  helpers and retired-name list; it also checks defaults against disposable
+  `USERPROFILE`. The POSIX runner reports `powershell.exe` availability without
+  implying it executed the separate Windows tests.
+- The catalog now requires canonical identity, capability-contract and
+  source/license/coupling rows, not arbitrary table-name presence. It checks
+  local Markdown heading references and includes root Markdown documents.
+  Tautological synthetic array/presence self-tests were removed; actual
+  disposable-file fixtures exercised the checker.
+- The health capability's missing contract/provenance rows were added.
+  Three broken Anti Slop anchors, overbroad no-bundled-tooling statements,
+  checker-status wording, PowerShell prerequisites/verification wording and
+  ambiguous historical acceptance framing were corrected. Old dated receipts
+  and historical source pins remain historical evidence.
+- Existing provenance now names unresolved modern-screenshot and RTK/Herdr
+  wrapper boundaries. Unknown terms remain UNVERIFIED, not compliant or cleared
+  by an unrelated notice. Upstream review retains its explicit blocked-adoption
+  gate and includes new/unregistered sources and incomplete discovery.
+- A primary-source check disproved the assertion that Impeccable's pinned root
+  NOTICE was absent. The unchanged notice and an immutable original-source
+  MIT LICENSE for the nested iOS/Android source are now inventoried, deployed
+  and hash-protected; README attribution and the existing ledger identify ehmo.
+  The two references match the pinned provider exports byte-for-byte.
+  The license-evidence revision does not pin the originally adapted body;
+  underlying platform-source rights remain UNVERIFIED.
+
+### Exercised verification and limits
+
+- PASS: `python3 scripts/test_install.py`, 294 mappings, disposable POSIX homes.
+- PASS: native Windows PowerShell 5.1.26100.9444,
+  `scripts/test_install.ps1` and `scripts/test_telemetry_install.ps1`. Cases
+  include default arguments, validation rejection, drift/fix/backup and
+  unrelated-byte preservation; full 294-entry deployment/check/repair, spaces
+  in home paths, telemetry opt-outs and UTF-8/UTF-16/UTF-32 profile encodings.
+  Windows-host execution was invoked through `powershell.exe` from WSL; this is
+  not a claim about Linux PowerShell or all Windows/UNC/remote-ZIP scenarios.
+- PASS: all six maintained catalog, location, configuration, tool-boundary,
+  Anti Slop and OMP-compatibility validators. Location coverage is 128 artifact
+  paths; hook results are handler contracts, not authenticated model behavior.
+- PASS: real disposable catalog fixtures reject omitted managed files, nested
+  references, unregistered/renamed/removed skills, removed notices, missing
+  identity/contract/provenance/license metadata and broken headings.
+  A new source key with UNKNOWN terms passes structural registration only:
+  the checker explicitly disclaims license compliance. No agent-adoption or
+  actual upstream-comparison behavior was inferred from this fixture.
+- PASS: 232 Markdown files inventoried by the anchor smoke, 52 internal inline
+  anchor links checked, no remaining candidates. This is an approximate
+  heading-link check, not rendered documentation or exhaustive external-URL,
+  reference-style-link or prose-path verification.
+- A POSIX ZIP-test run overlapped edits to managed health guidance and compared
+  different source snapshots; that result was invalidated and the unchanged
+  final source was rerun successfully. Initial Windows failures were reproduced
+  before their bounded corrections; the final Windows suites passed.
+
+No OMP update, dependency installation, external integration-service startup,
+real-user-home repair or unmanaged-file deletion was performed. Quick health
+remains installed compatibility/declared-destination inspection; full health
+adds relevant source/catalog/platform validation. Licensing and provider/runtime
+proof remain distinct. Outstanding exact-source/license evidence, external
+URLs, downloaded-engine behavior and authenticated model/Plan Mode behavior
+are UNVERIFIED by this audit, not silently certified.
+
+## Bounded complexity simplifications (2026-10-10)
+
+Five source-only cuts removed 31 lines across four implementation/test files:
+the redundant synthetic spawn-binding case in `test_model_routing.mjs`, the
+single-use Herdr reverse-search helper, the notice-mapping wrapper and redundant
+managed-source filter in `test_skill_catalog.mjs`, and comparison-only SHA-256
+computations in `check-omp-compat.mjs`. Last-assistant selection now uses
+`Array.findLast`; source comparison uses `Buffer.equals`. Prompt fingerprints,
+notice hashes, inventory admission and exact coverage checks remain in place.
+No dependency, configuration, inventory mapping or public entrypoint changed.
+The Herdr local modification is recorded in `config/SKILL-SOURCES.md`; its
+unresolved original provenance/licensing remains unresolved.
+
+- PASS: `node scripts/test_model_routing.mjs`, six meaningful handler cases
+  plus the retained assertion that only `tool_call` is registered. Earlier
+  seven-case receipts remain accurate historical records.
+- PASS: `bun scripts/test_omp_compat.mjs` and
+  `bun scripts/test_skill_catalog.mjs`, with 37 canonical skills, 14 aliases,
+  269 assets, 294 mappings and 40 notices.
+- PASS: a throwaway Bun smoke invoked the actual Herdr extension handlers and
+  timers against a disposable Unix-socket receiver. Eight `agent_end` cases
+  covered empty/missing/sparse entries, absent assistants, last-assistant
+  precedence, trailing user messages, retryable and nonretryable errors;
+  observed IPC states distinguished idle from retry-blocked and preserved the
+  selected error message.
+- PASS: the same smoke called `compareTrackedSources` using 18 actual localhost
+  HTTP requests: equal empty/binary bodies, differing bytes/lengths, hard/watched
+  classification and failed-response rejection. No upstream network was used.
+- PASS: a complete disposable catalog fixture passed, then rejected an omitted
+  managed extension mapping and removal of a retained notice plus its mapping.
+  The temporary smoke script and fixture were removed after verification.
+
+These are source-checker/handler and local transport observations, not
+authenticated OMP dispatch, an installed Herdr service, Windows named-pipe or
+fresh POSIX/PowerShell installer-suite verification. No user-home installation,
+external integration-service startup or unmanaged state change was performed.

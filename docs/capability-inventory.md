@@ -99,6 +99,7 @@ owner's SKILL.md for execution.
 | ui-stress-test | Requested UI edge-case stress test. | Read-only fixture proposal or authorized dev harness; no production fix. | Choose realistic fixtures and observe bounded failures. | Fixture matrix and defect report. | Frontend development harness. | ui-prototyping, ui-design. |
 | unpublished-changes | What is local/unpushed/unmerged/unreleased. | Read-only; no fetch or publication. | Inspect selected refs/baselines and separate lifecycle dimensions. | Present/absent/unknown publication-state evidence. | Git; optional GitHub evidence. | git-pr-work, git-triage. |
 | upstream-update-review | Check used/named upstreams for useful changes. | Read-only recommendations; no refresh/adoption. | Identify source pins and compare authoritative changes. | Source-linked recommendations and gaps. | Upstream source/release docs. | security-intake, agent-guidance. |
+| workflow-omp-health | Explicit installed OMP health or upgrade compatibility check. | Read-only quick/full inspection; no update, repair or dependency installation. | Quick checks installed compatibility; full reconciles source inventory and exercises relevant validators/runtime boundaries. | HEALTHY / DEGRADED / INCOMPATIBLE / NOT VERIFIED with scoped evidence and gaps. | Installed OMP; repository validators when available. | workflow-upstream-review, installer/doctor. |
 | web-motion | Build/name/suggest web motion; opt-in audit or explicit diff review. | Implementation only when authorized; reviews never approve. | Select build/opportunities/vocabulary/audit/diff-review branch. | Motion code, definitions, audit/plan or findings. | Web/browser, not Expo. | ui-design, ui-gesture-design. |
 | work-with-pr | Authorized bounded issue/change implementation and PR preparation. | No implicit branch/commit/push/publish/merge. | Define scope, implement/verify and optionally draft PR metadata. | Implementation and unpublished PR draft. | Git/GitHub project. | git-triage, code-review. |
 | writing-for-agents | Author guidance/skills or separately authorized behavior assessment. | Authoring does not grant assessment/runtime authority. | Establish consuming contract, one owner and source-loaded proof. | Guidance edits or scoped assessment. | Agent/harness guidance. | docs-engineering, workflow-upstream-review. |
@@ -139,12 +140,13 @@ unresolved provenance.
 | stitch-design-input | S6 | MIT notice LICENSE.taste. | C1 |
 | swift-development | S1 | MIT notice LICENSE.emil. | C1 |
 | tdd | S2 | LICENSE.superpowers; LICENSE.matt. | C1 |
-| ui-design | S7 | Apache-2.0 LICENSE. | C2 |
+| ui-design | S7 | Apache-2.0 LICENSE and NOTICE.md; nested MIT LICENSE.platform-design-skills, with original-body/license baseline and underlying rights UNVERIFIED. | C2 |
 | ui-browser | S8 | Original local guidance; package source details and intake limits in provenance. | C1 |
 | ui-prototyping | S1 | MIT notice LICENSE.emil. | C1 |
 | ui-stress-test | S1 | MIT notice LICENSE.emil. | C1 |
 | unpublished-changes | S5 | No imported third-party notice or inferred new grant. | C1 |
 | upstream-update-review | S5 | No imported third-party notice or inferred new grant. | C1 |
+| workflow-omp-health | S5 | Independently authored local procedure; no imported notice or inferred grant. | C1 |
 | web-motion | S1 | MIT notice LICENSE.emil. | C1 |
 | work-with-pr | S5 | No imported third-party notice or inferred new grant. | C1 |
 | writing-for-agents | S2 | LICENSE.superpowers; LICENSE.matt. | C1 |
