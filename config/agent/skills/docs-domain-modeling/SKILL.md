@@ -1,6 +1,6 @@
 ---
 name: docs-domain-modeling
-description: "Use for active terminology or relationship modeling, ambiguous domain concepts, or consequential ADR work."
+description: "[Matt Pocock] Use for active terminology or relationship modeling, ambiguous domain concepts, or consequential ADR work."
 ---
 
 # Domain Modeling

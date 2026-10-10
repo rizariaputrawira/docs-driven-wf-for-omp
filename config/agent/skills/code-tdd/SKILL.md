@@ -1,6 +1,6 @@
 ---
 name: code-tdd
-description: "Use for requested test-first development, TDD, or red-green-refactor."
+description: "[Matt+Superpowers] Use for requested test-first development, TDD, or red-green-refactor."
 ---
 
 # Test-Driven Development

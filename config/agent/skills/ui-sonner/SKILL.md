@@ -1,6 +1,6 @@
 ---
 name: ui-sonner
-description: "Guide to Sonner, the React toast library \u2014 install and wire up the Toaster, pick the right toast() call, promise and loading toasts, updating, dismissing and persisting toasts, styling, theming and icons, positioning and multiple toasters. Use when working with Sonner or troubleshooting it \u2014 toasts that don't appear, appear twice, lose their styles, ignore Tailwind classes, sit behind a modal, or don't follow dark mode. Also applies when explicitly requested as ask-sonner."
+description: "[Emil Kowalski] Set up, use, style, or troubleshoot Sonner toasts; also use when explicitly requested as ask-sonner."
 ---
 
 Modified adaptation; public metadata/routing updated locally. See [SOURCES.md](SOURCES.md)

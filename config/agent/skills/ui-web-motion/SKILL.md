@@ -1,6 +1,6 @@
 ---
 name: ui-web-motion
-description: "Build web motion, suggest opportunities, name an effect, audit/plan existing motion, or explicitly review a bounded motion diff. Select the matching mode. Not native Expo motion. Also applies when explicitly requested as animate."
+description: "[Emil Kowalski] Build or improve web motion, name an effect, or audit/plan/review existing motion; not native Expo. Also use for animate."
 ---
 
 # Web motion

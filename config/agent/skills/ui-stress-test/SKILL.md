@@ -1,6 +1,6 @@
 ---
 name: ui-stress-test
-description: "Stress-test a requested UI surface with plausible or schema-backed edge-case data. For inspection-only requests, report scoped fixture and development-harness proposals without writing a toggle or fixture. Build an authorized development-only harness only when requested or otherwise authorized, inspect rendered behavior, report observed defects and proposed fixes, and stop before production corrections unless requested. Also applies when explicitly requested as break-ui."
+description: "[Emil Kowalski] Stress-test a requested UI with plausible edge-case data; propose fixtures when inspection-only, and stop before production fixes unless requested. Also use for break-ui."
 ---
 
 Modified adaptation; public metadata/routing updated locally. See [SOURCES.md](SOURCES.md)

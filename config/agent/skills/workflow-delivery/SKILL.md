@@ -1,6 +1,6 @@
 ---
 name: workflow-delivery
-description: Use for documentation-first new applications, substantial/end-to-end delivery or authorized resume; ordinary bounded changes use native OMP workflow.
+description: "[Matt+Superpowers] Use for documentation-first new apps, substantial delivery, or authorized resume; bounded changes use native OMP."
 ---
 
 # Project Delivery

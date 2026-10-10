@@ -1,6 +1,6 @@
 ---
 name: ui-expo-motion
-description: "Build animations in React Native and Expo, making the decisions in the order that determines whether they feel right \u2014 should it animate, which thread it runs on, which properties, spring or timing, how the gesture hands off, how it degrades. Writes the implementation with Reanimated, Gesture Handler, Expo Router and expo-haptics. Use when animating anything in an Expo app, adding gestures, sheets, screen transitions, press feedback or haptics, or fixing motion that stutters on device. For web animation use `ui-web-motion`. Also applies when explicitly requested as animate-expo."
+description: "[Emil Kowalski] Build or fix animation and gestures in React Native or Expo, including sheets, transitions, press feedback, or haptics. For web motion use ui-web-motion; also use for animate-expo."
 ---
 
 Modified adaptation; public metadata/routing updated locally. See [SOURCES.md](SOURCES.md)

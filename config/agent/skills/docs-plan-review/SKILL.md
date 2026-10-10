@@ -1,6 +1,6 @@
 ---
 name: docs-plan-review
-description: Use for read-only coverage and integration review of a consequential multi-slice plan before native proposal or reapproval; trivial edits bypass it.
+description: "[Open GSD] Review consequential multi-slice plans for read-only coverage and integration before proposal or reapproval; trivial edits bypass it."
 ---
 
 # Plan Review

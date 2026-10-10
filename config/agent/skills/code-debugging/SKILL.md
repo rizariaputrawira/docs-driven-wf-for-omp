@@ -1,6 +1,6 @@
 ---
 name: code-debugging
-description: "Use for difficult bugs, flaky failures, performance regressions, or diagnosis before a root-cause fix."
+description: "[Matt+Superpowers] Diagnose difficult bugs, flaky failures, or performance regressions before a root-cause fix."
 ---
 
 # Diagnosing Bugs

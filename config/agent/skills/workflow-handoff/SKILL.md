@@ -1,6 +1,6 @@
 ---
 name: workflow-handoff
-description: Use for explicit pause/export or transfer to another harness; create a portable non-overwriting snapshot, or return proposed content only under read-only permissions.
+description: "[Open GSD] Use for explicit pause/export or transfer to another harness; create a non-overwriting snapshot or propose content under read-only permissions."
 ---
 
 # Portable Handoff

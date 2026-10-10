@@ -1,6 +1,6 @@
 ---
 name: brand-concepts
-description: "Create image-led brand-board and logo-world concepts from the supplied brief and assets. The brief controls deliverables, panel count, layout, palette and brand direction. Generation requires an available permitted image tool. Output is a visual concept, not production code, vector artwork, trademark clearance or proof of actual product features. Also applies when explicitly requested as brandkit."
+description: "[Taste] Create image-led brand-board and logo-world concepts from a supplied brief and assets; also use when explicitly requested as brandkit."
 ---
 
 Modified adaptation; public metadata/routing updated locally. See [SOURCES.md](SOURCES.md)

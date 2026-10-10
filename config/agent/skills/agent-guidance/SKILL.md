@@ -1,6 +1,6 @@
 ---
 name: agent-guidance
-description: "Use for authoring or revising agent guidance, skills, AGENTS.md, CLAUDE.md, or an authorized skill assessment."
+description: "[Matt+Superpowers] Author or revise agent guidance and skills, or conduct an authorized skill assessment."
 ---
 
 # Writing for Agents

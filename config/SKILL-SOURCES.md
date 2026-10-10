@@ -11,6 +11,29 @@ upstream authorship. Full notices accompany affected deployed packages, not only
 this non-deployed index. Per-package SOURCES.md owns exact immutable upstream paths,
 local file scope and modifications. No blanket license-compliance claim is made.
 
+## Compact picker provenance keys
+
+Selected OMP skill descriptions put these short source labels before the functional
+trigger; each label resolves to the full records and license notices below or in
+the named package record:
+
+| Picker label | Full source identity | Skills / complete lineage |
+|---|---|---|
+| `[Ponytail]` | DietrichGebert/ponytail | `code-simplicity`; the pinned revision identifies license evidence only, and the historical body revision remains unresolved. The precise boundary and MIT notice are in retained licensed boundaries below; source uncertainty is not hidden by the label. |
+| `[Matt+Superpowers]` | Matt Pocock's `mattpocock/skills` and Jesse Vincent's `obra/superpowers` | `agent-guidance`, `code-debugging`, `code-review`, `code-tdd`, `workflow-brainstorming`, `workflow-delivery`; exact paths, pinned revisions, mapped merges and MIT notices are in each skill's `SOURCES.md`. |
+| `[Matt Pocock]` | Matt Pocock's `mattpocock/skills` | `docs-domain-modeling`; exact pinned paths and MIT notice are in its `SOURCES.md`. |
+| `[Open GSD]` | Open GSD's `open-gsd/gsd-core` | `docs-engineering`, `docs-plan-review`, `workflow-delivery`, `workflow-handoff`, `workflow-handoff-read`, `workflow-retrospective`; exact path maps, pinned revision and MIT notices are in package `SOURCES.md` files. |
+| `[Emil Kowalski]` | Emil Kowalski's `emilkowalski/skills` | `swift-development`, `ui-expo-motion`, `ui-gesture-design`, `ui-library-selection`, `ui-mobile-web`, `ui-prototyping`, `ui-sonner`, `ui-stress-test`; `ui-web-motion` uses only Emil-derived `RECIPES.md`, while its core and other local references are independently authored. Exact compared source paths, revision, notices and historical-import limits are in package `SOURCES.md` files. |
+| `[Taste]` | Leonxlnx's `Leonxlnx/taste-skill` | `brand-concepts`, `ui-image-generation`, `ui-image-to-code`; exact compared source paths, revision, notices and historical-import limits are in package `SOURCES.md` files. |
+| `[Impeccable]` | Paul Bakaus's `pbakaus/impeccable` | `ui-design`; entrypoint, retained references/scripts, nested attribution and license boundaries are detailed below and in `config/agent/skills/ui-design/NOTICE.md`. |
+| `[NVIDIA]` | NVIDIA's `NVIDIA/SkillSpector` | `security-intake`; exact pinned source mapping and Apache-2.0 notice are in its `SOURCES.md`. |
+| `[Anthropic]` | Anthropic's `anthropics/claude-code-security-review` | `security-review`; exact pinned command mapping and MIT notice are in its `SOURCES.md`. |
+| `[Cloudflare]` | Cloudflare's `cloudflare/security-audit-skill` | `security-audit`; exact pinned file mapping and MIT notice are in its `SOURCES.md`. |
+
+Labels are navigation aids, not source or license claims beyond their documented
+scope. Full source URLs, revisions, merge lineage, modifications and notices remain
+in the package ledgers; picker text intentionally omits that detail.
+
 ## Emil and Taste source confirmation
 
 Compared immutable revisions were independently checked against current upstream

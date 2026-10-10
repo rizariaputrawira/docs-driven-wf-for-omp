@@ -1,6 +1,6 @@
 ---
 name: docs-engineering
-description: Use for engineering-documentation governance, resolving authoritative task context, or evidence-led engineering-document audits.
+description: "[Open GSD] Govern engineering documentation, resolve authoritative task context, or conduct evidence-led engineering-document audits."
 ---
 
 # Engineering Docs

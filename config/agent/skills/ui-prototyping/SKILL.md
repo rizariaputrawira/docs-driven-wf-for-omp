@@ -1,6 +1,6 @@
 ---
 name: ui-prototyping
-description: Explicit-only design exploration that builds distinct isolated UI variants behind a picker when implementation is requested. Inspection or planning requests remain proposals with no source writes, launcher, server, or external tool calls.
+description: "[Emil Kowalski] Explicit-only divergent UI exploration; build isolated variants behind a picker only when implementation is requested."
 disable-model-invocation: true
 ---
 

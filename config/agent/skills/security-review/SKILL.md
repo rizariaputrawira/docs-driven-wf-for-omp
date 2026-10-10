@@ -1,6 +1,6 @@
 ---
 name: security-review
-description: Use for a focused security review of a supplied diff or explicit base/head change boundary.
+description: "[Anthropic] Review security risks in a supplied diff or explicit base/head change boundary."
 ---
 
 # Security change review

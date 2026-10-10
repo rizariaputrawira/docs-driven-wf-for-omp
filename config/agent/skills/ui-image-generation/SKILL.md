@@ -1,6 +1,6 @@
 ---
 name: ui-image-generation
-description: Generate requested website-section or mobile-app screen/flow reference images with an available permitted image-generation tool. Images only, not frontend code or implementation from a screenshot.
+description: "[Taste] Generate requested website-section or mobile-app screen/flow reference images with an available permitted image-generation tool. Images only, not frontend code."
 ---
 
 # UI image generation

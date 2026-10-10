@@ -1,6 +1,6 @@
 ---
 name: workflow-brainstorming
-description: "Use before unresolved creative or behavioral design work, or for an explicit decision stress-test."
+description: "[Matt+Superpowers] Use before unresolved creative or behavioral design work, or for an explicit decision stress-test."
 ---
 
 # Brainstorming

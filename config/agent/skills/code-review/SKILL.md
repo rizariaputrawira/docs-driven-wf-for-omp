@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: "Use for requested PR, branch, WIP, working-tree or correction review of correctness, standards and spec fidelity."
+description: "[Matt+Superpowers] Review requested PR, branch, WIP, working-tree, or correction changes for correctness, standards, and spec fidelity."
 ---
 
 # Code Review

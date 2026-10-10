@@ -1,6 +1,6 @@
 ---
 name: security-audit
-description: Use only for an explicitly bounded implementation-level security audit or deep security review.
+description: "[Cloudflare] Use only for an explicitly bounded implementation-level security audit or deep security review."
 ---
 
 # Bounded source-led security audit

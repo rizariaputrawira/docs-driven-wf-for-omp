@@ -1,6 +1,6 @@
 ---
 name: security-intake
-description: Use for source-only intake of external skills, plugins, MCP bundles, or dependency adoption and updates.
+description: "[NVIDIA] Review external skills, plugins, MCP bundles, or dependency adoption and updates through source-only intake."
 ---
 
 # Security intake

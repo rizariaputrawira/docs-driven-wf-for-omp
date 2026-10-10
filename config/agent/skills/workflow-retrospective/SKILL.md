@@ -1,6 +1,6 @@
 ---
 name: workflow-retrospective
-description: "Use for a requested workflow-retrospective or evidence-grounded learning extraction from a completed session or delivered slice; recommendations do not authorize policy writes. Also applies when explicitly requested as retro."
+description: "[Open GSD] Use for a requested retrospective or evidence-grounded learning from a completed session or delivered slice; recommendations do not authorize policy writes."
 ---
 
 # Retrospective

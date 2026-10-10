@@ -6,6 +6,8 @@ Load when packaging an OMP skill or authoring skill-selection guidance. This is 
 
 Use a canonical skill directory with `SKILL.md`; supported discovery reads the one-level entrypoint metadata. Canonical frontmatter normally contains `name` and `description`; preserve justified documented exposure metadata. Tiny compatibility pointers may use `disable-model-invocation: true` after the exact runtime contract is verified. Name is the retained canonical identity. Description says when to load, not the steps, output schema or enforcement claims. Provenance/license belongs in `SOURCES.md` and actual notice files, not invented flags.
 
+Use descriptions as picker labels: put a short, recognizable provenance prefix immediately before the functional trigger, e.g. `[ponytail] Find unnecessary complexity and recommend minimal changes.` Keep the source key preferably within 20–25 characters; never trade away the purpose or invocation trigger to fit it. Use only a compact subset of verified contributing sources when needed, and leave independently authored skills untagged. Keep exact source names, URLs, merge lineage, licenses and attribution in the existing `SOURCES.md`/provenance owner. Do not add source claims from filename resemblance or uncertain historical lineage.
+
 Place conditional references/templates within that owner and link exact relative paths. Cross-skill shared guidance uses a conditional `skill://<name>/<relative-path>` pointer with the actual enabled owner and asset rather than copying its procedure. Namespace/collision handling depends on the actual OMP registry; do not create a second same-named managed variant or hard-code a package installation path.
 
 ## Real invocation and loading

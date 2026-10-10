@@ -16,6 +16,8 @@ Give an exact local relative target or enabled `skill://<name>/<relative-path>` 
 
 Co-locate a concept's definition, constraints and caveats. A long but unique document can still bury the decision; split by actual branch or sequence, not arbitrary length. A sequence split earns its place when later steps demonstrably pull attention away from a hard current completion criterion. Moving text to another heading does not create a real context boundary.
 
+When authoring or merging an OMP skill, read the picker-description and provenance convention in `skill://agent-guidance/references/omp-skill-contract.md`; that contract owns the exact rules.
+
 ## Ordered steps and observable bounds
 
 Each step states an action, required evidence and the condition that tells the actor it is finished. Replace “understand the task” with a contract such as “identify every material acceptance criterion, its source, affected consumer and missing facts.” Later “implement” text must not let the actor skip unknown requirements or approval.

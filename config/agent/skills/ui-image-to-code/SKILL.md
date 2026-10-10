@@ -1,6 +1,6 @@
 ---
 name: ui-image-to-code
-description: Analyze a supplied or permitted generated website reference and implement the requested frontend when authorized. Supplied-image analysis does not require new generation. Generate images only when requested or otherwise permitted and an available tool exists. Do not claim fidelity or build evidence without the corresponding reference and implementation.
+description: "[Taste] Analyze a supplied or permitted generated website reference and implement the requested frontend when authorized; generation is optional and permission-dependent."
 ---
 
 Modified adaptation; public metadata/routing updated locally. See [SOURCES.md](SOURCES.md)

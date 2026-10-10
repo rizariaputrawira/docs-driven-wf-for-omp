@@ -1,6 +1,6 @@
 ---
 name: ui-gesture-design
-description: "Apple's approach to interface design and fluid, physical motion, translated for the web. Use when building or reviewing gesture-driven UI, spring animations, drag/swipe/sheet interactions, momentum and interruptible transitions, translucent materials and depth, typography (optical sizing, tracking, leading), reduced-motion, or the design foundations (feedback, spatial consistency, restraint) behind Apple-style interfaces. Also applies when explicitly requested as apple-design."
+description: "[Emil Kowalski] Design or review gesture-driven web UI, spring motion, drag/swipe/sheets, reduced motion, translucent materials, or Apple-style interface foundations; also use for apple-design."
 ---
 
 Modified adaptation; public metadata/routing updated locally. See [SOURCES.md](SOURCES.md)

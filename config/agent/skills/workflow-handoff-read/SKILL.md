@@ -1,6 +1,6 @@
 ---
 name: workflow-handoff-read
-description: Use only to read/load and summarize a selected portable handoff; strictly read-only, never inspect its cited files or continue its tasks.
+description: "[Open GSD] Read and summarize one selected portable handoff only; do not inspect cited files or continue its tasks."
 ---
 
 # Read Handoff Context Only
