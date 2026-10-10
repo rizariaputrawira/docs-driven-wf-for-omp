@@ -1160,7 +1160,11 @@ unresolved original provenance/licensing remains unresolved.
   managed extension mapping and removal of a retained notice plus its mapping.
   The temporary smoke script and fixture were removed after verification.
 
-These are source-checker/handler and local transport observations, not
-authenticated OMP dispatch, an installed Herdr service, Windows named-pipe or
-fresh POSIX/PowerShell installer-suite verification. No user-home installation,
-external integration-service startup or unmanaged state change was performed.
+The later requested deployment ran `sh install.sh --home /home/personal`;
+only changed/missing managed files were installed, with backups for replaced
+Herdr and skill files. `sh scripts/doctor.sh --check --home /home/personal`
+then reported `managed summary: healthy`; existing legacy roots and unmanaged
+entries remained advisory and were preserved. This verifies the local installed
+payload against the source inventory, not OMP reload/authenticated dispatch or
+an installed Herdr service. No external integration service or unmanaged-file
+deletion was performed.
