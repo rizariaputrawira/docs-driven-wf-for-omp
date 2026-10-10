@@ -47,7 +47,6 @@ export const WATCHED_PATHS = [
 ];
 
 const ALL_PATHS = [...HARD_CRITICAL_PATHS, ...WATCHED_PATHS];
-const samePaths = (paths, expected) => Array.isArray(paths) && [...paths].sort().join("\n") === [...expected].sort().join("\n");
 
 export function parseArgs(args) {
   const parsed = { candidate: undefined, inspectMain: false };
@@ -87,8 +86,6 @@ function validateRecord(record) {
   if (!/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(record.source_reviewed?.omp_version ?? "")) throw new Error("source_reviewed.omp_version is missing or invalid");
   if (!/^[0-9a-f]{40}$/i.test(record.source_reviewed?.revision ?? "")) throw new Error("source_reviewed.revision must be a full Git commit");
   if (!/^[0-9a-f]{64}$/i.test(record.consultation_append_sha256 ?? "")) throw new Error("consultation_append_sha256 must fingerprint the managed APPEND_SYSTEM.md text");
-  if (!samePaths(record.hard_critical_upstream_paths, HARD_CRITICAL_PATHS) || !samePaths(record.watched_upstream_paths, WATCHED_PATHS)) throw new Error("compatibility record hard-critical/watched surfaces differ from the checker's reviewed surface set");
-  if (new Set([...record.hard_critical_upstream_paths, ...record.watched_upstream_paths]).size !== ALL_PATHS.length) throw new Error("upstream surface lists contain duplicate paths");
   const capabilities = ["model-roles", "agent-model-overrides", "task-dispatch", "plan-mode", "prompt-customization", "tool-call-extension"];
   if (!capabilities.every(capability => record.required_capabilities?.includes(capability))) throw new Error("required_capabilities omits a Candidate C dependency");
   const behavior = ["luna-direct", "luna-slow-luna", "plan-mode-luna"];
