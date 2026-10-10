@@ -1,4 +1,4 @@
-# OMP Config — omp-docflow
+# Aria OMP Config 
 
 Portable configuration and development guidance for [Oh My Pi (OMP)](https://github.com/can1357/oh-my-pi).
 
