@@ -6,16 +6,18 @@ This repository is a portable snapshot of OMP user-level configuration and the i
 
 ## Architecture & Data Flow
 
-`config/files.tsv` is the explicit source-to-home-relative inventory. `install.sh` and `install.ps1` validate the complete inventory and destination paths, then copy changed files into selected user homes while preserving unrelated files. `scripts/doctor.sh` and `scripts/doctor.ps1` compare those destinations; fix mode delegates to the installer and checks again. The payload is then consumed by an installed OMP runtime: settings, policy, custom agents, extensions, MCP declarations, commands, skills, and plugin metadata each retain their respective runtime roles.
+`config/files.tsv` is the explicit source-to-home-relative inventory. `install.sh` and `install.ps1` validate the complete inventory and destination paths, then copy changed files into selected user homes while preserving unrelated files. `scripts/doctor.sh` and `scripts/doctor.ps1` compare those destinations; fix mode delegates to the installer and checks again. The payload is consumed by an installed OMP runtime; this repository does not install OMP or start MCP servers or other services.
 
-The policy in `config/agent/PERSONALITY.md` distinguishes tool-heavy work from advisory/planning roles. Custom definitions live in `config/agent/agents/`; `luna-tool-boundary.js` enforces worker routing and tool boundaries. MCP credentials and local executable paths are environment-provided. Installation does not start MCP servers or other services.
+`config/agent/PERSONALITY.md` owns the working and escalation policy. Custom agents, extensions, commands, MCP declarations, and skills are under `config/agent/`; `luna-tool-boundary.js` enforces scoped extension tool-boundary behavior and does not route worker models. MCP credentials and local executable paths are environment-provided.
 
 ## Key Directories
 
-- `config/agent/`: OMP settings, policies, agents, extensions, user-invoked commands, MCP declarations, and OMP-root skills.
-- `config/skills-agents/`, `config/skills-agent/`: separate snapshots installed to `~/.agents/skills/` and `~/.agent/skills/`; keep copies distinct.
-- `config/plugins/`: package/lock metadata; `pi-9router-ext` is locked but disabled.
-- `scripts/`: doctor entry points and the POSIX integration runner.
+- `config/agent/`: OMP runtime settings, policies, agents, extensions, commands, MCP declarations, and skills.
+- `scripts/`: inventory validation, POSIX and PowerShell installer/doctor support, and integration tests.
+- `docs/`: maintained capability, verification, migration, and operational records.
+
+This repository-root `AGENTS.md` governs work in this checkout. `config/agent/AGENTS.md` is a separate managed OMP runtime policy deployed under `~/.omp/agent/`.
+`README.md` is the authoritative user-facing overview of managed paths, runtime prerequisites, supported commands, and intentionally unmanaged plugin state.
 
 ## Development Commands
 
@@ -40,17 +42,16 @@ PowerShell uses its own entry points and switches, for example `.\install.ps1 -D
 
 ## Important Files
 
-- `config/files.tsv`: deployment contract shared by installer and doctor.
-- `config/agent/config.yml`: role assignments, task overrides, approval mode, and skill discovery roots.
-- `config/agent/mcp.json`: portable GitHub and OpenDesign MCP entries; requires `GITHUB_TOKEN` and `OMP_OPEN_DESIGN_CLI`.
-- `config/agent/extensions/luna-tool-boundary.js`: worker routing and workspace-tool policy hook.
-- `config/plugins/omp-plugins.lock.json`: disabled plugin state.
-- `README.md`: supported install/doctor commands and external prerequisites.
+- `config/files.tsv`: deployment contract shared by installers and doctors.
+- `config/agent/config.yml`: runtime role assignments, task overrides, approval mode, and skill discovery configuration.
+- `config/agent/mcp.json`: portable MCP declarations and their external prerequisites.
+- `config/agent/extensions/luna-tool-boundary.js`: model/provider-dependent extension tool boundary; it is not a worker-model router.
+- `README.md`: supported deployment commands, managed paths, prerequisites, and unmanaged runtime state.
 
 ## Runtime/Tooling Preferences
 
-The deployment/test path uses POSIX `sh` and Python 3 standard library; remote ZIP installs additionally need `curl` and `unzip`. The Windows scripts target PowerShell 5.1+ and remote ZIP support uses `Invoke-WebRequest`/`Expand-Archive`. PowerShell execution is not covered by the Python runner, so Windows behavior requires platform verification. OMP, model credentials, Node/OpenDesign executables, and optional RTK/herdr services are external prerequisites. `config/plugins/bun.lock` records plugin metadata; it does not make dependency installation or a build step part of this repository's workflow.
+The POSIX deployment path uses `sh` and Python 3 standard library; remote ZIP installs additionally need `curl` and `unzip`. The Windows scripts target PowerShell 5.1+ and remote ZIP support uses `Invoke-WebRequest`/`Expand-Archive`. PowerShell execution is not covered by the POSIX Python integration runner; see `README.md` and `docs/verification.md` for platform-specific coverage and limits. OMP, model credentials, Node/OpenDesign executables, and optional RTK/herdr services are external prerequisites. The repository has no build, lint, or formatter step; do not install dependencies or activate disabled integrations for routine installer tests.
 
 ## Testing & QA
 
-`python3 scripts/test_install.py` exercises the production POSIX scripts with a complete temporary payload and home. It covers dry-run, install/check/fix, byte equality, backups, malformed or missing sources, unsafe destinations, comparison errors, and local HTTP ZIP acceptance/rejection. It reports when no PowerShell runtime is available; it does not test the `.ps1` scripts or OMP authenticated generation. Keep verification within disposable homes and do not start external services as part of installer tests.
+Run `python3 scripts/test_install.py` for POSIX installer/doctor integration. Focused checks use the repository's Bun and Node scripts under `scripts/` (including skill catalog, agent config, model routing, OMP compatibility, and documentation-location checks); see `README.md` and `docs/verification.md` for the maintained test set. PowerShell tests require `pwsh`; Linux execution is not native-Windows verification. Use disposable homes for installer/fix tests and never test against a real user home. Avoid external service startup in installer checks.
