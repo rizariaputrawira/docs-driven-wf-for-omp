@@ -67,6 +67,7 @@ const canonicalNames = new Set([
   "stitch-design-input",
   "swift-development",
   "ui-design",
+  "ui-browser",
   "ui-expo-motion",
   "ui-gesture-design",
   "ui-image-generation",

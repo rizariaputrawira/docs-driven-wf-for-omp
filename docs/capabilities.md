@@ -3,8 +3,8 @@
 Canonical public names communicate capability, not source branding. Public skills
 remain one level beneath the native skills root. Source identity, copyright and
 licenses remain separate. [Inventory](capability-inventory.md) covers every one
-of the 35 baseline input capabilities plus one local health procedure. Result:
-36 canonical capabilities (33 visible, 3 explicit-only), plus 14 hidden
+of the 35 baseline input capabilities plus two local additions. Result:
+37 canonical capabilities (34 visible, 3 explicit-only), plus 14 hidden
 compatibility pointers.
 
 ## Default communication density
@@ -116,6 +116,7 @@ Coupling is upgrade cost, not a vulnerability or removal mandate.
 | OMP compatibility record/checker | MEDIUM | KEEP small; fail closed | Exact addendum fingerprint, prompt-override detection, release/source comparison and three runtime receipts; reports known-patched/native-compatible or review-required |
 | workflow-omp-health | LOW | KEEP explicit-only | Post-deployment and post-upgrade operator entrypoint; quick/upgrade/full evidence, not an update manager or upstream-adoption review |
 | MCP declarations | MEDIUM | KEEP unchanged | Native HTTP/stdio MCP schema; parse/static prerequisites; no connection/service claim |
+| Playwright CLI and ui-browser | LOW | KEEP optional | Official globally installed WSL CLI plus managed Chromium; managed skill documents Bash invocation without MCP, upstream skill duplication or mandatory browser startup; browser proof remains separate from CLI/package presence |
 | antislop.js | MEDIUM | KEEP unchanged | before_agent_start string-array prompt contract; handler test and source API check |
 | luna-tool-boundary.js | HIGH | KEEP unchanged | tool_call plus exact live model/context assumptions; handler regression, real dispatch/Plan Mode separately |
 | rtk.ts | HIGH | KEEP optional/env-gated | Legacy Pi type-import compatibility and RTK executable protocol; source gate review, actual RTK process not exercised |
@@ -178,6 +179,7 @@ These are procedure/metadata simulations, not authenticated consumer runs.
 |---|---|---|---|
 | Use Impeccable to redesign this dashboard | ui-design; impeccable hidden pointer or description trigger | local/component-craft if relevant; marketing only actual marketing scope | Gesture/motion owners visible but only selected for matching specialist work |
 | Use ui-design to redesign this dashboard | ui-design directly | Same conditional craft reference | Same primary-owner rule |
+| Use Playwright to inspect this page's responsive layout | ui-browser | None; add ui-design only when design/audit is in scope | Ordinary Impeccable Live workflow remains separate |
 | Use animate to review this drawer transition | ui-web-motion; animate hidden pointer/description trigger | references/diff-review.md and referenced review standards | ui-design/gesture skill visible, not requested review owner |
 | Use ui-web-motion to review this drawer transition | ui-web-motion directly | Same explicit review branch | Same boundaries |
 | Use Ponytail to simplify this implementation | code-simplicity; ponytail hidden pointer/description trigger | Selected simplicity/review/audit branch only | code-review visible but correctness review not implied |
@@ -215,11 +217,13 @@ The broader historical 18.6.3 skill/discovery evidence remains historical.
 C removes persistent cells, built-in eval browser helpers, eval-defined tools and
 eval agent/workpool conveniences from the default surface. CLI help still mentions
 legacy browser/python tool names, but the checked registry has neither as a
-standalone replacement. Existing project browser automation can be run through bash
-when available; it is not proof of equivalent built-in browser capability. A task
-requiring eval can use a deliberate native session overlay (for example
-`omp --config <overlay>` with `eval.js: true`); the retained prompt policy remains.
-Do not silently enable a backend or another interpreter to bypass a denied action.
+standalone replacement. The separate optional `ui-browser` skill offers an
+explicitly invoked Playwright CLI path through Bash; it is not an eval tool,
+browser MCP server, or mandatory workflow. Existing project browser automation
+can also be run through Bash when available. A task requiring eval can use a
+deliberate native session overlay (for example `omp --config <overlay>` with
+`eval.js: true`); the retained prompt policy remains. Do not silently enable a
+backend or another interpreter to bypass a denied action.
 
 No historical eval-call telemetry was supplied or inspected. The measurable
 policy cost was one native approval requirement for every eval invocation,

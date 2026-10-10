@@ -2,8 +2,8 @@
 
 Inspected source baseline: current `main` commit `7ac5bda055f1ce27e604dde95a898b7307ac6dca` and actual one-level SKILL.md frontmatter, not historical catalog counts.
 Baseline: 35 upstream input capabilities.
-Result: 36 canonical capabilities, 33 model-visible and 3 explicit-only, including
-one local `workflow-omp-health` addition, plus 14 hidden compatibility pointers.
+Result: 37 canonical capabilities, 34 model-visible and 3 explicit-only, including
+two local additions: `workflow-omp-health` and `ui-browser`, plus 14 hidden compatibility pointers.
 
 This file owns detailed semantic inventory. [Decisions](capabilities.md) own
 dispositions; [migration](migration.md) owns old identifiers; package SOURCES.md
@@ -47,6 +47,7 @@ on one owner. See [migration](migration.md) for explicit alias classifications.
 | stitch-design-input | stitch-design-input | KEEP / Natural capability exception. | Model-visible canonical. | stitch-design-taste. |
 | swift-development | swift-development | KEEP / Natural capability exception. | Model-visible canonical. | write-swift. |
 | tdd | code-tdd | RENAME / code-. | Model-visible canonical. | tdd. |
+| local addition | ui-browser | ADD / ui-. | Model-visible canonical. | No historical alias. |
 | ui-design | ui-design | KEEP / ui-. | Model-visible canonical. | impeccable, design-taste-frontend, emil-design-eng. |
 | ui-prototyping | ui-prototyping | KEEP / ui-. | Explicit-only hidden canonical. | prototype. |
 | ui-stress-test | ui-stress-test | KEEP / ui-. | Model-visible canonical. | break-ui. |
@@ -92,6 +93,7 @@ owner's SKILL.md for execution.
 | stitch-design-input | Stitch-specific DESIGN.md input/example. | Proposal input, not canonical truth or implicit tool call. | Ground observed brief/project and author bounded example. | Labeled Stitch design input. | Google Stitch. | ui-design, brand-concepts. |
 | swift-development | Write/review/migrate Swift; concurrency/ARC/performance. | Authorized Swift work. | Apply Swift-specific ownership/concurrency/toolchain guidance. | Swift code/review and observed evidence. | Swift/Apple toolchain. | code-debugging, code-review. |
 | tdd | Explicitly requested/approved test-first development. | Opt-in RED/GREEN/refactor within scope. | Vertical behavior slices with honest failing-before evidence. | Behavior tests, implementation and observed RED/GREEN. | Project test runtime. | code-debugging, code-review. |
+| ui-browser | Browser interaction, inspection and rendered UI verification. | Relevant web task with native Bash access; optional, not automatic. | Open isolated, in-memory Chromium; inspect, interact, screenshot, diagnose and close. | Browser observations and bounded verification evidence. | WSL CLI, Playwright-managed Chromium. | ui-design, project Playwright Test suite. |
 | ui-design | Frontend design/refinement/critique/accessibility. | Request/native tools; no implicit engine or artifact generation. | Impeccable workflow and selective local supplements. | Design analysis or authorized UI implementation/audit. | Frontend/browser; optional engine. | ui-web-motion, ui-mobile-web, ui-gesture-design. |
 | ui-prototyping | Explicit divergent UI alternatives. | Hidden canonical; isolated picker only when authorized. | Select variation axes, build isolated alternatives and let user choose. | Functional variant picker or proposal. | Frontend development harness. | ui-stress-test, ui-design. |
 | ui-stress-test | Requested UI edge-case stress test. | Read-only fixture proposal or authorized dev harness; no production fix. | Choose realistic fixtures and observe bounded failures. | Fixture matrix and defect report. | Frontend development harness. | ui-prototyping, ui-design. |
@@ -138,6 +140,7 @@ unresolved provenance.
 | swift-development | S1 | MIT notice LICENSE.emil. | C1 |
 | tdd | S2 | LICENSE.superpowers; LICENSE.matt. | C1 |
 | ui-design | S7 | Apache-2.0 LICENSE. | C2 |
+| ui-browser | S8 | Original local guidance; package source details and intake limits in provenance. | C1 |
 | ui-prototyping | S1 | MIT notice LICENSE.emil. | C1 |
 | ui-stress-test | S1 | MIT notice LICENSE.emil. | C1 |
 | unpublished-changes | S5 | No imported third-party notice or inferred new grant. | C1 |
@@ -155,8 +158,10 @@ unresolved provenance.
 - **S5:** INDEPENDENTLY AUTHORED local procedure; package SOURCES when present.
 - **S6:** Leonxlnx/taste-skill@ce26fc25c0e5e8cab638f883de62d9a86ee5e45b; SOURCE UNCERTAIN, candidate notice only; see package SOURCES.md.
 - **S7:** pbakaus/impeccable@508d7e8955de3b3caf2d8676e85206723d41a887; adapted SKILL and separate independent local references.
+- **S8:** Microsoft `@playwright/cli@0.1.22`, npm license Apache-2.0, repository `microsoft/playwright-cli`; installed for the local WSL user. No upstream skill text is redistributed; see [source and security intake](../config/SKILL-SOURCES.md#playwright-cli).
 
 ### Coupling keys
 
 - **C1:** LOW: flat SKILL.md/reference, metadata, native URI/command/filter contract.
 - **C2:** MEDIUM: optional Impeccable engine/launcher; passive procedure LOW.
+- **C3:** LOW: optional globally installed CLI/browser binaries; `ui-browser` is passive OMP skill metadata and guidance.

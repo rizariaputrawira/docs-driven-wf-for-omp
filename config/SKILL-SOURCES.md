@@ -88,6 +88,33 @@ mechanisms, not imported upstream engines. Original UI component/marketing local
 supplements and current motion core/review/audit references remain separately
 identified local material. They are not represented as Impeccable-owned assets.
 
+## Playwright CLI
+
+Microsoft's official npm package `@playwright/cli@0.1.22` was installed globally
+for this WSL user from the npm registry. Metadata identifies repository
+`microsoft/playwright-cli`, Apache-2.0, and `playwright` /
+`playwright-core@1.64.0-alpha-1790635538000`; Playwright's managed Chromium
+155.0.8059.12 (revision 1247), headless shell and FFmpeg were downloaded by the
+official CLI to `~/.cache/ms-playwright`. Node.js v24.20.0 satisfies the official
+CLI documentation's Node.js 20+ requirement. Inspected local package manifest,
+CLI entrypoint, skill-check helper, README, bundled skill and session reference.
+The upstream skill's storage-state, cookie, attach and page-provided tool
+procedures are not adopted; `ui-browser` is independently authored for OMP and
+keeps those operations out of ordinary browser work. The CLI entrypoint makes a
+daily request to `https://registry.npmjs.org/@playwright/cli/latest` unless
+`NO_UPDATE_NOTIFIER` or `CI` is set; OMP guidance uses `NO_UPDATE_NOTIFIER=1`.
+Remaining intake limits: transitive Playwright runtime implementation and
+dependency source were not exhaustively audited, and their package signatures,
+build provenance and runtime behavior are not certified. This records local
+package/source evidence, not a safety certification or runtime proof.
+
+Source documentation: [installation](https://playwright.dev/agent-cli/installation),
+[configuration](https://playwright.dev/agent-cli/configuration),
+[command reference](https://playwright.dev/agent-cli/capabilities), and
+[skills](https://playwright.dev/agent-cli/skills). Upstream skill is available in
+the installed package at `node_modules/playwright-core/lib/tools/skills/playwright-cli/SKILL.md`;
+it is not copied into this repository or installed into OMP's managed root.
+
 Titus 3b752711dabebdc5f3762555d23fd75fc1c9eb92 has no established reuse grant;
 only independently expressed ownership/frontier ideas are retained, no copied
 prose/templates. Pi shortlist packages are bounded research/rejection evidence,
@@ -95,9 +122,12 @@ not adopted bodies. Engineering-docs SOURCES records those decisions and version
 ISO-informed catalog/templates are original engineering information, not copied
 normative clauses, certification or a conformity claim.
 
-No imported executable/scanner, dependency, service, provider directive, new plugin
-or dispatcher is adopted. Existing Impeccable optional engine/launcher remains part
-of its pinned package; no engine download or execution was performed for this task.
+No third-party runtime or browser tooling is bundled into this repository.
+The Playwright CLI is an optional user-installed WSL tool, not an OMP
+dependency; this limited source intake does not inspect every transitive
+runtime component or grant it OS containment. Existing Impeccable optional
+engine/launcher remains part of its pinned package; no engine download or
+execution was performed for this task.
 
 ## Deployment and update ownership
 

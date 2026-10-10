@@ -136,6 +136,7 @@ config/agent/skills/swift-development/LICENSE.emil	.omp/agent/skills/swift-devel
 config/agent/skills/swift-development/SKILL.md	.omp/agent/skills/swift-development/SKILL.md
 config/agent/skills/swift-development/SOURCES.md	.omp/agent/skills/swift-development/SOURCES.md
 config/agent/skills/tdd/SKILL.md	.omp/agent/skills/tdd/SKILL.md
+config/agent/skills/ui-browser/SKILL.md	.omp/agent/skills/ui-browser/SKILL.md
 config/agent/skills/ui-design/LICENSE	.omp/agent/skills/ui-design/LICENSE
 config/agent/skills/ui-design/SKILL.md	.omp/agent/skills/ui-design/SKILL.md
 config/agent/skills/ui-design/agents/impeccable_asset_producer.toml	.omp/agent/skills/ui-design/agents/impeccable_asset_producer.toml

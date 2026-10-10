@@ -89,6 +89,8 @@ After init writes PRODUCT.md, resume without rerunning `impeccable context`; ini
 
 **Never repair drift as a side effect of a design task.** A `CONTEXT_STALE` finding is reported, not acted on, unless the user asks. The one exception is a finding marked `auto`, which the next write to that file performs anyway.
 
+When a web task needs actual browser interaction or rendered-page evidence, load `skill://ui-browser`; it supplements this Impeccable workflow and never replaces Live's helper/session protocol.
+
 ## Local selective references
 
 Load [component craft](reference/local/component-craft.md) only for focused component detail. Load [marketing-site guidance](reference/local/marketing-sites.md) only for landing pages, portfolios, or marketing redesigns. Both are local, independently authored supplements; neither replaces this workflow or becomes a mandatory checklist. Motion details remain in `skill://ui-web-motion`.

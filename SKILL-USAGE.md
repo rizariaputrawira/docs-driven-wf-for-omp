@@ -12,6 +12,7 @@ retain native authority boundaries. [Decisions](docs/capabilities.md),
 | Family | Choose for | Canonical skills |
 |---|---|---|
 | ui- | Interface design, motion, mobile-web behavior and UI reference assets | [ui-design](config/agent/skills/ui-design/SKILL.md), [ui-expo-motion](config/agent/skills/ui-expo-motion/SKILL.md), [ui-gesture-design](config/agent/skills/ui-gesture-design/SKILL.md), [ui-image-generation](config/agent/skills/ui-image-generation/SKILL.md), [ui-image-to-code](config/agent/skills/ui-image-to-code/SKILL.md), [ui-library-selection](config/agent/skills/ui-library-selection/SKILL.md), [ui-mobile-web](config/agent/skills/ui-mobile-web/SKILL.md), [ui-prototyping](config/agent/skills/ui-prototyping/SKILL.md), [ui-sonner](config/agent/skills/ui-sonner/SKILL.md), [ui-stress-test](config/agent/skills/ui-stress-test/SKILL.md), [ui-web-motion](config/agent/skills/ui-web-motion/SKILL.md) |
+| browser and UI automation | Use only when a real browser is useful for interaction, rendered-page evidence, or responsive checks | [ui-browser](config/agent/skills/ui-browser/SKILL.md), alongside [ui-design](config/agent/skills/ui-design/SKILL.md) when UI design/audit owns the task |
 | code- | Implementation correctness, diagnosis, behavior tests and complexity | [code-debugging](config/agent/skills/code-debugging/SKILL.md), [code-review](config/agent/skills/code-review/SKILL.md), [code-simplicity](config/agent/skills/code-simplicity/SKILL.md), [code-tdd](config/agent/skills/code-tdd/SKILL.md) |
 | docs- | Engineering information and evidence-led model/plan review | [docs-domain-modeling](config/agent/skills/docs-domain-modeling/SKILL.md), [docs-engineering](config/agent/skills/docs-engineering/SKILL.md), [docs-plan-review](config/agent/skills/docs-plan-review/SKILL.md) |
 | workflow- | Task decision, delivery and installed OMP health | [workflow-brainstorming](config/agent/skills/workflow-brainstorming/SKILL.md), [workflow-delivery](config/agent/skills/workflow-delivery/SKILL.md), [workflow-handoff](config/agent/skills/workflow-handoff/SKILL.md), [workflow-handoff-read](config/agent/skills/workflow-handoff-read/SKILL.md), [workflow-omp-health](config/agent/skills/workflow-omp-health/SKILL.md), [workflow-retrospective](config/agent/skills/workflow-retrospective/SKILL.md), [workflow-upstream-review](config/agent/skills/workflow-upstream-review/SKILL.md) |
@@ -32,6 +33,8 @@ for broader brand-board/logo-world concepts.
   lifecycle or explicit diff review. Review-only requests stay read-only; a request
   to review and fix includes implementation. `ui-expo-motion` owns Expo/RN,
   `ui-mobile-web` owns browser/PWA, not native apps.
+
+- `ui-browser` supplies optional CLI-based browser interaction and rendered verification; it does not replace Impeccable Live, Playwright Test suites, or native tool permissions.
 - `ui-image-generation` generates requested images only, selecting web or mobile
   procedure lazily. `ui-image-to-code` implements a supplied/authorized reference.
   Tool availability and actual image output are required, not assumed.
@@ -67,5 +70,5 @@ and does not join normal model skill selection. In interactive OMP, invoke
 `/skill:workflow-omp-health [quick|upgrade|full]`.
 Family filters still apply; do not bypass a filter by direct file loading.
 
-Current catalog: 36 canonical capabilities (35 from current main plus local `workflow-omp-health`; 33 model-visible, 3 explicit-only), 14 hidden compatibility pointers, 266 skill assets and 292 managed mappings. Counts are not authenticated routing proof.
+Current catalog: 37 canonical capabilities (35 from current main plus local `workflow-omp-health` and `ui-browser`; 34 model-visible, 3 explicit-only), 14 hidden compatibility pointers, 267 skill assets and 292 managed mappings. Counts are not authenticated routing proof.
 After an omp-docflow install/update use `/skill:workflow-omp-health quick`; after an OMP version change use `/skill:workflow-omp-health upgrade`; use `/skill:workflow-omp-health full` only for explicit deeper checks or unresolved evidence.

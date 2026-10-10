@@ -13,6 +13,7 @@ Write guidance that the actual consuming agent can discover, follow and finish w
 2. Read existing guidance and its canonical owner, relevant code/config/help evidence, and the affected invocation paths. Find duplicate/conflicting rules and material source gaps before adding another instruction layer.
 3. Decide whether the need is universal ordered procedure, an on-demand branch, a project convention or shared reference. Extend the owner rather than create aliases/router engines for the same behavior. A new independent skill earns its context cost only with a genuinely distinct trigger and permission contract.
 
+4. For new capabilities, update the one-level skill catalog, explicit deployment inventory, provenance/licensing record, and current capability owner; use a managed OMP entrypoint rather than assuming upstream skill installers satisfy OMP discovery.
 When authoring instructions, load [authoring](references/authoring.md). When the asset is an OMP skill or routing pointer, also load [OMP skill contract](references/omp-skill-contract.md). When **behavioral assessment is separately authorized**, load [behavioral assessment](references/behavioral-assessment.md); authoring authority alone does not permit spawning/executing test actors.
 
 ## Write and prune

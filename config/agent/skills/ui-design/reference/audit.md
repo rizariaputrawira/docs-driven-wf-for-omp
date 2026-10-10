@@ -2,6 +2,8 @@ Run systematic **technical** quality checks and generate a comprehensive report.
 
 This is a code-level audit, not a design critique. Check what's measurable and verifiable in the implementation.
 
+Use `skill://ui-browser` when a specific check needs rendered-page inspection, responsive viewport evidence, or interactive browser behavior; source review and the bundled detector remain part of the audit.
+
 **Web only.** Native platforms (`ios` / `android` / `adaptive`) route to [audit.native.md](audit.native.md) instead; if the project is native, switch to it now.
 
 ## Diagnostic Scan
