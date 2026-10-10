@@ -20,8 +20,12 @@ sh install.sh --dry-run
 sh install.sh
 ```
 
-Windows PowerShell (beta; the telemetry/profile changes still require
-PowerShell runtime verification—see [requirements](#requirements-and-prerequisites)):
+Windows PowerShell is beta; Windows 5.1 and native-Windows verification remain
+incomplete. The normalized-key inventory defect is repaired in source and
+passed isolated PowerShell 7.6.6 testing on Linux; this is not Windows
+verification (see [requirements](#requirements-and-prerequisites) and
+[verification records](docs/verification.md)):
+
 
 ```powershell
 .\install.ps1 -DryRun
@@ -134,7 +138,7 @@ Example OMP requests:
 - Install OMP separately using its [official installation choices](https://github.com/can1357/oh-my-pi#install). Authenticate with `omp login openai-codex` or `/login openai-codex` inside OMP. A generic OpenAI API key does not automatically authenticate the separate provider. See [OMP provider documentation](https://github.com/can1357/oh-my-pi/blob/main/docs/providers.md).
 - Configured model identifiers are `gpt-6.1-sol` and `gpt-6-luna`; account/provider availability is not established here. Select supported models in your own settings if needed.
 - POSIX installation requires `sh`, `awk`, `dirname`, `mkdir`, `rm`, `cp`, `cmp`, `mktemp` and `date`. Remote ZIP additionally requires `curl` and `unzip`.
-- Windows installer is beta and requires PowerShell 5.1+; remote ZIP uses `Invoke-WebRequest` and `Expand-Archive`. Normalized-key inventory lookup is repaired in source; PowerShell runtime verification is unavailable for the new telemetry/profile changes. Windows PowerShell 5.1 and native-Windows behavior remain unverified; historical evidence is in [verification records](docs/verification.md).
+- Windows installer is beta and requires PowerShell 5.1+; remote ZIP uses `Invoke-WebRequest` and `Expand-Archive`. Normalized inventory required-key lookup passed isolated PowerShell 7.6.6 testing on Linux; Windows PowerShell 5.1 and native-Windows behavior remain unverified. Details and evidence are in [verification records](docs/verification.md).
 - Third-party software and credentials are not bundled. Installation starts no services. Every installed file is inventoried.
 
 ### Optional integrations and capabilities
@@ -270,11 +274,11 @@ The compatibility record pins the latest OMP source reviewed and records the ver
 
 ## Sources, licenses, and further reading
 
-Acknowledgements: this configuration adapts or references work from [Matt Pocock's skills](https://github.com/mattpocock/skills), [Superpowers](https://github.com/obra/superpowers), [GSD](https://github.com/open-gsd/gsd-core), [NVIDIA SkillSpector](https://github.com/NVIDIA/SkillSpector), [Anthropic Security Review](https://github.com/anthropics/claude-code-security-review), [Cloudflare Security Audit](https://github.com/cloudflare/security-audit-skill), Impeccable and Ponytail. Exact sources, revisions, adaptations, attribution and notice mappings are documented in [skill payload provenance](config/SKILL-SOURCES.md) and each adapted skill's `SOURCES.md`.
+Acknowledgements: this configuration adapts or references work from [Matt Pocock's skills](https://github.com/mattpocock/skills), [Superpowers](https://github.com/obra/superpowers), [GSD](https://github.com/open-gsd/gsd-core), [NVIDIA SkillSpector](https://github.com/NVIDIA/SkillSpector), [Anthropic Security Review](https://github.com/anthropics/claude-code-security-review), [Cloudflare Security Audit](https://github.com/cloudflare/security-audit-skill), Impeccable and Ponytail. Cursor Team Kit's Thermo-Nuclear Code Quality Review is an independently expressed reference for selected concepts, not bundled code or copied skill text. Exact sources, revisions, adaptations, attribution and notice mappings are documented in [skill payload provenance](config/SKILL-SOURCES.md) and each adapted skill's `SOURCES.md`.
 
-Full MIT and Apache-2.0 notices remain with the applicable bundled skill payloads; Apache-2.0 records include attribution and modification notices. See each relevant `LICENSE*` file and source ledger for the actual association. Attribution is not endorsement or a blanket statement of redistribution rights. The [Superpowers README](https://github.com/obra/superpowers#readme) describes its upstream project; this repository contains selected locally adapted material, is not its plugin, and upstream install instructions do not install this configuration.
+Full MIT and Apache-2.0 notices remain with applicable bundled skill payloads; Apache-2.0 records include attribution and modification notices. See each relevant `LICENSE*` file and source ledger for the actual association. Attribution is not endorsement or a blanket statement of redistribution rights. The [Superpowers README](https://github.com/obra/superpowers#readme) describes its upstream project; this repository contains selected locally adapted material, is not its plugin, and upstream install instructions do not install this configuration.
 
-Anti Slop is a compact UI/product-copy filter, not another design workflow. Its conditional delivery check excludes conceptual questions; Impeccable and the selective design complements retain ownership. The full MIT notice is [LICENSE.antislop](config/agent/extensions/LICENSE.antislop); selective-merge and source details are in [capabilities](docs/capabilities.md#anti-slop-selective-merge) and [provenance](config/SKILL-SOURCES.md#anti-slop-compact-extension).
+Anti Slop is a compact UI/product-copy filter, not another design workflow. Its conditional delivery check excludes conceptual questions; Impeccable and the selective design complements retain ownership. The full MIT notice is [LICENSE.antislop](config/agent/extensions/LICENSE.antislop); selective-merge and source details are in [capabilities](docs/capabilities.md#anti-slop-compact-extension) and [provenance](config/SKILL-SOURCES.md#anti-slop-compact-extension).
 
 No project-wide `LICENSE` was present in the inspected root listing. Historical snapshot roots had no separate LICENSE/COPYING files; unchanged snapshots and some retained third-party assets have unresolved licensing caveats. Titus material was not copied or translated because no covering grant was established. Local presence, attribution, a source URL, or a notice belonging to a different adaptation does not establish redistribution rights. Resolve exact upstream terms or exclude/rewrite material before relying on permission to redistribute it. This repository-content review is not legal advice or compliance certification.
 

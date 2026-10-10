@@ -122,6 +122,21 @@ not adopted bodies. Engineering-docs SOURCES records those decisions and version
 ISO-informed catalog/templates are original engineering information, not copied
 normative clauses, certification or a conformity claim.
 
+## Cursor Thermo-Nuclear Code Quality Review (independent reference)
+
+Reviewed [Cursor Team Kit's skill](https://github.com/cursor/plugins/blob/d73344bee8cf22e53b9d5f4cf5749d38ba38c174/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md)
+at `d73344bee8cf22e53b9d5f4cf5749d38ba38c174`. The repository's
+[MIT license](https://github.com/cursor/plugins/blob/d73344bee8cf22e53b9d5f4cf5749d38ba38c174/cursor-team-kit/LICENSE)
+identifies Copyright (c) 2026 Cursor. The local complexity-review reference
+independently expresses selected review concepts; no Cursor source text or
+substantial expression is copied, and no Cursor code/skill or license file is
+bundled. Accepted concepts are evidence-based scrutiny of branching/state
+growth, ownership/boundary cohesion, contract clarity, redundancy, and
+behavior-preserving structural simplification. Rigid line thresholds,
+presumptive blockers, mandatory decomposition, and unconditional abstraction,
+parallelism, or atomicity prescriptions were not adopted.
+This does not state an endorsement or a license/compliance determination.
+
 No third-party runtime or browser tooling is bundled into this repository.
 The Playwright CLI is an optional user-installed WSL tool, not an OMP
 dependency; this limited source intake does not inspect every transitive

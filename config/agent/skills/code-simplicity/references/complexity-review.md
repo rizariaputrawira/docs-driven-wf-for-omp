@@ -8,11 +8,23 @@ Require a supplied or discovered actual diff/base-head boundary. Inspect its cha
 
 Anchor each finding to the actual changed file/line: `file:Lline: tag what can be cut; replacement and reason`. Follow the requested output format. Possible line reductions must be supported by a concrete replacement; unknown totals remain unknown. No useful cuts is a valid lean result.
 
+## Structural maintainability standard
+
+Review the changed structure, not a checklist of smells. Look for demonstrated growth in conditional/state complexity, scattered flags or special cases, unnecessary wrappers/layers, duplicated logic where a canonical helper exists, misplaced responsibility or boundary leakage, unclear ownership, and weakened type/contracts that obscure real invariants. Also ask whether a materially smaller behavior-preserving design is apparent and whether a refactor merely relocates the same concepts.
+
+Treat these as investigation prompts, not automatic findings. A proposed abstraction, module split, state machine, typed model, parallel flow, or atomic update must have a concrete benefit in this code and preserve its actual requirements. Do not demand one because it is fashionable. A large cohesive file is not a defect by line count; size can prompt closer inspection, but extraction needs an independent cohesion/readability benefit. Preserve validation, errors, security, accessibility, data-integrity guarantees, and required behavior.
+
+For each consequential finding, state the exact changed source location, observed structural problem, concrete maintainability consequence, and a simpler implementation or ownership model with why it improves the design. Identify relevant behavior-preservation and regression checks; do not imply they were run unless observed. Distinguish a demonstrated **material maintainability regression** from a **simplification opportunity** that is beneficial but not required for correctness. Avoid speculative, cosmetic, arbitrary-abstraction, and refactoring-for-its-own-sake advice. A clean review with no actionable findings is valid.
+
+This remains a report-only structural review. Correctness/specification, security, and implementation authorization retain their separate owners; maintainability suggestions are not correctness blockers.
+
 ## Audit: explicit repository boundary
 
-Sweep the requested repository or named subtree, not a guessed whole checkout. Inspect dependencies, native/stdlib overlap, single-use abstractions, delegation-only wrappers, dead flags/config and speculative flexibility. Confirm consumers before declaring code dead. A one-export file or single-implementation interface is a candidate, not automatic proof it should disappear.
+Establish coverage before searching. For a Git checkout, inventory the complete tracked-file set (`git ls-files`) and identify relevant untracked, non-ignored files in scope; otherwise enumerate the requested tree completely. Use the inventory as a path checklist, not a prompt to load every file. State the boundary, inventory basis, included/excluded areas and any untracked/generated/vendor exclusions.
 
-Rank grounded cuts by impact with source paths, replacement and reason. Give possible line/dependency reductions only where supported; do not convert estimates into measurements. Report coverage and unknown totals. Apply nothing.
+Partition the inventory into bounded path groups. Search each group for likely dependencies, definitions, callers/references, configuration/manifest entries and tests; inspect candidate implementations and their consumers in context. Verify all relevant import, dynamic lookup, registration and external-contract paths before recommending removal, merging or consolidation. Use complete file lists plus targeted searches rather than broad, result-limited Glob output. If search output truncates, partition or paginate until the relevant group is complete; missing/truncated output is unknown, never evidence of absence. For any claim that something is unused, dead or globally absent, coverage of all relevant paths and reference forms is required.
+
+Only rank a cut after its evidence and replacement are grounded; otherwise record the candidate as unresolved, not a finding. Report coverage by the inventory groups actually examined and identify remaining gaps. A repository-wide clean conclusion is valid only when the relevant scope is complete; if not, limit the conclusion to inspected areas and state that repository-wide coverage is incomplete. Rank grounded cuts by impact with source paths, replacement and reason. Give possible line/dependency reductions only where supported; do not convert estimates into measurements. Apply nothing.
 
 ## Shared tags and boundaries
 

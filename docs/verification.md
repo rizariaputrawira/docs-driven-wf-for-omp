@@ -710,10 +710,18 @@ node scripts/test_antislop.mjs
 python3 scripts/test_install.py
 ```
 
+The Python installer runner above exercises the POSIX production scripts and
+is not PowerShell coverage. The PowerShell regression is
+`pwsh -NoProfile -File scripts/test_install.ps1`; it has passed with isolated
+PowerShell 7.6.6 on Linux, but that does not substitute for Windows PowerShell
+5.1 or native-Windows execution.
+
 | Exercised check | Outcome / evidence boundary |
 |---|---|
+| Isolated PowerShell production smoke (PowerShell 7.6.6 on Linux) | PASS: disposable-home dry-run/install/check/reinstall/drift-detection/fix across all 282 mappings; identical reinstall created no backups, drift backup preserved exact bytes, unrelated content was preserved. Artifact: `/tmp/omp-config-audit-smoke-uogw387t/powershell-transcript.json`. Not Windows runtime evidence. |
+| `pwsh -NoProfile -File scripts/test_install.ps1` | PASS: isolated PowerShell 7.6.6 on Linux; forward-slash dry-run/install/doctor-check/fix, byte and unrelated-content preservation, drift backup, and missing required mapping rejected by installer and doctor before writes. Does not establish Windows 5.1 behavior. |
 | `omp --version`, `omp --help`, `npm view @oh-my-pi/pi-coding-agent version repository --json` | Installed and published package both 18.6.3; official latest/tag source independently checked. No update performed. |
-| `python3 scripts/test_install.py` | PASS: production POSIX installer/doctor integration for 282 mappings, including dry-run, equality/backups, unsafe/missing inventory and local HTTP ZIP cases. Neither pwsh nor Windows PowerShell available. |
+| `python3 scripts/test_install.py` | PASS: production POSIX installer/doctor integration for 282 mappings, including dry-run, equality/backups, unsafe/missing inventory and local HTTP ZIP cases. Neither pwsh nor Windows PowerShell available for these historical checks. |
 | `bun scripts/test_skill_catalog.mjs` | PASS: 35 canonical capabilities (33 visible, 2 explicit-only), 14 hidden aliases, 263 exactly mapped assets, 282 mappings, 38 notices; all full URI/relative targets resolve, flat names/exposure/tiny pointer destinations valid, retained notice hashes unchanged. |
 | `bun scripts/test_agent_config.mjs` | PASS: Sol-medium main/plan, seven role selectors/definitions, maxConcurrency 3, maxRecursionDepth 1 and 16 negative cases. Static configuration, not authenticated dispatch. |
 | `node scripts/test_model_routing.mjs` | PASS: seven named tool-boundary handler cases; not OS containment or actual agent-session loading. |
@@ -726,6 +734,20 @@ python3 scripts/test_install.py
 | Emil/Taste file comparison | 19 baseline pairs: six byte-identical, eleven modified/adapted with substantial matching expression, two Stitch files source-uncertain. Comparison pins are not historical import commits. |
 | Inventory presentation simplification | 36 baseline records and all 15 fields retained through contract tables, proven folder formulas and shared source/coupling keys; 661 → 162 lines. No procedure, notice or runtime mechanism removed. |
 | Pre-publication smoke | PASS: fresh disposable dry-run/install/doctor check preserved unrelated content; OMP 18.6.3 discovered 49 identities (33 visible, 16 hidden, no warnings), and native ui-design/impeccable reads passed. Transcript: `/tmp/docflow-publish-smoke-ntu061zi/transcript.json`. All five repository checks above rerun and passed. |
+
+## Current audit record (2026-10-06)
+
+
+Broad source-fidelity review found no confirmed current model-selection or
+routing defect. The normalized required-inventory-key lookup is repaired and
+passed isolated PowerShell 7.6.6 Linux production smoke and regression testing;
+Windows PowerShell 5.1/native-Windows execution remains unverified. The
+historical spawn-routing failure is not current; native role settings own model selection.
+
+The five repository gates passed after repairs. OMP 18.6.3 native discovery
+found 49 identities (33 visible, 16 hidden), zero warnings; all 49 URI reads
+passed. Authenticated dispatch and model obedience remain unverified.
+
 
 ## Static OMP interface evidence
 
@@ -788,9 +810,7 @@ authenticated worker dispatch and whole-session extension loading are not inferr
   Herdr socket/pane reporting, MCP connection/tool discovery, Impeccable optional
   engine and image-generation tools are not implied by declarations/source review.
   No external service or generator was started.
-- Windows PowerShell 5.1 historically rejected inventory required-entry lookup after
-  slash conversion. The defect remains separately recorded, not silently fixed.
-  No successful current Windows installation is claimed.
+- Windows PowerShell 5.1 historically rejected inventory required-entry lookup after slash conversion. The source lookup is repaired; isolated PowerShell 7.6.6 Linux production smoke and regression passed. Windows PowerShell 5.1 and native-Windows execution remain unverified; no Windows installation pass is claimed. The regression command is `pwsh -NoProfile -File scripts/test_install.ps1` and is distinct from the POSIX integration runner.
 - Source import revisions remain unknown for confirmed Emil/Taste adaptations.
   Ponytail body revision remains unknown. Stitch source lineage/covering grant
   remains unresolved despite conservative candidate notice placement.

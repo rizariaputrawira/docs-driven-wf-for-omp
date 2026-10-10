@@ -23,7 +23,7 @@ For deep invalid-data/call-chain failures load [root-cause tracing](references/r
 
 ## Performance branch
 
-Define the user-relevant slow operation/workload and available baseline. Use actual authorized timing/profile/query-plan evidence to locate the bottleneck before optimizing. Compare equivalent inputs and change one causal element. Source suspicion is not a measured bottleneck; report unmeasured costs and unavailable environment facts honestly. Do not fabricate elapsed times or speedups.
+Define the user-relevant slow operation/workload and available baseline. Use actual authorized timing/profile/query-plan evidence to locate the bottleneck before optimizing. Compare representative, equivalent inputs and change one causal element. Before trusting a comparison, confirm the measured work completed and its outputs/errors are valid; compare production-relevant settings and include end-to-end impact when a microbenchmark informs a user-facing choice. Repeat and alternate measurements when needed to distinguish a real difference from run-to-run variation; report run count, observed spread and material environmental limits. A quick estimate may use one run if clearly labeled and not used to choose between options. No fixed run count or statistical test is required. Source suspicion is not a measured bottleneck; report unmeasured costs and unavailable environment facts honestly. Do not fabricate elapsed times or speedups.
 
 ## Root correction and evidence
 
