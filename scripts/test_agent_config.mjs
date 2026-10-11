@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 
 const configPath = "config/agent/config.yml";
 const agentDir = "config/agent/agents";
@@ -48,6 +48,10 @@ function validate(config, definitions) {
   assert.equal(config.eval?.py, false, `${configPath}: Python eval disabled by default`);
   assert.equal(config.eval?.js, false, `${configPath}: JavaScript eval disabled by default`);
   assert.equal(config.tools?.approval?.eval, "prompt", `${configPath}: opt-in eval safety policy`);
+  for (const key of ["enabled", "ultrathink", "orchestrate", "workflow", "jevify"]) {
+    const value = config.magicKeywords?.[key];
+    assert.ok(value === undefined || value === true, `${configPath}: native keyword ${key} available`);
+  }
   for (const tool of ["read", "grep", "glob", "edit", "write", "bash", "lsp", "task", "wait", "todo", "web_search"]) {
     const policy = config.tools?.approval?.[tool];
     assert.ok(policy === undefined || policy === "allow", `${configPath}: ordinary ${tool} approval`);
@@ -152,6 +156,14 @@ rejects("ordinary approval mode", (cfg) => { cfg.tools.approvalMode = "write"; }
 rejects("Python eval exposed", (cfg) => { cfg.eval.py = true; }, /Python eval disabled/);
 rejects("JavaScript eval exposed", (cfg) => { cfg.eval.js = true; }, /JavaScript eval disabled/);
 rejects("eval escape unprompted", (cfg) => { cfg.tools.approval.eval = "allow"; }, /opt-in eval safety policy/);
+for (const key of ["enabled", "ultrathink", "orchestrate", "workflow", "jevify"]) {
+  const enabled = structuredClone(config);
+  enabled.magicKeywords = { ...enabled.magicKeywords, [key]: true };
+  validate(enabled, definitions);
+  rejects(`native keyword ${key} disabled`, (cfg) => {
+    cfg.magicKeywords = { ...cfg.magicKeywords, [key]: false };
+  }, new RegExp(`native keyword ${key} available`));
+}
 rejects("ordinary tool prompted", (cfg) => { cfg.tools.approval.bash = "prompt"; }, /ordinary bash approval/);
 rejects("force push unprotected", (cfg) => {
   cfg.bash.patterns = cfg.bash.patterns.filter(rule => !rule.match.includes("push"));

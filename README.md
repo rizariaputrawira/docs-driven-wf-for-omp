@@ -271,6 +271,29 @@ Detailed procedures: [delivery](config/agent/skills/workflow-delivery/SKILL.md),
 [plan review](config/agent/skills/docs-plan-review/SKILL.md), and
 [standards applicability](config/agent/skills/docs-engineering/references/standards.md).
 
+### Native keyword activation
+
+Native `ultrathink`, `orchestrate`, `workflowz` and `jevify` remain available
+through inherited OMP defaults; they are explicitly invoked per turn, not
+automatic model routing. OMP 18.8.9 matches lowercase standalone prose rather
+than code, identifiers or uppercase examples. `ultrathink` affects automatic
+effort on the current model, not fixed medium or model selection. `orchestrate`
+requires task dispatch; `workflowz` requires task plus reachable Eval, and
+`jevify` requires Eval.
+
+Both Eval backends remain disabled globally. Deliberate session-only
+`omp --config <overlay.yml>` can enable the needed backend while retaining
+`tools.approval.eval: prompt`; keywords never enable it themselves. Eval grants
+host execution, not a sandbox or Bash-pattern confinement. Classification and
+reused pool workers do not replace fresh named specialist security review.
+Required bounded `slow`, native approval and one-writer ownership still apply,
+and keywords authorize no unrequested commit, push or external effect.
+
+See the [native ownership/activation matrix](docs/capabilities.md#native-ownership-and-activation--omp-1889)
+for pinned sources and retained specializations, and the
+[execution receipt](docs/verification.md#native-ownership-and-minimum-duplication-execution)
+for observed results and authentication-blocked behavior.
+
 ### Optional Vibe execution
 
 Ordinary execution remains the default for bounded changes, direct verification
@@ -306,16 +329,13 @@ bundled definitions, not this repository's custom `task`, `reviewer` or
 `security-reviewer` contracts. No Vibe-specific configuration keys or automatic
 model router are added.
 
-[PERSONALITY owns director coordination](config/agent/PERSONALITY.md#optional-vibe-execution).
-Use the existing [implementation brief](config/agent/skills/workflow-delivery/references/implementation-brief.md)
-for standalone assignments, explicit interfaces/dependencies, Done When and
-authorized verification. Substantial assignments return at useful acceptance or
-interface milestones, with evidence, remaining work and the next action—not an
-arbitrary request/token/time cap. The director inspects that result and deliberately
-continues a suitable idle worker through `vibe_send`. Reuse relevant context and
-unchanged evidence; use fresh workers for changed responsibility or independence.
-Self-delivered results reduce the need for status inspection: wait only on a real
-prerequisite, inspect state/queues when uncertain, and release completed workstreams.
+[PERSONALITY owns the local Vibe boundaries](config/agent/PERSONALITY.md#optional-vibe-execution);
+the native [Vibe documentation](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/docs/vibe-mode.md)
+and live tool descriptions own worker lifecycle and coordination. Use the existing
+[implementation brief](config/agent/skills/workflow-delivery/references/implementation-brief.md)
+for complete assignments or coherent acceptance/interface milestones with allowed
+writes, prerequisites and an authorized checker. A settled worker turn or director
+file read is not behavioral acceptance; inspect actual executor output.
 
 **Native limits, reviewed for 18.8.9:** the director has read/coordination tools,
 not shell execution or named specialist dispatch. Assign bounded runtime checks
@@ -371,7 +391,7 @@ user plugin state are not managed.
 | [scripts/](scripts/), `install.*` | Deployment, inventory, static contracts, and executable hook checks |
 
 OMP owns the full system prompt. The recorded OMP 18.8.7 path appends the
-six-line `APPEND_SYSTEM.md` clarification without replacing native content;
+narrow `APPEND_SYSTEM.md` clarification without replacing native content;
 PERSONALITY remains the owner of required `slow` conditions. The compatibility
 checker fingerprints this append and requires no active `SYSTEM.md` or
 `SYSTEM_TEMPLATE.md` override. Prompt changes apply to fresh sessions.

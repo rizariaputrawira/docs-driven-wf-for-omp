@@ -187,8 +187,6 @@ tui:
 display:
   shimmer: classic
   showTokenUsage: true
-magicKeywords:
-  ultrathink: false
 plan:
   enabled: true
   defaultOnStartup: false

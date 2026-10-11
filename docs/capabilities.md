@@ -108,11 +108,11 @@ Coupling is upgrade cost, not a vulnerability or removal mandate.
 | Managed mechanism | Coupling | Decision | Interface and compatibility check |
 |---|---|---|---|
 | Plain SKILL.md and references | LOW | KEEP | Flat discovery, frontmatter, native URI/command/hide/filter; catalog + isolated native list/read/filter smoke |
-| AGENTS.md | LOW | KEEP | Documented guidance discovery; routing/link check; instructions are not enforcement |
-| PERSONALITY.md | MEDIUM | KEEP; centralize task authority | OMP global instruction owner; direct requested scope proceeds without redundant confirmation; role/Plan/read-only boundaries remain |
-| config.yml | MEDIUM | KEEP native policy; disable eval by default | Registered settings schema; Candidate C changes only main/plan ownership and narrows slow's role/tool contract; native task semantics, scoped approval/eval cleanup and other settings remain. Static contract and exact-version native approval checks |
+| AGENTS.md | LOW | KEEP entrypoint; link execution owner | Documented guidance discovery; PERSONALITY owns ordinary routing, AGENTS retains conditional skill selection and repository-independent conventions; instructions are not enforcement |
+| PERSONALITY.md | MEDIUM | KEEP local contracts; inherit native workflow mechanics | Ordinary Luna ownership, bounded Sol decisions, specialist independence and acceptance remain local. One keyword compatibility paragraph protects mandatory contracts; native Vibe owns lifecycle/scheduling APIs |
+| config.yml | MEDIUM | KEEP native policy; Eval off; keywords available | Inherit native master/four keyword defaults instead of an ultrathink opt-out. Role aliases/effort, concurrency/depth, isolation, approval and disabled fallback/advisor/prewalk remain unchanged. Static validation and scoped installed discovery are not actor proof |
 | Agent frontmatter | MEDIUM | KEEP except slow contract | Native agent discovery/model/tool/schema contract; slow is narrowed to bounded read-only Sol decision service while other definitions remain unchanged; parse/static model-role check, effective dispatch needs runtime evidence |
-| APPEND_SYSTEM.md | MEDIUM | KEEP narrow | Six-line Candidate C consultation distinction appended to OMP's stock prompt; content fingerprint, no full-template replacement, fresh Luna direct/slow and Plan Mode probes |
+| APPEND_SYSTEM.md | MEDIUM | KEEP narrow, unchanged | Narrow Candidate C consultation distinction appended to OMP's stock prompt; content fingerprint, no full-template replacement, fresh Luna direct/slow and Plan Mode probes |
 | OMP compatibility record/checker | MEDIUM | KEEP small; fail closed | Exact addendum fingerprint, prompt-override detection, release/source comparison and three runtime receipts; reports known-patched/native-compatible or review-required |
 | workflow-omp-health | LOW | KEEP explicit-only | Post-deployment and post-upgrade operator entrypoint; quick/upgrade/full evidence, not an update manager or upstream-adoption review |
 | MCP declarations | MEDIUM | KEEP unchanged | Native HTTP/stdio MCP schema; parse/static prerequisites; no connection/service claim |
@@ -124,6 +124,69 @@ Coupling is upgrade cost, not a vulnerability or removal mandate.
 | Empty plugin metadata | MEDIUM | RETIRE managed scaffolding | Native loader tolerates absent empty roots; installer creates package on plugin install; no configured plugin behavior lost |
 | Native OMP system prompt | LOW | INHERIT | No local template copy; upstream prompt changes flow directly, and tracked prompt/dispatch source changes require a bounded compatibility review |
 | Installer/doctor | LOW | KEEP | Explicit home-relative inventory; production POSIX tests/smoke and scoped native Windows PowerShell 5.1 checks; remaining platform/scenario limits in verification |
+
+## Native ownership and activation — OMP 18.8.9
+
+The installed release is bound to upstream revision
+[`fa5ff4a3a977a28b93d025f4cf50f046e019f18c`](https://github.com/can1357/oh-my-pi/tree/fa5ff4a3a977a28b93d025f4cf50f046e019f18c).
+“Sufficient” below describes the pinned source contract, not demonstrated model
+adherence. [The scoped receipt](verification.md#native-ownership-and-minimum-duplication-execution)
+distinguishes static checks, installed observations and authentication-blocked cases.
+The global compatibility record retains its prior basis and REVIEW REQUIRED status.
+
+| Capability | Owner/classification | Minimum disposition and activation | Required proof boundary |
+|---|---|---|---|
+| `ultrathink` | Native sufficient [K] | Inherit enabled defaults; explicit per-turn invocation. Auto effort may use the current model's maximum; fixed medium stays fixed; no model switch | Prose/negative matching, medium versus auto and actual unchanged model; authenticated behavior blocked |
+| `orchestrate` | Native partial [K,T]; mandatory contracts local | Keep enabled; native decomposition/dispatch, one narrow exception for required slow/security/approval/one-writer contracts; no handler or second engine | Single required slow despite one-off guidance, controlled saturation ≤3, final acceptance and no unrequested commit |
+| `workflowz` | Native scheduler/helpers sufficient [K,E,T]; specialist substitute insufficient | Keyword enabled; requires reachable deliberately enabled Eval plus task; no custom pool | Default Eval gate; opt-in accounting, reuse and dependent aggregate; reused workers cannot satisfy fresh security phases |
+| `jevify` | Native classification sufficient [K,E]; security assurance insufficient | Keyword enabled; selective Eval opt-in, synthetic or authorized homogeneous units and frozen rubric | Complete eligible-set/error accounting and actual judge route; unflagged items still receive required source review |
+| `/plan` | Native lifecycle/read-only/approval sufficient [P,T] | Keep enabled, startup off; explicit invocation; native approval only | Parent/child denied writes before approval and approved execution; passive activation alone is insufficient |
+| `/vibe` | Native partial [V]; managed specialist dispatch unavailable | Optional user-selected mode; inherit worker lifecycle APIs, keep local readiness/identity/acceptance and Ordinary hand-back | Bundled tiers, continuation, reader overlap, cancellation and Plan/Goal conflicts; do not accept worker status as behavioral proof |
+| Native task and model routing | Native discovery/resolution/limits sufficient [T] | Preserve aliases/overrides, concurrency 3, depth 1, isolation off; no runtime router | Actual model/effort/effective definitions and nested rejection; task semaphore is not one aggregate OS/process limit across every dispatch mechanism |
+| `slow` and Candidate C append | Native insufficient for semantic decision-only requirement | Preserve predicates, bounded packet, read-only Sol-medium and byte-identical narrow append | Luna → exactly one named slow without override/filler → Luna, actual definition and receipt |
+| Managed `task` / `routine` | Native partial [T] | Retain medium, non-spawning scoped definitions; bundled task instead permits spawns and auto effort | Actual effort, no nested delegation and meaningful evidence return |
+| `scout` / `reviewer` / `security-reviewer` | Native partial [T]; local source/schema/phase specializations | Retain named contracts; fresh independent security discovery/refutation, complete coverage and effective dispatched-definition provenance | Fresh IDs, recorded definition/prompt/tools/model, source operations/digests and semantic terminals; classification is not refutation |
+| `advisor` | Native partial; local evidence-only/no investigation | Explicit-only; automatic advisor remains off | No automatic dispatch or substitution for source-inspecting review |
+| PERSONALITY / managed AGENTS | Native partial; local model/decision/safety/conditional selection | Consolidate ordinary ownership in PERSONALITY and link it from AGENTS; remove duplicated Vibe recipes | Zero-worker ordinary countercase and conditional documentation-dependent readiness; no suite reactivation when disabled |
+| Eval availability and approval | Native partial [E,A]; host execution exceeds Bash-pattern boundary | Both backends off globally; deliberate session-only opt-in, `tools.approval.eval: prompt`, no provisioning in probes | Default roster observed absent; JS overlay observed reachable; approval/denial/headless execution still requires authenticated tool calls |
+| `luna-tool-boundary.js` | Native insufficient for exact live provider/model workspace gate | Keep unchanged; not a worker router or sandbox | Handler cases plus installed allowed/restricted identity and legitimate Plan paths |
+| Native approvals / Bash protections | Native policy resolver sufficient [A] | Preserve yolo and explicit prompt/deny rules; sole approval interaction | Benign protected targets, declined Git prompt and child fail-closed; no destructive or interpreter-escape probe |
+| Telemetry opt-out | Native partial; inherited third-party opt-outs local | Keep privacy payload and extension unchanged | Installer/environment coverage; no optional service activation |
+| RTK / Herdr | Native insufficient for external protocol consumers | Preserve opt-in/environment gating and bodies; not dispatch engines | Existing source/process limits and unresolved licensing provenance remain; no external startup |
+| Anti Slop | Native insufficient for conditional UI/copy filter | Preserve behavior/license; no orchestration ownership | Existing positive/negative handler suite, not authenticated UI proof |
+| OpenDesign commands / MCP | Native insufficient for daemon lifecycle/prerequisites | Preserve user-invoked commands/declarations; no custom mode handler | Existing prerequisites/source limits; no daemon/MCP/network activation in these probes |
+| Documentation/planning/security skills | Native partial; whole-boundary readiness/source-evidence procedures local | Preserve conditional suite, seven-field brief, disabled-suite fallback and security lifecycle | Lightweight and documentation-first controls; native Plan tools do not replace readiness or independent validation |
+| Repository-root AGENTS | Native insufficient for deployment architecture/QA rules | Preserve unchanged; checkout rules are distinct from deployed runtime guidance | Actual installer/doctor QA, not an application build |
+
+### Pinned native sources
+
+All links below use the release revision above; no upstream prompt templates are
+copied into managed payloads.
+
+- **[K]** [Magic keywords](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/docs/magic-keywords.md),
+  [canonical table](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/modes/magic-keywords.ts)
+  and its imported notice templates. Matching is exact lowercase standalone prose,
+  notices are user-attributed per turn, and absent managed keys inherit native true defaults.
+- **[V]** [Vibe contract](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/docs/vibe-mode.md).
+- **[T]** [Task discovery](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/docs/task-agent-discovery.md),
+  [bundled definitions](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/task/agents.ts),
+  [shared subagent policy](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/task/structured-subagent.ts),
+  [model resolver](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/config/model-resolver.ts)
+  and [executor/session-init provenance](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/task/executor.ts).
+  Invocation selector precedes settings override, frontmatter and parent/default.
+  Plan children exclude LSP/MCP/injected tools and share the session-local root.
+- **[P]** [Plan settings](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/plan-mode/settings.ts) and [T].
+- **[E]** [Eval settings](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/eval/settings.ts),
+  [tool selection](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/tools/index.ts#L640-L681),
+  [native agent bridge](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/eval/agent-bridge.ts),
+  [prelude approval](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/eval/preludes.ts)
+  and [JS provisioning](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/eval/js/package-installer.ts).
+  Native workpool reuse is not fresh independent specialist review. JS-only reachability
+  needs no Python preflight. Eval host APIs are not sandboxed: direct kernel
+  subprocess calls do not traverse Bash-pattern matching; bridge tool calls retain
+  native approvals. Selective utility does not justify global enablement.
+- **[A]** [Approval contract](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/docs/approval-mode.md)
+  and [resolver](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/tools/approval.ts).
 
 ## Extension purpose and upgrade cost
 
@@ -144,7 +207,7 @@ role, not a claim that all behavior was exercised.
 
 | Component | Class | Decision / evidence |
 |---|---|---|
-| `config/agent/config.yml` | A + D | Preserve privacy, integration and task settings; Candidate C intentionally changes only default/plan model roles. Keep `dev.autoqaConsent: denied`, `dev.autoqa: false`, `telemetry.otlpExportEnabled: false`; preserve local stats/session/token display, approval, Plan Mode, retry/fallback and remaining model settings. |
+| `config/agent/config.yml` | A + D | Preserve privacy, integration, task and model settings; native keyword cutover removes only the ultrathink opt-out. Keep `dev.autoqaConsent: denied`, `dev.autoqa: false`, `telemetry.otlpExportEnabled: false`; preserve local stats/session/token display, approval, Plan Mode, retry/fallback and all role selectors. |
 | `telemetry-opt-out.js`, `telemetry.env`, `telemetry.ps1` | D | Keep and align environment opt-outs. Add clearing of generic/per-signal OTLP endpoints/headers, `PI_AUTO_QA_PUSH_URL`/`TOKEN`, and OpenDesign `OBJECT_RELAY_URL`; do not unset provider credentials. |
 | `rtk.ts` | B + D | Preserve optional local rewrite integration. `RTK_TELEMETRY_DISABLED=1` is the supported RTK opt-out; RTK 0.51 source reports core telemetry disabled by this env. Installed command behavior was not invoked. |
 | `herdr-omp-agent-state.ts` | B | Preserve local pane/session reporting over gated local IPC; no evidenced external sink. |

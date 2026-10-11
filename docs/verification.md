@@ -1,5 +1,150 @@
 # Verification and current limits
 
+## Native ownership and minimum-duplication execution
+
+### Basis, isolation and preserved boundaries
+
+Approved baseline: `ded44a3186d8c263a3d35a8867ac8bb10f63b76e`.
+Installed `/home/personal/.local/bin/omp` identifies as **18.8.9**; observed
+SHA-256 is `cacc12d5cdd46ff207f3452b36a0d0cfa7c5b8aee0d403aa83c5ab1f46bccb58`,
+matching the official release asset established during planning. Source ownership
+is pinned to
+[`fa5ff4a3a977a28b93d025f4cf50f046e019f18c`](https://github.com/can1357/oh-my-pi/tree/fa5ff4a3a977a28b93d025f4cf50f046e019f18c);
+the [matrix and source links](capabilities.md#native-ownership-and-activation--omp-1889)
+describe source contracts, not authenticated adherence.
+
+Only three managed payloads changed: `config/agent/config.yml`,
+`PERSONALITY.md` and `AGENTS.md`. The config inherits all native keyword switches;
+the policies add the mandatory-contract boundary and remove duplicated Vibe/
+entrypoint mechanics. The existing validator now accepts omitted/true master/
+keyword switches and rejects each false value. All seven agent definitions,
+append, extensions, commands, MCP declarations, inventory, licenses, privacy and
+compatibility record remain byte-identical to baseline.
+The append SHA-256 remains
+`7f504df8c2cdcb9bb378b0685063140e09c9daf60b43d2a0cdff2286cb7a8aa3`.
+
+External evidence root: `/tmp/omp-native-reuse-qqGs2Y/evidence/`.
+`payload-hashes.json` records every baseline/candidate mapped source digest;
+`candidate-source-hashes.json` additionally binds the changed validator and
+inventory. Baseline was exported with `git archive` at the exact revision, then
+the real installer staged separate `baseline-home` and `candidate-home`.
+All 294 mapped copies were compared byte-for-byte and unrelated sentinels survived.
+No real-home deployment, commit, push, OMP upgrade or optional service activation occurred.
+
+Fresh runtime roots are disposable copies of those installed homes. Their sole
+payload exception is an empty `mcpServers` discovery map to prevent external MCP/
+OpenDesign startup; this is not a managed MCP change or connection test.
+`RTK_DISABLED=1`, absent Herdr activation inputs, telemetry opt-outs and disposable
+HOME/agent roots prevent the optional integrations exercised here from starting.
+No credentials were copied, no broker/service was started, no packages were
+provisioned, and no persistent setting was enabled. Presence-only environment
+receipt records `PI_PY`, `PI_JS`, Codex/OpenAI credentials and broker URL/token
+absent; no secret values are retained.
+
+### Commands and actual outcomes
+
+The integrated checks ran once after the four payload/validator steps. Earlier
+focused checks verified each step before proceeding. These are current candidate
+results, not reused historical green receipts.
+
+| Command/check | Result and evidence under the external root |
+|---|---|
+| `bun scripts/test_agent_config.mjs` | Exit 0; omitted/true switches accepted, each disabled switch rejected; existing seven roles/medium/slow/approval/Eval-off contracts pass. `agent-config.log` |
+| `node scripts/test_model_routing.mjs` | Exit 0; six named handler cases, not installed identity enforcement or OS containment. `model-routing.log` |
+| `bun scripts/test_skill_catalog.mjs` | Exit 0; 37 canonical, 34 visible, 3 explicit-only, 14 aliases, 269 mapped assets, 294 mappings and 40 notices; structural/reference coverage, not legal certification. `skill-catalog.log` |
+| `bun scripts/test_omp_compat.mjs` | Exit 0; checker unit contracts, not new whole-version acceptance. `omp-compat-unit.log` |
+| `bun scripts/test_document_locations.mjs` | Exit 0; 128 artifact paths; no adoption/migration was performed. `document-locations.log` |
+| `node scripts/test_antislop.mjs` | Exit 0; 16 positive/18 negative handler cases, not UI/model adherence. `antislop.log` |
+| `python3 scripts/test_install.py` | Exit 0; POSIX integration for 294 entries. Runner detected `powershell.exe` but did not execute separate PowerShell tests. `install-integration.log` |
+| `sh install.sh --dry-run --home <home>`; `sh install.sh --home <home>`; `sh scripts/doctor.sh --check --home <home>` | Each exit 0 for both disposable homes; managed healthy, mapped bytes exact, sentinel preserved. `{baseline,candidate}-{dry-run,install,doctor}.log`, `checks.json`, `payload-hashes.json` |
+| `omp config get magicKeywords.{enabled,ultrathink,orchestrate,workflow,jevify}` | Each exit 0. Baseline ultrathink false; candidate all true. Other native keyword defaults remain true. `*-config-magicKeywords.*.log` |
+| `omp config get eval.py`; `eval.js`; task concurrency/depth/isolation; Plan startup | Each exit 0: false/false, 3/1/false, startup false. `*-config-*.log` |
+| `omp config get tools.approval.eval`; `modelRoles.default`; `modelRoles.slow` | Each exit 1: leaf paths are not registered CLI keys. Correct aggregate queries `tools.approval` and `modelRoles` exit 0, show Eval prompt, Luna-medium default and Sol-medium slow. `aggregate-config.json`; no claim the failed leaf commands passed |
+| Existing passive checker's exported `resolvePromptDiscovery` against installed roots | `bun /tmp/omp-native-reuse-qqGs2Y/passive.mjs` exit 0: both `known-patched`, exact append fingerprint, no discovered full prompt override. `passive-discovery.json`. The known historical source comparison was not rerun or cleared |
+| Standard-library RPC v2 client | Explicit-selector launches exit 0 and expose native state/rosters; every submitted prompt ends with `agentInvoked: false`, `status: error`, `No API key found for openai-codex.` Unforced launch stops before ready with `No default model selected.` See corrected transcripts below |
+| Actual PTY interactive mode | Exit 0; `/vibe` enables, second `/vibe` disables, `/plan` enables, `/vibe` rejects with `Exit plan mode first.` `tui-corrected.raw`, `tui-corrected.json` |
+
+RPC invocations use `omp --mode rpc --no-session --no-title --cwd <fixture>`,
+explicit model/effort only where labeled, and native `--config` only for the
+JS overlay. Ready negotiation selects v2 and validates chunk order/count/byte
+length with strict UTF-8 reassembly. `get_state`, `get_messages`, `get_subagents`
+and event subscription capture actual session identifiers, provider/model,
+effort, prompt, tool schemas and admitted-command errors. There were no children,
+so child `get_subagent_messages`/`session_init` provenance is unavailable, not
+implicitly proven. All synthetic `double.js` fixtures remained unchanged.
+
+Decisive metadata/transcripts:
+`rpc-summary-corrected.json`, `{baseline,candidate}-explicit-control-corrected.jsonl`,
+`{baseline,candidate}-ultrathink-corrected.jsonl`,
+`candidate-{keyword-controls,eval-off,auto,js-opt-in,sol-explicit}-corrected.jsonl`,
+`candidate-unforced-corrected.stderr.log`, `unforced-corrected.json`,
+`prompt-inspection.json` and extracted `*-corrected-prompt.txt`.
+Provider account metadata was removed and inherited secret values redacted.
+No self-reported model name is used as provenance.
+
+An initial fixture mistakenly used an absolute `PI_CONFIG_DIR`; native expects
+that name relative to HOME. It loaded PERSONALITY through the separate agent
+override but omitted the append from dumped prompts. The corrected `.omp`
+invocations loaded the exact append in every state dump; initial unsuffixed
+receipts are retained as invalid-discovery diagnostics, not candidate failures
+or acceptance evidence. The corrected TUI receipt supersedes the initial
+`proc://nativeReuseTui` mode capture for this discovery basis.
+
+### Acceptance cases and remaining blockers
+
+“Observed pass” below is limited to the stated passive/native operation.
+Authentication failed before model invocation and keyword notice processing;
+zero children after that failure is not a successful zero-worker control.
+
+| Approved case | Status | Observed result / missing proof |
+|---|---|---|
+| Ordinary one-file lightweight control, baseline/candidate | BLOCKED | Equivalent synthetic edit requests admitted but no Codex credentials; unchanged fixtures and no actors. Unforced main cannot start; no direct edit/check/acceptance proof |
+| Documentation-dependent adopted fixture and disabled-suite counterpart | STATIC / BLOCKED | Conditional owners and discovery preserved; authenticated readiness/approval/implementation paths unrun |
+| `ultrathink` medium/auto and code/XML/comment/substring/uppercase controls | BLOCKED | Corrected medium state is medium, auto startup reports high, selected model remains Luna. No generated turn, notice matching or judge-effort behavior proved |
+| `orchestrate` independent reads, integration and four-reader saturation | STATIC / BLOCKED | Native availability and configured 3/1 limits observed; overlap, fourth queue, one writer and final acceptance unrun |
+| Exactly one consequential slow, ordinary/keyword, no commit despite fixture expectation | STATIC / BLOCKED | Unchanged append/predicates and named Sol-medium/read-only contract; actual dispatch/receipt/Luna resumption/no-commit adherence unrun |
+| Model precedence and child limits | OBSERVED PASS (explicit state) / BLOCKED | Explicit Luna and Sol resolve selected provider/model at medium; unforced identity, named role dispatch, nested rejection and effective child definitions unrun |
+| Default `workflowz` / `jevify`, individually/combined with `orchestrate` | OBSERVED PASS (Eval gate) / BLOCKED | Default roster excludes Eval and settings stay off, including restored later ordinary/Sol session; combined request fails pre-invocation. Notices and truthful model response unrun |
+| Session-only JS Eval, benign `1 + 1`, approve/deny/headless child | OBSERVED PASS (reachability) / BLOCKED | JS-only overlay exposes Eval with py false/autoProvision false and managed prompt policy unchanged; no approval dialog, evaluation result, denial or child fail-closed execution |
+| Practical Eval computation and named `agent()` helper | STATIC / BLOCKED | Native helper ownership established; real approved computation, routing and bridge approval unrun |
+| Four-item `workflowz` workpool and dependent aggregate | BLOCKED | No authenticated workers; live pool limit/accounting/reuse/aggregate unrun; global freshAgents and backend defaults unchanged |
+| ≥20-unit `jevify` frozen-rubric batch including errors/truncation | BLOCKED | No batch or authorized judge run; actual route and complete flagged/error accounting unknown; no fallback verdicts fabricated |
+| Fresh security discovery/refutation, ordinary/orchestrate/Eval combined | STATIC / BLOCKED | Named complete-source/effective-definition contracts retained; no actual discovery/refutation actors, source operations or terminals; unflagged review case unrun |
+| Native Plan mutation restrictions and proposal approval/execution | OBSERVED PASS (activation) / BLOCKED | `/plan` enters; direct/child denied mutation, restricted child roster, sole slow consultation and approved implementation require authenticated turns |
+| Vibe tiers, concurrent readers, continuation and specialist hand-back | STATIC / BLOCKED | Native director entry observed; actual sonic/task identity, overlap, milestone continuation and Ordinary named hand-back unrun |
+| Vibe transition/cancellation | OBSERVED PASS (enter/exit/active Plan conflict) / BLOCKED | Active Plan rejects entry; paused Plan/Goal conflicts, cancellation of live workers and no post-exit writes unrun |
+| Native approvals and model boundary | STATIC / BLOCKED | Six extension handler cases pass; actual allowed/restricted tool calls, protected Bash deny/prompt, declined Git approval and child policy execution unrun. No destructive target or interpreter escape tested |
+
+**Full behavioral acceptance remains blocked** by unavailable Codex authentication
+in isolated sessions through inherited credentials/broker transport. No credential
+copy, login, model fallback, global Eval enablement or boundary weakening was used
+to turn this into a pass. Authenticated baseline/candidate comparisons and
+independent behavior judgment therefore remain unavailable. No measured quality,
+token/dollar savings, quota protection, OS isolation or future-version guarantee
+is claimed.
+
+The retained compatibility record still has its historical 18.8.7 source/behavior
+basis; its known 18.8.9 comparison remains REVIEW REQUIRED. Scoped 18.8.9 discovery,
+mode activation and unit/install results do not satisfy the whole-upgrade receipt.
+Native Windows tests, optional external processes/MCP and licensing compliance
+were not exercised; existing unresolved provenance/license limits remain.
+README and capabilities reflect these scoped results, not a blanket verification upgrade.
+
+Final documentation-link smoke exited 0 and checked 96 local file/heading targets
+across README, capabilities and this record; `documentation-links.json` retains
+the inspected targets. This is link integrity, not behavior or license proof.
+
+### Simplicity follow-up
+
+The follow-up audit covered the seven-file native-ownership cutover against HEAD
+and its policy, delivery-pointer and validator consumers; the complete Git file
+inventory was inspected to establish that boundary, not to claim a whole-repository
+audit. No substantial complexity regression was found. Removed the pre-existing
+unused `existsSync` import from `scripts/test_agent_config.mjs`; independent
+keyword fixtures, validation and runtime-proof limits remain intact.
+`bun scripts/test_agent_config.mjs` then exited 0. The source hash receipt above
+predates this import-only cleanup; its recorded execution basis is unchanged.
+
 ## Optional Vibe guidance 2026-10-11
 
 ### Basis and implemented boundary
