@@ -160,7 +160,7 @@ decomposition, but **size alone does not require a stronger model**.
 | `advisor` | Exceptional evidence-only advice, not independent investigation | `openai-codex/gpt-6.1-sol:high` |
 
 [PERSONALITY](config/agent/PERSONALITY.md#working-policy) requires a bounded
-`slow` consultation for an identified consequential issue: conflicting evidence
+`slow` consultation for Luna-led execution with an identified consequential issue: conflicting evidence
 or requirements, root causes still indistinguishable after discriminating checks,
 unclear cross-system ownership, consequential architecture/compatibility/security/
 data-integrity constraints, unreliable acceptance or safety boundaries, or material
@@ -270,6 +270,70 @@ Detailed procedures: [delivery](config/agent/skills/workflow-delivery/SKILL.md),
 [information sequence](config/agent/skills/docs-engineering/references/sequence.md),
 [plan review](config/agent/skills/docs-plan-review/SKILL.md), and
 [standards applicability](config/agent/skills/docs-engineering/references/standards.md).
+
+### Optional Vibe execution
+
+Ordinary execution remains the default for bounded changes, direct verification
+and named specialist tasks. Choose native Vibe when persistent workstreams or
+meaningful independent concurrency provide a practical benefit; it is not required
+for documentation-driven delivery. Prepare its required documents and plan,
+review and obtain native approval first, then choose Ordinary or Vibe, implement
+authorized vertical slices, verify behavior and reconcile affected as-built owners.
+Keep the operative approved scope and canonical references through mode changes.
+
+Start interactive `omp`, then enter `/vibe`. There is no `--vibe` CLI flag.
+For a user-selected Sol director, start with:
+
+```sh
+omp --model openai-codex/gpt-6.1-sol --thinking medium
+```
+
+Use `--thinking high` when consequential decisions, complex integration or
+difficult reasoning justify it. Medium is a starting recommendation for
+well-defined execution and routine coordination, not a forced routing rule.
+Luna-medium remains the normal main; explicit selections are not silently changed.
+A Sol director can decide a consequential question directly when evidence and
+authority suffice, without a redundant `slow` call; independent security review
+and native approval remain separate.
+
+| Native tier | Responsibility | Current model resolution |
+|---|---|---|
+| `fast` | Fully specified mechanical work | Bundled `sonic` → `@smol` → Luna-medium |
+| `good` | Complete implementation slices, integration and ordinary judgment/review | Bundled `task`, managed `.task` override → `@task` → Luna-medium |
+
+Tier labels do not guarantee different quality or cost. Vibe always selects
+bundled definitions, not this repository's custom `task`, `reviewer` or
+`security-reviewer` contracts. No Vibe-specific configuration keys or automatic
+model router are added.
+
+[PERSONALITY owns director coordination](config/agent/PERSONALITY.md#optional-vibe-execution).
+Use the existing [implementation brief](config/agent/skills/workflow-delivery/references/implementation-brief.md)
+for standalone assignments, explicit interfaces/dependencies, Done When and
+authorized verification. Substantial assignments return at useful acceptance or
+interface milestones, with evidence, remaining work and the next action—not an
+arbitrary request/token/time cap. The director inspects that result and deliberately
+continues a suitable idle worker through `vibe_send`. Reuse relevant context and
+unchanged evidence; use fresh workers for changed responsibility or independence.
+Self-delivered results reduce the need for status inspection: wait only on a real
+prerequisite, inspect state/queues when uncertain, and release completed workstreams.
+
+**Native limits, reviewed for 18.8.9:** the director has read/coordination tools,
+not shell execution or named specialist dispatch. Assign bounded runtime checks
+to a permitted worker and inspect actual output; reading files is not runtime
+proof. Required `slow` or independent reviewer/security-reviewer operations use
+the supported Ordinary workflow, preserving effective-definition provenance.
+One writer owns a shared checkout unless isolation is established. Finish and
+record needed work before toggling `/vibe` off: exit cancels remaining workers.
+Active or paused Plan/Goal modes cannot coexist with Vibe; session reset/fork/
+move/handoff actions are restricted, and interrupted worker turns do not
+automatically resume after process restart.
+
+Native [Vibe documentation](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/docs/vibe-mode.md)
+and [compaction documentation](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/docs/compaction.md)
+are version-pinned references, not future compatibility guarantees. Existing
+compaction settings stay unchanged; large cache-read totals alone do not justify
+worker resets. [Evidence and actual verification](docs/verification.md#optional-vibe-guidance-2026-10-11)
+separate these instructional improvements from measured compliance or savings.
 
 ### Documentation ownership after adoption
 

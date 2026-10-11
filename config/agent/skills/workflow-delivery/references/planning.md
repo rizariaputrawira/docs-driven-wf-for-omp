@@ -24,12 +24,12 @@ Use the existing plan format, with enough detail for a fresh implementer:
 - Verification: authorized checker, real entry/consumer/input, expected success and failure result, relevant automated/manual checks, environment and unavailable evidence.
 - Done condition: complete implementation, consumer integration, documentation and criterion-specific proof; shape/existence is named separately from behavior.
 - Risks/undo cost and unresolved approval/source facts.
-- Recommended executor: `direct`, `routine` or `task`; a separate bounded `slow` consultation may be recorded only for an identified consequential decision under shared PERSONALITY policy, never as implementation-slice executor.
+- Recommended execution mode and executor: Ordinary `direct`, `routine` or `task`, or optional native Vibe `fast`/`good` after approval. Use [PERSONALITY](../../../PERSONALITY.md#optional-vibe-execution) for mode/model boundaries; `slow` remains a separate decision consultation, never an implementation-slice executor.
 - Reason: current evidence supporting the recommendation, not file count or a category.
 
 The plan also carries a global coverage table and current review dispositions. Keep product truth in canonical sources and link it. Exact changing paths/interfaces belong here; no new tracker/state schema is needed.
 
-Executor recommendations are advisory; Luna owns current-evidence routing and integration. Use `direct` for small bounded main work, `routine` for specified established-pattern work, and `task` for bounded work with settled direction/interfaces. Consult `slow` only for a separate bounded decision matching the existing PERSONALITY material uncertainty/consequence triggers; Luna completes the plan and implementation slice.
+Executor recommendations are advisory; the active main/director owns current-evidence selection and integration. Ordinary Mode uses `direct` for small bounded main work, `routine` for specified established-pattern work, and `task` for bounded work with settled direction/interfaces. Optional Vibe uses the same coverage and prerequisite map; record meaningful milestone returns and continuation conditions in the [implementation brief](implementation-brief.md), not a second plan or queue. Shared PERSONALITY owns consequential decision handling, including the user-selected Sol director boundary.
 
 Examples:
 - Recommended executor: `task`. Reason: the export producer/CLI interface, denial behavior and fixtures are settled; the remaining bounded implementation uses those exact contracts.

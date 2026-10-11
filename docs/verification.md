@@ -1,5 +1,123 @@
 # Verification and current limits
 
+## Optional Vibe guidance 2026-10-11
+
+### Basis and implemented boundary
+
+The checkout and remote repository main both resolved to
+`4efa2d795bbab7da52f7d8f9f87e03c375c77dd2` before edits. The repository URL
+redirects to `rizariaputrawira/aria-omp-config`. Installed `omp --version`
+returned **18.8.9**; the official tag points to
+[`fa5ff4a3a977a28b93d025f4cf50f046e019f18c`](https://github.com/can1357/oh-my-pi/tree/fa5ff4a3a977a28b93d025f4cf50f046e019f18c).
+Reviewed native [Vibe documentation](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/docs/vibe-mode.md),
+[worker runtime](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/packages/coding-agent/src/vibe/runtime.ts)
+and [compaction documentation](https://github.com/can1357/oh-my-pi/blob/fa5ff4a3a977a28b93d025f4cf50f046e019f18c/docs/compaction.md).
+The inspected upstream main snapshot
+[`592e894eb29ed3db2ee2dae71ec7d72ac13c64c8`](https://github.com/can1357/oh-my-pi/tree/592e894eb29ed3db2ee2dae71ec7d72ac13c64c8)
+documents the same Vibe interface; this is not whole-main compatibility proof.
+
+PERSONALITY owns optional mode selection, tier/model considerations, director
+coordination and specialist fallback. AGENTS links that owner. Existing delivery
+planning/brief/verification references now carry execution choice, workload-bound
+milestone returns, deliberate continuation and the same acceptance map. README
+explains the user-facing choice; delivery SOURCES records original local additions.
+No settings, agents, hooks, inventory entries, licenses or dependencies changed.
+
+### Session evidence and limits
+
+The accessible local `~/.omp/local-reports/vibe-usage-reconstruction.md`,
+sections 1, 4–9 and 12–13, corroborates the supplied aggregate observations:
+2,023 recorded model responses/attempts, 2,308 tool calls and 248,440,715 reported
+tokens including cache reads; about 97.8% were cache-read tokens. Workers account
+for about 85% of requests/tokens; the Sol-led director accounts for about 68%
+of recorded cost metadata. Its 73 sends, 129 waits and 28 lists establish
+coordination activity, not avoidable overhead.
+
+Frontend turn 5 records 611 responses, 629 calls, 80,988,819 reported tokens,
+three compactions and 148 excess argument-identical executions among calls with
+recorded arguments. Matching HTTP 429 `usage_limit_reached` events confirm a
+provider limitation affected the run. Repeated arguments do not establish
+redundancy, and the report does not prove weak boundaries, persistence or repeated
+calls caused the limit. Cost metadata is neither actual subscription billing nor
+proof of quota consumption. The run's 18.8.9 version is supplied context, not a
+version field in those session records. Raw sessions were not re-exported or
+reparsed for this implementation; the reconstruction is secondary evidence.
+
+Acceptance/interface checkpoints are a conservative risk-control hypothesis,
+not measured savings or guaranteed compliance. The report's suggested possible
+request/tool budget was not adopted: no universal quantitative cap is justified.
+Automatic context resets, compaction tuning, Sol `good` defaults, model routing,
+retry orchestration and new telemetry/components were deliberately rejected.
+No comparison establishes that Sol High was necessary or Luna Medium inadequate.
+
+### Exercised checks and remaining verification
+
+PASS: `bun scripts/test_agent_config.mjs`; `node scripts/test_model_routing.mjs`
+(six named handler cases); `bun scripts/test_skill_catalog.mjs` (294 mappings,
+269 skill assets and 40 notices); `bun scripts/test_document_locations.mjs`;
+`bun scripts/test_omp_compat.mjs`; `node scripts/test_antislop.mjs` (16 positive
+and 18 negative cases). These are configuration/structural/handler checks,
+not authenticated worker proof. The first catalog attempt caught the not-yet-written
+receipt anchor; it passed after the receipt was added with its matching heading.
+
+The optional, unrelated `test_critique_optional_state.mjs` attempt stopped at its
+missing `IMPECCABLE_BIN` prerequisite; no engine was installed/activated.
+PowerShell checks were not run for this guidance-only change.
+
+PASS: production `sh install.sh --home <disposable-home>` and
+`sh scripts/doctor.sh --check --home <disposable-home>` reported
+`managed summary: healthy`. Installed OMP `read
+skill://workflow-delivery/references/implementation-brief.md` resolved the
+changed deployed owner successfully. Actual output: task artifact `artifact://20`,
+especially lines 575–638; no real user home was changed.
+
+PASS: `python3 scripts/test_install.py` completed its production POSIX
+installer/doctor dry-run/install/reinstall/drift/fix and validation scenarios
+using disposable fixtures for **294 inventory entries**. The runner reports
+`powershell.exe` is available but does not execute separate PowerShell tests.
+This is POSIX proof, not native-Windows or authenticated Vibe verification.
+
+The isolated installed 18.8.9 TUI exercised `/vibe` enter/exit, then `/plan`
+followed by rejected `/vibe` with `Warning: Exit plan mode first.` Vibe displayed
+`Vibe mode enabled` and the read/coordination-toolset message; exit displayed
+`Vibe mode disabled`. The fixture used an empty workspace, disposable HOME and
+PI_CODING_AGENT_DIR, explicit Luna/medium, `--no-session --no-title
+--no-extensions --no-skills --no-rules`, and no copied credentials/MCP. Initial
+setup was exited without authentication. These are passive native mode checks,
+not model instruction-following, worker dispatch or approval proof. Evidence is
+the task's `proc://vibePassiveTui` terminal capture (exited 0); temporary fixture
+root `/tmp/omp-vibe-guidance-GggXtN`. No generated turn was submitted.
+
+`bun scripts/check-omp-compat.mjs --candidate 18.8.9` completed with exit **2**:
+**REVIEW REQUIRED**, not a passing upgrade receipt. Managed roles/worker bounds
+and fallback settings were correct, and Candidate C was `known-patched`.
+Compared with the retained reviewed 18.8.7 baseline, hard-critical `main.ts`
+and `config/model-resolver.ts` changed, as did watched
+`extensibility/extensions/types.ts`. This task's scoped native Vibe inspection
+does not clear those whole-upgrade requirements; the existing compatibility
+record was not silently promoted.
+
+Authenticated director/worker execution, persistent continuation compliance,
+specialist dispatch, full plan approval/execution, provider-limit prevention and
+cost/quality improvements are **NOT VERIFIED** for the new guidance. No model
+turn is necessary to establish the edited instruction/link/inventory contracts;
+no authenticated pilot, credentials copy, external telemetry, service activation,
+commit, push or live-home deployment was performed.
+
+### Minimal future efficiency comparison
+
+On an explicitly authorized representative vertical slice, hold repository base,
+acceptance, worker models, fixtures and verification constant. Compare prior
+guidance with bounded milestone/continuation guidance; compare Sol Medium versus
+High separately so effort and checkpoint effects are not conflated. Record exact
+OMP/model/effort identities, acceptance/corrections, responses/tools, meaningful
+send/wait/list reasons, wall-clock boundaries, compactions, input/output/cache
+tokens and errors from local native receipts. Judge repeat usefulness against
+source/input changes, not fingerprints alone. Keep metadata cost separate from
+billing/quota and prioritize equal acceptance/verification quality before claiming
+efficiency. Reuse relevant workers by default; a matched fresh-worker comparison
+is optional evidence for a later context-policy decision, not a reset rule.
+
 ## Complexity cuts — source verification (2026-10-09)
 
 The three scoped simplifications share the PowerShell inventory validator,
