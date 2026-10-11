@@ -1,5 +1,76 @@
 # Verification and current limits
 
+## Native capability revalidation — 2026-10-11
+
+Checkout `HEAD` was `cc0288eeaf816d547da792c024f3fbda0074da6b`; `git status
+--short --branch` reported `main...origin/main` with no changes. Installed
+`omp --version` returned **18.8.9**. The existing `Native ownership and
+minimum-duplication execution` receipt remains applicable to this same installed
+version and its explicit passive observations; the authenticated prompt/actor
+cases remain blocked as recorded there.
+
+Fresh installed config reads confirmed `magicKeywords.enabled=true`,
+`ultrathink=false`, `orchestrate=true`, `workflow=true`, `jevify=true`,
+`eval.js=false`, `eval.py=false`, `task.maxConcurrency=3`,
+`task.maxRecursionDepth=1`, `task.isolation.enabled=false`,
+`plan.defaultOnStartup=false`, `tools.approval={"eval":"prompt"}`, and model
+roles defaulting to `openai-codex/gpt-6-luna:medium` with `slow` set to
+`openai-codex/gpt-6.1-sol:medium`. Advisor is configured at Sol High but
+`advisor.enabled=false` per the compatibility checker. This is **RUNTIME
+CONFIGURATION OBSERVATION**, not authenticated dispatch, keyword matching,
+model adherence, workpool execution, or child-definition provenance. One
+initial aggregate `omp config get magicKeywords` query used an unsupported
+aggregate path and exited 1; subsequent registered leaf queries succeeded.
+
+The compatibility check `bun scripts/check-omp-compat.mjs --candidate latest
+--inspect-main` exited **2 / REVIEW REQUIRED**. Installed 18.8.9 resolves to
+`fa5ff4a3a977a28b93d025f4cf50f046e019f18c`; stable-release differences from
+the retained 18.8.7 baseline include hard-critical `main.ts` and
+`config/model-resolver.ts` plus watched extension types. Current upstream main
+resolves to `c9de2b02b997f37cc89639282ed35dec86f139e8` and also changes task
+dispatch/executor, settings, extension runner and registry surfaces. Main is
+early warning only. No whole-upgrade acceptance was established; the
+compatibility record was not promoted.
+
+Fresh checks passed: `bun scripts/test_agent_config.mjs`,
+`node scripts/test_model_routing.mjs` (six handler cases),
+`bun scripts/test_omp_compat.mjs`, `bun scripts/test_skill_catalog.mjs`,
+`bun scripts/test_document_locations.mjs`, and `node scripts/test_antislop.mjs`
+(16 positive/18 negative cases). These are static/handler contracts, not proof
+of authenticated runtime behavior. The POSIX doctor was run read-only against
+`/home/personal`; it reported drift in installed `AGENTS.md`, `PERSONALITY.md`,
+`config.yml`, and workflow-delivery `SKILL.md`, `SOURCES.md`,
+`references/implementation-brief.md`, `references/planning.md`, and
+`references/verification.md`. Other listed managed entries matched. This is
+live-home drift, not checkout drift; no fix/install was run, to preserve the
+user's installed state. Doctor exit was nonzero due to these differences.
+
+| Requested behavior | Status | Evidence / limit |
+|---|---|---|
+| Keyword enabled/configured state; Eval disabled; concurrency/depth; role selection | PASS (configuration observation) | Fresh leaf queries above. Does not show notices, dispatch or adherence. |
+| Authenticated `ultrathink`, `orchestrate`, `workflowz`, `jevify` behavior; Luna/slow dispatch and worker integration | BLOCKED | Existing corrected RPC receipts ended before invocation with `No API key found for openai-codex`; unforced start lacked a default model. No authenticated behavior is inferred. |
+| Plan/Vibe activation | PASS (prior passive native observation only) | Existing TUI evidence in the preceding receipt; no fresh mode transition or mutation attempt in this revalidation. Approval/execution restrictions remain unverified. |
+| Eval opt-in/workpool and synthetic `jevify` batch | BLOCKED | Default Eval remains off; no temporary overlay execution or model/judge run in this revalidation. Existing JS overlay evidence shows reachability only, not approved execution. |
+| Compatibility against stable and current upstream | REVIEW REQUIRED | Fresh checker exit 2; hard-critical drift prevents promoting the compatibility record. |
+| Installed managed-file parity | FAIL (drift observed) | Doctor identifies the specific differing managed files above. No deployment or correction authorized/performed. |
+
+The reviewed overlap remains justified specialization/documentation rather
+than confirmed duplicate runtime functionality: native OMP owns keyword,
+task/pool, Plan and Vibe mechanics; PERSONALITY retains decision predicates,
+bounded Sol semantics, authorization and acceptance; named security/reviewer
+contracts retain independent evidence and source coverage; workflow skills
+retain conditional readiness and specialist procedure. No behavioral conflict
+was demonstrated. No configuration, compatibility-record, or live-home
+correction was warranted by these observations.
+
+No credentials were copied, Eval was not enabled, and no external service,
+commit or push occurred. Authenticated magic-keyword notices and model turns,
+native delegation/concurrency behavior, Plan/Vibe mutation authorization,
+Eval-approved workpool operation, and complete `jevify` batch integrity remain
+unverified. See [capability ownership matrix](capabilities.md#native-ownership-and-activation--omp-1889)
+for the exact acceptance boundaries. The source compatibility record remains
+REVIEW REQUIRED until its full scoped criteria pass.
+
 ## Native ownership and minimum-duplication execution
 
 ### Basis, isolation and preserved boundaries
